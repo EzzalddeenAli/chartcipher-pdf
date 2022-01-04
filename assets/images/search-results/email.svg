@@ -1,0 +1,15 @@
+<svg id="Email" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140" height="97" viewBox="0 0 140 97">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 13px;
+        fill: #5d5d66;
+        text-anchor: middle;
+        font-family: "Open Sans";
+        font-weight: 600;
+      }
+    </style>
+  </defs>
+  <image id="Email_Icon_Orange" data-name="Email Icon Orange" x="41" y="5" width="57" height="39" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAAnCAYAAAC1xOBuAAABXElEQVRogd2aWw4CIQxFwcyO3JP73wH+aIJYoC230E4/Z0zkePuiNZfXM32spHtZ/tI8bgZG2lUpmG+k5g/LRbxMgWHJ89fuWhpVo1lXIComI4IOPbCXeCKBTkNslF0jgLJyyKyEeAZlJ0lOnfScaVln4zYDxZmaopre1smRFQd1VPX90rbuZIyqf2BN73oCdMmDtA36TtDlEFm5hewAheSA1auWFWhGJjnEfRINWsNBsrikhIysBdUezqREeZoMmMU2GhLhuvBGw0JJDahpJ2XtrhxQ81qLSjy1tc1zDUGp3H4WriYSsudyNVgPrn4Gd10UJEcB7qHhI1JETFrNa2F32BXIHXfLQri52LSQO6ftZVVVDeSpdYIaVAp5el+iApVAelkIiUE5kB6XQKLWcQbpfZ3HUrXXDERa4U27JAoy4jJ22CW17hp920y672UxUzlsf0np/n+MSCm9AaX0VvBCpzVdAAAAAElFTkSuQmCC"/>
+  <text id="Email-2" data-name="Email" class="cls-1" transform="translate(69.682 90.003) scale(1.787 1.818)"><tspan x="0">Email</tspan></text>
+</svg>

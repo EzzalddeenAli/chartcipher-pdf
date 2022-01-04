@@ -1,0 +1,277 @@
+
+
+
+.element-container .ms-staff-carousel {
+margin: 0px auto;
+}
+
+.ms-info2{
+text-align: center;
+
+      top: -webkit-calc(100% + 16px);
+   top:    -moz-calc(100% + 16px);
+   top:         calc(100% + 16px);
+position: absolute;
+margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+}
+
+
+.ms-info2 a{
+color: #32323a;
+    text-decoration:none;
+     font-size:14px;
+}
+.ms-info2 a span{
+color: #999999;
+    text-decoration:none;
+    font-size:14px;
+        line-height: 35px;
+}
+
+section
+    {
+padding: 0px;
+
+}
+
+.header-container a{
+        color:#8b26b2;
+        text-decoration:none;
+        font-size:15px;
+        display:block;
+        margin: 20px 0 0px ;
+    }
+section.home-top{
+    padding-top:0px;
+}
+
+
+    .element-container{
+      padding-left: 20px;
+    padding-right: 20px;
+    }
+    .home-top .element-container{
+      padding-left: 10px;
+    }
+    @media (max-width: 600px) {
+.home-search-column-1 {
+/*min-width: 150px;*/
+    width: calc(100% - 10px);
+}}
+    .home-search-column-1 {
+min-width: auto;
+         width: calc(100% - 10px);
+}
+.home-search{
+width:100%;
+}
+
+.home-search-column-3{
+font-size: 10px;
+color: #a7a7a7;
+font-weight: 600;
+        width: 10px;
+}
+
+.home-search-body table td {
+padding: 12px 14px;
+    vertical-align: middle;
+}
+
+.home-search-body table tr {
+height: 70px;
+}
+@media (max-width: 1200px) and (min-width: 768px){
+.home-search {
+    margin-bottom: 0px;
+}
+}
+.home-search {
+    margin-bottom: 0px; 
+}
+
+    /*.col-3.flex,    
+    .col-4.flex ,
+  .col-6.flex {
+
+padding-bottom: 35px!important;
+}*/
+
+.new2020 .col-3.flex, .new2020 .col-4.flex,.new2020 .col-6.flex {
+     padding-bottom: 0px!important; 
+}
+    
+    .col-4 {
+background-color:#fff;
+            margin-bottom: 25px;
+}
+    
+       .col-4:last-child {
+background-color:#fff;
+}
+
+[class*="col-"] {
+padding: 0px 0px 0 0;
+margin-right: 15px;
+    border-radius:3px;
+position: relative;
+background-color:#fff;
+margin-bottom:30px;
+  min-width: 0px;
+}
+
+.chart-landing [class*="col-"] {
+ margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+[class*="col-"]:last-child,
+.last {
+margin-right: 0px;
+}
+
+@media (min-width: 1000px){
+.row-equal {
+display: flex;
+display: -webkit-flex;
+}}
+
+
+
+
+/*
+.info-block .more-info-icon.page-icon,
+.info-block:hover .more-info-icon.page-icon.orange{
+margin: auto;
+display: block;
+}
+.info-block:hover .more-info-icon.page-icon,
+.info-block .more-info-icon.page-icon.orange{
+display:none;
+}*/
+    
+.modalDialog {
+        position: fixed;
+        font-family: Arial, Helvetica, sans-serif;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 99999;
+        opacity:0;
+        -webkit-transition: opacity 400ms ease-in;
+        -moz-transition: opacity 400ms ease-in;
+        transition: opacity 400ms ease-in;
+        pointer-events: none;
+            display: flex;
+    align-items: center;
+    justify-content: center;
+         -webkit-justify-content: space-around; 
+          -webkit-align-items: center;
+            display: -webkit-flex;
+    }
+
+    .modalDialog:target ,
+    .modalDialog.selected {
+        opacity:1;
+        pointer-events: auto;
+    }
+
+    .modalDialog > div {
+        width: 400px;
+        position: relative;
+        margin: 17% auto;
+        padding:30px;
+        border-radius: 3px;
+        background: #fff;
+    }
+    
+    @media (max-width:480px ){
+          .modalDialog > div {
+       width: calc(100% - 30px);
+              margin:0 15px;
+  
+    } 
+    }
+    
+      .modalDialog > div img{
+      margin: auto;
+    display: block;
+          margin-bottom:20px;
+    }
+    
+       .modalDialog > div h2{
+   text-align:center;
+               margin-bottom:5px;
+              font-family: 'Open Sans', serif;
+    }
+        
+          .modalDialog > div p{
+   text-align:center;
+               margin-bottom:15px;
+              font-family: 'Open Sans', serif;
+    }
+    .modalDialog > div h2{
+     line-height:24px;   
+    }
+      .modalDialog > div a button{
+          background-color:#8b26b2;
+              border-style: none;
+          color:#fff;
+          padding:10px 30px 10px 30px;
+          position:relative;
+          border-radius:3px;
+          cursor:pointer;
+      }
+  
+
+    .close {
+          cursor:pointer;
+        background: ;
+        color: #ccc;
+        line-height: 25px;
+        position: absolute;
+        right: 12px;
+        text-align: center;
+        top: 10px;
+        width: 24px;
+        text-decoration: none;
+        font-weight: bold;
+       /* -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        border-radius: 12px;
+        -moz-box-shadow: 1px 1px 3px #000;
+        -webkit-box-shadow: 1px 1px 3px #000;
+        box-shadow: 1px 1px 3px #000;*/
+    }
+    
+
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+         .home-search-header a{
+           width: 100%;
+           margin-top: 15px;
+}
+}
+
+
+.modal-hover-icon{
+     height: 18px;
+    width: 17px;
+    display: inline-block;
+    margin: 0 auto;
+    	background-image:url('../images/hit-songs-deconstructed-more-information-tile-icon.svg');
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.modal-hover-icon:hover{ 
+    	background-image:url('../images/hit-songs-deconstructed-more-information-tile-icon-hover.svg');
+}

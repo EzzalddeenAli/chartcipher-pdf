@@ -1,0 +1,237 @@
+<? 
+$graphname = str_replace( "-", "", $sectionid );
+$graphname = str_replace( ":", "", $graphname );
+$graphname = strtolower( $graphname );
+
+$search[comparisonaspect] = getTrendGraphNameConverter( $sectionname );
+
+
+if( $search[comparisonaspect] ) 
+{
+$rows = getRowsComparison( $search, $allsongsallquarters );
+if( $help )
+    print_r( $rows );
+$colors = array( "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd" ); 
+
+$dataforrows = getTrendDataForRows( $quarterstorun, $search[comparisonaspect] );
+if( $help )
+    print_r( $dataforrows );
+
+
+?>
+
+<span class='showall'>    <a href='#' onClick='<?=$graphname?>_showAllGraph( true ); return false' style="background-color: #32323a;display: inline-block;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;text-align: center;font-size: 14px;color: #ffffff;text-decoration: none;padding: 12px;">Show All</a>      <a href='#' onClick='<?=$graphname?>_showAllGraph( false ); return false' style="background-color: #ff6633;display: inline-block;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;text-align: center;font-size: 14px;color: #ffffff;text-decoration: none;padding: 12px;">Hide All</a></span>
+        <a href='#' id="<?=$graphname?>exportjpg" onClick='return false' style="background-color: #aeb2b7;display: inline-block;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;text-align: center;font-size: 14px;color: #ffffff;text-decoration: none;padding: 12px;">Save As Image</a></span>
+
+     <script language='javascript'>
+    function <?=$graphname?>_showAllGraph( val )
+{
+    for(i = 0; i <  <?=$graphname?>chart.options.data.length ; i++ )
+    {
+        <?=$graphname?>chart.options.data[i].visible = val;
+    }
+    <?=$graphname?>chart.render();
+}
+</script>    
+
+      <!-- begin graph -->
+	<div id="<?=$graphname?>chartContainer" style="height:600px;">
+	</div>
+<? 
+     $graphnote = getTrendReportNote( "0", $sectionid );
+if( $graphnote ) 
+{ 
+    echo( "<i>$graphnote</i><br>" );	   
+}
+$specificgraphnote = getTrendReportNote( $thisquarter, $sectionid );
+if( $specificgraphnote ) 
+{ 
+    echo( "<font color='red'>$specificgraphnote</font><br>" );	    
+}
+?>
+<!-- end graph -->    
+
+    <? $gray = "#444444"; ?>
+	<script type="text/javascript">
+$(document).ready(function(){
+<? if( !$alreadyaddedcolorset ) { 
+   $alreadyaddedcolorset = true;
+?>
+
+			CanvasJS.addColorSet("hsdColors",
+                [//colorSet Array
+
+                "#5d97cc",
+                "#fb833b",
+                "#aeaeae"
+                // "#3CB371",
+                // "#90EE90"                
+                ]);
+<? } ?>
+
+			<?=$graphname?>chart = new CanvasJS.Chart("<?=$graphname?>chartContainer", {
+				colorSet: "hsdColors",
+				exportEnabled: true,
+				title: {
+				text: "<?=str_replace( '"', '\"', $sectionname )?>",
+                    fontColor: "#888888",
+                    // fontColor: "#ffffff",
+                    fontFamily: "Open Sans",
+                    fontWeight: "bold",
+					fontSize: 25
+				},
+				subtitles:[
+<? $descr = db_query_first_cell( "select Value from graphnotes where Name = '" . mysql_escape_string( $sectionname ). "' " );
+
+$descr = nl2br( trim( $descr ) );
+
+if( $descr )
+{
+?>
+
+            {
+              text: "<?=str_replace( '"', '\"', $descr )?>",
+              fontColor: "#ff6633",
+              fontSize: 16,
+              fontWeight: "normal",
+              fontFamily: "Open Sans",
+            }
+            
+<? 
+}
+?>
+
+            
+																     ],
+				animationEnabled: false,
+                backgroundColor: '#ffffff',
+                // backgroundColor: '<?=$gray?>',
+				axisX: { // this is the quarters
+					gridColor: "#f0f0f0",
+					// gridColor: "#525252",
+					labelFontColor: "#4f4f4f",
+					labelFontFamily: "Open Sans",
+					labelFontSize: "14",
+					gridThickness:0,
+					tickColor: '#dddddd',
+					// tickColor: '<?=$gray?>',
+					lineColor:"#dddddd",
+					// lineColor:"#525252",
+					tickLength: 5,
+                    margin: 20
+				},
+				toolTip: {
+                      // backgroundColor: "<?=$gray?>",
+                      shared: false,
+                      fontColor: "#4f4f4f",
+                      fontStyle: "normal",
+                      // fontColor: "#FFFFFF",
+                      contentFormatter: function(e){
+                            var thiscolumn = e.entries[0].dataSeries.name;
+                                // this is like Q4-2015
+                            var thisq = e.entries[0].dataPoint.label;
+                            var thislabel = e.entries[0].dataPoint.indexLabel;
+                                // this is like 20%
+                            var thisy = e.entries[0].dataPoint.y;
+                            val = thislabel + "<br>";
+                            var count = 0;
+                            for(i = 0; i <  e.chart.options.data.length ; i++ )
+                            {
+                                    // this is like 1-5 times
+                                var chartname = e.chart.options.data[i].name;
+                                var thiscolor = e.chart.options.data[i].color;
+//                                alert( e.chart.options.data[i].name );
+
+                                var dpoints = e.chart.options.data[i].dataPoints;
+                                for( j = 0; j < dpoints.length; j++ )
+                                {
+                                    if( dpoints[j].label == thisq && dpoints[j].y == thisy )
+                                    {
+                                        if( dpoints[j].url ) 
+                                            val += ( "<a href='" + dpoints[j].url + "'><font color='" + thiscolor + "'>" + chartname + "</font></a><Br>" ) ;
+                                        else
+                                            val += ( "<font color='" + thiscolor + "'>" + chartname + "</font><Br>" ) ;
+                                    }
+                                }
+                            }
+                            return val;
+                        }
+				},
+				// theme: "theme2",
+				axisY: { // this is the data
+					gridColor: "#f0f0f0",
+					// gridColor: "#3c3c3c",
+					tickLength: 0,
+        			lineThickness:0,
+        			gridThickness:1,
+					labelFontColor: "#4f4f4f",
+					// labelFontColor: "<?=$gray?>",
+					tickColor: "#dddddd",
+					// tickColor: "<?=$gray?>",
+                    valueFormatString: " "
+                    
+                    
+				},
+				data: [
+                    <?
+                    $count = 0;
+                    $cnt = 0;
+                    foreach( $rows as $r=>$rname ) {
+                        $cnt++;
+                       ?>
+            {
+					type: "line",
+                    markerType: "none",
+                   <? if( $cnt > 6 && 1 == 0  ) { ?>visible: false, <? }?>
+					indexLabelFontFamily: "Open Sans",
+					showInLegend: true,
+					lineThickness: 3,
+					name: "<?=$rname?>",
+					color: "<?=$colors[$count++]?>",
+					dataPoints: [
+                        <?
+                        if( $count == count( $colors ) )
+                        {
+                            $count = 0;
+                        }
+                        $qcount = 0;
+                        foreach( $quarterstorun as $q ) {
+                            $qcount++;
+                            list( $m, $y ) = explode( "/", $q );
+                            $m = ($m-1)*3 + 1;
+                            ?>                         
+                                { label: "Q<?=str_replace( "/", "-", $q )?>", y: <?=formatYAxis( $dataforrows[$q][$r][0] )?>, indexLabel: "<?=$dataforrows[$q][$r][1]?>", indexLabelFontColor: "#4f4f4f", indexLabelFontWeight: "lighter", indexLabelFontSize: "12", click: function( e ) { <? if( $dataforrows[$q][$r][3] ) { ?> document.location.href="<?=$dataforrows[$q][$r][3]?>"; <? } ?> }, <? if( $dataforrows[$q][$r][3] ) { ?>cursor: "pointer", <? } ?> markerType: "circle", "url": "<?=$dataforrows[$q][$r][3]?>" },
+                                    <? }?>                                
+					]
+				},
+                <? } ?>
+				],
+				legend: {
+                      verticalAlign: "top",
+                      fontSize: 14,
+                      fontColor: "#4f4f4f",
+                      // fontColor: "#ffffff",
+                      fontFamily: "Open Sans",
+                      horizontalAlign: "center",
+                      cursor: "pointer",
+                      itemclick: function (e) {
+                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                e.dataSeries.visible = false;
+                            }
+                            else {
+                                e.dataSeries.visible = true;
+                            }
+                            <?=$graphname?>chart.render();
+                        }
+                    }
+                });
+			<?=$graphname?>chart.render();
+		} );
+	</script>
+<!-- end chart code -->
+
+    <? if( !in_array( $sectionid, $nogainers ) ) { ?>
+<?=printGainersLosers( $dataforrows, $rows ) ?>
+<? } ?>
+
+<? } ?>

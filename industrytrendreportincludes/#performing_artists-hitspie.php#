@@ -1,0 +1,16 @@
+<? 
+$sectionname = "Artists with more than one hit";
+$overtitle = "Artists With More than One Top 10 Hit (Excludes Featured Artists): Q{$threeagoq} {$threeagoy} - Q$quarter $year";
+$specificgraphtype = "pie";
+$timeperiod = "Q{$threeagoq} {$threeagoy} - Q$quarter $year";
+if($doingyearlysearch)
+    {
+	$timeperiod = $rangedisplay;
+	$overtitle = "Artists With More than One Top 10 Hit (Excludes Featured Artists): $rangedisplay";
+    }
+
+
+
+
+include "industrytrendreportincludes/genericgraph.php"; 
+?>

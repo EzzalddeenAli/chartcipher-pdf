@@ -1,0 +1,131 @@
+id -- int(11)
+ReportQuarter -- varchar(10)
+QuarterEnteredTheTop10 -- varchar(10)
+YearEnteredTheTop10 -- varchar(10)
+EntryPosition -- varchar(10)
+NumberOfWeeksSpentInTheTop10 -- int(11)
+PeakPosition -- int(11)
+Imprint -- int(11)
+GenreID -- int(11)
+GenreFusionType -- enum('Blend','Sectional','Blend + Sectional')
+ElectricVsAcoustic -- enum('Primarily Electronic','Primarily Acoustic','Electronic/Acoustic Combo')
+DominantInstrument -- enum('Synth','Guitar','Bass','Piano','Drums/Perc','Mix')
+CleverVsGeneric -- enum('Clever/Impactful','Generic')
+SongTitleWordCount -- int(11)
+SongTitleAppearances -- int(11)
+PrimaryNarrative -- set('1st Person','2nd Person','3rd Person')
+BackgroundVocals -- tinyint(4)
+SongForm -- varchar(30)
+SongLength -- time
+FirstSection -- int(11)
+IntroType -- enum('Backing Music','Multifacited','Narration & Plug','Unique','Sparse')
+ChorusKickoffType -- enum('Abbreviated','Breakdown/Sparse','Full')
+V1V2BackingComparison -- enum('Remains The Same/Close To The Same','Very Changed Up')
+V1V2BackingComments -- text
+V1V2MelodyComparison -- enum('Remains Constant','Slight To Moderate Shift','Major Shift')
+V1V2MelodyComments -- text
+PreChorusMTI -- enum('Less Throughout','Decrease/Increase','Constant','Constant/Increase','Greater Throughout')
+PreChorusMTIComments -- text
+VersePreChorusBackingMusic -- enum('Remains Constant','Slight To Moderate Shift','Major Shift')
+VersePreChorusBackingMusicComments -- text
+SimpleRepetitiveChorus -- tinyint(4)
+FirstChorusMTI -- set('Decrease','Similar','Increase')
+TransitionMethodIntoFirstChorus -- set('Vocal Lead In','Instrumental/Effect Lead In','Transitional Pause/Lull','Turning on a Dime/Seamless')
+BridgeSurroundingAreaMTI -- enum('C-L','C-H','C/H-L','L-H','L/H-L','L/H-H','L-C','H-L','H-L/H')
+BridgePlacement -- enum('A-C-B','B-C-A','B-C-B','B-C-PC/C','IB-C-IB')
+InstrumentalBreakType -- enum('Synth','Guitar','Bass','Drums/Perc','Wind','Mixed')
+LastSectionID -- int(11)
+OutroType -- enum('Vocal play','Change upon preceding section','Change upon a different section','New Type Of Section','Other Section')
+OutroTypeComments -- text
+EndingType -- set('Abrupt','Sustained','Resolved','False','Fadeout')
+VocalsGender -- enum('Solo Female','Solo Male','Duet/Group (All Male)','Duet/Group (All Female)','Duet/Group (Female/Male)')
+songkeyid -- int(11)
+timesignatureid -- int(11)
+songnameid -- int(11)
+MajorMinor -- enum('Major','Minor','Both')
+Tempo -- decimal(10,2)
+PrimaryGroupId -- int(11)
+WritingProduction -- int(11)
+SongStructure -- varchar(255)
+AbbrevSongStructure -- varchar(255)
+SongLengthRange -- varchar(40)
+IntroLengthRange -- varchar(40)
+FirstChorusPercent -- decimal(10,2)
+FirstChorusDescr -- varchar(20)
+OutroRange -- varchar(20)
+FirstChorusPercentRange -- varchar(20)
+ChorusPrecedesVerse -- tinyint(4)
+Lyrics -- text
+VocalTypeExamples -- varchar(255)
+FormDescription -- text
+FirstSectionDescription -- text
+IntroDescr -- text
+ChorusDescr -- text
+ArtistBand -- varchar(255)
+SongwriterCount -- tinyint(4)
+Spotify -- text
+OfficialVideo -- text
+iTunes -- text
+Composition -- text
+MixType -- enum('Blend & Sectional','Sectional','Blend')
+SongTitleAppearanceRange -- varchar(20)
+TempoRange -- varchar(20)
+IntroLengthRangeNums -- varchar(20)
+VerseCount -- int(11)
+PrechorusCount -- int(11)
+BridgeCount -- int(11)
+ChorusCount -- int(11)
+BreakCount -- int(11)
+FirstChorusRange -- varchar(255)
+LastSection -- int(11)
+LastSectionType -- varchar(30)
+FirstSectionType -- varchar(30)
+OutroLengthRangeNums -- varchar(20)
+SongLyricsLink -- varchar(255)
+TransitionDetails -- text
+ContainsSampled -- set('Contains Sampled Music','Contains Sampled Vocals')
+IntroVocalVsInst -- enum('Instrumental Only','Vocal Only','Instrumental & Vocal')
+FirstChorusMTIDetails -- text
+SubgenreFusionTypeDescription -- text
+OutroRecycled -- enum('All Recycled','All New','Recycled/New')
+OutroVocalVsInst -- enum('Instrumental Only','Vocal Only','Instrumental & Vocal')
+OutroCharacteristics -- set('Backing Music','Breakdown/Sparse','Multifaceted','Narration','Artist Plug','Big/Powerful')
+OutroCharacteristicsDescr -- text
+EndingDetails -- text
+RecycledSections -- set('Intro','Verse','Pre-Chorus','Chorus','Bridge','Instrumental Break','Vocal Break','Turnaround')
+HSDReport -- varchar(255)
+OfficialVideoEmbed -- varchar(255)
+BridgeSurrCount -- int(11)
+AllSections -- text
+IsRemix -- tinyint(4)
+PlacementsHard -- varchar(255)
+SubgenresHard -- varchar(255)
+LyricalThemesHard -- varchar(255)
+SubsectionVocalTypesHard -- text
+IsActive -- tinyint(4)
+CleanUrl -- varchar(255)
+WeekEnteredTheTop10 -- int(11)
+BridgeSurrogateShortForm -- varchar(255)
+KeyMajor -- varchar(255)
+SampledLink -- varchar(255)
+timesignatureid2 -- int(11)
+timesignatureid3 -- int(11)
+SubsectionVocalsHard -- text
+SongNameHard -- varchar(255)
+ChorusBeforeFirstVerse -- tinyint(4)
+ClientID -- int(11)
+ArtistCount -- tinyint(4)
+ProducerCount -- tinyint(4)
+InfluenceCount -- int(11)
+LabelCount -- int(11)
+LeadArtistCount -- tinyint(4)
+LogicFilename -- varchar(255)
+ReleaseDate -- date
+HasBillboard -- tinyint(4)
+BillboardName -- varchar(255)
+BillboardArtistName -- varchar(255)
+LogicFilenameDate -- datetime
+TotalCount -- tinyint(4)
+PrimaryGender -- varchar(20)
+FeatGender -- varchar(20)
+FirstChorusBreakdown -- tinyint(4)

@@ -1,0 +1,15 @@
+<svg id="Share" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140" height="97" viewBox="0 0 140 97">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 24px;
+        fill: #5d5d66;
+        text-anchor: middle;
+        font-family: "Open Sans";
+        font-weight: 600;
+      }
+    </style>
+  </defs>
+  <image id="Share_Icon_Orange" data-name="Share Icon Orange" x="42" width="56" height="57" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA5CAYAAABj2ui7AAABjUlEQVRoge2bXbLCIAxGwXFH7sn976D35aZDW35CCF+Cw5nxxTHIaQQTrPH4fsIiHI1pxtyT7wXcWmL3111EX/rzUYUrl3KJ8SwokXvEehUckbuM4f0jOsrhUVAjeye/nsEtuDxbcHU8lWqquyfhQXCKGGEpOFXsn2i1BiFyAZxBhBRxtkwowV65tKcbiW0K5gbPds4d8TVyY8eOcR7xJcHagNnOuSM+R+ui1TJajb0L9kwsJ6otNhyTCko3AUmcREwECaJ2OJgYgdpF4WLEe3L2zMSIWRk0FyO0Bd2IEdq1KLIcY7E7+tXZggIOT2txZgZdiL4AW7upJGoNmmWTBFFf0HDRNINSyZg8uMBE76UaTZLz5qXjBW58YJ4OlGJq8zgp1aKlLp07EW1RzhFKNp5TbI+sTw3R3mOUrlM1LaSiEi4XCV2qRXRLZVWLIkRd3GUxW9TNXRbTRL21S+qSux9cnS24OlvQANWd9NczaHaXRQuNLJoU2z1otGnuP6LDP3Gv8LcCbi/5vBghhD9/vUE0jsC+eQAAAABJRU5ErkJggg=="/>
+  <text id="Share-2" data-name="Share" class="cls-1" x="69.359" y="91.063"><tspan x="69.359">Share</tspan></text>
+</svg>

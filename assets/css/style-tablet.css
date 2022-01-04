@@ -1,0 +1,42 @@
+
+@media (max-width:768px){
+.logo-container img{
+margin: 0;
+    }
+}
+
+
+
+
+@media (max-width:1150px){
+.logo-container img{
+width:275px;
+padding: 30px 8px 30px 8px;
+    }
+    
+    
+    .sidebar-toggle-box{
+        background-color: #8626b2;
+            right: 15px;
+    }
+    
+    .fa-bars:before {
+    content: "\f0c9";
+    color:#ffffff;
+}
+
+.sidebar-toggle-box:hover .fa-bars:before {
+		  content: "\f0c9";
+    color:#ffffff;
+}
+    
+    .site-sidebar{
+        padding-top: 120px;
+    }
+    
+     .site-header{
+	width: 100%;
+    }
+    
+
+}

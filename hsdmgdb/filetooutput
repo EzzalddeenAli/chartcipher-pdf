@@ -1,0 +1,24 @@
+1) trend report master - hot 100
+
+   1)    list all the reports (column a) with start and end quarter dropdowns
+   	 *   autopopulate end with 3 quarters later
+	 ** autopopulate the below reports
+	 ** check off which reports he wants
+	 ** all reports are separate tabs 
+   2)   output results
+   	
+   
+2) genre report 
+   Genre Report Output.xlsx
+   1) need to add description fields for the report types -- not to be output on the page
+   2) date range per report
+   3) checkboxes, same as above
+
+      
+   
+
+3) top 10 deconstructed 
+   - HSD Database - Top 10 report output
+
+
+SEND SERVER REC

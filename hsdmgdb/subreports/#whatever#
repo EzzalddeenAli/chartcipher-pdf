@@ -1,0 +1,17 @@
++----+-----------------------------+
+| id | name                        |
++----+-----------------------------+
+| 60 | Bridge and Bridge Surrogate |
+| 61 | Instrumental Break          |
+| 59 | Post Chorus                 |
+| 58 | Chorus                      |
+| 56 | Verse                       |
+| 57 | Pre-Chorus                  |
+| 55 | Intro                       |
+| 54 | First Section Type          |
+| 53 | Section Length              |
+| 62 | Vocal Break                 |
+| 63 | Last Section Type           |
+| 64 | Outro                       |
+| 65 | Ending                      |
++----+-----------------------------+

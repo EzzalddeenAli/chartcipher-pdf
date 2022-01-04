@@ -1,0 +1,15 @@
+<svg id="Save_Search" data-name="Save Search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140" height="97" viewBox="0 0 140 97">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 24px;
+        fill: #5d5d66;
+        text-anchor: middle;
+        font-family: "Open Sans";
+        font-weight: 600;
+      }
+    </style>
+  </defs>
+  <text id="Save_Search_" data-name="Save Search " class="cls-1" x="71.359" y="93.062"><tspan x="71.359">Save Search</tspan></text>
+  <image id="Save_icon_orange" data-name="Save icon orange" x="51" width="40" height="62" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAA+CAYAAABZcVnrAAABzklEQVRoge3ar0sDYRjA8a/TYDAsitliMMgwWP0DDMIEDQaFgQbBBcOCiIKGBYPIgkHQYFixLRhMYjAsGAwKLgwRBTEYDAfKK88r2zHHtuecBz5fWNlu7z733q/BXc9HJkWDJoBBoK/Rh79UAFSBq9rhawH9wBKQAYa7jPO9A7dAHjiuBSaBbQH+ZW6SRoEjYATIeeBsDHDhVoGbhLyZjo/rOzeb6YRM6XhMUOHGHHBAXnEsmYgp7DsDajOgNgNqM6A2A2ozoDYDajOgNgNqM6A2A2ozoDYDajOgNgNqM6A2A2ozoDYDavt3wEtgF7iOasAogQ42CWSBKaAYxaBRAANBZeV+r6sCzAA72sG1wEdgQWavUTmBB38BdPvZvL8z3iSHXwZeuwk8BxaBsxaXPwDmgHK7P9QJsCjPNdQ9/NBCpTZXqiOgm4kV4K7N7/nKsnItH+HtPNlRCB2pnVaRlQzkWYmmtTqDK7Kja3E+d/S7A2xLCwzkNLIXESw89jqw1myhZsA3uSIcRm+rKy9bp+G58idgWa4EpV/G+Qqyyauh9wMHfJYd11eSc1a3cL4TYFr+cPjuezdSQy/Ak8zmKbCpOI1oewAugN6vSYP9T/7VTUdbVNe0AAAAAElFTkSuQmCC"/>
+</svg>
