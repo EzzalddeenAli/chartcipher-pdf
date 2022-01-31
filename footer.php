@@ -349,6 +349,11 @@ for (i = 0; i < l; i++) {
 	    	    document.location.href = "chart-landing.php?setchart=" + s.options[i].value;
 		    	    break;
 	    }
+	    else if( s.id == "mysetbenchmark" )
+	    {
+	    	    document.location.href = "<?=$benchmarkurlwithouttype?>&search[benchmarktype]=" + encodeURIComponent( s.options[i].value );
+		    	    break;
+	    }
 	    else
 	    {
 	    	    document.location.href = "<?=$tmpurl?>" + s.options[i].value;

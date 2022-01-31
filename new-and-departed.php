@@ -245,7 +245,6 @@ echo( $whatsnewcache );
                              <p>Highest Levels in Four or More Quarters<span class="arrow"> >></span></p>
                               <p>Lowest Levels in Four or More Quarters<span class="arrow"> >></span></p>
                               <p>New/Departing Songs<span class="arrow"> >></span></p>
-                              <p>Compare/contrast compositional characteristics for songs that are tat the top and the bottom of the chart.<span class="arrow"> >></span></p>
                            
                              
                              
@@ -266,7 +265,6 @@ echo( $whatsnewcache );
                              
                                 <h4>Cross Charts Reports</h4>
                              <p>What do songs that are charting on multiple charts have in common?<span class="arrow"> >></span></p>
-                              <p>What are the commonalities between multiple charts?<span class="arrow"> >></span></p>
                           
                         
                         </div><!-- /.header-block-1B -->

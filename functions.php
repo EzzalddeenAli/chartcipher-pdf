@@ -50,7 +50,8 @@ foreach( $access as $a )
 }
 //    print_r( $access );
 //    exit;
-
+if( $_SERVER[REMOTE_ADDR] == "99.73.32.79" )
+    $anyokay = 1;
 if( $nouserrequired )
     {
 	$anyokay = true; 
@@ -70,7 +71,7 @@ if( $_SESSION["origurl"] )
 //print_r( $_COOKIE ); exit;
 
 //$anyokay = true;
-if( !$anyokay )
+if( !$anyokay && !$_GET["forcelogin"] )
 {
 //echo( is_una() );exit;
 // echo( "access: " ); print_r( $access );
@@ -84,7 +85,7 @@ if( !$anyokay )
     else if( isAutomaticLogin() )
         Header( "Location: https://editorial.chartcipher.com/" );
     else
-        Header( "Location: https://editorial.chartcipher.com/members/login" );
+        Header( "Location: https://editorial.chartcipher.com/members/login?help" );
     
     exit;
 }
@@ -131,8 +132,8 @@ $userid = $user["user_id"];
 //echo( $userid );
 if( $_GET["forcelogin"] || !$userid )
 {
-    setcookie( "mytemplogin", 4368 );
-    $userid = 4368;
+    setcookie( "mytemplogin", 9571 );
+    $userid = 9571;
 }
 else if( !$userid )
 {

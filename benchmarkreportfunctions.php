@@ -15,10 +15,10 @@ $reportsarr = array();
 
 $benchmarktypes = array();
 $benchmarktypes["Top 25 vs. Bottom 25"] = "Top 25 vs. Bottom 25";
-$benchmarktypes["New Songs vs. Songs that Departed"] = "New Songs vs. Songs that Departed";
+//$benchmarktypes["New Songs vs. Songs that Departed"] = "New Songs vs. Songs that Departed";
 $benchmarktypes["New Songs vs. Carryovers"] = "New Songs vs. Carryovers";
-$benchmarktypes["Staying Power: Song with 10+ Weeks vs. Songs that left after 1 week"] = "Staying Power: Song with 10+ Weeks vs. Songs that left after 1 week";
-$benchmarktypes["Songs Moving Up the Chart vs. Songs Going Down the Chart"] = "Songs Moving Up the Chart vs. Songs Going Down the Chart";
+$benchmarktypes["Staying Power - 10 Weeks"] = "Staying Power: Song with 10+ Weeks vs. Songs with less than 10 Weeks";
+//$benchmarktypes["Songs Moving Up the Chart vs. Songs Going Down the Chart"] = "Songs Moving Up the Chart vs. Songs Going Down the Chart";
 
 
 // Overview
@@ -50,6 +50,21 @@ $benchmarkreportsarr[] = "Sub-Genres";
 $benchmarkreportsarr[] = "Influences";
 $benchmarkreportsarr[] = "Lyrical Moods";
 $benchmarkreportsarr[] = "Lyrical Themes";
+
+$benchmarkreportsarr[] = "Average Song Length";
+$benchmarkreportsarr[] = "Prominent Instruments";
+$benchmarkreportsarr[] = "Tempo Range General";
+$benchmarkreportsarr[] = "KeyMajorMinor";
+$benchmarkreportsarr[] = "Song Title Word Count";
+$benchmarkreportsarr[] = "Verse Count";
+$benchmarkreportsarr[] = "Pre-Chorus Count";
+$benchmarkreportsarr[] = "Chorus Count";
+//$benchmarkreportsarr[] = "Chorus Precedes Any Section";
+$benchmarkreportsarr[] = "First Section";
+$benchmarkreportsarr[] = "Last Section";
+
+ 
+
 //$reportsarr["Genres & Sub-Genres/Influences"]["Influence-Count"] = "Influence Count";
 
 // // Lead Vocals

@@ -60,10 +60,10 @@ $allcharts = db_query_array( "select id, chartkey from charts", "chartkey", "id"
                                                     <td><a href="chart-landing.php?setchart=<?=$allcharts["christian-songs"]?>" class="norowlink"><span>Hot Christian Songs</span></a></td>
                                                     <td class="nolock"> </td>
                                                </tr>
-                                                 <tr>
+<!--                                                 <tr>
                                                     <td><a href="chart-landing.php?setchart=<?=$allcharts["latin-songs"]?>" class="norowlink"><span>Hot Latin Songs</span></a></td>
                                                      <td class="nolock"> </td>
-                                               </tr>
+                                               </tr>-->
                                 </table>
                                 </div><!-- /.header-block-1B -->
 

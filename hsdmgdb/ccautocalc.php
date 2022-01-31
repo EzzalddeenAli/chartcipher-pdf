@@ -92,7 +92,7 @@ $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOfInvertedChor
 //Use of Inverted Chords: https://analytics.chartcipher.com/URAn2 (Incidental / Low use of Inverted Chords - Under 7%, Low-Mid use of Inverted Chords - 7-10%, Mid-High use of Inverted Chords - 10-15%, High use of Inverted Chords - Above 15%)
 
 // UseOf7thChordsRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOf7thChordsRange", "UseOf7thChords", "25-, 25-35, 35-45, 45+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOf7thChordsRange", "UseOf7thChords", "0.01-", "0.01-25, 25-35, 35-45, 45+", "", array( "None", "Low", "Low-Mid", "High-Mid", "High" )  );
 
 // UseOfMajor7thChordsRange
 $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOfMajor7thChordsRange", "UseOfMajor7thChords", "5-, 5-10, 10-20, 20+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );

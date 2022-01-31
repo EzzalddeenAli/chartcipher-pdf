@@ -920,7 +920,7 @@ function getQuarterEnteredTheTopTenString( $str , $season, $not = "" )
 
 function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter = "", $endyear = "", $positiononly = "", $orderbysongtitle = false, $seasontouse = "" )
 {
-    global $cachesongids, $numberoneonly, $nodates, $clientfilter, $genrefilter, $lyricalthemefilter, $lyricalsubthemefilter, $lyricalmoodfilter, $minweeksfilter, $bpmfilter, $majorminorfilter, $newcarryfilter, $subgenrefilter, $season, $withimprint; // ughhhhhh
+    global $cachesongids, $numberoneonly, $nodates, $clientfilter, $genrefilter, $lyricalthemefilter, $lyricalsubthemefilter, $lyricalmoodfilter, $minweeksfilter, $bpmfilter, $majorminorfilter, $newcarryfilter, $subgenrefilter, $season, $withimprint, $chartid; // ughhhhhh
     $seasontouse = $seasontouse?$seasontouse:$season;
     if( $numberoneonly ) $positiononly = 1;
   if( $_GET["help"] )
@@ -939,18 +939,18 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
 	    }
       if( $endquarter )
       {
-          $ext .= " and ( 1 = 0 "; 
+          $ext .= " and  songs.id in ( select songid from song_to_chart where chartid = $chartid and ( 1 = 0 "; 
           foreach( $quarters as $q )
           {
               $ext .= " or " . getQuarterEnteredTheTopTenString( $q, $seasontouse );
           }
-          $ext .= " )";
+          $ext .= " ) )";
           logquery( "this is the one: " . $ext );
       }
       else
       {
           $q = ( "{$quarter}/{$year}" );
-          $ext .= " and " . getQuarterEnteredTheTopTenString( $q, $seasontouse );
+          $ext .= " and songs.id in ( select songid from song_to_chart where  chartid = $chartid and (" . getQuarterEnteredTheTopTenString( $q, $seasontouse ) . " ))" ;
           
       }
     }
@@ -963,7 +963,7 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
           $ext .= " and ( 1 = 1 "; 
           foreach( $quarters as $q )
           {
-              $ext .= " and " . getQuarterEnteredTheTopTenString( $q, $seasontouse , "not" );
+              $ext .= " and  songs.id not in ( select songid from song_to_chart where  chartid = $chartid and (" . getQuarterEnteredTheTopTenString( $q, $seasontouse ) . " ))";
           }
           $ext .= " )";
           logquery( "this is the one: " . $ext );
@@ -971,7 +971,7 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
       else
       {
           $q = ( "{$quarter}/{$year}" );
-          $ext .= " and " . getQuarterEnteredTheTopTenString( $q, $seasontouse , "not" );
+          $ext .= " and  songs.id not in ( select songid from song_to_chart where chartid = $chartid and  (" . getQuarterEnteredTheTopTenString( $q, $seasontouse ) . " ))";
           
       }
     }
@@ -979,7 +979,6 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
     $weekdateext = "";
   if( $positiononly )
   {
-
       if( strpos( $positiononly, "client-" ) !== false )
       {
           $clientid = str_replace( "client-", "", $positiononly );
@@ -1095,7 +1094,7 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
   if( $_GET["help"] )
       echo( "<br>\n getsongidswithinquarter : " . $ext . "\n<br>\n" );
   
-  $key = "$quarter, $year, $endquarter, $endyear, $positiononly, $newarrivalsonly, $songwriterfilter, $clientfilter, $labelfilter, $artistfilter, $genrefilter, $artistid, $artisttype, $withimprint";
+  $key = "$quarter, $year, $endquarter, $endyear, $positiononly, $newarrivalsonly, $songwriterfilter, $clientfilter, $labelfilter, $artistfilter, $genrefilter, $artistid, $artisttype, $withimprint, $newcarryfilter, $minweeksfilter";
   if( $endyear && !$endquarter )
   {
       $endquarter = 4;

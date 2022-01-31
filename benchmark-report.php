@@ -27,9 +27,16 @@ if( !$search["dates"]["fromy"] && !$search["dates"]["fromweekdate"] && !$search[
    $search["dates"]["fromy"] = $season?getLastSeason( $season ):$exp[1];
 }
 
+//echo( $search["benchmarktype"] );
 switch( $search["benchmarktype"] ) { 
     case "Top 25 vs. Bottom 25":
     $columns = array( "Top 25"=>"1:25", "Bottom 25"=> "75:100" );
+    break;
+    case "New Songs vs. Carryovers":
+	$columns = array( "New Songs"=> array( "newcarryfilter"=>"new" ), "Carryovers"=> array("newcarryfilter"=>"carryover" ) );
+    break;
+    case "Staying Power - 10 Weeks":
+	$columns = array( "Song with 10+ Weeks"=>array( "minweeksfilter"=>"10" ), "Songs with less than 10 Weeks"=> array( "minweeksfilter"=>"1-9" ) );
     break;
 default:
     $columns = array( "Top 25"=>"1:25", "Bottom 25"=> "75:100" );
@@ -64,8 +71,25 @@ else
 
     $allsongsbench = array();
 $alllllsongs = array();
+//echo( "clinetid: " . $searchclientid );
     foreach( $columns as $c=>$benchmarkpeak )
     {
+
+    $newcarryfilter = "";
+    $minweeksfilter = "";
+    if( is_array( $benchmarkpeak ) )
+	{
+	    foreach( $benchmarkpeak as $type=>$val )
+		{
+		    if( $type == "newcarryfilter" )
+			$newcarryfilter = $val;
+		    if( $type == "minweeksfilter" )
+			$minweeksfilter = $val;
+		}
+	        $benchmarkpeak = "";
+	}
+    //    echo( "min: $minweeksfilter" );
+    //    echo( $minweeksfilter );
 	$allsongstop = getSongIdsWithinQuarter( false, $search[dates][fromq], $search[dates][fromy], $search[dates][toq], $search[dates][toy], $benchmarkpeak );
 	$allsongsbench[$c] = $allsongstop;
 	//	print_r( $allsongstop );
@@ -73,7 +97,6 @@ $alllllsongs = array();
     }	     
 //echo( "all the songs: " );
 //print_r( $alllllsongs );
-
 $rows = getRowsComparison( $search, $alllllsongs );
     $allgenres = db_query_array( "select id, Name from genres order by OrderBy", "id", "Name" );
     $genrefilter = $_GET["genrefilter"];
@@ -82,9 +105,14 @@ include "trendreportfunctions.php";
 ?> 
 	<div class="site-body index-pro ">
 <? include "chartchooser.php"; ?>                
+<? if( 1 == 0 ) { ?>
+        <? include "searchcriteria-benchmark.php"; ?>
+<?  } ?>
              
         <section class="home-top">
 			<div class="element-container row">
+
+
                
                 
                <div class="row  row-equal row-padding mobile link-alt">
@@ -92,9 +120,11 @@ include "trendreportfunctions.php";
                        <div class="home-search-header  flex-addon">
                                 <h2>
 
+                         <div class="custom-select" >
 								<select id="mysetbenchmark">
 								<? outputSelectValues( $benchmarktypes, $search[benchmarktype] ); ?>
 								</select>
+</div>
 
 </h2>
                                
@@ -110,9 +140,10 @@ include "trendreportfunctions.php";
 $tmpurl = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $tmpurl );
 $tmpurl .= "&search[comparisonaspect]=";
  foreach( $benchmarkreportsarr as $c=>$displ ) { 
+
  ?>
                      <tr>
-                                <td><span><span><a href='<?=$tmpurl?><?=$displ?>'><?=$displ?></a></span> <?=$notsuredispl?></span>
+                                <td><span><span><a href='<?=$tmpurl?><?=$displ?>'><?=$possiblesearchfunctions[$displ]?$possiblesearchfunctions[$displ]:$displ?></a></span> <?=$notsuredispl?></span>
 <!--<a href="home" class="rowlink">Primary Genres: R&B/Soul</a>-->
 </td>
                                   <td></td>
@@ -124,14 +155,14 @@ $tmpurl .= "&search[comparisonaspect]=";
                       </div>
                              <div class="col-6">
                    <div class="home-search-header flex-addon">
-                                <h2>View Trend Graph</h2>
+                                <h2>Trend Graph</h2>
 <?     $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[benchmarktype]=". $search[benchmarktype] , "", $tmpurl );
 if( strpos( $tmpurl, "comparisonaspect") === false )
     $tmpurl .= "&search[comparisonaspect]=" . $search[comparisonaspect];
 
 ?>
-                                 <a class="search" href="/<?=$tmpurl?>"> View Trend <img src="assets/images/home/search-view-icon.svg" /></a>
+                                 <a class="search" href="/<?=$tmpurl?>"> View >></a>
                             </div>
                          <div class="header-inner insight-graph" >
 
@@ -160,9 +191,6 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
 
                       
                         </div><!-- /.header-block-1B -->
-                                 <div class="info-block">
-                             <p>Compositional characteristics that are at their highest levels in four or more quarters.</p>
-                        </div>
                       </div>
                       </div>
         
@@ -182,7 +210,6 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
                              <p>Highest Levels in Four or More Quarters<span class="arrow"> >></span></p>
                               <p>Lowest Levels in Four or More Quarters<span class="arrow"> >></span></p>
                               <p>New/Departing Songs<span class="arrow"> >></span></p>
-                              <p>Compare/contrast compositional characteristics for songs that are tat the top and the bottom of the chart.<span class="arrow"> >></span></p>
                            
                              
                              
@@ -203,7 +230,6 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
                              
                                 <h4>Cross Charts Reports</h4>
                              <p>What do songs that are charting on multiple charts have in common?<span class="arrow"> >></span></p>
-                              <p>What are the commonalities between multiple charts?<span class="arrow"> >></span></p>
                           
                         
                         </div><!-- /.header-block-1B -->
@@ -293,6 +319,13 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
        */ 
 
                     
+	$(document).ready(function(){
+	    $("a.expand-btn").click(function(){
+	        $("a.expand-btn").toggleClass("collapse-btn");
+	        $("#search-hidden").toggleClass("hide show");
+                return false;
+	    });
+	});
   
 	</script>
 

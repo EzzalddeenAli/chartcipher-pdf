@@ -1,9 +1,10 @@
 <?
     // [song id] => 0
-$fullname = $data[0];
-$fullnamearr = explode( ".", $fullname );
-$artist = $fullnamearr[0];
-$songname = $fullnamearr[1];
+$artist = $data[0];
+// $fullnamearr = explode( ".", $fullname );
+// $artist = $fullnamearr[0];
+// $songname = $fullnamearr[1];
+$songname = $data[1];
 
 $songid = db_query_first_cell( "select songs.id from songs, songnames where songnameid = songnames.id and Name = '" . escMe( $songname ).  "' and ArtistBand = '" . escMe( $artist ).  "'" );
 

@@ -189,7 +189,8 @@ select.multiple{
 </head>
 <body><table><tr><td valign='top'>
 <ul id="menu"><li>
-<a href='songs.php'><b>Songs</b></a>
+<a href='songs.php'><b>Songs</b></a></li>
+<li><a href='missingsongsexport.php'><b>Missing Songs Export</b></a>
 </li>
    <li><a href='customhovers.php'>Custom Hovers</a>
 <ul class="fallback">

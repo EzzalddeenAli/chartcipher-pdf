@@ -4,51 +4,27 @@ include "connect.php";
 //     $allgenresfordropdown = db_query_array( "select id, Name from genres order by OrderBy, Name", "id", "Name" );
 
 
-$songs = db_query_rows( "select * from songs where IsActive = 1 ", "id" );
+$songs = db_query_rows( "select id, BillboardName from songs where IsActive = 1 ", "id" );
+//print_r( $songs );
 foreach( $songs as $songid=>$srow )
 {
 
-$arr = db_query_array( "select distinct( influenceid ) from song_to_influence where songid = '$songid' and type = 'Main' ", "influenceid", "influenceid" );
-$autocalcvalues["InfluencesHard"] = "," . implode( ",", $arr ) . ",";
-    // // $anyfemale = db_query_first_cell( "select count(*) from song_to_artist a, artist_to_member b, members c where c.id = b.memberid and type = 'primary' and MemberGender = 'Female' and songid = $songid and a.artistid = b.artistid" );    
-    
-    // // $anyfemalegroup = db_query_first_cell( "select count(*) from song_to_group a, group_to_member b, members c where c.id = b.memberid and type = 'primary' and MemberGender = 'Female' and songid = $songid and a.groupid = b.groupid" ); 
+	echo( "select songnames.id from songnames where Name = '" . escMe( $srow["BillboardName"] ) . "'<br>" );
+	$a = db_query_first_cell( "select songnames.id from songnames where Name = '" . escMe( $srow["BillboardName"] ) . "'" );
+	echo( "bname: ($songid)" . $srow["BillboardName"] . "<br>");
 
-
-    // // $anyfemalefeat = db_query_first_cell( "select count(*) from song_to_artist a, artist_to_member b, members c where c.id = b.memberid and type = 'featured' and MemberGender = 'Female' and songid = $songid and a.artistid = b.artistid" );    
-    
-    // // $anyfemalefeat += db_query_first_cell( "select count(*) from song_to_group a, group_to_member b, members c where c.id = b.memberid and type = 'featured' and MemberGender = 'Female' and songid = $songid and a.groupid = b.groupid" ); 
-
-    // // $anymalefeat = db_query_first_cell( "select count(*) from song_to_artist a, artist_to_member b, members c where c.id = b.memberid and type = 'featured' and MemberGender = 'Male'  and songid = $songid and a.artistid = b.artistid" );    
-    
-    // // $anymalefeat += db_query_first_cell( "select count(*) from song_to_group a, group_to_member b, members c where c.id = b.memberid and type = 'featured' and MemberGender = 'Male' and songid = $songid and a.groupid = b.groupid" ); 
-
-
-
-    // $autocalcvalues["PrimaryGender"] = $anyfemale || $anyfemalegroup ? "Female":"Male";
-    // $autocalcvalues["FeatGender"] = "";
-    
-    // if( $anyfemalefeat || $anymalefeat )
-    // 	{
-    // 	    if( $anymalefeat && $anyfemalefeat )
-    // 		$autocalcvalues["FeatGender"] = "Both";
-    // 	    else if ( $anymalefeat )
-    // 		$autocalcvalues["FeatGender"] = "Male";
-    // 	    else
-    // 		$autocalcvalues["FeatGender"] = "Female";
-
-    // 	}
-
-    // $arr = db_query_array( "select distinct( subgenreid ) from song_to_subgenre where songid = '$songid' and type = 'Main' ", "subgenreid", "subgenreid" );
-    // $autocalcvalues["SubgenresHard"] = "," . implode( ",", $arr ) . ",";
+     $autocalcvalues["songnameid"] = $a;
     foreach( $autocalcvalues as $aid=>$val )
     {
-	echo( "$srow[CleanUrl] - update songs set $aid = '$val' where id = $songid<br>" );
-	db_query( "update songs set $aid = '$val' where id = $songid" );
+        if( $val )
+	    {
+		echo( "$srow[CleanUrl] - update songs set $aid = '$val' where id = $songid<br>" );
+			db_query( "update songs set $aid = '$val' where id = $songid" );
+			}
     }
     
 }
-
+exit;
 
 // $dist = db_query_rows( "select type, Name, song_to_songkey.id from song_to_songkey, songkeys where songkeyid = songkeys.id" );
 // foreach($dist as $d )

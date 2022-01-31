@@ -201,7 +201,7 @@ $backurl = "/song-landing.php";
 								</div>
 								<div class="form-row-right-inner">
                                   <label># of weeks on <?=$chartname?></label>
-									<select name="search[minweeks]" id="fromy" >
+									<select name="search[minweeks]"  >
 									<option value="" disabled selected>(Any, 10, +25, 50+) </option>
 <?
 $minweeksvalues = array( "1-1"=>"1 Week", "1-5"=>"5 Weeks or Less", "1-10"=>"10 Weeks or Less", "10"=>"10 Weeks or More", "20"=>"20 Weeks or More", "30"=>"30 Weeks or More" );

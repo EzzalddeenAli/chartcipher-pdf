@@ -195,7 +195,7 @@ include "benchmarkreportfunctions.php";
                    </div>
                 </div>
                    
-                               <div class="row outter row-equal row-padding">
+                               <div class="row outter row-equal row-padding" style="display:none">
                     <div class="col-12 flex switch">
                
                        <div class="row inner row-equal row-padding link-alt">

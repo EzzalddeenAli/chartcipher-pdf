@@ -119,9 +119,8 @@ $backurl = "chart-landing.php";
                          <div class="reports header-inner " >
                         <h4>Weekly Snapshots: Week of X</h4>
                              <p><a href="https://analytics.chartcipher.com/highest-levels">Highest Levels in Four or More Quarters <span class="arrow"> >></span></a></p>
-                              <p>Lowest Levels in Four or More Quarters<span class="arrow"> >></span></p>
-                              <p><a href="https://analytics.chartcipher.com/new-and-departed.php">New/Departing Songs <span class="arrow"> >></span></a></p>
-<!--                              <p>Compare/contrast compositional characteristics for songs that are tat the top and the bottom of the chart.<span class="arrow"> >></span></p>-->
+                              <p><a href="https://analytics.chartcipher.com/highest-levels">Lowest Levels in Four or More Quarters<span class="arrow"> >></span></a></p>
+<!--                              <p><a href="https://analytics.chartcipher.com/new-and-departed.php">New/Departing Songs <span class="arrow"> >></span></a></p>-->
                            
                              
                              
@@ -142,7 +141,6 @@ $backurl = "chart-landing.php";
                              
                                 <h4>Cross Charts Reports</h4>
                              <p>What do songs that are charting on multiple charts have in common?<span class="arrow"> >></span></p>
-<!--                              <p>What are the commonalities between multiple charts?<span class="arrow"> >></span></p>-->
                           
                         
                         </div><!-- /.header-block-1B -->

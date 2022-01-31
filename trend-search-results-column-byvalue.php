@@ -1,66 +1,4 @@
 <? 
-//echo( "data?" ) ;
-file_put_contents(  "/tmp/data", print_r( $dataforrows, true  ) );
-file_put_contents(  "/tmp/data", "rows: " . print_r( $rows, true  ), FILE_APPEND );
-//print_r( $dataforrows );
-
-$songstouse = array( ""=>array() );
-
-if( $doingthenandnow )
-    {
-	$songstouse = array( "$fromweekdatedisplay - $toweekdatedisplay"=>$allsongs, "$fromweekdatedisplaysecond - $toweekdatedisplaysecond"=>$allsongssecond );
-	$dateurlstouse = array( "$fromweekdatedisplay - $toweekdatedisplay"=>$urldatestr, "$fromweekdatedisplaysecond - $toweekdatedisplaysecond"=>$urldatestrsecond );
-	if( $fromweekdatedisplaythird )
-	    {
-		$songstouse["$fromweekdatedisplaythird - $toweekdatedisplaythird"] = $allsongsthird;
-		$dateurlstouse["$fromweekdatedisplaythird - $toweekdatedisplaythird"] = $urldatestrthird;
-	    }
-    }
-//print_r( $dateurlstouse );
-$alldataforrows = array();
-//echo( "about to start\n" );
-
-if( $allsongsbench )
-{
-	$songstouse = $allsongsbench;
-}
-
-foreach( $songstouse as $barname=>$tmpsongs )
-{
-	if( $allsongsbench )
-	    {
-		// this is awful, but we need to see what we're also filtering by here
-		$benchmarkpeak = $columns[$barname];
-		$newcarryfilter = "";
-		$minweeksfilter = "";
-		if( is_array( $benchmarkpeak ) )
-		    {
-			foreach( $benchmarkpeak as $type=>$val )
-			    {
-				if( $type == "newcarryfilter" )
-				    $newcarryfilter = $val;
-				if( $type == "minweeksfilter" )
-				    $minweeksfilter = $val;
-			    }
-			$benchmarkpeak = "";
-		    }
-	    }
-
-
-    $alldataforrows[$barname] = getBarTrendDataForRows( $search[comparisonaspect], "", $tmpsongs );
-}
-
-
-
-
-
-$sortingbyvalue = 1; 
-if( isHighestToLowest( $search[comparisonaspect] ) ) 
-{
-include "trend-search-results-column-byvalue.php";
-}
-else
-{
 
 
 //print_r( $alldataforrows );
@@ -96,18 +34,69 @@ else
 				    }
 				else
 				    {
-					$presortedbarkey[$rid] = $rid;
+					$presortedbarkey[$rid] = $tmparr[0]; // this is one thign for the sort
 				    }
 			    }
 		    }
 		$cnt++;
 	    }
 
+function cdp_sort( $a, $b )
+{
+$sorter["%I"] = 7;
+$sorter["%II"] = 6;
+$sorter["%III"] = 5;
+$sorter["%IV"] = 4;
+$sorter["%V"] = 3;
+$sorter["%VI"] = 2;
+$sorter["%VII"] = 1;
+return $sorter[$a] > $sorter[$b];
+
+
+}
+function cr_sort( $a, $b )
+{
+$sorter["Not Repetitive"] = 7;
+$sorter["Somewhat Repetitive"] = 6;
+$sorter["Very Repetitive"] = 5;
+$sorter["Highly Repetitive"] = 4;
+return $sorter[$a] > $sorter[$b];
+
+
+}
+function yesno_sort( $a, $b )
+{
+$sorter["Yes"] = 7;
+$sorter["No"] = 6;
+
+return $sorter[$a] > $sorter[$b];
+
+
+}
+
+
 //print_r( $rows );
 //print_r( $presortedbarkey );
-//	asort( $presortedbarkey );
+//echo( $search["comparisonaspect"] );
+	   if( $search["comparisonaspect"] == "ChordDegreePrevalence" )
+	   {
+	   	uksort( $presortedbarkey, 'cdp_sort' );
+		
+	   }
+	   elseif( $search["comparisonaspect"] == "ChordRepetitionRange" )
+	   {
+	   	uksort( $presortedbarkey, 'cr_sort' );
+		
+	   }
+	   elseif( $search["comparisonaspect"] == "Departure Section" )
+	   {
+	   	uksort( $presortedbarkey, 'yesno_sort' );
+		
+	   }
+	   else
+	   	asort( $presortedbarkey );
 	$cnt = 0;
-	foreach( $rows as $key=>$throwaway )
+	foreach( $presortedbarkey as $key=>$throwaway )
 	    {
 		$barkey[$key]= $cnt;
 		$cnt++;
@@ -139,8 +128,7 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
 				exportEnabled: true,
 				animationEnabled: false,
 				title: {
-				 text: "<?=str_replace( '"', '\"', $possiblesearchfunctions[$search[comparisonaspect]] )?>",
-
+				text: "<?=str_replace( '"', '\"', $possiblesearchfunctions[$search[comparisonaspect]] )?>",
                     fontColor: "#888888",
                     // fontColor: "#ffffff",
                     fontFamily: "Open Sans",
@@ -217,7 +205,6 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
 					tickLength: 0,
         			lineThickness:0,
         			gridThickness:1,
-
 					labelFontColor: "#7a7a7a",
 					// labelFontColor: "<?=$gray?>",
 					tickColor: "#dddddd",
@@ -247,8 +234,9 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
 					dataPoints: [
                         <?php
                         $qcount = 0;
+//                        uasort( $dataforrows, "trendsortByValue" );                        
                         $keys = array_keys( $dataforrows );
-                        foreach( $keys as $rname ) {
+                        foreach( $keys as $rname ) { // this is one thign for the sort
 //echo( "rname: " . $rname . "\n" );
                             $r = $rname;
                             $labelname = $rows[$rname];
@@ -278,7 +266,7 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
                             }
                             ?>                         
                                 {
-                                  color: "<?=$colors[$cnt]?>", label: "<?=$labelname?>", x: <?=$barkey[$rname]?>, y: <?=formatYAxis( $dataforrows[$r][0] )?>, numsongs: "<?=$dataforrows[$r][4]?>", indexLabel: "<?=$dataforrows[$r][1]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "bold", indexLabelFontSize: "14", click: function( e ) { document.location.href="<?=$dataforrows[$r][3]?>"; }, cursor: "pointer", markerType: "circle", "url": "<?=$dataforrows[$r][3]?>" },
+                                  color: "<?=$colors[$cnt]?>", label: "<?=$labelname?>", x: <?=100-$barkey[$rname]?>, y: <?=formatYAxis( $dataforrows[$r][0] )?>, numsongs: "<?=$dataforrows[$r][4]?>", indexLabel: "<?=$dataforrows[$r][1]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "bold", indexLabelFontSize: "14", click: function( e ) { document.location.href="<?=$dataforrows[$r][3]?>"; }, cursor: "pointer", markerType: "circle", "url": "<?=$dataforrows[$r][3]?>" },
                         <?  }
                         ?>                                
 					]
@@ -304,11 +292,10 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
                             chart.render();
                         }
                     }
-			    });
+                });
 
 
 
 			chart.render();
 		}
 	</script>
-<? } ?>
