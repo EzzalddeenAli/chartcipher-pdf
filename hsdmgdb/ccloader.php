@@ -2,8 +2,10 @@
 $nologin = 1;
 ini_set('auto_detect_line_endings',TRUE);
 ini_set('memory_limit','1024M');
-include "../header.php"; 
 
+include "connect.php";
+
+include "nav.php";
 
 //     $des = db_query_rows( "describe songs" );
 // foreach( $des as $srow )
@@ -19,6 +21,7 @@ include "../header.php";
     foreach( $subs as $s )
 	{
 	    if( !trim( $s ) ) continue;
+	    if( strtolower( $s ) == "null" ) continue; 
 	    $newid = getOrCreate( $table . "s", trim( $s ) );
 	    if( !$newid ) 
 		{
@@ -112,7 +115,7 @@ function getData( $colname, $ispercent = 0 )
 	$val = $val * 100;
     if( $val > 100 && $ispercent )
 	{
-	    echo( "percent error for $colname : $val<br>" );
+	    file_put_contents( "alllines.txt", "percent error for $colname : $val\n", FILE_APPEND );
 	    $val = 100;
 	}
     return getNull( $val );
@@ -129,14 +132,21 @@ function getTimeData( $colname )
     $val = getRawData($colname);
 
     if( strpos( $val, "o"  ) !== false )
-    return "NULL";
-        if( strpos( $val, "N" ) !== false )
-	    return "NULL";
-
-    if( strlen( $val ) )
-	{
-	    $val = "'00:{$val}'";
-	}
+	return "NULL";
+    if( strpos( $val, "N" ) !== false )
+	return "NULL";
+    
+    if( $val ) { 
+	$exp = explode( ":", $val );
+	if( count( $exp ) < 3 && $val )
+	    {
+		$val = "'00:{$val}'";
+	    }
+	else if( $val )
+	    {
+		$val = "'{$val}'";
+	    }
+    }
     else
 	$val = "NULL";
     return $val;
@@ -151,7 +161,7 @@ function getTimeData( $colname )
 
 if( $gosongs )
     {
-ob_start();
+//ob_start();
 	$started = false;
 	$count = 0;
 	if( $delexistingsongs )
@@ -169,16 +179,25 @@ ob_start();
 	    }
 	$path = "ccsongs.csv";
 	$tmppath = $_FILES["uploadsongs"]["tmp_name"];
+	file_put_contents( "alreadyexisted.txt", "" );
+	file_put_contents( "nobillboardmatch.txt", "" );
+	file_put_contents( "alllines.txt", "" );
+	$alreadynum = 0;
+	$billboardnum = 0;
+	
 	if( $tmppath )
 	    {
 		move_uploaded_file( $tmppath, $path );
 	    }
-
+	    if( $delexistingsongs )
+	    	    $alreadysongs = array();
 	    if (($handle = fopen($path, "r")) !== FALSE) 
 		{
 		$tmpnumsongs = 0;
 		    while (($data = fgetcsv($handle, 99999, ",")) !== FALSE) {
-			echo( "starting a line $data[0]<br>" );
+			echo("starting a line $data[0]<br>" );
+			file_put_contents( "alllines.txt", "starting a line $data[0]\n" , FILE_APPEND );
+			file_put_contents( "ccloaddata", "begin $data[0]\n" );
 			if( $data[1] && !$started )
 			    {
 				$headerrow = array();
@@ -190,17 +209,44 @@ ob_start();
 				//				file_put_contents( "ccloadheaders", print_r( $headerrow, true  ) );
 				continue;
 			    }
-						file_put_contents( "ccloaddata", print_r( $data, true ) );
+			$key = strtolower( $data[0] . "-" . $data[1] );
+			file_put_contents( "alllines.txt", "starting a key $key\n" , FILE_APPEND );
+			if( $alreadysongs[$key] )
+			    {
+				echo( "this song already existed $key" );
+				file_put_contents( "alllines.txt", "this song already existed $key\n" , FILE_APPEND );
+				file_put_contents( "alreadyexisted.txt", "this song already existed $key\n", FILE_APPEND );
+				$alreadynum++;
+				continue;
+			    }
+			$alreadysongs[$key] = 1;
+			file_put_contents( "alllines.txt", "after already $key\n" , FILE_APPEND );
+			file_put_contents( "ccloaddata", print_r( $data, true ), FILE_APPEND );
 			include "loadermiddle.php";
 			$tmpnumsongs++;
 			// if( $data[1] == 10 )
 			//     break;
 		    }
 		}
+		db_query( "update songs set ProfanityRange = 'None' where PercentProfanity = 0" );
 		include "loadbillboardchartdata.php";
-$err =ob_get_contents(); 
-$err .= "<br> $tmpnumsongs " . ( $delexistingsongs?"added.":"updated." );
-ob_end_clean();
+//$err =ob_get_contents(); 
+//$err .= "<br> $tmpnumsongs " . ( $delexistingsongs?"added.":"updated." );
+		$err .= "$tmpnumsongs added.<Br>";
+		$err .= "$alreadynum duplicates.<Br>";
+		$err .= "$billboardnum didn't match billboard.<Br>";
+		$err .= "<a href='nobillboardmatch.txt' target='_blank'>billboard no matches</a><Br>";
+		$err .= "<a href='alreadyexisted.txt' target='_blank'>dupes</a><Br>";
+		$err .= "<a href='alllines.txt' target='_blank'>all lines (including data errors)</a><Br>";
+		$err .= "<a href='loadbb1.txt' target='_blank'>latest billboard info</a><Br>";
+//		mail( "rachelc@gmail.com", "Chart Cipher Import", $err, "From: info@analytics.chartcipher.com" );
+//		mail( "yael@hitsongsdeconstructed.com", "Chart Cipher Import", $err, "From: info@analytics.chartcipher.com" );
+		$headers = array();
+		$headers[] = 'Content-type: text/html; charset=iso-8859-1';
+		$headers[] = "From: info@analytics.chartcipher.com";
+		
+		mail( "sivan@mypart.com, yael@hitsongsdeconstructed.com, rachelc@gmail.com", "Chart Cipher Import", $err, implode("\r\n", $headers));
+//ob_end_clean();
     }
 
 
@@ -233,26 +279,37 @@ if( $gosongsshort )
 
 //include "nav.php";
 ?>
-	<div class="site-body index-pro ">
-        <section class="home-top">
-			<div class="element-container row">
 <form method='post' enctype='multipart/form-data'>
 
 <br><br>                                                                                                                                                     <h3>Upload Songs</h3>
     File: (csv format ONLY) <input type='file' name='uploadsongs'> <br>
 <br><br>
-Update Data: <input type='radio' name='delexistingsongs' value='0' <?=isset( $_POST["delexistingsongs"] ) && !$_POST["delexistingsongs"] ?"CHECKED":""?> style="display: inline">	
-<br>****OR****
-<br>   Delete Existing Data: <input type='radio' name='delexistingsongs'  <?=!isset( $_POST["delexistingsongs"] ) || $_POST["delexistingsongs"]?"CHECKED":""?> value='1' style="display: inline">
-<br>
-<br><input type='submit' name='gosongs' value='Go'>
+<table style="width:500px"><tr><td>
+Update Data:</td><td> <input type='radio' name='delexistingsongs' value='0' <?=isset( $_POST["delexistingsongs"] ) && !$_POST["delexistingsongs"] ?"CHECKED":""?> style="width: 15px">	
+</td></tr>
+<tr><td>****OR****</td></tr>
+<tr><td>   Delete Existing Data:</td><td> <input type='radio' name='delexistingsongs'  <?=!isset( $_POST["delexistingsongs"] ) || $_POST["delexistingsongs"]?"CHECKED":""?> value='1' style="width: 15px"></td></tr>
+     <tr><td>
+<input type='submit' name='gosongs' value='Go'>
+</td></tr></table>
 <br><Br>
 <?=$err?>
+<br>
+
+<h3>From Last Import</h3>
+<i>This is all songs that were imported</i><br>
+<a href='alllines.txt' target='_blank'>all lines (including data errors)</a> -- last modified  <?=date ("m/d/Y H:i:s", filemtime("alllines.txt"))?><Br>
+<br>
+<b>Errors in Data</b><br>
+<a href='nobillboardmatch.txt' target='_blank'>billboard no matches</a> -- last modified <?=date ("m/d/Y H:i:s", filemtime("nobillboardmatch.txt"))?><Br>
+<a href='alreadyexisted.txt' target='_blank'>dupes</a> -- last modified  <?=date ("m/d/Y H:i:s", filemtime("alreadyexisted.txt"))?><Br>
+<br><i>Songs are imported, then billboard data is pulled. This is the result of the billboard data pull</i><br>
+<a href='loadbb1.txt' target='_blank'>latest billboard info</a> -- last modified  <?=date ("m/d/Y H:i:s", filemtime("loadbb1.txt"))?><Br>
+
+
 
 <br><input type='submit' name='gosongsshort' value='TESTING'>
 
 
                                                                                                                                                      </form>
-</div>
-</section></div>
-<? include "../footer.php"; ?>
+<? include "footer.php"; ?>

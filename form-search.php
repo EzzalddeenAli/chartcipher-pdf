@@ -109,7 +109,7 @@ outputClientSelectValues( $search["peakchart"] );
 								</select>
 								</div><!-- /.form-row-left -->
 								<div class="form-row-right">
-								<label>Sub-Genre/Influence:</label>
+								<label>Genre/Influence:</label>
 								<select name='search[specificsubgenre]'>
 									<option value="">Any</option>
                                                  <? outputSelectValuesForOtherTable( "subgenres", $search["specificsubgenre"], true ); ?>

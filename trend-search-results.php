@@ -3,7 +3,6 @@ $istrend = true;
 $nologin = 1;
 
 
-
 if( isset( $_GET["search"]["chartid"] ) && $_GET["search"][chartid] ) $mybychart = "_bychart";
 require_once "hsdmgdb/connect{$mybychart}.php";
 require_once "functions{$mybychart}.php";
@@ -11,11 +10,42 @@ include "trendfunctions{$mybychart}.php";
 $searchsubtype = str_replace( "/", "", $searchsubtype );
 $thetype = str_replace( "/", "", $thetype );
 
+
+if( $_GET["gome"] )
+{
+
+$res = db_query_array( "select songid, group_concat( chartid ) as num from song_to_chart group by songid", "songid", "num" );
+
+foreach( $res as $sid=>$values )
+{
+    $val = "";
+    $values = explode( ",", $values );
+    foreach( $values as $vid )
+	{
+	    $vid = trim( $vid );
+	    if( $val )
+		$val .= ",";
+	    $val .= "$vid";
+	}
+    
+    db_query( "update songs set chartids ='$val' where id = $sid" );
+    file_put_contents( "loadbb1.txt", "chart info $sid ($val)\n", FILE_APPEND );
+
+}
+}
+
+
+
 if( isEssentials() ) 
 {
 Header( "Location: index.php?l=1" );
 exit;
 }
+$font = "Poppins";
+//$font = "Arial";
+
+
+$newsearchlink =  "/song-landing.php";
 
 
 // db_query( "delete from song_to_songkey" );
@@ -41,6 +71,7 @@ $majorminorfilter = $search["majorminor"];
 $lyricalmoodfilter = $search["lyricalmoodid"];
 $lyricalsubthemefilter = $search["lyricalsubthemeid"];
 $lyricalthemefilter = $search["lyricalthemeid"];
+$subgenrefilter = $search["specificsubgenre"];
 $minweeksfilter = $search["minweeks"];
 
 $season = $search[dates][season];
@@ -256,7 +287,8 @@ else
 	}
 
     // exit;
-    $colors = array( "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd", "#ed8a6b", "#2fcc71", "#689bd0", "#a38671", "#e74c3c", "#34495e", "#9b59b6", "#1abc9c", "#95a5a6", "#5e345e", "#a5c63b", "#b8c9f1", "#e67e22", "#ef717a", "#3a6f81", "#5065a1", "#345f41", "#d5c295", "#f47cc3", "#ffa800", "#ffcd02", "#c0392b", "#3498db", "#2980b9", "#5b48a2", "#98abd5", "#79302a", "#16a085", "#f0deb4", "#2b2b2b" );
+// new colors
+$colors = array( "#eeac6f", "#f5ca7d", "#8475a2", "#ebac9a", "#faa33c", "#38226d", "#da857a", "#f9e3b7", "#e3ddf2", "#d7719f", "#bb0e2c", "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd", "#ed8a6b", "#2fcc71", "#689bd0", "#a38671", "#e74c3c", "#34495e", "#9b59b6", "#1abc9c", "#95a5a6", "#5e345e", "#a5c63b", "#b8c9f1", "#e67e22", "#ef717a", "#3a6f81", "#5065a1", "#345f41", "#d5c295", "#f47cc3", "#ffa800", "#ffcd02", "#c0392b", "#3498db", "#2980b9", "#5b48a2", "#98abd5", "#79302a", "#16a085", "#f0deb4", "#2b2b2b" );
     //$colors = array( "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd" ); 
     // $colors = array( "#5d97cc","#fb833b", "#aeaeae", "#4b6986", "#7f5237", "#ffffff" ); 
     // $colors = array( "#A860AB", "#FF2705", "#FFFF17", "#1DFF0D", "#10FFEF", "#1020FF", "#FF03BC", "#FFAEB3" );
@@ -316,6 +348,8 @@ if( isTrendTable( $search[comparisonaspect] ) )
         <? include "searchcriteria-trend.php"; ?>
 		<section class="search-results-bottom">
 			<div class="element-container row">
+                <div class="col-12 flex">
+
 				<div class="search-container">
 			
 					<div class="search-body" >
@@ -373,7 +407,6 @@ if( isTrendTable( $search[comparisonaspect] ) )
            <ul class="icon-list">
 <!--                     <li><a href="<?=$thetype?"$thetype":"trend"?>-search.php?<?=$_SERVER['QUERY_STRING']?>"  class="back-link">Back Link</a></li>-->
                
-                 <li><a href="/song-landing.php"  class="search-link">New Search</a></li>
                                     </ul>
            
            
@@ -434,6 +467,7 @@ if( isTrendTable( $search[comparisonaspect] ) )
 					</div><!-- /search-body -->
 				</div><!-- /.search-container -->
 			</div><!-- /.row -->
+            </div>
 		</section><!-- /.search-results-bottom -->
 	</div><!-- /.site-body -->
 
@@ -445,8 +479,8 @@ if( isTrendTable( $search[comparisonaspect] ) )
 		var searchType = "<?=$searchtype?$searchtype:"Trend"?>";
 	var searchName = "<?=getSearchTrendName( $search[comparisonaspect] )?>";
 
-saveSearch( "recent" );
 $(document).ready(function(){
+saveSearch( "recent" );
         $("a.expand-btn").click(function(){
             $("a.expand-btn").toggleClass("collapse-btn");
             $("#search-hidden").toggleClass("hide show");

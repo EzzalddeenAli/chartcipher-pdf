@@ -6,6 +6,7 @@ if( !$_SESSION["loggedin"] ) {
 //    exit;
 }
 
+$newsearchlink = "/";
 
 if( !$newcarryfilter ) $newcarryfilter = $search["newcarryfilter"];
 $logtype = "advanced search results";
@@ -62,9 +63,6 @@ if( $_SERVER["HTTP_REFERER"] )
                <div class="icon back-search ">
                    <a class=" desktop" href="<?=$searchurl?>">Back</a></div>
                         
-                       <div class="icon new-search ">
-           
-              <a href="https://db.hitsongsdeconstructed.com/index.php">New Search</a> </div>
 
     
     </div>

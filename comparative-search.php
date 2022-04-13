@@ -173,16 +173,6 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
                             
 							
 <? if( $overpagename == "STAYING POWER" ) {  ?>
-						<div class="form-row-left">
-								<label>Primary Genre:</label>
-								<select name="genrefilter">
-									<option value="">All Primary Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-
-
-								</select>
-
-					</div><!-- /.form-row-right -->
 <? } else { ?>
 							<div class="form-row-left">
 								<label>Peak Chart Position:</label>

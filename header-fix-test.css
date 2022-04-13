@@ -1,0 +1,10 @@
+@media screen and (max-height: 830px) and (min-width: 768px){
+	.site-sidebar{
+	    position: absolute;
+	    height: 100% !important;
+	}
+	body
+	{
+		position: relative; 
+	}
+}

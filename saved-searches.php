@@ -7,6 +7,7 @@ Header( "Location: index.php?l=1" );
 exit;
 }
 
+$allcharts = db_query_array( "select id, Name from charts", "id", "Name" );
 if( $delid )
 {
 	db_query( "delete from savedsearches where userid = '$userid' and id = $delid" );
@@ -42,8 +43,9 @@ if( $errmsg == "delall" )
 					<div class="search-header">
 						<h1><?=getOrCreateCustomTitle( "Saved Searches", "Saved Searches" )?></h1>
 
+<!--
 <h2>    <? $cust = getOrCreateCustomHover( "saved-searches", "View and manage your saved searches." );?>
-<?=$cust?></h2>
+<?=$cust?></h2>-->
 
 						<a href="#" class="search-header-manage">Manage</a>
 						<div class="cf"></div>
@@ -57,7 +59,10 @@ if( $errmsg == "delall" )
 									Name
 								</th>
 								<th>
-									Search Criteria
+									Chart
+								</th>
+								<th>
+									View Search Criteria
 								</th>
 								<th>
 									Date Saved
@@ -70,99 +75,6 @@ if( $errmsg == "delall" )
 								</th>
 							</tr>
         
-        <!--
-        <tr>
-								<td data-label="Name">
-									Name
-								</td>
-								<td data-label="Name">
-									Search Criteria
-								</td>
-								<td data-label="Name">
-									Date Saved
-								</td>
-								<td data-label="Name">
-									View Results
-								</td>
-								<td>
-									<a href="saved-searches.php?delall=1" class="delete-btn-all">Delete All</a>
-								</td>
-							</tr>
-        
-            
-        <tr>
-								<td>
-									Name
-								</td>
-								<td>
-									Search Criteria
-								</td>
-								<td>
-									Date Saved
-								</td>
-								<td>
-									View Results
-								</td>
-								<td>
-									<a href="saved-searches.php?delall=1" class="delete-btn-all">Delete All</a>
-								</td>
-							</tr>
-        
-            
-        <tr>
-								<td>
-									Name
-								</td>
-								<td>
-									Search Criteria
-								</td>
-								<td>
-									Date Saved
-								</td>
-								<td>
-									View Results
-								</td>
-								<td>
-									<a href="saved-searches.php?delall=1" class="delete-btn-all">Delete All</a>
-								</td>
-							</tr>
-        
-            
-        <tr>
-								<td>
-									Name
-								</td>
-								<td>
-									Search Criteria
-								</td>
-								<td>
-									Date Saved
-								</td>
-								<td>
-									View Results
-								</td>
-								<td>
-									<a href="saved-searches.php?delall=1" class="delete-btn-all">Delete All</a>
-								</td>
-							</tr>
-        
-        <tr>
-								<td>
-									Name
-								</td>
-								<td>
-									Search Criteria
-								</td>
-								<td>
-									Date Saved
-								</td>
-								<td>
-									View Results
-								</td>
-								<td>
-									<a href="saved-searches.php?delall=1" class="delete-btn-all">Delete All</a>
-								</td>
-							</tr>-->
 <? $searches = getSavedSearches(); 
 foreach( $searches as $s ) { 
 	 $url = $s[url] . "&savedid={$s[id]}";
@@ -251,6 +163,9 @@ foreach( $searches as $s ) {
 							<tr class="saved-searches-table-row" data-href="<?=$searchurl?>" id="ss<?=$s[id]?>">
 								<td data-label="Name" class="search-column-1 " > 
 <span id="span<?=$s[id]?>" class='editable'><?=$s[Name]?></span>
+								</td>
+								<td data-label="Chart" class="search-column-2">
+<?= $allcharts[$s["chartid"]]?>
 								</td>
 								<td data-label="Search Type" class="search-column-2">
 <a href="<?=$searchurl?>">View Search Criteria</a> 

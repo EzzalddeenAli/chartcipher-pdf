@@ -37,7 +37,18 @@ if( $addnew && $newname )
       {
           foreach( $extracolumns as $k=>$throwaway )
           {
-              db_query( "update $tablename set $k = '" . escMe( $_POST["new". $k] ) . "' where id = $ins" );
+	      $val = $_POST["new". $k];
+	      if( $k == "inactive" && !$val ) 
+		  $val = 0;
+	      if( $k == "isadmin" && !$val ) 
+		  $val = 0;
+	      if( $k == "IsLive" && !$val ) 
+		  $val = 0;
+	      if( $k == "UseOnDb" && !$val ) 
+		  $val = 0;
+	      if( $k == "OrderBy" && !$val ) 
+		  $val = 99;
+              db_query( "update $tablename set $k = '" . escMe( $val ) . "' where id = $ins" );
           }
       }
       if( $tablename == "artists" || $tablename == "groups" )
@@ -59,15 +70,27 @@ if( $update )
 	  {
 	    foreach( $extracolumns as $k=>$throwaway )
 	      {
-		db_query( "update $tablename set $k = '" . escMe( $_POST[$k][$id] ) . "' where id = $id" );
+	      $val = $_POST[$k][$id];
+	      if( $k == "inactive" && !$val ) 
+		  $val = 0;
+	      if( $k == "isadmin" && !$val ) 
+		  $val = 0;
+	      if( $k == "IsLive" && !$val ) 
+		  $val = 0;
+	      if( $k == "UseOnDb" && !$val ) 
+		  $val = 0;
+	      if( $k == "OrderBy" && !$val ) 
+		  $val = 99;
+	      
+		db_query( "update $tablename set $k = '" . escMe( $val ) . "' where id = $id" );
 	      }
 	  }
 	
       }
-    doMembersUpdate( $tablename );
+    //    doMembersUpdate( $tablename );
 
 
-      fixTotalCountForAllSongs();
+    //      fixTotalCountForAllSongs();
 
   }
 
@@ -101,7 +124,7 @@ include "nav.php";
 	}
       $type = "text";
       $value = "";
-      if( $k == "HideFromAdvancedSearch" || $k == "HideFromHSDCharts" || $k == "IsLive" || $k == "isadmin" || $k == "inactive" || $k == "ishook")
+      if( $k == "HideFromAdvancedSearch" || $k == "HideFromHSDCharts" || $k == "IsLive" || $k == "UseOnDb" || $k == "isadmin" || $k == "inactive" || $k == "ishook")
       {
           $type = "checkbox";
           $value = 1;
@@ -161,7 +184,7 @@ else
 	}
       $type = "text";
       $value = $r[$k];
-      if( $k == "HideFromAdvancedSearch" || $k == "HideFromHSDCharts" || $k == "IsLive" || $k == "isadmin" || $k == "inactive" || $k == "ishook")
+      if( $k == "HideFromAdvancedSearch" || $k == "HideFromHSDCharts" || $k == "IsLive" || $k == "UseOnDb" || $k == "isadmin" || $k == "inactive" || $k == "ishook")
       {
           $type = "checkbox";
           $value = 1;

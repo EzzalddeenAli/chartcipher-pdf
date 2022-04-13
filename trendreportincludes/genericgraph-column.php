@@ -415,9 +415,9 @@ if( $descr )
                                     $labelname = "5+"; 
                                 $labelname .= ($labelname == "1"?" Artist/Group":" Artists/Groups");
                             }
-                            if( $search[comparisonaspect] == "Sub-Genre/Influence Count" )
+                            if( $search[comparisonaspect] == "Genre/Influence Count" )
                             {
-                                $labelname .= ($labelname == "1"?" Sub-Genre/Influence":" Sub-Genres/Influences");
+                                $labelname .= ($labelname == "1"?" Genre/Influence":" Sub-Genres/Influences");
                             }
                             else if( strpos( $search[comparisonaspect], "Count"  ) !== false  && 1 == 0 )
                             {

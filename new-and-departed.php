@@ -160,7 +160,7 @@ if( !$whatsnewcache || 1 )
                             <tbody role="rowgroup">
                                 
                              <tr role="row">
-                                <td role="cell"><a href="home" class="rowlink">Primary Genre</a></td>
+                                <td role="cell"><a href="home" class="rowlink">Genre</a></td>
                                  <td role="cell">Pop(80%)</td>
                                         <td role="cell">Hip-Hop(80%)</td>
                                   

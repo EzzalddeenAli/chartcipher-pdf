@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="stylesheet" href="../assets/css/style.css?ver=1631905117" type="text/css" />
+    <link rel="stylesheet" href="../assets/css/style.css?ver=1631905117" type="text/css" />
+    <link rel="stylesheet" href="../assets/css/style-tablet.css?ver=1631905117" type="text/css" />
+
+	<link rel="stylesheet" href="../assets/css/desktop.css?ver=16319051171" type="text/css" media="screen and (min-width: 768px)"/>
+	<link rel="stylesheet" href="header-fix-test.css?ver=1631905117" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
+	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="//cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
+
+ <link rel="stylesheet" type="text/css" href="assets/css/grid.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/new-style.css">
+ 
+
+ 
+
+
+	<script src="canvas/source/canvasjs.js"></script>
+	<script src="table-export/tableExport.js"></script>
+	<script src="table-export/html2canvas.js"></script>
+	<script src="jquery.sortElements.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="/assets/css/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <script src="/assets/css/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/js/script.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<!-- Optional theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+<!-- Latest compiled and minified JavaScript -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+
+
+    <link href="https://pagecdn.io/lib/easyfonts/fonts.css" rel="stylesheet" />
+    
+</head>
+<style type="text/css">
+	/*.tool + .tooltip > .tooltip-inner {
+      background-color: #ffffff;
+      color: #666666;
+      border: 1px solid #999999;
+      padding: 15px;
+      font-size: 12px;
+  }
+  .tool + .tooltip.bottom > .tooltip-arrow {
+    border-bottom: 5px solid #999999;
+}*/
+
+
+    .site-sidebar {
+       overflow:visible!important;
+    }
+
+   right-wrap
+.site-sidebar {
+    display: none;
+    margin-left: -250px!important;}
+
+    .menu-items ul {
+    width: auto !important;
+text-align: center !important;
+}
+
+
+
+
+
+
+
+   .site-sidebar {
+    width: 250px;
+    height: 100%;
+    position: absolute!important;
+    background: #32323a;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    margin-left: -250px;
+    z-index: 1000;
+    overflow-y: auto;
+    min-height: 926px;
+}
+    
+     @media (min-width: 1150px){
+         .logo-container .sidebar-toggle-box{display: none;}
+         
+
+    }
+
+   @media (max-width: 1150px){
+       
+ 
+
+    .logo-container {
+
+ width: 100%!important;
+ min-height: 80px!important;
+ position: relative!important;
+    float:none!important;
+}
+
+
+.site-sidebar {
+    width: 250px;
+    height: 100%;
+    position: absolute!important;
+    background: #32323a;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    margin-left: -250px;
+    z-index: 1000;
+    overflow-y: auto;
+    min-height: 875px;
+}
+       .menu-container {
+    background-color: #fff;
+}
+
+
+
+
+
+     .menu-bar {
+    margin-left: 0px!important;
+}
+       .menu-bar {
+    margin: 0px!important;
+    position: absolute!important;
+    width: auto!important;
+    max-width:50%;
+        max-height:85px;
+}
+
+
+
+       .menu-bar img {
+    vertical-align: middle;
+      position: absolute;
+           padding:10px 0!Important;
+             max-height:85px;
+}}
+
+
+.menu-items
+{
+	margin-right: 6% !important;
+	    width: auto !important;
+}
+
+.menu-items ul
+{
+	text-align: right !important;
+}
+
+@media (max-width: 1150px)
+{
+	.menu-items ul
+	{
+		width: auto !important;
+		text-align: center !important;
+	}
+    	.menu-items
+	{
+        float:none!important;
+	}
+
+}
+@media (min-width: 900px)
+{
+
+	.menu-text h1
+	{
+		margin: 0 !important;
+	}
+}
+
+       .site-sidebar ul li ul {
+    padding-top: 0px!important;
+}
+
+.site-sidebar ul li ul{
+    padding-top:0px;
+    padding-bottom:0px;
+    display:block;
+}
+
+.site-sidebar ul li ul li{
+    background-color:#eee;
+    border:0px;
+
+}
+.site-sidebar ul li ul li a,
+       #sub-nav3 a{
+    background-size: 0 0;
+        font-size:12px;
+     padding: 8px 15px 8px 50px;
+    line-height:15px;
+}
+
+
+.site-sidebar  > ul > li > a.dropdown:after{
+          background : url(assets/images/sidebar-icons/ChevronRight-closed.svg) no-repeat!important;
+       content: ''!important;
+    background-size:15px 15px!important;
+    background-color: transparent!important;
+    display: inline-block!important;
+    z-index: 99999999999!important;
+       height: 15px;
+    width: 15px;
+    margin-right:10px;
+    float:right;
+    fill:#ff6633;
+    opacity:.8;
+}
+
+    .site-sidebar ul li a.arrow:after{
+          background : url(assets/images/sidebar-icons/ChevronRight-opened.svg) no-repeat!important;
+       content: ''!important;
+    background-size:15px 15px!important;
+    background-color: transparent!important;
+    display: inline-block!important;
+    z-index: 99999999999!important;
+       height: 15px;
+    width: 15px;
+    margin-right:10px;
+    float:right;
+    fill:#ff6633;
+ }
+
+ .site-sidebar ul li a.sidebar-menu-item-13-highlight{
+  color:#ff6633;
+     background-image:url('assets/images/sidebar-icons/hsd-database-navigation-trend-search-icon-hover.svg');
+	background-position: 10% center;
+	background-repeat: no-repeat;
+ }
+ .site-sidebar ul li a.sidebar-menu-item-2-highlight{
+  color:#ff6633;
+     background-image:url('assets/images/sidebar-icons/sidebar-menu-icon-2-hover.svg');
+	background-position: 10% center;
+	background-repeat: no-repeat;
+ }
+ .site-sidebar ul li a.sidebar-menu-item-browse-highlight{
+  color:#ff6633;
+     background-image:url('assets/images/sidebar-icons/sidebar-menu-icon-browse-hover.svg');
+	background-position: 10% center;
+	background-repeat: no-repeat;
+ }
+
+    li.sidebar-menu-item-document a {
+  background-image: url('assets/images/sidebar-icons/hit-songs-deconstructed-reports-icon.svg');
+    background-position: 10% center;
+    background-repeat: no-repeat;
+}
+
+        li.sidebar-menu-item-document a:hover {
+  background-image: url('assets/images/sidebar-icons/hit-songs-deconstructed-reports-icon-hover.svg');
+    background-position: 10% center;
+    background-repeat: no-repeat;
+}
+
+    .site-sidebar ul li a.sidebar-menu-item-document-highlight {
+          color:#ff6633;
+  background-image: url('assets/images/sidebar-icons/hit-songs-deconstructed-reports-icon-hover.svg');
+    background-position: 10% center;
+    background-repeat: no-repeat;
+}
+
+
+        li.sidebar-menu-item-compositional a {
+  background-image: url('assets/images/sidebar-icons/sidebar-menu-icon-compositional.svg');
+    background-position: 10% center;
+    background-repeat: no-repeat;
+}
+
+        li.sidebar-menu-item-compositional a:hover {
+  background-image: url('assets/images/sidebar-icons/sidebar-menu-icon-compositional-hover.svg');
+    background-position: 10% center;
+    background-repeat: no-repeat;
+}
+
+    .site-sidebar ul li a.sidebar-menu-item-compositional-highlight {
+          color:#ff6633;
+  background-image: url('assets/images/sidebar-icons/sidebar-menu-icon-compositional-hover.svg');
+    background-position: 10% center;
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+
+    .menu-items {
+    margin-right: 0% !important;
+}
+    .menu-items ul li a {
+    font-weight: 500!important;
+        padding: 8px 0 8px 15px;
+            margin-left: 15px;
+}
+    @media (min-width: 768px){
+.menu-items ul li a {
+    padding: 8px 0 8px 23px;
+
+}}
+    
+        .menu-items ul li:last-child ul#sub-nav2{
+          margin-left:-55px;
+    }
+    
+
+    .menu-items ul li:last-child ul#sub-nav2{
+          margin-left:-55px;
+    }
+    
+
+    .menu-items ul li ul#sub-nav2{
+     /*   margin-top:10px;*/
+  position:absolute!important;
+         margin-left:5px;
+          box-shadow: 1px 1px 6px #999;
+       /* border:1px solid #999;*/
+          background-color:#fff;
+            z-index: 30000000000;
+               padding: 0px 5px 0px!important;
+    }
+
+       .menu-items ul li ul#sub-nav2 li{
+      position:relative!important;
+   display: block!important;
+    width: 130px!important;
+    text-align: left!important;
+    float: none!important;
+     margin:0px 0!important;
+     padding:18px 5px!important;
+     border-bottom: 1px solid #ddd;
+
+    }
+
+           .menu-items ul li ul#sub-nav2 li a{
+    /* margin:10px 15px!important;    */
+     padding:0px  0px!important;
+     margin-left: 0px!important;
+               color:#4f4f4f;
+              line-height: 18px;
+    }
+
+             .menu-items ul li ul#sub-nav2 li a:hover{
+              color:#ff6633;
+    }
+
+            .menu-items ul li ul#sub-nav2 li:last-child {
+               border-bottom: 0px solid #666;
+    }
+
+ .menu-items ul li.user a{
+           color:#ff6633;
+    }
+   /*  .menu-items ul li.user a:after{
+              background : url(assets/images/nav-icons/arrow.png) no-repeat!important;
+       content: ''!important;
+    background-size:7px 9px!important;
+    background-color: transparent!important;
+    display: inline-block!important;
+    z-index: 99999999999!important;
+       height: 9px;
+    width: 7px;
+         margin-top:5px;
+    margin-left:4px;
+    float:right;
+    fill:#ff6633;
+    opacity:.8;
+     }*/
+
+         .menu-items ul li.user ul li a:after{
+    background-size:00 0!important;
+     }
+
+
+
+
+
+
+
+    @media (min-width: 1149px){
+        .site-body{
+            margin-top: 30px;
+        }
+
+.logo-container {
+ height:122px!important;
+}
+    .site-sidebar ul {
+    padding-top: 122px!important;
+}
+
+            .site-sidebar ul li ul {
+    padding-top: 0px!important;
+}
+
+
+    }
+
+     .menu-bar{
+margin:0px!important;
+     position:absolute!important;
+     width:100%!important;
+     height:100%!important;
+ }
+
+    @media (min-width:1150px){
+ .menu-bar{
+  margin-left:250px!important;
+     position:absolute!important;
+     width:40%!important;
+     height:100%!important;
+     max-width:728px;
+ }
+         .menu-bar img{
+width:100%!important;
+height:auto!important;
+     vertical-align: middle;
+     padding-top:25px;
+ }
+    }
+
+
+    @media (max-width: 767px){
+.menu-bar {
+    position:absolute!important;
+    display: inline!Important;
+    width:100%!important;
+        max-width: 100%!important;
+    max-height: 100%!important;
+}
+
+    }
+
+    .menu-items ul li a {
+    margin-left: 10px!important;
+}
+
+    .menu-bar img{
+ max-width: 100%!important;
+    max-height: 100%!important;
+    }
+
+    .hidden{
+     display:none!important;
+    }
+
+
+#sub-nav3{
+ position:absolute!important;
+    left:86%!important;
+    width:275px!important;
+    height:120px;
+    background-color:#ffffff;
+    margin-top:-90px;
+    padding:20px 35px;
+    text-align:center;
+   box-shadow: 1px 1px 6px #999;
+    z-index:20000000000;
+}
+
+    #sub-nav3 .arrow-left{
+ position:absolute!important;
+    left:-8px!important;
+    width:16px!important;
+    height:16px;
+    background-color:#ffffff;
+   top:50%;
+        margin-top:-8px;
+    z-index:20000000000;
+           -ms-transform: rotate(50deg); /* IE 9 */
+    -webkit-transform: rotate(50deg); /* Safari */
+    transform: rotate(50deg);
+}
+    #sub-nav3 h2{
+    font-size:14px;
+        font-weight:600;
+        line-height: 20px;
+        margin:5px 0 10px 0;
+}
+#sub-nav3 a{
+      margin:5 0px;
+     padding: 0px;
+     background-color: transparent;
+    color:#ff6633;
+        margin-left: 15px;
+}
+    #sub-nav3 a:after{
+              background : url(assets/images/sidebar-icons/ChevronRight-open.svg) no-repeat!important;
+       content: ''!important;
+    background-size:35px 35px!important;
+    background-color: transparent!important;
+    display: inline-block!important;
+    z-index: 99999999999!important;
+       height: 5px!important;
+    width: 5px!important;
+        margin-top:5px;
+    margin-right:31px!important;
+    float:right!important;
+    fill:#ff6633!important;
+    background-color:transparent!important;
+        border-right:1px solid #ff6633;
+           border-top:1px solid #ff6633;
+            -ms-transform: rotate(50deg); /* IE 9 */
+    -webkit-transform: rotate(50deg); /* Safari */
+    transform: rotate(50deg);
+}
+
+    .footer-disclaimer p:last-child {
+    margin-bottom: 0px!Important;
+        padding-bottom:10px;
+}
+
+
+
+
+
+
+@media (min-width: 767px){
+.right-wrap {
+    display: block;
+    position: absolute;
+    width: 100%;
+    background-color: #ffffff;
+}}
+
+@media (min-width: 1150px){
+.right-wrap {
+    width: calc(100% - 270px);
+    margin-left: 270px;
+    display: block;
+    position: absolute;
+    height: 100%;
+}}
+
+.menu-container {
+    display: flex!important;
+    display: -webkit-flex!important;
+    float: right;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+}
+@media (min-width: 770px){
+.menu-container {
+    display: flex!important;
+    display: -webkit-flex!important;
+  /*width: 395px;*/
+    align-items: center;
+    justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+    -webkit-align-items: center;
+}}
+.ad-container {
+    display: none;
+}
+@media (min-width: 770px){
+.ad-container {
+    display: none;
+    /* display: -webkit-flex; */
+    position: relative;
+    /* display: -webkit-flex; */
+    float: left;
+    height: 100%;
+    /* padding-left: 15px; */
+    align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    width: calc(100% - 395px)!important;
+}}
+
+@media (min-width: 1150px){
+.ad-container img, .ad-container-responsive img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}}
+
+.ad-container img, .ad-container-responsive img {
+    width: 100%;
+    height: auto;
+    display: block;
+    padding: 10px 0 10px 25px;
+    max-width: 728px;
+        max-height: 93px;
+}
+
+.menu-items ul li a {
+		display: block;
+		 padding: 8px 0 8px 0px;
+}
+    
+    
+    
+    
+    
+
+</style>
+    
+    
+
+    <script>
+    $(document).ready(function(){
+            $('.site-sidebar ul li a.dropdown').click(function(){
+                var $target = $($(this).parent());
+                var $theclass =  $target.attr('class');
+                $target.children('.sub-nav').toggleClass( "hidden" )
+                $(this).toggleClass($theclass +'-highlight');
+                $(this).toggleClass('arrow');
+            });
+        });
+
+         $(document).ready(function(){
+            $('.menu-items ul li a.dropdown,.site-sidebar ul li, #sub-nav2').hover(function(){
+                       var $target = $($(this).parent());
+                var $theclass =  $target.attr('class');
+                $target.children('#sub-nav2').removeClass( "hidden" )
+            },
+                                                   function(){
+                       var $target = $($(this).parent());
+                var $theclass =  $target.attr('class');
+                $target.children('#sub-nav2').addClass( "hidden" )
+            });
+        });
+
+        $(document).ready(function(){
+           $('a.locked,#sub-nav3').hover(function(){
+                       var $target = $($(this).parent());
+                var $theclass =  $target.attr('class');
+                $target.children('#sub-nav3').removeClass( "hidden" )
+            },
+                                                   function(){
+                       var $target = $($(this).parent());
+                var $theclass =  $target.attr('class');
+                $target.children('#sub-nav3').addClass( "hidden" )
+            });
+
+          });
+    </script>
+    
+
+<body>
+	<input type='hidden' name='userid' value='4368' id="userid">
+      <input type='hidden' name="proxyloginid" id='proxyloginid' value="">
+	<header class="site-header fixed-top">
+		<div class="logo-container">
+			<a href="/index.php"><img src="../assets/images/ChartCipher_logo_horizontal_transparent_white_powered_by.png" border="0" /></a>
+			<div class="sidebar-toggle-box">
+        		<div class="fa fa-bars"></div>
+    		</div>
+		</div><!-- /.logo-container -->
+
+
+		<div class="right-wrap" style="display:none;">
+			<div class="ad-container">
+					<div class="cf"></div>
+			</div>
+
+				<div class="menu-container">
+			<!--<div class="menu-text">
+				<h1>Welcome!</h1>
+			</div>--><!-- /.menu-text -->
+			<div class="menu-items">
+				<ul>
+				<!--	<li class="menu-item-1"><a href="help">Help</a></li> -->
+				<!--	<li class="menu-item-0"><a href="/contact">Contact Us</a></li>-->
+				<!--	<li class="menu-item-0"><a href="https://editorial.chartcipher.com" >Chart Cipher</a></li>-->
+                  <!--  <li class="menu-item-0"><a href="help">FAQ</a></li>-->
+                         <!--    <li class="menu-item-0"><a href="help">Tutorials</a></li> -->
+
+												 												 
+                    <!--<li class="menu-item-0">
+                                          <a href="" class="dropdown">Knowledge Base</a>
+                    <ul id="sub-nav2" class="hidden">
+                    					<li class="menu-item-0"><a href="https://editorial.chartcipher.com/video_categories/subscription-plans/">Subscription Video Overview</a></li>
+                    					<li class="menu-item-0"><a href="https://editorial.chartcipher.com/video_categories/product-overview/"  >Video Overview</a></li>
+                    					<li class="menu-item-0"><a href="https://editorial.chartcipher.com/video_categories/feature-releases/"  >New feature Releases</a></li>
+                    					 <li class="menu-item-0"><a href="https://editorial.chartcipher.com/knowledge-base/about-reports/"  >About the HSD Platform</a></li>
+                    					  <li class="menu-item-0"><a href="https://editorial.chartcipher.com/knowledge-base/about-immersion/"  >About IMMERSION</a></li>
+                    					   <li class="menu-item-0"><a href="https://editorial.chartcipher.com/knowledge-base/glossary/"  >Glossary</a></li>
+
+
+                    </ul>
+                    </li>-->
+                    
+                  
+                    <li class="menu-item-0"><a href="https://editorial.chartcipher.com/video_categories/product-overview/">Tutorials</a></li>
+                    
+                    <li class="menu-item-0"><a href="https://editorial.chartcipher.com/knowledge-base/glossary/">Glossary</a></li>
+                    
+                    <li class="menu-item-0"><a href="https://www.chartcipher.com/events/">Upcoming Workshops</a></li>
+
+
+                    
+
+                <li class="menu-item-0"><a href="https://www.chartcipher.com/contact/">Contact</a></li>
+                    <li class="menu-item-0 user">
+                                     <!--<a href="" class="dropdown"></a>-->
+<a href="" class="dropdown">My Account</a>                                                                                                    <ul id="sub-nav2" class="hidden">
+                                                	<li class="menu-item-0"><a href="https://editorial.chartcipher.com/members" class="dropdown">My Account </a>
+                        	</li>
+					<li class="menu-item-0"><a href="https://editorial.chartcipher.com/members/logout">Logout</a></li>
+                    </ul>
+                    </li>
+
+
+
+				</ul>
+			</div><!-- /.menu-text -->
+               <!-- <div class="menu-bar">
+             <a href="http://www.chartcipher.com/workshops/mastery-workshop-1/?utm_source=HSD-&utm_content=WKSHP-&utm_medium=WB&utm_campaign=HSD-WKSHP-WB&ocode=HSD-WKSHP-WB"><img src="../assets/images/banner.jpg" width="100%"/></a>
+            </div>-->
+			<div class="cf"></div>
+		</div><!-- /.menu-container -->
+		</div>
+
+
+		<div class="cf"></div>
+	</header><!-- .site-header -->
+    <div class="content-wrap">
+	<div class="site-sidebar">
+		<ul>
+	       <li class="sidebar-menu-item-home">
+				<a href="/#">Home <img class="info-icon menu-icon"  src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg"> </a>
+           </li>
+			<li class="sidebar-menu-item-articles">
+				<a href="/#" >Articles <img class="info-icon menu-icon"  src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg"> </a>
+			</li>
+            <li class="sidebar-menu-item-charts">
+				<a  class="dropdown">My Charts <img class="info-icon menu-icon" title="Search for how many weeks a song, performing artist, songwriter, producer, record label, or a specific compositional characteristic spent in the Top 10 or at #1 during a specific time period." src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
+                  <ul class="sub-nav hidden">
+                      <li><a href="/chart-landing.php?setchart=37">Billboard Hot 100</a></li>
+                      <li><a href="/chart-landing.php?setchart=41">Hot Christian Songs</a></li>
+                      <li><a href="/chart-landing.php?setchart=6">Hot Country Songs</a></li>
+                      <li><a href="/chart-landing.php?setchart=43">Hot Dance/Electronic Songs</a></li>
+                      <li><a href="/chart-landing.php?setchart=30">Hot Latin Songs</a></li>
+                      <li><a href="/chart-landing.php?setchart=15">Hot R&B/Hip-Hop Songs</a></li>
+                      <li><a href="/chart-landing.php?setchart=42">Hot Rock Songs</a></li>
+                      <li><a href="/chart-landing.php?setchart=3">Pop Songs</a></li>
+                </ul>
+			</li>
+            
+            <!-- <li class="sidebar-menu-item-song-trends">
+				<a href="/#" >Song trends <img class="info-icon menu-icon"  title="Compare genres, influences, song structure characteristics, lyrical themes and more across performing artists, songwriters, producers, record labels, top
+				10 hits and #1 hits." src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg"> </a>
+			</li>
+            
+             <li class="sidebar-menu-item-artist-trends">
+				<a href="/#" >Artist Trends <img class="info-icon menu-icon"  title="Search for examples of songwriting techniques (i.e.: hook techniques, techniques to hook the listener in and leave them wanting more, genre fusion techniques, duet structure techniques, etc.). " src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg"  src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg"> </a>
+			</li> -->
+			
+                                <li class="sidebar-menu-item-song-searches">
+                        <a href="/saved-searches">Saved Song Searches<img class="info-icon menu-icon" title="Access or edit your saved searches here." src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
+                    </li>
+                    <!--<li class="sidebar-menu-item-artist-searches">
+                        <a href="/saved-artists-labels"> Saved Artists Searches<img class="info-icon menu-icon" title="Access or edit your saved artists and labels here." src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
+                    </li>-->
+			             <li class="sidebar-menu-item-knowledge-base">
+				<a  class="dropdown">Knowledge base <img class="info-icon menu-icon" title="Search for how many weeks a song, performing artist, songwriter, producer, record label, or a specific compositional characteristic spent in the Top 10 or at #1 during a specific time period." src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
+                  <ul class="sub-nav hidden">
+                      <li><a href="https://editorial.chartcipher.com/knowledge-base/glossary/">Glossary</a></li>
+                     <li><a href="https://editorial.chartcipher.com/video_categories/product-overview/">Tutorials</a></li>
+                </ul>
+			</li>
+            <li class="menu-item-0 user">
+                             <!--<a href="" class="dropdown"></a>-->       
+                  <a  class="dropdown">My Account <img class="info-icon menu-icon"  src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg"> </a>                                                                                                    <ul class="sub-nav hidden">
+                                                	<li class="menu-item-0"><a href="https://editorial.chartcipher.com/members" class="dropdown">My Account</a></li>
+					<li class="menu-item-0"><a href="https://editorial.chartcipher.com/members/logout">Logout</a></li>
+                               </ul>
+            
+
+		</ul>
+		<script type="text/javascript">
+
+$(document).ready(function(){
+    // $('[data-toggle="tooltip"]').tooltip();
+});
+
+
+
+		</script>
+		<div class="footer-disclaimer">
+			<p>&copy; 2021 ChartCipher, All Rights Reserved</p>
+            
+            <p>Phone:<br>
+            212-871-2308</p>
+            
+            <p>Customer Service:<br>
+            customerservice@chartcipher.com</p>
+			<p><a href="https://www.chartcipher.com/privacy-policy/" >Privacy Policy</a> | <a href="https://www.chartcipher.com/terms" >Terms of Use</a></p>
+			<p><a href="http://i360m.com/">Designed by Imagine 360 Marketing</a></p>
+		</div>
+	</div><!-- /.site-sidebar -->
+	<div class="site-content">
+                          <style type="text/css">
+	.search-header h1{ float:none; }
+	.search-header h2{
+    margin-top: 15px;
+    color: #7a7a7a;
+    font-size: 14px;
+	}
+    
+    ul.instructions li{
+         list-style-type: initial!important;
+        margin-left:15px!important;
+        padding-bottom:6px;
+       font-weight: 500;
+    }
+    
+    #chartContainer h2 {
+/*    padding-bottom:20px; */
+    }
+</style>
+	<div class="site-body">
+        <section class="home-top">
+			<div class="element-container row">
+                
+                
+                
+       
+                <div class="row inner row-equal row-padding">
+                           <div class="col-12 flex">
+                               
+                               <div class="home-search-header  chart-header desktop-alt variant2 flex-addon ">
+      
+                         <div class="custom-select" >
+								<select id="mysetchart">
+								<option value='37' SELECTED>Billboard Hot 100</option>
+<option value='41'  >Hot Christian Songs</option>
+<option value='6'  >Hot Country Songs</option>
+<option value='43'  >Hot Dance/Electronic Songs</option>
+<option value='30'  >Hot Latin Songs</option>
+<option value='15'  >Hot R&B/Hip-Hop Songs</option>
+<option value='42'  >Hot Rock Songs</option>
+<option value='3'  >Pop Songs</option>
+								</select>
+                            </div>
+                                <span>
+                                    <ul class="icon-list">
+                                        <li><a href='#' onClick="javascript: maillink('Subject goes here'); return false;" class="email-link">Email Link</a></li>
+                                        <li><a href='#' id="copylink" onClick="javascript: shorturl2(); return false;" class="copy-link">Copy Link</a></li>
+                                        <li><a href="structure-search.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro%20Length%20Range"  class="back-link">Back Link</a></li>
+                                    </ul> 
+                                    </span>
+                            </div>
+                               
+                           </div>
+                           
+                     
+                   </div>
+                
+                       
+                <div class="row inner row-equal row-padding mobile-alt">
+                           <div class="col-12 flex">
+                               
+                               <div class="home-search-header  chart-header variant2 flex-addon ">
+                                <span>
+                                      <ul class="icon-list">
+                                        <li><a onClick="javascript: maillink('Subject goes here'); return false;" class="email-link">Email </a></li>
+                                        <li><a href='#'   id="copylink" onClick="javascript: shorturl2(); return false;" class="copy-link">Copy Link</a></li>
+                                        <li><a href="structure-search.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro%20Length%20Range"  class="back-link">Back </a></li>
+                                    </ul> 
+                                    </span>
+                            </div>
+                               
+                           </div>
+                           
+                     
+                   </div>
+                
+                
+        		<section class="search-results-top">
+			<div class="element-container row">
+				<div class="search-container">
+                      <div class="home-search-header variant2">
+                                     <h1>Structure Search: General Structure &amp; Instruments</h1>
+                                <div class="cf"></div>
+                            </div>
+					<div class="search-body">
+                        
+                      
+						<h1><a class="expand-btn " href="#">Search Criteria</a></h1>
+						<div id="search-hidden" class="hide">
+							<table width="100%" id="search-criteria-table">
+							
+
+								<tr>
+									<td class="search-column-1">
+									Chart:
+</td>									<td class="search-column-2">
+
+ 								<select name="search[chartid]" style="width:200px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&setchart=" + escape( this.options[this.selectedIndex].value )' >
+<option value='37' SELECTED>Billboard Hot 100</option>
+<option value='41'  >Hot Christian Songs</option>
+<option value='6'  >Hot Country Songs</option>
+<option value='43'  >Hot Dance/Electronic Songs</option>
+<option value='30'  >Hot Latin Songs</option>
+<option value='15'  >Hot R&B/Hip-Hop Songs</option>
+<option value='42'  >Hot Rock Songs</option>
+<option value='3'  >Pop Songs</option>
+</select>
+</td></tr>
+
+    								<tr>
+									<td class="search-column-1">
+
+                         Dates: 
+</td>									<td class="search-column-2">
+
+
+                               2010                                                                                 to  2021                                                        </td></tr>
+                         								<tr>
+									<td class="search-column-1">
+									Season:
+</td>									<td class="search-column-2">
+
+ 								<select name="search[dates][season]" style="width:200px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&search[dates][season]=" + escape( this.options[this.selectedIndex].value )' >
+									<option value="">All</option>
+<option value='1,1'  >Q1</option>
+<option value='2,2'  >Q2</option>
+<option value='3,3'  >Q3</option>
+<option value='4,4'  >Q4</option>
+<option value='4,1,2,3'  >Q1 & Q3</option>
+<option value='1,2,3,4'  >Q2 & Q4</option>
+
+								</select>
+</td></tr>
+
+
+
+								<tr>
+									<td class="search-column-1">
+									# Weeks on Chart:
+</td>									<td class="search-column-2">
+
+ 								<select name="search[minweeks]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&search[minweeks]=" + escape( this.options[this.selectedIndex].value )' >
+<option value="">Any</option>
+<option value='1-1'  >1 Week</option>
+<option value='1-5'  >5 Weeks or Less</option>
+<option value='1-10'  >10 Weeks or Less</option>
+<option value='10'  >10 Weeks or More</option>
+<option value='20'  >20 Weeks or More</option>
+<option value='30'  >30 Weeks or More</option>
+</select>
+</td></tr>
+
+								<tr>
+									<td class="search-column-1">
+BPM:
+</td>									<td class="search-column-2">
+
+								<select name="search[exactbpm]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&search[exactbpm]=" + this.options[this.selectedIndex].value'>
+									<option value="">All</option>
+<option value='100 - 109'  >100 - 109</option>
+<option value='110 - 119'  >110 - 119</option>
+<option value='120 - 129'  >120 - 129</option>
+<option value='130 - 139'  >130 - 139</option>
+<option value='140 - 149'  >140 - 149</option>
+<option value='150 - 159'  >150 - 159</option>
+<option value='160 - 169'  >160 - 169</option>
+<option value='170 - 179'  >170 - 179</option>
+<option value='180 - 189'  >180 - 189</option>
+<option value='60 - 69'  >60 - 69</option>
+<option value='70 - 79'  >70 - 79</option>
+<option value='80 - 89'  >80 - 89</option>
+<option value='90 - 99'  >90 - 99</option>
+								</select>
+</td></tr>
+
+
+								<tr>
+									<td class="search-column-1">
+Major/Minor:
+</td>									<td class="search-column-2">
+
+								<select name="search[majorminor]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&search[majorminor]=" + this.options[this.selectedIndex].value'>
+									<option value="">All</option>
+<option value='Major'  >Major</option>
+<option value='Minor'  >Minor</option>
+								</select>
+</td></tr>
+
+
+
+								<tr>
+									<td class="search-column-1">
+Lyrical Mood:
+</td>									<td class="search-column-2">
+
+								<select name="search[lyricalmoodid]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&search[lyricalmoodid]=" + this.options[this.selectedIndex].value'>
+									<option value="">All</option>
+<option value='6'  >Anger</option>
+<option value='12'  >Bitter</option>
+<option value='5'  >Cynical</option>
+<option value='2'  >Detached</option>
+<option value='4'  >Dramatic</option>
+<option value='8'  >Happy</option>
+<option value='7'  >Nostalgic</option>
+<option value='1'  >Optimistic</option>
+<option value='11'  >Other</option>
+<option value='10'  >Positive</option>
+<option value='9'  >Reluctance</option>
+<option value='3'  >Sad</option>
+
+								</select>
+</td></tr>
+
+
+
+
+								<tr>
+									<td class="search-column-1">
+Lyrical Theme:
+</td>									<td class="search-column-2">
+
+								<select name="search[lyricalsubthemeid]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[comparisonaspect]=Intro Length Range&search[lyricalthemeid]=" + this.options[this.selectedIndex].value'>
+									<option value="">All</option>
+<option value='1'  >Boasting</option>
+<option value='2'  >Freestyle</option>
+<option value='19'  >Historical/Biographical</option>
+<option value='22'  >Holiday</option>
+<option value='4'  >Hooking Up</option>
+<option value='20'  >Inspiration/Empowerment</option>
+<option value='6'  >Introspection</option>
+<option value='21'  >Lifestyle</option>
+<option value='23'  >Love</option>
+<option value='15'  >Love/Relationships</option>
+<option value='9'  >Novelty</option>
+<option value='25'  >Other</option>
+<option value='18'  >Partying/Living It Up</option>
+<option value='26' SELECTED>Political/Social Issues</option>
+<option value='24'  >Relationships</option>
+<option value='12'  >Religion</option>
+
+								</select>
+</td></tr>
+
+
+								<tr>
+									<td class="search-column-1">
+Lyrical Sub Theme:
+</td>									<td class="search-column-2">
+
+								<select name="search[lyricalsubthemeid]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&search[lyricalsubthemeid]=" + this.options[this.selectedIndex].value'>
+									<option value="">All</option>
+<option value='16'  >Boasting</option>
+<option value='1'  >Breakup</option>
+<option value='17'  >Drugs or Alcohol Use</option>
+<option value='29'  >Egocentric</option>
+<option value='44'  >Empowering</option>
+<option value='6'  >Family</option>
+<option value='33'  >Friendship</option>
+<option value='36'  >Hedonism</option>
+<option value='2'  >Holiday</option>
+<option value='4'  >Infatuation</option>
+<option value='34'  >Introspection</option>
+<option value='15'  >Lifestyle</option>
+<option value='5'  >Love</option>
+<option value='35'  >Materialize Dream</option>
+<option value='43'  >Other</option>
+<option value='47'  >Protest</option>
+<option value='7'  >Religion</option>
+<option value='32'  >Romantic</option>
+<option value='45'  >Sex</option>
+<option value='8'  >Success</option>
+<option value='46'  >Yearning for Social company</option>
+
+								</select>
+</td></tr>
+
+
+
+
+
+
+
+
+
+
+
+
+    								<tr>
+									<td class="search-column-1">
+
+                       Primary Genre: 
+</td>									<td class="search-column-2">
+								<select name="genrefilter" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&genrefilter=" + this.options[this.selectedIndex].value'>
+									<option value="">All Primary Genres</option>
+								<option value='10'  >Latin</option>
+<option value='8'  >Dance/Club/Electronic</option>
+<option value='2'  >Hip Hop/Rap</option>
+<option value='3'  >Pop</option>
+<option value='4'  >R&B/Soul</option>
+<option value='5'  >Rock</option>
+<option value='6'  >Country</option>
+<option value='-2'  >All Genres Except Hip Hop/Rap</option>
+								</select>
+
+                                </div><!-- /.form-row-right -->
+</td></tr>
+    								<tr>
+									<td class="search-column-1">
+Chart Position:</td>									<td class="search-column-2">
+
+ 								<select name="search[peakchart]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&search[peakchart]=" + this.options[this.selectedIndex].value' >
+									<option value="">Any</option>
+    <option value='1'  >1</option>
+<option value='3'  >Top 3</option>
+<option value='5'  >Top 5</option>
+<option value='10'  >10</option>
+<option value='25'  >Top 25</option>
+<option value='50'  >Top 50</option>
+								</select>
+								<tr>
+									<td class="search-column-1">
+
+                       New Songs / Carryovers: 
+</td>									<td class="search-column-2">
+								<select id="newcarryfilter" name="newcarryfilter" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&newcarryfilter=" + this.options[this.selectedIndex].value'>
+									<option value="">All Songs</option>
+	   <option value='new'  >Only include new songs for the selected time period</option>
+<option value='carryover'  >Only include songs that were previously charting</option>
+								</select>
+
+                                </div><!-- /.form-row-right -->
+</td></tr>
+
+    
+								<tr>
+									<td class="search-column-1">
+    Aspect: 
+</td>									<td class="search-column-2">
+ 								<select name="search[comparisonaspect]" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=" + this.options[this.selectedIndex].value' >
+          <option  value="Average Song Length">Average Song Length</option>
+                                                                    <option  value="Song Length Range">Song Length Range</option>
+                                                                    <option  value="First Section">First Section Type</option>
+                                                                    <option  value="Average Intro Length">Average Intro Length</option>
+                                                                    <option SELECTED value="Intro Length Range">Intro Length Range</option>
+                                                                    <option  value="Use Of A Pre-Chorus">Use Of A Pre-Chorus</option>
+                                                                    <option  value="Chorus Preceding First Verse">Chorus Preceding First Verse</option>
+                                                                    <option  value="First Chorus: Time Into Song Range">First Chorus: Time Into Song Range</option>
+                                                                    <option  value="First Chorus: Percent Into Song Range">First Chorus: Percent Into Song Range</option>
+                                                                    <option  value="First Chorus: Average Time Into Song">First Chorus: Average Time Into Song</option>
+                                                                    <option  value="First Chorus: Average Percent Into Song">First Chorus: Average Percent Into Song</option>
+                                                                    <option  value="Use Of A Vocal Post-Chorus">Use Of A Vocal Post-Chorus</option>
+                                                                    <option  value="Use Of A Bridge">Use Of A Bridge</option>
+                                                                    <option  value="Last Section">Last Section Type</option>
+                                                                    <option  value="Average Outro Length">Average Outro Length</option>
+                                                                    <option  value="Outro Length Range">Outro Length Range</option>
+                                                                    <option  value="Verse Count">Verse Count</option>
+                                                                    <option  value="Pre-Chorus Count">Pre-Chorus Count</option>
+                                                                    <option  value="Chorus Count">Chorus Count</option>
+                                                                    <option  value="Vocal Post-Chorus Count">Vocal Post-Chorus Count</option>
+                                                                    <option  value="Song Form">Song Form (Trends)</option>
+                                                                    <option  value="Intro Instrumental Vocal or Instrumental">Intro (Instrumental or Vocal)</option>
+                                                                    <option  value="Outro Instrumental Vocal or Instrumental">Outro (Instrumental or Vocal)</option>
+                                                                    <option  value="SectionCountRange">Number of Distinct Sections</option>
+                                                              								</select>
+</td></tr>
+    								<tr>
+									<td class="search-column-1">
+    Output Format: 
+</td>									<td class="search-column-2">
+ 								<select name="graphtype" style="width:400px" onChange='document.location.href="trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&graphtype=" + this.options[this.selectedIndex].value' >
+          <option SELECTED value="column">Bar Graph</option>
+                                                                    <option  value="line">Line Graph</option>
+                                                              								</select>
+</td></tr>
+                                             
+							</table>	
+						</div><!-- /.search-hidden -->	
+					</div><!-- /.search-body -->
+				</div><!-- /.search-container -->
+			</div><!-- /.row -->
+		</section><!-- /.search-results-top -->			
+		<section class="search-results-bottom">
+			<div class="element-container row">
+				<div class="search-container">
+			
+					<div class="search-body" >
+                        
+<div class="graph-head" >                       
+
+     <div class="left set" style="margin-bottom:20px;">  
+         
+         
+             <ul class="icon-list">
+                     <li><a href='#' id="exportjpg" onClick='return false' class="download-link">Download</a></li>
+               
+                 <li><a href="#" data-featherlight="#searchlightbox"  class="save-link">Save Search</a></li>
+                                    </ul>
+         
+        
+                             <div class="icon save" style="display:none;">
+                             <a href="#" data-featherlight="#searchlightbox">Save Search</a></div>
+                        
+                     
+                           
+         
+                         <div class="icon share" style="display:none">
+                             <a href='#' >Share</a>
+                             <div class="subset hidden">
+                                
+                                 <div class="icon email">
+                                     <a href='#'  onClick="javascript: maillink('Subject goes here'); return false;" >Email</a></div>
+                                  <div class="icon copy">
+                                     <a href='#'   id="copylink" onClick="javascript: shorturl2(); return false;" >Copy Link</a></div>
+                            </div>
+         
+                        </div>
+                  
+                        
+    </div>   
+    
+    
+    
+       <div class="right set" style="margin-bottom:20px;">  
+    <span class='showall' >   
+           
+           
+           <ul class="icon-list">
+                     <li><a href="structure-search.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro%20Length%20Range"  class="back-link">Back Link</a></li>
+               
+                 <li><a href="/search-for-industry-trends.php"  class="search-link">New Search</a></li>
+                                    </ul>
+           
+           
+       
+                
+
+    
+    </div>
+                        </div>
+                        
+                        
+                      
+            
+<script language='javascript'>
+
+        function saveCanvas()
+{
+    chart.exportCanvas( chart.canvas, "png", chart.exportFileName);
+
+}
+    function showAllGraph( val )
+{
+    for(i = 0; i <  chart.options.data.length ; i++ )
+    {
+        chart.options.data[i].visible = val;
+    }
+    chart.render();
+}
+</script>    
+<!-- begin graph -->
+	<div id="chartContainer" style="height:600px;">
+	</div>
+    <!-- end graph -->    
+                        <div class="search-footer" style="display:none;">
+							<div class="search-footer-left span-3">
+								<a href="structure-search.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro%20Length%20Range" style="float:left;" class="search-header-back">BACK <span class="hide-text">TO SEARCH</span></a>
+								<div class="cf"></div>
+							</div><!-- /search-footer-left -->
+							<div class="search-footer-right span-4">
+        <a class="black-btn" href="#" data-featherlight="#searchlightbox">SAVE SEARCH</a>
+                            								<a class="orange-btn" href="/search-for-industry-trends.php">NEW SEARCH</a>
+								<div class="lightbox" id="searchlightbox">
+									<div class="save-search-header">
+										<h1>SAVE SEARCH</h2>
+									</div><!-- /.save-search-header -->
+									<div class="save-search-body">
+										<label>Name:</label>
+										<input type='text' name="searchname" id='searchname' onChange='javascript:document.getElementById( "searchnamehidden").value = this.value; '>
+										<a class="black-btn" href="#" onClick='javascript:saveSearch( "saved", "Trend" ); return false'>SAVE</a>
+										<div class="cf"></div>
+									</div><!-- /.save-search-body -->
+								</div><!-- #searchlightbox -->
+							</div><!-- /search-footer-right -->
+							<div class="cf"></div>
+						</div><!-- /.search-footer -->
+					</div><!-- /search-body -->
+				</div><!-- /.search-container -->
+			</div><!-- /.row -->
+		</section><!-- /.search-results-bottom -->
+	</div><!-- /.site-body -->
+
+
+
+      <input type='hidden' name="searchnamehidden" id='searchnamehidden'>
+    <script>
+		var sessid = "66e825488a1f4f74cc946a1fd82412ea";
+		var searchType = "Compositional";
+	var searchName = "TREND SEARCH: GENERAL STRUCTURE &AMP; INSTRUMENTS";
+
+saveSearch( "recent" );
+$(document).ready(function(){
+        $("a.expand-btn").click(function(){
+            $("a.expand-btn").toggleClass("collapse-btn");
+            $("#search-hidden").toggleClass("hide show");
+        });
+    });
+
+    </script>
+
+
+<script>
+      $(document).ready(function(){
+           $('.icon.share').hover(function(){
+                       var $target = $($(this).children('.subset'));
+              //  var $theclass =  $target.attr('class');
+                $target.removeClass( "hidden" );
+            },
+                                                   function(){
+                       var $target = $($(this).children('.subset'));
+              //  var $theclass =  $target.attr('class');
+                $target.addClass( "hidden" )
+            });
+
+          });
+</script>
+	</div><!-- .site-content -->
+</div><!-- .sidebar & contant wrap -->
+	<script type="text/javascript">
+
+/*$('.info-block a').hover(function() {
+var href = $(this).attr("href");
+window.location.href = href;
+return false;
+});
+
+$(document).ready(function() {
+
+            $('.info-block a .modal-hover-icon').hover(
+
+               function () {
+                 var id = $(this).parent().attr("data-target");
+                 $(id).addClass("selected");
+               },
+
+               function () {
+                  $(".modalDialog.selected").removeClass("selected");
+               }
+            );
+
+         });
+
+
+
+
+      $( ".info-block a .modal-hover-icon" ).mouseenter(function() {
+          var id = $(this).parent().attr("data-target");
+          $(id).addClass("selected");
+      });
+      $( ".info-block a .modal-hover-icon" ).mouseleave(function() {
+           $(".modalDialog.selected").removeClass("selected");
+      });*/
+
+
+
+        $('.info-block a').click(function() {
+          $(".modalDialog.selected").removeClass("selected");
+        /* var id = $(this).attr("href");*/
+         var id = $(this).attr("data-target");
+         $(id).addClass("selected");
+         });
+
+         $('.close').click(function() {
+           $(".modalDialog.selected").removeClass("selected");
+          });
+
+
+$(function() {
+$(".modalDialog").click(function(e) {
+if ($(e.target).closest(".modalDialog div").length) {
+
+} else {
+  $(".modalDialog.selected").removeClass("selected");
+    return false;
+}
+});
+})
+	       </script>
+
+<script>
+$(document).ready(function(){
+    $(".sidebar-toggle-box").click(function(){
+        $(".site-sidebar").toggleClass("hide-sidebar");
+        $(".site-content").toggleClass("merge-left");
+    });
+    
+    
+          $(window).resize(function(){
+                if ($(window).width() > 1150) {
+                      $( ".site-content" ).removeClass( "merge-left" );
+                     $( ".site-sidebar" ).removeClass( "hide-sidebar" );
+                }
+         }); 
+    
+    
+
+//	$("#saved-searches-table tr, .home-search tr").click(function() {
+//        window.document.location = $(this).data("href");
+//    });
+	$(".home-search-body tr").click(function() {
+            if( $(this).data("href") > "" )
+                window.document.location = $(this).data("href");
+   });
+
+    $(".site-sidebar ul li a").filter(function(){
+    	return this.href == location.href.replace(/#.*/, "");
+	}).addClass("active");
+
+	$('.search-header-clear').click(function(){
+		$('.search-header-clear-section').each(function(){
+		$(this).click();
+		});
+ 	});
+	$('.search-header-clear-section').click(function(){
+            var id = $(this).attr( 'id' );
+            id = id.replace( "-cs", "" );
+//            alert( id );
+            clear_form_elements( id );
+
+ 	});
+			$( "#autosuggestprimaryartist" ).autocomplete({
+				source: "autocomplete.php?type=primaryartist",
+				    });
+
+			$( "#search-fullform" ).autocomplete({
+				source: "autocomplete.php?type=form",
+				minLength: 1
+				    });
+			$( "#search-key" ).autocomplete({
+				source: "autocomplete.php?type=key",
+				minLength: 1
+				    });
+
+});
+
+</script>
+<script>
+	$(function() {
+    	$( ".info-icon" ).tooltip({
+        tooltipClass: "hoverbox",
+        position: {  my: "center bottom-15",
+        at: "center bottom"}
+	});
+});
+</script>
+<button onclick="topFunction()" id="myBtn" title="Go to top"><i class="up fa fa-arrow-up" aria-hidden="true"></i></button>
+
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+
+</script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+		$('label').contents().filter(function() {
+	     return this.nodeType == 3
+	      }).each(function(){
+	     this.textContent = this.textContent.replace(/:/, " ")
+	      });
+});
+
+
+</script>
+
+<script type="text/javascript">
+
+    (function(e,t,o,n,p,r,i){e.visitorGlobalObjectAlias=n;e[e.visitorGlobalObjectAlias]=e[e.visitorGlobalObjectAlias]||function(){(e[e.visitorGlobalObjectAlias].q=e[e.visitorGlobalObjectAlias].q||[]).push(arguments)};e[e.visitorGlobalObjectAlias].l=(new Date).getTime();r=t.createElement("script");r.src=o;r.async=true;i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)})(window,document,"https://diffuser-cdn.app-us1.com/diffuser/diffuser.js","vgo");
+
+    vgo('setAccount', '475744837');
+
+    vgo('setTrackByDefault', true);
+
+ 
+
+    vgo('process');
+
+</script>
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '287943558203756', {
+em: 'insert_email_variable'
+});
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=287943558203756&ev=PageView&noscript=1"
+/></noscript>
+<!-- DO NOT MODIFY -->
+<!-- End Facebook Pixel Code -->
+
+
+
+<script>
+var x, i, j, l, ll, selElmnt, a, b, c;
+/*look for any elements with the class "custom-select":*/
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /*for each element, create a new DIV that will act as the selected item:*/
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /*for each element, create a new DIV that will contain the option list:*/
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 0; j < ll; j++) {
+    /*for each option in the original select element,
+    create a new DIV that will act as an option item:*/
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+//	    alert( s.id );
+	    if( s.id == "mysetchart" )
+	    {
+	    	    document.location.href = "chart-landing.php?setchart=" + s.options[i].value;
+		    	    break;
+	    }
+	    else
+	    {
+	    	    document.location.href = "/trend-search-results.php?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro%20Length%20Range?searchtype=Compositional&fromlink=industry&searchsubtype=structure&searchby=Year&search[dates][fromyear]=2010&search[dates][toyear]=2021&search[dates][season]=&search[peakchart]=&newcarryfilter=&genrefilter=&search[subgenreid]=&search[lyricalsubthemeid]=&search[lyricalmoodid]=&search[majorminor]=&search[exactbpm]=&graphtype=column&search[lyricalthemeid]=26&search[comparisonaspect]=Intro Length Range&setchart=" + s.options[i].value;
+		    	    break;
+	    }
+
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+}
+function closeAllSelect(elmnt) {
+  /*a function that will close all select boxes in the document,
+  except the current select box:*/
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+/*if the user clicks anywhere outside the select box,
+then close all select boxes:*/
+document.addEventListener("click", closeAllSelect);
+
+var mychartatend = 37;
+</script>   
+
+
+</body>
+</html>
+
+ <!-- end chart code -->
+        	<script type="text/javascript">
+		window.onload = function () {
+			CanvasJS.addColorSet("hsdColors",
+                [//colorSet Array
+
+                "#fb833b",
+                "#5d97cc",
+                "#aeaeae"
+                // "#3CB371",
+                // "#90EE90"                
+                ]);
+
+			chart = new CanvasJS.Chart("chartContainer", {
+				colorSet: "hsdColors",
+				theme: "light1", // "light1", "light2", "dark1", "dark2"
+				exportEnabled: true,
+				animationEnabled: false,
+				title: {
+				text: "Intro Length Range",
+                    fontColor: "#888888",
+                    // fontColor: "#ffffff",
+                    fontFamily: "Open Sans",
+                    fontWeight: "bold",
+					fontSize: 25
+				},
+                backgroundColor: '#ffffff',
+                // backgroundColor: '#444444',
+				axisX: { // this is the quarters
+					gridColor: "#f0f0f0",
+					// gridColor: "#525252",
+					labelFontColor: "#7a7a7a",
+					labelFontFamily: "Open Sans",
+                    labelAngle: 50,
+					labelFontSize: 14,
+                    interval: 1,
+					gridThickness:0,
+					tickColor: '#dddddd',
+					// tickColor: '#444444',
+					lineColor:"#dddddd",
+					// lineColor:"#525252",
+					tickLength: 5,
+                    margin: 20,
+                    labelFormatter: function ( e ) { if( e.label ) return e.label; else return "";  }
+				},
+				toolTip: {
+                      // backgroundColor: "#444444",
+                      shared: false,
+                      fontColor: "#7a7a7a",
+                      fontStyle: "normal",
+                      // fontColor: "#FFFFFF",
+                      contentFormatter: function(e){
+                            var thiscolumn = e.entries[0].dataSeries.name;
+                                // this is like Q4-2015
+                            var thisq = e.entries[0].dataPoint.label;
+                                // this is like 20%
+                            var thisy = e.entries[0].dataPoint.y;
+			    
+                            val = thisy + "%<br>";
+//                            alert( thisval );
+                            var count = 0;
+                            for(i = 0; i <  e.chart.options.data.length ; i++ )
+                            {
+                                    // this is like 1-5 times
+
+                                var chartname = e.chart.options.data[i].name;
+//                                var thiscolor = e.chart.options.data[i].color;
+//                                alert( e.chart.options.data[i].name );
+
+                                var dpoints = e.chart.options.data[i].dataPoints;
+                                for( j = 0; j < dpoints.length; j++ )
+                                {
+                                    if( dpoints[j].label == thisq && dpoints[j].y == thisy )
+                                    {
+                                        var chartname = dpoints[j].numsongs;
+                                        var thiscolor = dpoints[j].color;
+                                        if( dpoints[j].url ) 
+                                            val += ( "<a href='" + dpoints[j].url + "'><font color='" + thiscolor + "'>" + chartname + "</font></a><Br>" ) ;
+                                        else
+                                            val += ( "<font color='" + thiscolor + "'>" + chartname + "</font><Br>" ) ;
+                                    }
+                                }
+                            }
+                            return val;
+                        }
+				},
+				// theme: "theme2",
+				axisY: { // this is the data
+					gridColor: "#f0f0f0",
+					// gridColor: "#3c3c3c",
+					tickLength: 0,
+        			lineThickness:0,
+        			gridThickness:1,
+					labelFontColor: "#7a7a7a",
+					// labelFontColor: "#444444",
+					tickColor: "#dddddd",
+					// tickColor: "#444444",
+                    valueFormatString: " ",
+                    
+                    
+				}, 
+           dataPointMaxWidth: 120,
+				data: [
+                                {
+					type: "column",
+                    markerType: "none",
+                   					indexLabelFontFamily: "Open Sans",
+					showInLegend: false,
+					lineThickness: 3,
+					name: "",
+					color: "#5b9bd5",
+					dataPoints: [
+                                                 
+                                {
+                                  color: "#5b9bd5", label: "0:20 - 0:29", x: 3, y: 24, numsongs: "60", indexLabel: "24%", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "lighter", indexLabelFontSize: "12", click: function( e ) { document.location.href="search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Moderately+Long"; }, cursor: "pointer", markerType: "circle", "url": "search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Moderately+Long" },
+                                                 
+                                {
+                                  color: "#5b9bd5", label: "0:10 - 0:19", x: 2, y: 55, numsongs: "138", indexLabel: "55%", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "lighter", indexLabelFontSize: "12", click: function( e ) { document.location.href="search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Moderately+Short"; }, cursor: "pointer", markerType: "circle", "url": "search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Moderately+Short" },
+                                                 
+                                {
+                                  color: "#5b9bd5", label: "0:01 - 0:09", x: 1, y: 2, numsongs: "5", indexLabel: "2%", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "lighter", indexLabelFontSize: "12", click: function( e ) { document.location.href="search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Short"; }, cursor: "pointer", markerType: "circle", "url": "search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Short" },
+                                                 
+                                {
+                                  color: "#5b9bd5", label: "0:30 +", x: 4, y: 19, numsongs: "47", indexLabel: "19%", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "lighter", indexLabelFontSize: "12", click: function( e ) { document.location.href="search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Long"; }, cursor: "pointer", markerType: "circle", "url": "search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=4&search[dates][toy]=2021&search[peakwithin]=&search[lyricalthemes][26]=1&&search[introlengthrange]=Long" },
+                                                        
+					]
+				},
+                    				],
+				legend: {
+                      verticalAlign: "top",
+                      fontSize: 14,
+                      fontColor: "#7a7a7a",
+                      // fontColor: "#ffffff",
+                      fontFamily: "Open Sans",
+                      horizontalAlign: "center",
+                      cursor: "pointer",
+                      itemclick: function (e) {
+                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                e.dataSeries.visible = false;
+                            }
+                            else {
+                                e.dataSeries.visible = true;
+                            }
+                            chart.render();
+                        }
+                    }
+                });
+			chart.render();
+		}
+	</script>
+
+<!-- end chart code -->
+    
+

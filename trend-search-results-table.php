@@ -241,13 +241,6 @@ $custom = "";
                <div class="icon back-search ">
                    <a  class=" desktop" href="trend-search<?=$thetype?"-$thetype":""?>.php?<?=$_SERVER['QUERY_STRING']?>" >Back</a></div>
                         
-                       <div class="icon new-search ">
-                           <a href="search-for-<?=$fromlink?$fromlink:"industry"?>-trends.php"  style="display:none;">New Search</a> 
-           
-              <a href="/search-for-<?=$fromlink?$fromlink:"industry"?>-trends.php" >New Search</a> </div>
-
-    
-    </div>
                         </div>
                         
                         

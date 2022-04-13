@@ -3,28 +3,46 @@ require_once "connect.php";
 
 $charts = db_query_array( "select id, chartkey from charts where UseOnDB = 1", "id", "chartkey" );
 $weekdates = db_query_array( "select id, Name from weekdates", "id", "Name" );
+$bbids = array();
 if( 1 == 1 )
     {
+	file_put_contents( "loadbb1.txt", "starting \n" );
 foreach( $charts as $cid=>$cname )
 {
+	file_put_contents( "loadbb1.txt", "-------------------starting $cname \n", FILE_APPEND );
     foreach( $weekdates as $weekdateid=>$wname )
 	{
 	    $res = db_query_first_cell( "select count(*) from song_to_weekdate where chartid = $cid and weekdateid = $weekdateid" );
 	    if( !$res )
 		{
-//		    echo( "starting $cname - $wname<br>" );
-		    $bsongs = db_query_rows( "select * from dbi360_admin.billboardinfo where chart = '$cname' and weekdateid = $weekdateid" );
-//		    echo( count( $bsongs ) . " results...<br>" );
-		    foreach( $bsongs as $brow )
+	    	file_put_contents( "loadbb1.txt", "starting $cname - $wname \n", FILE_APPEND );
+
+		    $bsongs = db_query( "select * from dbi360_admin.billboardinfo where chart = '$cname' and weekdateid = $weekdateid" );
+	    	file_put_contents( "loadbb1.txt", count( $bsongs ) . " results... \n", FILE_APPEND );
+		foreach( $bsongs as $brow )
 			{
-			    $mysongid = db_query_first_cell( "select id from songs where BillboardName = '".escMe( $brow[title] ) . "' and BillboardArtistName = '".escMe( $brow[artist] ) . "'" );
+			    if( isset( $bbids[$brow["artist"]][$brow["title"]] ) )
+				{
+				    $mysongid = $bbids[$brow["artist"]][$brow["title"]];
+				}
+			    else
+				{
+				    $mysongid = db_query_first_cell( "select id from songs where BillboardName = '".escMe( $brow[title] ) . "' and BillboardArtistName = '".escMe( $brow[artist] ) . "'" );
+				    $bbids[$brow["artist"]][$brow["title"]] = $mysongid;
+				    if( !$mysongid )
+					{
+					    file_put_contents( "loadbb1.txt", "starting no song match for $brow[title] $brow[artist] \n", FILE_APPEND );
+					}
+				}
 			    if( $mysongid )
 				{
-				    db_query( "insert into song_to_weekdate( songid, weekdateid, chartid, type ) values ( $mysongid, $weekdateid, $cid, 'position{$brow[rank]}' )" );
+//				    	file_put_contents( "loadbb1.txt", "$brow[title], $brow[artist] -- insert into song_to_weekdate( songid, weekdateid, chartid, type, actualposition ) values ( $mysongid, $weekdateid, $cid, 'position{$brow[rank]}', {$brow[rank]} )\n", FILE_APPEND );
+				    db_query( "insert into song_to_weekdate( songid, weekdateid, chartid, type, actualposition ) values ( $mysongid, $weekdateid, $cid, 'position{$brow[rank]}', {$brow[rank]} )" );
 				}
 			}
 		}
 	}
+	file_put_contents( "loadbb1.txt", "---------------------ending chart $cname \n", FILE_APPEND );
 
 }
     }
@@ -33,8 +51,10 @@ if( 1 == 1 )
     {
 db_query( "delete from song_to_chart" );
 $songs = db_query_array( "select id from songs", "id", "id" );
+       	file_put_contents( "loadbb1.txt", "starting mapping songs to charts\n", FILE_APPEND );
 foreach( $songs as $songid )
 {
+	file_put_contents( "loadbb1.txt", "doing song $songid\n", FILE_APPEND );
     foreach( $charts as $chartid=>$chartname )
 	{
 	    $firstrow = db_query_first( "select Name, type, OrderBy, weekdates.id from weekdates, song_to_weekdate where songid = $songid and weekdateid = weekdates.id  and chartid = $chartid order by OrderBy limit 1" );
@@ -61,12 +81,13 @@ foreach( $songs as $songid )
 	    
 	    $firstweek = $firstrow["Name"];
 	    $numweeks = db_query_first_cell( "select count(*) from weekdates, song_to_weekdate where songid = $songid and weekdateid = weekdates.id and chartid = $chartid order by OrderBy" );
-	    $peak = db_query_first_cell( "select type from weekdates, song_to_weekdate where songid = $songid and weekdateid = weekdates.id and chartid = $chartid order by cast( replace( type, 'position', '' ) as signed ) limit 1" );
+	    $peak = db_query_first_cell( "select type from weekdates, song_to_weekdate where songid = $songid and weekdateid = weekdates.id and chartid = $chartid order by actualposition limit 1" );
 	    $peak = str_replace( "position", "", $peak );;
 	    $entrypos = str_replace( "position", "", $firstrow["type"] );;
 	    $year = date( "Y", $firstdate );
 	    db_query( "insert into song_to_chart( songid, chartid, PeakPosition, EntryPosition, NumberOfWeeksSpentInTheTop10, YearEnteredTheTop10, QuarterEnteredTheTop10, WeekEnteredTheTop10 ) values ( '$songid', '$chartid', '$peak', '$entrypos', '$numweeks', '$year', '$quarter', '$firstweek' )" );
 	}
+//	file_put_contents( "loadbb1.txt", "ending song $songid\n", FILE_APPEND );
 
 }
 
@@ -86,6 +107,7 @@ foreach( $res as $sid=>$values )
 	}
     
     db_query( "update songs set chartids ='$val' where id = $sid" );
+    file_put_contents( "loadbb1.txt", "chart info $sid ($val)\n", FILE_APPEND );
 }
 
 

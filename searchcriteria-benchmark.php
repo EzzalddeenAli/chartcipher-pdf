@@ -73,26 +73,6 @@ All Dates
 
 
 
-    <?php
-    $tmpurl = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
-$tmpurl = str_replace( "&genrefilter=". $genrefilter , "", $tmpurl );
-$tmpurl .= "&genrefilter=";
-
-    ?>
-<?if( isset( $_GET["genrefilter"] ) ) {  ?>
-								<tr>
-									<td class="search-column-1">
-
-                       Primary Genre: 
-</td>									<td class="search-column-2">
-								<select name="genrefilter" style="width:400px" onChange='document.location.href="<?=$tmpurl?>" + this.options[this.selectedIndex].value'>
-									<option value="">All Primary Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-								</select>
-
-                                </div><!-- /.form-row-right -->
-</td></tr>
-<? } ?>
 <? 
 $tmpurl = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[specificsubgenre]=". $search[specificsubgenre] , "", $tmpurl );
@@ -101,11 +81,11 @@ if( $search["specificsubgenre"] || 1  ) {
 ?>
 								<tr>
 									<td class="search-column-1">
-Sub-Genre:
+Genre:
 </td>									<td class="search-column-2">
 
 								<select name="genrefilter" style="width:400px" onChange='document.location.href="<?=$tmpurl?>" + this.options[this.selectedIndex].value'>
-									<option value="">All Sub-Genres/Influences</option>
+									<option value="">All Genres/Influences</option>
 <? outputSelectValuesForOtherTable( "subgenres", $search[specificsubgenre], true ); ?>
 								</select>
 </td></tr>

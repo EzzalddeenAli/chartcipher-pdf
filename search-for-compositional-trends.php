@@ -20,7 +20,7 @@
                    <div class="col-3 flex">
                          <div class="header-block header-block-ct1">
                             <a href="/trend-search-influences">
-                                <p>Primary Genre & Sub-Genres/Influences</p>
+                                <p>Sub/Influences</p>
                             </a>
                         </div><!-- /.header-block-1B -->
                         <div class="info-block">
@@ -202,7 +202,7 @@
                     <div class="">
                         <a  title="Close" class="close">X</a>
                         <img src="assets/images/home/hit-songs-deconstructed-genres-and-influences-icon.svg">
-                        <h2>Primary Genre & Sub-Genres/Influences</h2>
+                        <h2>Genres/Influences</h2>
                         <p><?=getOrCreateCustomHover( "Comp Trend Box - Genre & Influences", "Search for trends pertaining to the percentage of songs that possess a specific influence or fall into a specific primary genre." )?></p>
                         <P><a href="/trend-search-influences"><button>GET STARTED</button></a></P>
                     </div>

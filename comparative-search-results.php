@@ -102,6 +102,8 @@ $rows = getRowsComparison( $search, $allsongs );
 // file_put_contents( "/tmp/rows", print_r( $rows, true ), FILE_APPEND );
 //print_r( $rows );
 //exit;
+
+$newsearchlink = $thetype=="industry"?"trend-search-staying-power":"comparative-search";
 ?>
 <style>
 .search-body #comp-search-table th, .search-body #comp-search-table td {
@@ -161,9 +163,6 @@ $rows = getRowsComparison( $search, $allsongs );
                                            <div class="icon back-search ">
                                                <a  class=" desktop" href="<?=$thetype=="industry"?"trend-search-staying-power.php":"comparative-search.php"?>?<?=$_SERVER['QUERY_STRING']?>" >Back</a></div>
 
-                                                   <div class="icon new-search ">
-
-                                          <a href="https://analytics.chartcipher.com/<?=$thetype=="industry"?"trend-search-staying-power":"comparative-search"?>" >New Search</a> </div>
 
 
                             </div>

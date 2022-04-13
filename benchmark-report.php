@@ -7,8 +7,28 @@ if( !$_GET["graphtype"] ) $_GET["graphtype"] = "column";
 $graphtype = $_GET["graphtype"];
 $backurl = "benchmark.php";
 $sorttableids = array();
+$newsearchlink = "/benchmark.php";
 $allgraphnames = array();
-$season = $search[dates][season];
+if( count( $search[dates][season] ) )
+    $season = $search[dates][season];
+
+if( !$search["benchmarksubtype"] ) $search["benchmarksubtype"] = "Compositional";
+
+$typestouse = getMyPossibleSearchFunctions( strtolower( $search["benchmarksubtype"] ) );
+if( $search["benchmarktype"] == "Genre Comparisons" )
+    {
+	$typestouse = $benchmarknumerics[$search[benchmarksubtype]];
+    }
+
+if( ($search["benchmarktype"] == "Seasonal Comparisons") && !$season )
+    {
+	//	echo( "in here" );
+	Header( "Location: /benchmark.php?needsseason=1&" . $_SERVER["QUERY_STRING"] );
+	echo( "<script>document.location.href = 'benchmark.php?needsseason=1&" . $_SERVER["QUERY_STRING"]."';</script>" );
+	exit;
+    }
+
+//print_r( $season) ;
 if( !$search["dates"]["fromy"] && !$search["dates"]["fromweekdate"] && !$search["dates"]["fromyear"] )
 {
 
@@ -27,10 +47,19 @@ if( !$search["dates"]["fromy"] && !$search["dates"]["fromweekdate"] && !$search[
    $search["dates"]["fromy"] = $season?getLastSeason( $season ):$exp[1];
 }
 
+
 //echo( $search["benchmarktype"] );
 switch( $search["benchmarktype"] ) { 
-    case "Top 25 vs. Bottom 25":
-    $columns = array( "Top 25"=>"1:25", "Bottom 25"=> "75:100" );
+    case "Top vs. Bottom of the Charts":
+    $columns = array( "Top $topmiddle"=>"1:$topmiddle", "Bottom $topmiddle"=> "$bottommiddle:$maxnumperchart" );
+    break;
+    case "Seasonal Comparisons":
+	$columns = array();
+	//	print_r( $season );
+	foreach( $season as $s )
+	    {
+		$columns[$seasonswithall[$s]] = array( "season"=>$s );
+	    }
     break;
     case "New Songs vs. Carryovers":
 	$columns = array( "New Songs"=> array( "newcarryfilter"=>"new" ), "Carryovers"=> array("newcarryfilter"=>"carryover" ) );
@@ -38,14 +67,21 @@ switch( $search["benchmarktype"] ) {
     case "Staying Power - 10 Weeks":
 	$columns = array( "Song with 10+ Weeks"=>array( "minweeksfilter"=>"10" ), "Songs with less than 10 Weeks"=> array( "minweeksfilter"=>"1-9" ) );
     break;
+    case "Genre Comparisons":
+	$columns = db_query_array( "select id, Name from subgenres order by OrderBy", "Name", "id" );
+    break;
 default:
-    $columns = array( "Top 25"=>"1:25", "Bottom 25"=> "75:100" );
+    $columns = array( "Top $topmiddle"=>"1:$topmiddle", "Bottom $topmiddle"=> "$bottommiddle:$maxnumperchart" );
 }
 
 //print_r( $benchmarkreportsarr );
 if( !$search["comparisonaspect"]  )
-    $search["comparisonaspect"] = $benchmarkreportsarr[0];
-//echo( $search["comparisonaspect"] );
+    {
+	$search["comparisonaspect"] = array_key_first( $typestouse );
+	if( !$search["comparisonaspect"]  ) $search["comparisonaspect"] = $typestouse[0];
+    }
+
+
 if( $search["dates"]["fromyear"] )
 {
 
@@ -72,11 +108,13 @@ else
     $allsongsbench = array();
 $alllllsongs = array();
 //echo( "clinetid: " . $searchclientid );
+//print_r( $columns );
     foreach( $columns as $c=>$benchmarkpeak )
     {
 
     $newcarryfilter = "";
     $minweeksfilter = "";
+    $season = "";
     if( is_array( $benchmarkpeak ) )
 	{
 	    foreach( $benchmarkpeak as $type=>$val )
@@ -85,12 +123,30 @@ $alllllsongs = array();
 			$newcarryfilter = $val;
 		    if( $type == "minweeksfilter" )
 			$minweeksfilter = $val;
+		    if( $type == "season" )
+			{
+			$season = $val;
+			}
 		}
 	        $benchmarkpeak = "";
 	}
+    // add to the trend-search-results-type too
+	if( $search["benchmarktype"] == "Genre Comparisons" )
+	{
+	    $subgenrefilter = $benchmarkpeak;
+	    $benchmarkpeak = "";
+	}		
+
+
     //    echo( "min: $minweeksfilter" );
     //    echo( $minweeksfilter );
-	$allsongstop = getSongIdsWithinQuarter( false, $search[dates][fromq], $search[dates][fromy], $search[dates][toq], $search[dates][toy], $benchmarkpeak );
+	$allsongstop = getSongIdsWithinQuarter( false, $search[dates][fromq], $search[dates][fromy], $search[dates][toq], $search[dates][toy], $benchmarkpeak, false, $season );
+	if( !count( $allsongstop ) )
+	    {
+		unset( $columns[$c] );
+		continue;
+	    }
+	//	echo( "$subgenrefilter: " . count( $allsongstop ) . "<br>");
 	$allsongsbench[$c] = $allsongstop;
 	//	print_r( $allsongstop );
 	$alllllsongs = array_merge( $alllllsongs, $allsongstop );
@@ -98,9 +154,10 @@ $alllllsongs = array();
 //echo( "all the songs: " );
 //print_r( $alllllsongs );
 $rows = getRowsComparison( $search, $alllllsongs );
-    $allgenres = db_query_array( "select id, Name from genres order by OrderBy", "id", "Name" );
-    $genrefilter = $_GET["genrefilter"];
+//    $allgenres = db_query_array( "select id, Name from genres order by OrderBy", "id", "Name" );
+//    $genrefilter = $_GET["subgenrefilter"];
 
+include "trend-datedisplaycalc.php";
 include "trendreportfunctions.php";
 ?> 
 	<div class="site-body index-pro ">
@@ -116,7 +173,7 @@ include "trendreportfunctions.php";
                
                 
                <div class="row  row-equal row-padding mobile link-alt">
-                            <div class="col-6">
+                            <div class="col-4">
                        <div class="home-search-header  flex-addon">
                                 <h2>
 
@@ -125,6 +182,11 @@ include "trendreportfunctions.php";
 								<? outputSelectValues( $benchmarktypes, $search[benchmarktype] ); ?>
 								</select>
 </div>
+                         <div class="custom-select" >
+
+								<select id="mysetbenchmarktype">
+								<? outputSelectValues( $benchmarksubtypes, $search[benchmarksubtype] ); ?>
+								</select>
 
 </h2>
                                
@@ -135,34 +197,47 @@ include "trendreportfunctions.php";
 // for the footer
     $benchmarkurlwithouttype = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
     $benchmarkurlwithouttype = str_replace( "&search[benchmarktype]=". $search[benchmarktype] , "", $benchmarkurlwithouttype );
+    $benchmarkurlwithouttype = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $benchmarkurlwithouttype );
+    $benchmarkurlwithoutsubtype = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
+    $benchmarkurlwithoutsubtype = str_replace( "&search[benchmarksubtype]=". $search[benchmarksubtype] , "", $benchmarkurlwithoutsubtype );
+    $benchmarkurlwithoutsubtype = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $benchmarkurlwithoutsubtype );
 // end for the footer
     $tmpurl = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $tmpurl );
 $tmpurl .= "&search[comparisonaspect]=";
- foreach( $benchmarkreportsarr as $c=>$displ ) { 
+
+
+ foreach( $typestouse as $c=>$displ ) { 
 
  ?>
                      <tr>
-                                <td><span><span><a href='<?=$tmpurl?><?=$displ?>'><?=$possiblesearchfunctions[$displ]?$possiblesearchfunctions[$displ]:$displ?></a></span> <?=$notsuredispl?></span>
-<!--<a href="home" class="rowlink">Primary Genres: R&B/Soul</a>-->
+                                <td><span><span><a href='<?=$tmpurl?><?=$c?>'><?=$possiblesearchfunctions[$displ]?$possiblesearchfunctions[$displ]:$displ?></a></span> <?=$notsuredispl?></span>
 </td>
                                   <td></td>
                             </tr>
-<? } ?>
+	 <? } ?>
                         
                         </table>
                         </div><!-- /.header-block-1B -->
                       </div>
-                             <div class="col-6">
+                             <div class="col-8">
                    <div class="home-search-header flex-addon">
                                 <h2>Trend Graph</h2>
+<!--                         <div class="custom-select" >
+								<select id="mysetgraphtype">
+     <? foreach( array(  "column"=>"Bar Graph", "line"=>"Line Graph" ) as $pid=>$pval ) { ?>
+                     <option <?=$_GET["graphtype"] == $pid?"SELECTED":""?> value="<?=$pid?>"><?=$pval?></option>
+                                                                             <? } ?>
+								</select>
+</div>-->
+
 <?     $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[benchmarktype]=". $search[benchmarktype] , "", $tmpurl );
 if( strpos( $tmpurl, "comparisonaspect") === false )
     $tmpurl .= "&search[comparisonaspect]=" . $search[comparisonaspect];
 
 ?>
-                                 <a class="search" href="/<?=$tmpurl?>"> View >></a>
+<!--                                 <a class="search" href="/<?=$tmpurl?>"> View >></a>-->
                             </div>
                          <div class="header-inner insight-graph" >
 
@@ -186,6 +261,11 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
 <!-- begin graph -->
 	<div id="chartContainer" style="height:600px;">
 	</div>
+                             
+                             <div class="info-block"><p>
+<?=$benchmarkdescriptions[$search["benchmarktype"]]?>
+									     </p>
+                        </div>
     <!-- end graph -->    
 
 
@@ -254,70 +334,6 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
 	</div><!-- /.site-body -->
 
 	<script>
-        /*
-		$(".header-block").click(function() {
-  window.location = $(this).find("a").attr("href");
-  return false;
-});
-  
-        
-        
-        
-        
- if(window.outerHeight){
-       var w = window.outerWidth;
-      var h = window.outerHeight;
-  }
-  else {
-      var w  = document.body.clientWidth;
-      var h = document.body.clientHeight; 
-  }     
-        
-         var moreItems = document.querySelectorAll('.more-items');
-        moreItems = [...moreItems];
-        
-        moreItems.forEach(element => console.log(element));
-        
-        console.log(w + 'this');
-        
-                if(w > 1702 || w < 1002){
-            console.log('works');
-             moreItems.forEach(element => element.style.display="none");     
-        }else{
-            moreItems.forEach(element => element.style.display="block");
-        } 
-   
-    
-    window.addEventListener('resize', function(event){
-    var w  = document.body.clientWidth;
-      var h = document.body.clientHeight;    
-        
-         var moreItems = document.querySelectorAll('.more-items');
-        moreItems = [...moreItems];
-        
-        moreItems.forEach(element => console.log(element));
-        
-        console.log(w + 'this');
-        
-                if(w > 1702 || w < 1002){
-            console.log('works');
-             moreItems.forEach(element => element.style.display="none");     
-        }else{
-            moreItems.forEach(element => element.style.display="block");
-        } 
-});
-        
-        
-
-        
-              
-    
-       
-            
-        
-        
-       */ 
-
                     
 	$(document).ready(function(){
 	    $("a.expand-btn").click(function(){

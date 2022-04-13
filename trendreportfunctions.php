@@ -41,9 +41,9 @@ $reportsarr["Artists"]["Songs-With-Featured"] = "Songs with a Featured Artist";
 // Genres / Influences
 // Primary Genres
 // Influences
-$reportsarr["Genres & Sub-Genres"]["Primary-Genres"] = "Primary Genres";
-$reportsarr["Genres & Sub-Genres"]["Sub-Genres-Influencers"] = "Sub-Genres";
-//$reportsarr["Genres & Sub-Genres/Influences"]["Influence-Count"] = "Influence Count";
+//$reportsarr["Genres & Sub-Genres"]["Genres"] = "Genres";
+$reportsarr["Genres/Influencers"] = "Genres/Influencers";
+//$reportsarr["Genres/Influences"]["Influence-Count"] = "Influence Count";
 
 // Lead Vocals
 // Lead Vocal Gender
@@ -126,7 +126,7 @@ $reportsarr["Song Structure"]["Outro-Length-Range"] = "Outro Length Range";
 if( $_GET["help3"] )
     {
     $reportsarr = array();
-    $reportsarr["Genres & Sub-Genres"]["Primary-Genres"] = "Primary Genres";
+//    $reportsarr["Genres & Sub-Genres"]["Primary-Genres"] = "Primary Genres";
     $reportsarr["Genres & Sub-Genres"]["Sub-Genres-Influencers"] = "Sub-Genres";
     }
 //$reportsarr["General Characteristics & Instruments"]["Chorus-Count"] = "Chorus Count";
@@ -139,7 +139,7 @@ if( $_GET["help3"] )
 
 }
 
-$reportsarr["Genres & Sub-Genres"]["Primary-Genres"] = "Primary Genres";
+//$reportsarr["Genres & Sub-Genres"]["Primary-Genres"] = "Primary Genres";
 
 
 function getTrendGraphNameConverter( $sectionname )
@@ -175,7 +175,7 @@ function getTrendGraphNameConverter( $sectionname )
     if( $sectionname == "Lead Vocal" ) return "Lead Vocals"; // ok
     if( $sectionname == "Lead Vocal Gender (with solo vs. duet/group)" ) return "Lead Vocal Gender"; // ok
     if( $sectionname == "Lead Vocal Delivery Type" ) return "Lead Vocal Delivery"; // ok
-    if( $sectionname == "Primary Genres" ) return "Primary Genres"; // ok
+//    if( $sectionname == "Primary Genres" ) return "Primary Genres"; // ok
     if( $sectionname == "Key (Major vs. Minor)" ) return "Major vs. Minor"; // ok
     if( $sectionname == "Key" ) return "Key"; // ok
     if( $sectionname == "Sub-Genres" ) return "Sub-Genres"; // ok
@@ -226,17 +226,9 @@ function getTrendGraphNameConverter( $sectionname )
 function gatherCharacteristicsSingleQuarter( $thisquarter, $type )
 {
     $retval = array();
-    global $reportsarr, $nogainers, $quarterstorun, $search, $industrytrendreports, $doingyearlysearch, $doingweeklysearch, $doingquarterrange, $doinghomepage;
+    global $reportsarr, $nogainers, $quarterstorun, $search, $industrytrendreports, $doingyearlysearch, $doingweeklysearch, $doingquarterrange, $doinghomepage, $possiblesearchfunctions;
     $pos = $search["peakchart"];
-    if( isset( $industrytrendreports ) )
-        $arrtouse = $industrytrendreports;
-    else
-	{
-	    $fixtures = array( "Primary-Genres"=>"Primary Genres", "Sub-Genres-Influencers"=>"Sub-Genres", "Influence-Count"=>"Influence Count" );
-	    array_unshift( $reportsarr, $fixtures );
-
-	    $arrtouse = $reportsarr;
-	}
+    $arrtouse = $reportsarr;
     if( $type == "most" || $type == "least" )
 	{
 	    if( $doingyearlysearch ) // this is sooo ugly
@@ -257,6 +249,9 @@ function gatherCharacteristicsSingleQuarter( $thisquarter, $type )
 		$allsongs = getSongIdsWithinWeekdates( false, $search[dates][fromweekdate], $search[dates][toweekdate], $pos );
 	    else 
 		$allsongs = getSongIdsWithinQuarter( false, $search[dates][fromq], $search[dates][fromy], $search[dates][toq], $search[dates][toy], $pos );
+	    //	    echo( count( $allsongs ) . "<br>" );
+	$flip = array_flip( $possiblesearchfunctions );
+
 	    // if( $_GET["help"] ) 
 	    // 	echo( "num total songs: " . count( $allsongs ) . "<br>");
 	    //	    print_r( $arrtouse );
@@ -272,12 +267,12 @@ function gatherCharacteristicsSingleQuarter( $thisquarter, $type )
 		{
 		    continue;
 		}
-            if( !getTrendGraphNameConverter( $displ ) ) { 
-		//		echo( "skipping $displ<br>" );
-		continue;
-	    }
+            // if( !getTrendGraphNameConverter( $displ ) ) { 
+	    // 	//		echo( "skipping $displ<br>" );
+	    // 	continue;
+	    // }
             if( in_array( $reportname, $nogainers ) ) continue;
-            $comparisonaspect = getTrendGraphNameConverter( $displ );
+            $comparisonaspect = $reportname;
             $mysearch = $search;
             $mysearch["comparisonaspect"] =$comparisonaspect;
 	    //	    echo( $reportname . "<br>");
@@ -342,6 +337,7 @@ function gatherCharacteristicsSingleQuarter( $thisquarter, $type )
 		    // 	echo( "in one, $vid: " . print_r( $varr, true ) );
 		    if( strpos( $displ, " Count" ) !== false && !$vid ) continue;
 		    if( $vid == "null" ) continue;
+		    if( $vid == "None" ) continue;
 		    if( strpos( $displ, "Post-Chorus Sections" ) !== false && $vid == "No Post-Chorus" ) continue;
                     if( $vid === "Duet/Group (All)" || $vid === "No Outro" || $vid === "No Intro" ) {
                             // if( $displ == "Use Of A Post-Chorus" )
@@ -431,18 +427,19 @@ function gatherCharacteristicsMultipleQuarters( $quarterstorun, $type )
     $qarr = $quarterstorun;
 
         $arrtouse = $reportsarr;
-	$fixtures = array( "Primary-Genres"=>"Primary Genres", "Sub-Genres-Influencers"=>"Sub-Genres", "Influence-Count"=>"Influence Count" );
-	array_unshift( $arrtouse, $fixtures );
-
+//echo( "arr:" ) ;
+//	    print_r( $arrtouse );
+//	    print_r( $quarterstorun );
     foreach( $arrtouse as $tmpreportsarr )
     {
         foreach( $tmpreportsarr as $reportname=>$displ )
         {
 
-            if( $displ == "Songwriters" ) continue;
-            if( !getTrendGraphNameConverter( $displ ) ) continue;
+//	    echo( "doing $reportname ($displ)" );
+//	    continue;
             if( in_array( $reportname, $nogainers ) ) continue;
-            $comparisonaspect = getTrendGraphNameConverter( $displ );
+//	    echo( "doing $reportname<br>" );
+            $comparisonaspect = $reportname;
             $mysearch = $search;
             $mysearch["comparisonaspect"] =$comparisonaspect;
             $mysearch["dates"]["fromq"] = $oldestq;
@@ -490,12 +487,14 @@ function gatherCharacteristicsMultipleQuarters( $quarterstorun, $type )
 			$data = $newoutput;
 		    }
 
-	    // if( $displ == "Outro Length Range" )
-	    // 	{
-	    // 	    echo( "<br><br>data: <br><br>" ); 
-	    // 	    print_r( $data );
-	    // 	    echo( "<br><br>" );
-	    // 	}
+		if( strpos( $displ, "Key" ) !== false && count( $rows ) == 2 && 1==0)
+	    	{
+	    	    echo( "<br><br>data: <br><br>" ); 
+	    	    print_r( $data );
+	    	    echo( "<br><br>" );
+	    	    print_r( $rows );
+	    	    echo( "<br><br>" );
+	    	}
             
                 // MAX VALUES
             
@@ -526,11 +525,18 @@ function gatherCharacteristicsMultipleQuarters( $quarterstorun, $type )
 //                echo( $tmpquarter . ", " . $thisquarter . "<br>");
                     if( $type == "upward" )
                     {
-                        if( $thisval-3 <= $prevvalue ) $oktoadd = false;
+			// was 3
+                        if( $thisval <= $prevvalue ) $oktoadd = false;
                     }
                     if( $type == "downward" )
                     {
-                        if( $thisval+3 >= $prevvalue ) $oktoadd = false;
+			// was 3? 
+                        if( $thisval >= $prevvalue ) $oktoadd = false;
+		// if( strpos( $displ, "Key" ) !== false && count( $rows ) == 2 )
+	    	// {
+		// 	echo( "$displ($rowdispl): $thisval, $prevvalue<br>" );
+		// 	echo( "$oktoadd<Br>" );
+		// }
                     }
                     if( $type == "highest" )
                     {

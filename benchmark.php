@@ -135,7 +135,7 @@ include "benchmarkreportfunctions.php";
                                     
                                     <div class="select-wrapper">
                                         <label>Benchmark Focus</label>
-									<select name="search[benchmarktype]" >
+									<select id="benchmarktype" name="search[benchmarktype]" onChange="showSeasons( this.options[this.selectedIndex].value )">
 									<option value="" disabled selected>(Select One)</option>
 
 								<? outputSelectValues( $benchmarktypes, $search[benchmarktype] ); ?>
@@ -143,31 +143,60 @@ include "benchmarkreportfunctions.php";
                 </div>
                                     
 								</div>
-								<div class="form-row-right-inner">
+								<div id="seasonaldiv" class="form-row-right-inner" style="display:<?=$search[benchmarktype]=="Seasonal Comparisons"?"":"none"?>">
+                                    <div class="select-wrapper">
+<label>Season (Use the command key to select multiple seasons.) </label>
+									<select id="seasons" name="search[dates][season][]" multiple style="height:85px">
+<?php
+outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
+									</select>
+</div>
+
 								</div>
 								
 				<div class="cf"></div>
 		</div><!-- /.form-row-left -->
    
+
+
+
  </div>
+
+             <div class="form-row-full quarter-select">
+								<div class="form-row-left-inner">
+                                    
+                                    <div class="select-wrapper">
+                                        <label>Benchmark Aspect</label>
+																		<select name="search[benchmarksubtype]" >
+									<option value="" disabled selected>(Select One)</option>
+
+								<? outputSelectValues( $benchmarksubtypes, $search[benchmarksubtype] ); ?>
+									</select>
+                </div>
+                                    
+								</div>
+								<div class="form-row-right-inner">
+                                  <label>Select Peak Chart Position</label>
+    								<select name="search[peakchart]">
+    									<option value="">Entire Chart</option>
+    									<?php
+    outputSelectValues( $peakvalues, $search["peakchart"] );
+    outputClientSelectValues( $search["peakchart"] );
+    ?>
+    								</select>
+								</div>
+								
+								
+				<div class="cf"></div>
+		</div><!-- /.form-row-left -->
+   
                                       
                                       
      
      
                   <div class="form-row-full quarter-select">
 								<div class="form-row-left-inner">
-                                    <!--
-               	<span id="outputformatspan" <?=$onlyonequarter?"style='display:none'":""?> >
-                                   
-                                        <label>Select Output Format</label>
-               								<select id="graphtype" name="graphtype">
-               									<option value="">(Select One)</option>
-    <? foreach( array(  "column"=>"Bar Graph", "line"=>"Line Graph" ) as $pid=>$pval ) { ?>
-                     <option <?=$_GET["graphtype"] == $pid?"SELECTED":""?> value="<?=$pid?>"><?=$pval?></option>
-                                                                             <? } ?>
-               								</select>
-</span>                                    &nbsp;
--->
+                                    &nbsp;
 								</div>
 								<div class="form-row-right-inner">
                                <div class="submit-btn-wrap">
@@ -216,16 +245,9 @@ include "benchmarkreportfunctions.php";
              <div class="form-row-full quarter-select">
 								<div class="form-row-left-inner">
                                     
-                               
-                                        <label>Select A Specific Primary Genre</label>
-							<select name="genrefilter">
-								<option value="">All Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-							</select>                                    
-                                    
 								</div>
 								<div class="form-row-right-inner">
-                                  <label>Select a Specific Sub-Genre</label>
+                                  <label>Select a Specific Genre</label>
 									<select name="search[subgenreid]" >
 									<option value=""  selected>All</option>
 									<? outputSelectValuesForOtherTable( "subgenres", $search[subgenreid]); ?>
@@ -494,13 +516,13 @@ include "benchmarkreportfunctions.php";
 		    else {
 		       $('.comp-hidden-producer').removeClass('show').addClass('hide');
 		    }
-		    if ($("#comp-select").val() == "Primary Genre") {
-		       $('.comp-hidden-primary').removeClass('hide').addClass('show');
-		    }
-		    else {
-		       $('.comp-hidden-primary').removeClass('show').addClass('hide');
-		    }
-		    if ($("#comp-select").val() == "Vocal Gender") {
+		    // if ($("#comp-select").val() == "Primary Genre") {
+		    //    $('.comp-hidden-primary').removeClass('hide').addClass('show');
+		    // }
+		    // else {
+		    //    $('.comp-hidden-primary').removeClass('show').addClass('hide');
+		    // }
+	    if ($("#comp-select").val() == "Vocal Gender") {
 		       $('.comp-hidden-vocal').removeClass('hide').addClass('show');
 		    }
 		    else {
@@ -625,17 +647,30 @@ $( document ).ready(function() {
                 return true;
             }, "* Please enter the name of a songwriter or artist.");
 
+        $.validator.addMethod("onlyifseasons", function(value, element) {
+		var val = $("#benchmarktype").val();
+		//		alert( "chosen:" + val );
+		var thesevalues = $("#seasons").val();
+		//		alert( "these: " + thesevalues );
+
+		if( val == "Seasonal Comparisons" && ((""+thesevalues) == "null" ) )
+		    return false;
+                return true;
+            }, "* Please choose one or more seasons.");
+
 		$('#benchmarkform').validate({
 			onfocusout: false,
 			onkeyup: false,
 			onclick: false,
 			rules: {
-                  'search[comparisonaspect]': { required: true },
+                  'search[benchmarktype]': { required: true },
+                  'search[benchmarksubtype]': { required: true },
                   'graphtype': { required: true },
                   'search[dates][fromq]': { datesmustbevalid: true },
                   'search[dates][toq]': { datesmustbevalid: true },
                   'search[dates][fromy]': { datesmustbevalid: true },
                   'search[dates][toy]': { datesmustbevalid: true },
+                  'search[dates][season][]': { onlyifseasons: true },
                   'search[dates][fromyear]': { datesmustbevalidyear: true },
                   'search[dates][toyear]': { datesmustbevalidyear: true },
                   'searchcriteria[artistid]': { onlyifartist: true },
@@ -848,6 +883,15 @@ checkOutputFormat();
 
        });
     });
+
+function showSeasons( val )
+{
+if( val == "Seasonal Comparisons" )
+    $("#seasonaldiv").css( "display", "" );
+else
+    $("#seasonaldiv").css( "display", "none" );
+}
+
         
 function resetQuarters()
 {

@@ -50,7 +50,9 @@ if( $sectioncount >= 5 )
 else
     $autocalcvalues["NumMelodicThemesRange"] = $sectioncount;
 
-if( $autocalcvalues["NumMelodicThemesRange"] == 1 )
+if( !$autocalcvalues["NumMelodicThemesRange"] )
+    $autocalcvalues["NumMelodicThemesRange"] = "";
+else if( $autocalcvalues["NumMelodicThemesRange"] == 1 )
     $autocalcvalues["NumMelodicThemesRange"] = "Low Use";
 else if( $autocalcvalues["NumMelodicThemesRange"] == 2 || $autocalcvalues["NumMelodicThemesRange"] == 3 )
     $autocalcvalues["NumMelodicThemesRange"] = "Low-Mid Use";
@@ -63,12 +65,20 @@ else if( $autocalcvalues["NumMelodicThemesRange"] == "5+" )
 
 
 // PercentDiatonicChordsRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "PercentDiatonicChordsRange", "PercentDiatonicChords", "70-, 70-80, 80-90, 90+", "", array( "Chromatic Influence / Multiple Keys", "Somewhat Diatonic", "Diatonic", "Very Diatonic" ) );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "PercentDiatonicChordsRange", "PercentDiatonicChords", "70-, 70-80, 80-100, 100+", "", array( "Chromatic Influence / Multiple Keys", "Somewhat Diatonic", "Primarily Diatonic", "Entirely Diatonic" ) );
 				    //Diatonic Chord Prevalence: https://analytics.chartcipher.com/4NmgW (Very Diatonic - over 90%, Diatonic - 80-90%, Somewhat Diatonic - 70-80%,  - Lower than 70%)
 
 // ChordRepetitionRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "ChordRepetitionRange", "ChordRepetition", "3.5-, 3.5-4.5, 4.5-5.5, 5.5+", "" );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "ChordRepetitionRange", "ChordRepetition", "1.5-, 1.5-4.5, 4.5+", "", array( "Low Repetition", "Moderate Repetition", "High Repetition" ) );
 //Not Repetitive, Somewhat Repetitive, Very Repetitive, Highly Repetitive)
+
+
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "ThousandWordsPrevalenceRange", "ThousandWordsPrevalence", "45-, 45-55, 55-65, 65+", "", array( "Little Use", "Some", "Moderate", "Very Frequent" ) );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "GeneralLocationReferencesRange", "GeneralLocationReferences", "0-, 0-5, 5-14, 14+", "", array( "None", "Few", "Frequent", "Very Frequent" ) );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "LocationReferencesRange", "LocationReferences", ".01-, .01-3, 3-7, 7+", "", array( "None", "Few", "Frequent", "Very Frequent" ) );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "PersonReferencesRange", "PersonReferences", "0.01-, 0.01-4, 4-12, 12+", "", array( "None", "Few", "Frequent", "Very Frequent" ) );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "GeneralPersonReferencesRange", "GeneralPersonReferences", "0.01-, 0.01-8, 8-17, 17+", "", array( "None", "Few", "Frequent", "Very Frequent" ) );
+
 
 if( $autocalcvalues["ChordRepetitionRange"] == "Under 3.5" )
 $autocalcvalues["ChordRepetitionRange"] = "Not Repetitive";
@@ -88,11 +98,11 @@ $autocalcvalues["ChordRepetitionRange"] = "Highly Repetitive";
 $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOfTriadsRange", "UseOfTriads", "35-, 35-50, 50-60, 60+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
 
 // UseOfInvertedChordsRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOfInvertedChordsRange", "UseOfInvertedChords", "4-, 4-7, 7-10, 10+", "", array( "Low", "Low-Mid", "High-Mid", "High" ) );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOfInvertedChordsRange", "UseOfInvertedChords", "0.001-, 0.001-9, 9-14, 14+", "", array( "None", "Sporadic Use", "Moderate Use", "Frequent Use" ) );
 //Use of Inverted Chords: https://analytics.chartcipher.com/URAn2 (Incidental / Low use of Inverted Chords - Under 7%, Low-Mid use of Inverted Chords - 7-10%, Mid-High use of Inverted Chords - 10-15%, High use of Inverted Chords - Above 15%)
 
 // UseOf7thChordsRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOf7thChordsRange", "UseOf7thChords", "0.01-", "0.01-25, 25-35, 35-45, 45+", "", array( "None", "Low", "Low-Mid", "High-Mid", "High" )  );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOf7thChordsRange", "UseOf7thChords", "0.0001-, 0.0001-13, 13-35, 35+", "", array( "None", "Sporadic Use", "Moderate Use", "Frequent Use" )  );
 
 // UseOfMajor7thChordsRange
 $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "UseOfMajor7thChordsRange", "UseOfMajor7thChords", "5-, 5-10, 10-20, 20+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
@@ -103,10 +113,13 @@ $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "LineRepetitionPre
 
 
 // OverallRepetitivenessRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "OverallRepetitivenessRange", "OverallRepetitiveness", "35-, 35-40, 40.-45, 45+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "OverallRepetitivenessRange", "OverallRepetitiveness", "60-, 60-67, 67-75, 75+", "", array( "Low", "Moderate", "High", "Very High" )  );
 
 // AverageWordRepetitionRange
 $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "AverageWordRepetitionRange", "AverageWordRepetition", "2.5-, 2.5-3, 3-3.5, 3.5+", "", array( "Low", "Low-Mid", "High-Mid", "High" ) );
+
+// Slang
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "SlangWordsRange", "SlangWords", "1-, 1-8, 8-20, 20+", "", array( "Low", "Some", "Frequent", "Very Frequent" ) );
 
 // ConsonanceAlliterationScoreRange
 $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "ConsonanceAlliterationScoreRange", "ConsonanceAlliterationScore", "0.6-, 0.6-0.9, 0.9-1.2, 1.2+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
@@ -117,7 +130,7 @@ $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "AssonanceAllitera
 //Average Assonance Alliteration: https://analytics.chartcipher.com/gUaud (High - Above 0.9, High-Mid - 0.6-0.9, Low-Mid -0.3-0.6, Low - Under 0.3)
 
 // RhymeDensityRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "RhymeDensityRange", "RhymeDensity", "25-, 25-33, 33-50, 50+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "RhymeDensityRange", "RhymeDensity", "25-, 25-33, 33-50, 50+", "", array( "Low", "Moderate", "High", "Very High" )  );
 //Rhyme Density: https://analytics.chartcipher.com/wAJmL (High - Above 50%, High-Mid - 33%-50%, Low-Mid - 25%-33%, Low - Under 25%)
 
 // RhymesPerSyllableRange
@@ -155,11 +168,11 @@ $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "EndOfLineRhymesPe
 //Use of End-of-Line Rhymes: https://analytics.chartcipher.com/fhD8a (High - Above 60%, High-Mid -50%-60%, Low-Mid -40%-50%, Low - Under 40%)
 
 // MidLineRhymesPercentageRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "MidLineRhymesPercentageRange", "MidLineRhymesPercentage", "40-, 40-50, 50-60, 60+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "MidLineRhymesPercentageRange", "MidLineRhymesPercentage", "40-, 40-50, 50-60, 60+", "", array( "Little to None", "Occasional", "Moderate", "Frequent" )  );
 //Use of Mid-Line Rhymes: https://analytics.chartcipher.com/rfFfs (High - Above 60%, High-Mid -50%-60%, Low-Mid -40%-50%, Low - Under 40%)
 
 // InternalRhymesPercentageRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "InternalRhymesPercentageRange", "InternalRhymesPercentage", "5-, 5-10, 10-15, 15+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "InternalRhymesPercentageRange", "InternalRhymesPercentage", "5-, 5-10, 10-15, 15-30, 30+", "", array( "Little to None", "Occasional", "Moderate", "Frequent", "Very Frequent" )  );
 //Use of internal Rhymes: https://analytics.chartcipher.com/NzYY3 (High - Above 15%, High-Mid - 10%-15%, Low-Mid -5%-20%, Low - Under 5%)
 
 // MidWordRhymesRange
@@ -170,11 +183,14 @@ $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "MidWordRhymesRang
 $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "LyricalDensityRange", "LyricalDensity", "1-, 1-1.23, 1.23-1.26, 1.26+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
 
 // DanceabilityRange
-$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "DanceabilityRange", "Danceability", "35-, 35-80, 80-95, 95+", "", array( "Low", "Low-Mid", "High-Mid", "High" )  );
-//Danceability: https://analytics.chartcipher.com/ShbcB (High - >97%, High-Mid  - 80%-97%, Low-Mid - 60%-80%, Low - under 60%)
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "DanceabilityRange", "Danceability", "70-, 70-90, 90+", "", array( "Low", "Moderate", "High" )  );
+//Danceability: https://analytics.chartcipher.com/ShbcB (High - >90%, Moderate  - 70%-90%, Low - under 70%)
+
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "ProfanityRange", "PercentProfanity", "0.00001-, 0.00001-7, 7+", "", array( "None", "Sporadic Use", "Heavy Use" )  );
 
 // LoudnessRange
 $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "LoudnessRange", "Loudness", "4-, 4-6, 6-9, 9+", "", array( "Low", "Low-Mid", "High-Mid", "High" ) );
+$autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "TotalAlliterationRange", "TotalAlliteration", "1-, 1-2, 2-3, 3+", "", array( "Little to None", "Moderate", "Frequent", "Very Frequent" ) );
 //Loudness: https://analytics.chartcipher.com/cs0Nb (High, High-Mid, Low-Mid, Low)
 
 
@@ -373,8 +389,10 @@ while( $i < 400 )
   }
 
 db_query( "update songs set TempoRangeGeneral = 'Under 79' where Tempo <= 79 and Tempo > 0 and id = $songid" );
-db_query( "update songs set TempoRangeGeneral = '80-119' where Tempo >= 80 and Tempo < 120 and id = $songid " );
-db_query( "update songs set TempoRangeGeneral = '120+' where Tempo >= 120  and id = $songid" );
+db_query( "update songs set TempoRangeGeneral = '80-99' where Tempo >= 80 and Tempo < 100 and id = $songid " );
+db_query( "update songs set TempoRangeGeneral = '100-119' where Tempo >= 100 and Tempo < 120 and id = $songid " );
+db_query( "update songs set TempoRangeGeneral = '120-149' where Tempo >= 120  and Tempo < 150 and id = $songid" );
+db_query( "update songs set TempoRangeGeneral = '150+' where Tempo >= 120  and id = $songid" );
 
 db_query( "update songs set TempoRangeGeneral = null where (Tempo = 0 or Tempo is null) and id = $songid" );
 db_query( "update songs set MajorMinor = 'Major' where SpecificMajorMinor in ( 'Major', 'Lydian', 'Mixolydian', 'Pentatonic' ) and id = $songid" );

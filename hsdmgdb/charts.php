@@ -53,7 +53,8 @@ if (($handle = fopen("/tmp/chart.csv", "r")) !== FALSE) {
 }
     }
 
-
+$extob = "UseOnDb desc, ";
+$obdesc = "asc";
 $uppercasesingle = "Chart";
 $lowercasesingle = strtolower( $uppercasesingle );
 $uppercase = $uppercasesingle . "s"; 
@@ -64,7 +65,7 @@ $lowercase = strtolower( $uppercase );
       return false;
       
     }
-$extracolumns = array( "chartkey"=>"Key", "chartdescr"=> "Description", "chartmedium"=> "Medium", "genre"=> "Genre", "IsLive"=>"IsLive" );
+$extracolumns = array( "chartkey"=>"Key", "OrderBy"=>"Order By", "chartdescr"=> "Description", "chartmedium"=> "Medium", "genre"=> "Genre", "IsLive"=>"IsLive", "UseOnDb"=>"Use On Db" );
 $extracolumnsizes = array( "chartdescr" => 80, "chartkey" => 40, "chartmedium" => 40, "genre" => 40 );
 
 $specialname = "chartname";

@@ -320,13 +320,13 @@ $sheet->write( $rownum, $colnum++, "Producer: " . $search["producer"], $format_b
 if( $search["specificsubgenre"] ) 
     {
 	$rownum++; $colnum = 0;
-	$sheet->write( $rownum, $colnum++, "Sub-Genre/Influence: " . getNameById( "subgenres", $search["specificsubgenre"] ) , $format_bold ); 
+	$sheet->write( $rownum, $colnum++, "Genre/Influence: " . getNameById( "subgenres", $search["specificsubgenre"] ) , $format_bold ); 
     }
 
 if( count( $influences ) )
     {
 	$rownum++; $colnum = 0;
-	$sheet->write( $rownum, $colnum++, "Sub-Genre/Influence(s): ", $format_bold );
+	$sheet->write( $rownum, $colnum++, "Genre/Influence(s): ", $format_bold );
 	foreach( $influences as $i )
 	    {
 		$sheet->write( $rownum, $colnum++, getNameById( "subgenres", $i ) );

@@ -1,0 +1,39 @@
+                
+                               <div class="row  row-equal row-padding mobile link-alt">
+                            <div class="col-12">
+                       <div class="home-search-header  flex-addon">
+                                <h2>Reports</h2>
+                                 
+                            </div>
+                         <div class="header-inner " >
+                        <h4>Weekly Snapshots: Week of <?=$dt?></h4>
+                             <p><a href='highest-levels'>Highest Levels in Four or More Quarters<span class="arrow"> >></span></a></p>
+                              <p><a href='lowest-levels'>Lowest Levels in Four or More Quarters<span class="arrow"> >></span></a></p>
+                              <p>New/Departing Songs<span class="arrow"> >></span></p>
+                           
+                             
+                             
+                             <h4>Chart Movement</h4>
+                             <p>Up the Chart (found in 75% or more of songs)<span class="arrow"> >></span></p>
+                              <p>Down the Chart (found in 75% or more of songs)<span class="arrow"> >></span></p>
+                             
+                                    <h4>Staying Power</h4>
+                             <p>What characteristics are found in 75% or more of songs that have charted for over 10 weeks during the year?<span class="arrow"> >></span></p>
+                        
+                                    <h4>Spotlights</h4>
+                             <p>Compositional Spotlight<span class="arrow"> >></span></p>
+                              <p>Lyrical Spotlight<span class="arrow"> >></span></p>
+                              <p>Production Spotlight<span class="arrow"> >></span></p>
+                              <p>Structure Spotlight<span class="arrow"> >></span></p>
+                              <p>#1 Hit Spotlight<span class="arrow"> >></span></p>
+                             
+                             
+                                <h4>Cross Charts Reports</h4>
+                             <p>What do songs that are charting on multiple charts have in common?<span class="arrow"> >></span></p>
+                          
+                        
+                        </div><!-- /.header-block-1B -->
+                      </div>
+                            
+                      </div>
+                

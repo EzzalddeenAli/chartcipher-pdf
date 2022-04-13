@@ -15,7 +15,7 @@ include 'header.php';
 <link rel="stylesheet" href="masterslider/masterslider/style/masterslider.css" />
 <script src="masterslider/masterslider/masterslider.min.js"></script>
 <? 
-$allcharts = db_query_array( "select id, chartkey from charts", "chartkey", "id" );
+$allcharts = db_query_rows( "select id, chartkey, Name from charts where UseOnDb = 1 order by OrderBy", "id" );
 ?>
 	<div class="site-body index-pro ">
         <section class="home-top">
@@ -31,39 +31,12 @@ $allcharts = db_query_array( "select id, chartkey from charts", "chartkey", "id"
                                     <div class="display-list">
                                   <div class="header-inner " >
                                              <table class="table table-charts">
+<? foreach( $allcharts as $cid=>$arow ) { ?>
                                                 <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["hot-100"]?>" class="norowlink"><span>Billboard Hot 100</span></a></td>
+                                                    <td><a href="chart-landing.php?setchart=<?=$cid?>" class="norowlink"><span><?=$arow[Name]?></span></a></td>
                                                      <td class=""> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["pop-songs"]?>" class="norowlink"><span>Pop Airplay</span></a></td>
-                                                     <td class="nolock"> </td>
                                                </tr>
-                                                 <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["country-songs"]?>" class="norowlink"><span>Hot Country Songs</span></a></td>
-                                                     <td class="nolock"> </td>
-                                               </tr>
-                                                 <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["r-b-hip-hop-songs"]?>" class="norowlink"><span>Hot R&B/Hip Hop Songs</span></a></td>
-                                                    <td class="nolock"> </td>
-                                                 </tr>
-                                                     <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["dance-electronic-songs"]?>" class="norowlink"><span>Hot Dance/Electric Songs</span></a></td>
-                                                     <td class="nolock"> </td>
-                                               </tr>
-                                                 <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["rock-songs"]?>" class="norowlink"><span>Hot Rock Alternative Songs</span></a></td>
-                                                     <td class="nolock"> </td>
-                                                     
-                                               </tr>
-                                               <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["christian-songs"]?>" class="norowlink"><span>Hot Christian Songs</span></a></td>
-                                                    <td class="nolock"> </td>
-                                               </tr>
-<!--                                                 <tr>
-                                                    <td><a href="chart-landing.php?setchart=<?=$allcharts["latin-songs"]?>" class="norowlink"><span>Hot Latin Songs</span></a></td>
-                                                     <td class="nolock"> </td>
-                                               </tr>-->
+<? } ?>
                                 </table>
                                 </div><!-- /.header-block-1B -->
 

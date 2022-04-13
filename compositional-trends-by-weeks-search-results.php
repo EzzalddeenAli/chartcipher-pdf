@@ -4,6 +4,9 @@ $iscomparable = true;
 include 'header.php';
 include "compositionaltrendsbyweeksfunctions.php";
 
+
+$newsearchlink = "https://analytics.chartcipher.com/compositional-trends-by-weeks-search";
+
 if( $search["primaryartist"] ) 
     {
 	$artistfilter = db_query_first_cell( "select id from artists where name = '" . $search["primaryartist"] . "' " );
@@ -195,11 +198,6 @@ else
                  <div class="icon back-search ">
                    <a  class=" desktop" href="compositional-trends-by-weeks-search.php?<?=$_SERVER['QUERY_STRING']?>" >Back</a></div>
                         
-                       <div class="icon new-search ">
-                         
-           
-              <a href="https://analytics.chartcipher.com/compositional-trends-by-weeks-search" >New Search</a> </div>
-
     
     </div>
                         </div>

@@ -2,7 +2,7 @@
 include "connect.php";
 
 $dt = strtotime( "2009-12-26" ); // a saturday
-while( $dt < strtotime( "2022-01-01" ) )
+while( $dt < strtotime( "2023-01-01" ) )
   {
     if( !db_query_first_cell( "select id from weekdates where Name = '" . date( "m/d/y", $dt ) . "'" ) )
     {   

@@ -14,11 +14,64 @@ $nogainers[] = "";
 $reportsarr = array();
 
 $benchmarktypes = array();
-$benchmarktypes["Top 25 vs. Bottom 25"] = "Top 25 vs. Bottom 25";
+$benchmarktypes["Top vs. Bottom of the Charts"] = "Top vs. Bottom of the Charts";
 //$benchmarktypes["New Songs vs. Songs that Departed"] = "New Songs vs. Songs that Departed";
 $benchmarktypes["New Songs vs. Carryovers"] = "New Songs vs. Carryovers";
 $benchmarktypes["Staying Power - 10 Weeks"] = "Staying Power: Song with 10+ Weeks vs. Songs with less than 10 Weeks";
-//$benchmarktypes["Songs Moving Up the Chart vs. Songs Going Down the Chart"] = "Songs Moving Up the Chart vs. Songs Going Down the Chart";
+$benchmarktypes["Seasonal Comparisons"] = "Seasonal Comparisons";
+
+$benchmarkdescriptions = array();
+$benchmarkdescriptions["Top vs. Bottom of the Charts"] = "Compare the characteristics of songs that peaked at the top half of the chart vs. those at the bottom half.";
+$benchmarkdescriptions["New Songs vs. Carryovers"] = "Compare the characteristics of songs that entered the chart for the very first time during the selected time-period vs. those that carried over from previous quarters.";
+$benchmarkdescriptions["Staying Power - 10 Weeks"] = "Compare the characteristics of songs that charted for ten or more weeks vs. those that charted for nine or less weeks.";
+$benchmarkdescriptions["Seasonal Comparisons"] = "Compare the characteristics of songs based on seasons.";
+
+if( !in_array( intval( $chartid ), array( 6, 3, 15, 42, 43 ) ) )
+    {
+	$benchmarktypes["Genre Comparisons"] = "Genre Comparisons";
+	$benchmarkdescriptions["Genre Comparisons"] = "Compare the characteristics of songs by genre.";
+    }
+
+
+$benchmarksubtypes = array();
+$benchmarksubtypes["Compositional"] = "Compositional";
+$benchmarksubtypes["Lyrical"] = "Lyrical";
+$benchmarksubtypes["Production"] = "Production";
+$benchmarksubtypes["Structure"] = "Structure";
+
+
+$benchmarknumerics = array();
+$benchmarknumerics["Compositional"]["MainMelodicRange"] =  "MainMelodicRange";
+$benchmarknumerics["Compositional"]["NumMelodicThemesRange"] = "NumMelodicThemesRange";
+$benchmarknumerics["Compositional"]["ChordRepetitionRange"] = "ChordRepetitionRange";
+$benchmarknumerics["Compositional"]["UseOf7thChordsRange"] = "UseOf7thChordsRange";
+$benchmarknumerics["Compositional"]["UseOfInvertedChordsRange"] = "UseOfInvertedChordsRange";
+$benchmarknumerics["Compositional"]["PercentDiatonicChordsRange"] = "PercentDiatonicChordsRange";
+
+$benchmarknumerics["Structure"]["Average Song Length"] =  "Average Song Length";
+$benchmarknumerics["Structure"]["Song Length Range"] =  "Song Length Range";
+//$benchmarknumerics["Structure"]["Verse Count"] =  "Verse Count";
+//$benchmarknumerics["Structure"]["Pre-Chorus Count"] =  "Pre-Chorus Count";
+$benchmarknumerics["Structure"]["Chorus Count"] =  "Chorus Count";
+
+$benchmarknumerics["Production"]["Average Tempo"] =  "Average Tempo";
+$benchmarknumerics["Production"]["DanceabilityRange"] =  "DanceabilityRange";
+
+// $benchmarknumerics["Lyrical"]["PersonReferences"] =  "PersonReferences";
+// $benchmarknumerics["Lyrical"]["Song Title Word Count"] =  "Song Title Word Count";
+// $benchmarknumerics["Lyrical"]["LocationReferences"] =  "LocationReferences";
+
+$benchmarknumerics["Lyrical"]["Song Title Word Count"] = "Song Title Word Count";
+$benchmarknumerics["Lyrical"]["InternalRhymesPercentageRange"] = "InternalRhymesPercentageRange";
+$benchmarknumerics["Lyrical"]["MidLineRhymesPercentageRange"] = "MidLineRhymesPercentageRange";
+$benchmarknumerics["Lyrical"]["RhymeDensityRange"] = "RhymeDensityRange";
+$benchmarknumerics["Lyrical"]["EndOfLineRhymesPercentageRange"] = "EndOfLineRhymesPercentageRange";
+$benchmarknumerics["Lyrical"]["PercentAbbreviations"] = "PercentAbbreviations";
+$benchmarknumerics["Lyrical"]["SlangWords"] = "SlangWords";
+$benchmarknumerics["Lyrical"]["ProfanityRange"] = "ProfanityRange";
+$benchmarknumerics["Lyrical"]["PersonReferences"] = "PersonReferences";
+$benchmarknumerics["Lyrical"]["LocationReferences"] = "LocationReferences";
+$benchmarknumerics["Lyrical"]["ThousandWordsPrevalence"] = "ThousandWordsPrevalence";
 
 
 // Overview
@@ -45,25 +98,44 @@ $benchmarktypes["Staying Power - 10 Weeks"] = "Staying Power: Song with 10+ Week
 // Genres / Influences
 // Primary Genres
 // Influences
-$benchmarkreportsarr[] = "Primary Genres";
-$benchmarkreportsarr[] = "Sub-Genres";
+//$benchmarkreportsarr[] = "Primary Genres";
+
+// not used anymore
+$benchmarkreportsarr[] = "Genres";
 $benchmarkreportsarr[] = "Influences";
 $benchmarkreportsarr[] = "Lyrical Moods";
 $benchmarkreportsarr[] = "Lyrical Themes";
-
-$benchmarkreportsarr[] = "Average Song Length";
 $benchmarkreportsarr[] = "Prominent Instruments";
 $benchmarkreportsarr[] = "Tempo Range General";
 $benchmarkreportsarr[] = "KeyMajorMinor";
 $benchmarkreportsarr[] = "Song Title Word Count";
-$benchmarkreportsarr[] = "Verse Count";
-$benchmarkreportsarr[] = "Pre-Chorus Count";
 $benchmarkreportsarr[] = "Chorus Count";
-//$benchmarkreportsarr[] = "Chorus Precedes Any Section";
 $benchmarkreportsarr[] = "First Section";
 $benchmarkreportsarr[] = "Last Section";
-
- 
+$benchmarkreportsarr[] =  "Song Length Range";
+$benchmarkreportsarr[] =  "Average Song Length";
+$benchmarkreportsarr[] =  "NumMelodicThemesRange";
+$benchmarkreportsarr[] =  "MelodicIntervalPrevalence";
+$benchmarkreportsarr[] =  "MainMelodicRange";
+$benchmarkreportsarr[] =  "Key (Major, Minor, Major Mode, Minor Mode)";// 
+$benchmarkreportsarr[] =  "PercentDiatonicChordsRange";
+$benchmarkreportsarr[] =  "UseOfInvertedChordsRange";
+$benchmarkreportsarr[] =  "UseOf7thChordsRange";
+$benchmarkreportsarr[] =  "ChordDegreePrevalence";
+$benchmarkreportsarr[] =  "ChordRepetitionRange";
+$benchmarkreportsarr[] =  "Tempo Range";
+$benchmarkreportsarr[] =  "Timbre";
+$benchmarkreportsarr[] =  "ProductionMood";
+$benchmarkreportsarr[] =  "DanceabilityRange";
+$benchmarkreportsarr[] =  "PersonReferences";
+$benchmarkreportsarr[] =  "LocationReferences";
+$benchmarkreportsarr[] =  "ThousandWordsPrevalence";
+$benchmarkreportsarr[] =  "SlangWords";
+$benchmarkreportsarr[] =  "ProfanityRange";
+$benchmarkreportsarr[] =  "RhymeDensityRange";
+$benchmarkreportsarr[] =  "InternalRhymesPercentageRange";
+$benchmarkreportsarr[] =  "MidLineRhymesPercentageRange";
+$benchmarkreportsarr[] =  "EndLinePerfectRhymesPercentageRange";
 
 //$reportsarr["Genres & Sub-Genres/Influences"]["Influence-Count"] = "Influence Count";
 
@@ -166,8 +238,8 @@ $benchmarkreportsarr[] = "Last Section";
 
 function getBenchmarkGraphNameConverter( $sectionname )
 {
-    if( $sectionname == "Primary Genres" ) return "Primary Genres"; // ok
-    if( $sectionname == "Sub-Genres" ) return "Sub-Genres"; // ok
+//    if( $sectionname == "Primary Genres" ) return "Primary Genres"; // ok
+    if( $sectionname == "Genres" ) return "Genres"; // ok
     if( $sectionname == "Influences" ) return "Influences"; // ok
 
     return "";

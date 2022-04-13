@@ -15,6 +15,13 @@ $hasvideos = $api->canViewOnDemandVideos() || $api->isVideoOnDemandSub();
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TTS64J4');</script>
+<!-- End Google Tag Manager -->
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="stylesheet" href="../assets/css/style.css?ver=<?=time()?>" type="text/css" />
@@ -744,6 +751,12 @@ height:auto!important;
     
 
 <body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTS64J4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 	<input type='hidden' name='userid' value='<?=$userid?>' id="userid">
       <input type='hidden' name="proxyloginid" id='proxyloginid' value="<?=$_COOKIE['proxyloginid']?>">
 	<header class="site-header fixed-top">
@@ -902,7 +915,7 @@ foreach( $charts as $id => $name ) {
 			
             <? if( isEssentials() ) {  ?>
                     <li class="sidebar-menu-item-song-searches">
-                        <a class="locked" href="#">Saved Song Searches</a>
+                        <a class="locked" href="#">My Dashboard</a>
                         <div id="sub-nav3" class="hidden">
                             <span class="arrow-left"></span>
                            <h2> This feature is available with a PRO subscription. </h2>
@@ -935,7 +948,7 @@ foreach( $charts as $id => $name ) {
                     </li>
             <? } else if( !isStudent() && !isEssentials() ) {  ?>
                     <li class="sidebar-menu-item-song-searches">
-                        <a href="/saved-searches">Saved Song Searches<img class="hide info-icon menu-icon" title="<?=getOrCreateCustomHover( "Navigation - Saved Searches", "Access or edit your saved searches here.")?>" src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
+                        <a href="/saved-searches">My Dashboard<img class="hide info-icon menu-icon" title="<?=getOrCreateCustomHover( "Navigation - Saved Searches", "Access or edit your saved searches here.")?>" src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
                     </li>
                     <!--<li class="sidebar-menu-item-artist-searches">
                         <a href="/saved-artists-labels"> Saved Artists Searches<img class="info-icon menu-icon" title="<?=getOrCreateCustomHover( "Navigation - Saved Artists & Labels", "Access or edit your saved artists and labels here.")?>" src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>

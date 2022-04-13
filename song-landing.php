@@ -31,7 +31,7 @@ $backurl = "chart-landing.php";
                                              <div class="header-block header-block-compositional-trends">
                                                <a  href="/compositional-search.php" >
                                                    <h1>Compositional Trends</h1>
-                                                    <p>(Sub-genres & influences, instruments, key, etc.)</p>
+                                                    <p>(Key, Melodic Range, etc.)</p>
                                                 </a>
                                             </div><!-- /.header-block-1B -->
 
@@ -53,7 +53,7 @@ $backurl = "chart-landing.php";
                                              <div class="header-block header-block-production-trends">
                                                <a  href="/production-search.php" >
                                                    <h1>Production Trends</h1>
-                                                    <p>(Tempo, timbre, instruments, etc.)</p>
+                                                    <p>(Genres, timbre, instruments, etc.)</p>
                                                 </a>
                                             </div><!-- /.header-block-1B -->
 

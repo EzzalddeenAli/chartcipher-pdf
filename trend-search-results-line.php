@@ -14,12 +14,12 @@
 				colorSet: "hsdColors",
 				exportEnabled: true,
 				title: {
-				    text: "<?=fixTitleText($possiblesearchfunctions[$search[comparisonaspect]]) ?>",
-                    fontColor: "#888888",
-                    // fontColor: "#ffffff",
-                    fontFamily: "Open Sans",
+				    text: "<?=fixTitleText($possiblesearchfunctions[$search[comparisonaspect]]?$possiblesearchfunctions[$search[comparisonaspect]]:$search[comparisonaspect]) ?><?=$datedisplay?": ".$datedisplay:""?> <?=$search[specificsubgenre]?"(".getNameById( "subgenres", $search[specificsubgenre] ) . ")":""?>",
+                    fontColor: "#8b26b2",
+                    // fontColor: "#",
+                    fontFamily: "Poppins",
                     fontWeight: "bold",
-					fontSize: 25
+					fontSize: 20
 				},
 				animationEnabled: false,
                 backgroundColor: '#ffffff',
@@ -28,7 +28,7 @@
 					gridColor: "#f0f0f0",
 					// gridColor: "#525252",
 					labelFontColor: "#7a7a7a",
-					labelFontFamily: "Open Sans",
+					labelFontFamily: "Poppins",
 					labelFontSize: "14",
 					interval: 1, 
 <? 
@@ -127,9 +127,9 @@ $labelname = "";
                             {
                                 $labelname = ($rname == "1"?" Artist/Group":" Artists/Groups");
                             }
-                            if( $search[comparisonaspect] == "Sub-Genre/Influence Count" )
+                            if( $search[comparisonaspect] == "Genre/Influence Count" )
                             {
-                                $labelname = ($rname == "1"?" Sub-Genre/Influence":" Sub-Genres/Influences");
+                                $labelname = ($rname == "1"?" Genre/Influence":" Sub-Genres/Influences");
                             }
 
                         $cnt++;
@@ -138,7 +138,7 @@ $labelname = "";
 					type: "<?=$_GET["graphtype"]?$_GET["graphtype"]:"line"?>",
                     markerType: "none",
                    <? if( $cnt > 6 && 1 == 0  ) { ?>visible: false, <? }?>
-					indexLabelFontFamily: "Open Sans",
+					indexLabelFontFamily: "Poppins",
 					showInLegend: true,
 					lineThickness: 3,
 					name: "<?=$rname?><?=$labelname?>",
@@ -193,7 +193,7 @@ $labelname = "";
 				    //$label .= print_r( $dataforrows[$q][$r], true );
 				    
                             ?>                         
-                                { label: "<?=$label?>", y: <?=formatYAxis( $dataforrows[$thiskey][$r][0] )?>, indexLabel: "<?=$dataforrows[$thiskey][$r][1]?>", numsongs: "<?=$dataforrows[$thiskey][$r][4]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "lighter", indexLabelFontSize: "12", <? if( $dataforrows[$thiskey][$r][3] &&(1|| $_SESSION["loggedin"]) ) { ?> click: function( e ) { document.location.href="<?=$dataforrows[$thiskey][$r][3]?>"; }, cursor: "pointer",  <? } else { ?> click: function( e ) { return false }, <? } ?> markerType: "circle", <? if( $dataforrows[$thiskey][$r][3] && (1||$_SESSION["loggedin"]) ) { ?> "url": "<?=$dataforrows[$thiskey][$r][3]?>"<? } ?> },
+                                { label: "<?=$label?>", y: <?=formatYAxis( $dataforrows[$thiskey][$r][0] )?>, indexLabel: "<?=$dataforrows[$thiskey][$r][1]?>", numsongs: "<?=$dataforrows[$thiskey][$r][4]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "lighter", indexLabelFontSize: "12", <? if( $dataforrows[$thiskey][$r][3] &&($_SESSION["loggedin"]) ) { ?> click: function( e ) { document.location.href="<?=$dataforrows[$thiskey][$r][3]?>"; }, cursor: "pointer",  <? } else { ?> click: function( e ) { return false }, <? } ?> markerType: "circle", <? if( $dataforrows[$thiskey][$r][3] && ($_SESSION["loggedin"]) ) { ?> "url": "<?=$dataforrows[$thiskey][$r][3]?>"<? } ?> },
                                     <? } 
 			}?>                                
 					]
@@ -205,7 +205,7 @@ $labelname = "";
                       fontSize: 14,
                       fontColor: "#7a7a7a",
                       // fontColor: "#ffffff",
-                      fontFamily: "Open Sans",
+                      fontFamily: "Poppins",
                       horizontalAlign: "center",
 <? if( $_SESSION["loggedin"] ) { ?>
                       cursor: "pointer",

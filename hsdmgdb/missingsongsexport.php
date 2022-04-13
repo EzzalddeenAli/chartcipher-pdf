@@ -10,12 +10,18 @@ $allcharts = db_query_array( "select * from charts order by chartname", "chartke
 $weeks = db_query_array( "select OrderBy, Name from weekdates order by OrderBy", "OrderBy", "Name" );
 
 
+$date = db_query_first_cell( "select max( thedate ) from billboardinfo" ); 
+
 if( $go )
     {
 	$whr = "1";
-	if( $chartname )
+	if( $maincharts )
 	    {
-		$whr .= " and chart = '$chartname'";
+		$whr .= " and chart in ('hot-100', 'country-songs', 'dance-electronic-songs', 'rock-songs', 'christian-songs', 'pop-songs' )";
+	    }
+	    else
+	    {
+		$whr .= " and chart in ('latin-songs', 'r-and-b-songs', 'rap-song' )";
 	    }
 	if( $fromweek )
 	    {
@@ -32,7 +38,7 @@ if( $go )
 	$cols[] = "title"; 
 	$cols[] = "artist"; 
 	$cols[] = "charts"; 
-	$rows = db_query_rows( "select title, artist, group_concat( distinct( chart ) ) as charts from dbi360_admin.billboardinfo where chart<> 'latin-songs' and concat( artist, '-', title ) not in ( select concat( BillboardArtistName, '-', BillboardName ) from  accipher_admin.songs ) group by artist, title" );
+	$rows = db_query_rows( "select title, artist, group_concat( distinct( chart ) ) as charts from dbi360_admin.billboardinfo where $whr and concat( artist, '-', title ) not in ( select concat( BillboardArtistName, '-', BillboardName ) from  accipher_admin.songs ) and thedate = '$date' group by artist, title" );
 
 	header("Content-type: text/csv");
 	header("Cache-Control: no-store, no-cache");
@@ -61,7 +67,9 @@ if( $go )
 <form method='post'>
 <h3>Missing Songs</h3>
 <table>
-<!--    <?=outputSelectRow( "Chart", "chartname", $chartname, $allcharts )?>-->
+<tr><td><input type='radio' name='maincharts' value='1' checked> Main Charts (Hot 100, Country, Top 40, Dance, Rock, Christian)<br>
+<input type='radio' name='maincharts' value='0'> Extra Charts (Latin, R&B, Rap)<br>
+
 <tr><td><input type='submit' name='go' value='Go'></td></tr>
 </table>
 

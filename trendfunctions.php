@@ -21,7 +21,7 @@ function isRounder( $comparisonaspect )
 
 function isHighestToLowest( $title )
 {
-    file_put_contents( "doing", $title, FILE_APPEND );
+//    file_put_contents( "doing", $title, FILE_APPEND );
     if( $title == "Key (major/minor)" || 
 	$title == "Chord degree prevalence" ||
 	$title == "Lyrical Moods" ||
@@ -32,35 +32,56 @@ function isHighestToLowest( $title )
 	$title == "UseOfInvertedChordsRange" || 
 	$title == "MelodicIntervalPrevalence" || 
 	$title == "NumMelodicThemesRange" || 
+	$title == "TotalAlliterationRange" || 
 	$title == "MainMelodicRange" || 
 	$title == "LyricalSubThemes" || 
 	$title == "PercentDiatonicChordsRange" || 
 	$title == "Prominent Instruments" || 
-	$title == "Primary Genre" || 
-	$title == "Sub-Genres" || 
+	//	$title == "Primary Genre" || 
+	$title == "ProfanityRange" || 
+	$title == "Genres" || 
 	$title == "Influences" || 
 	$title == "VocalsInstrumentsPrevalence" || 
 	$title == "LastSectionType" || 
 	$title == "Song Form" || 
+	$title == "RhymeDensityRange" || 
+	$title == "EndOfLineRhymesPercentageRange" || 
+	$title == "EndLinePerfectRhymesPercentageRange" || 
+	$title == "MidLineRhymesPercentageRange" || 
+	$title == "ThousandWordsPrevalenceRange" || 
+	$title == "TotalAlliterationRange" || 
+	$title == "Timbre" || 
+	$title == "SlangWordsRange" || 
+	$title == "LocationReferencesRange" || 
+	$title == "GeneralPersonReferencesRange" || 
+	$title == "GeneralLocationReferencesRange" || 
+	$title == "PersonReferencesRange" || 
+	$title == "SlangWordsRange" || 
+	$title == "OverallRepetitivenessRange" || 
+	$title == "InternalRhymesPercentageRange" || 
 	$title == "FirstSectionType" || 
 	$title == "Timbre" || 
 	$title == "Danceability" || 
+	$title == "DanceabilityRange" || 
 	$title == "ProductionMood" || 
 	$title == "UseOfMajor7thChordsRange" || 
 	$title == "VerseCount" || 
 	$title == "PreChorusCount" || 
 	$title == "UseofParallelMode" || 
 	$title == "LiteralExperiencesvsAbstract" || 
-	$title == "Primary Genres" || 
 	$title == "ChorusCount" || 
 	$title == "Chorus Precedes Any Section" || 
 	$title == "Departure Section" || 
+	$title == "NumMelodicThemesRange" || 
 	$title == "First Section" || 
 	$title == "Last Section" || 
 	$title == "SongTitleWordCount" || 
 	$title == "SlangWords" || 
+	$title == "SlangWordsRange" || 
 	$title == "PersonReferences" || 
 	$title == "LocationReferences" || 
+	$title == "GeneralPersonReferences" || 
+	$title == "GeneralLocationReferences" || 
 	$title == "Key (Major, Minor, Major Mode, Minor Mode)" || 
 	$title == "PercentDiatonicChordsRange" || 
 	$title == "Word Prevalence (Top 1000 words)" || 
@@ -82,24 +103,34 @@ function isNotPercent( $comparisonaspect )
 
 $possiblesearchfunctions = array();
 
-$possiblesearchfunctions["Primary Genres"] = "Primary Genres";
-$possiblesearchfunctions["Primary Genre Breakdown"] = "Primary Genre Breakdown";
-$possiblesearchfunctions["Sub-Genres"] = "Sub-Genres";
+// produiction
+//$possiblesearchfunctions["Primary Genre Breakdown"] = "Genre Breakdown";
+$possiblesearchfunctions["Genres"] = "Genres";
 $possiblesearchfunctions["Influences"] = "Influences";
 $possiblesearchfunctions["Prominent Instruments"] = "Prominent Instruments";
-$possiblesearchfunctions["Key"] = "Key";
-$possiblesearchfunctions["KeyMajorMinor"] = "Key (Major vs. Minor)";
-$possiblesearchfunctions["Key (Major, Minor, Major Mode, Minor Mode)"] = "Key (Major, Minor, Major Mode, Minor Mode)";
+//$possiblesearchfunctions["Average Tempo"] = "Average Tempo (BPM)";
+$possiblesearchfunctions["Tempo Range General"] = "Tempo Range (BPM)";
+//$possiblesearchfunctions["Tempo Range"] = "Tempo Range (BPM) (Specific)";
+$possiblesearchfunctions["Timbre"] = "Timbre";
+$possiblesearchfunctions["ProductionMood"] = "Production Mood";
+$possiblesearchfunctions["Danceability"] = "Danceability (Average)";
+$possiblesearchfunctions["DanceabilityRange"] = "Danceability";
+// end production
 
-$possiblesearchfunctions["Average Tempo"] = "Average Tempo (BPM)";
-$possiblesearchfunctions["Tempo Range"] = "Tempo Range (BPM) (Specific)";
-$possiblesearchfunctions["Tempo Range General"] = "Tempo Range (BPM) (Broad)";
+//structure
 $possiblesearchfunctions["Average Song Length"] = "Average Song Length";
 $possiblesearchfunctions["Song Length Range"] = "Song Length Range";
 $possiblesearchfunctions["First Section"] = "First Section Type";
+//$possiblesearchfunctions["Verse Count"] = "Verse Count";
+//$possiblesearchfunctions["Pre-Chorus Count"] = "Pre-Chorus Count";
+$possiblesearchfunctions["Chorus Count"] = "Chorus Count";
+//$possiblesearchfunctions["Departure Section"] = "Departure Section";
+$possiblesearchfunctions["Last Section"] = "Last Section Type";
+// end structure
+
 $possiblesearchfunctions["Average Intro Length"] = "Average Intro Length";
 $possiblesearchfunctions["Intro Length Range"] = "Intro Length Range";
-$possiblesearchfunctions["Sub-Genre Count"] = "Sub-Genre Count";
+$possiblesearchfunctions["Genre Count"] = "Genre Count";
 $possiblesearchfunctions["Influence Count"] = "Influence Count";
 $possiblesearchfunctions["Use Of A Pre-Chorus"] = "Use Of A Pre-Chorus";
 $possiblesearchfunctions["Chorus Precedes Any Section"] = "Chorus Precedes Any Section";
@@ -108,45 +139,47 @@ $possiblesearchfunctions["First Chorus: Percent Into Song Range"] = "First Choru
 $possiblesearchfunctions["First Chorus: Average Time Into Song"] = "First Chorus: Average Time Into Song";
 $possiblesearchfunctions["First Chorus: Average Percent Into Song"] = "First Chorus: Average Percent Into Song";
 $possiblesearchfunctions["Use Of A Vocal Post-Chorus"] = "Use Of A Vocal Post-Chorus";
-$possiblesearchfunctions["Departure Section"] = "Departure Section";
-$possiblesearchfunctions["Last Section"] = "Last Section Type";
 $possiblesearchfunctions["Average Outro Length"] = "Average Outro Length";
 $possiblesearchfunctions["Outro Length Range"] = "Outro Length Range";
-$possiblesearchfunctions["Song Title Word Count"] = "Song Title Word Count";
 $possiblesearchfunctions["Song Title Appearances"] = "Song Title Appearances";
 $possiblesearchfunctions["Electronic Vs. Acoustic Songs"] = "Predominantly Acoustic vs Electronic";
 
-$possiblesearchfunctions["Verse Count"] = "Verse Count";
-$possiblesearchfunctions["Pre-Chorus Count"] = "Pre-Chorus Count";
-$possiblesearchfunctions["Chorus Count"] = "Chorus Count";
 $possiblesearchfunctions["Vocal Post-Chorus Count"] = "Vocal Post-Chorus Count";
-$possiblesearchfunctions["Song Form"] = "Song Form (Trends)";
+$possiblesearchfunctions["Number of Songs (Form)"] = "Number of Songs (Form)";
 
 $possiblesearchfunctions["Intro Instrumental Vocal or Instrumental"] = "Intro (Instrumental or Vocal)";
 $possiblesearchfunctions["Outro Instrumental Vocal or Instrumental"] = "Outro (Instrumental or Vocal)";
 
-//$possiblesearchfunctions["LyricalMoods"] = "Lyrical Moods";
-$possiblesearchfunctions["Lyrical Moods"] = "Lyrical Moods";
-$possiblesearchfunctions["Lyrical Themes"] = "Lyrical Themes";
-$possiblesearchfunctions["LyricalSubThemes"] = "Lyrical Sub-themes";
+
+
+
+
 $possiblesearchfunctions["ConsonanceAlliterationScore"] = "Consonance Alliteration Score";
 $possiblesearchfunctions["AssonanceAlliterationScore"] = "Assonance Alliteration Score";
+
+// 
+$possiblesearchfunctions["Key"] = "Key";
+$possiblesearchfunctions["KeyMajorMinor"] = "Key (Major vs. Minor)";
+$possiblesearchfunctions["Key (Major, Minor, Major Mode, Minor Mode)"] = "Key (Major, Minor, Major Mode, Minor Mode)";
 $possiblesearchfunctions["MainMelodicRange"] = "Main Melodic Range";
 $possiblesearchfunctions["MainMelodicRangeNum"] = "Main Melodic Range (Number)";
+$possiblesearchfunctions["MelodicIntervalPrevalence"] = "Melodic Interval Prevalence";
+$possiblesearchfunctions["NumMelodicThemes"] = "Amount of Themes In Song";
+$possiblesearchfunctions["NumMelodicThemesRange"] = "Diverse Melodic Themes";
+$possiblesearchfunctions["ChordRepetition"] = "Chord Repetition (Average)";
+$possiblesearchfunctions["ChordRepetitionRange"] = "Chord Repetition";
+$possiblesearchfunctions["UseOf7thChords"] = "Use of 7th Chords (Average)";
+$possiblesearchfunctions["UseOf7thChordsRange"] = "Use of 7th Chords";
+$possiblesearchfunctions["UseOfInvertedChords"] = "Use Of Inverted Chords (Average)";
+$possiblesearchfunctions["UseOfInvertedChordsRange"] = "Use of Inverted Chords";
 $possiblesearchfunctions["PercentDiatonicChords"] = "Diatonic Chord Prevalence (Average)";
 $possiblesearchfunctions["PercentDiatonicChordsRange"] = "Diatonic Chord Prevalence";
-$possiblesearchfunctions["Timbre"] = "Timbre";
+$possiblesearchfunctions["ChordDegreePrevalence"] = "Chord Degree Prevalence";
+//
+
+
 $possiblesearchfunctions["WordsRepetitionPrevalence"] = "Use of In-Line Lyric Repetition";
-$possiblesearchfunctions["LineRepetitionPrevalence"] = "Line Repetition (Average)";
-$possiblesearchfunctions["LineRepetitionPrevalenceRange"] = "Line Repetition";
-$possiblesearchfunctions["SlangWords"] = "Use of Slang";
-$possiblesearchfunctions["ThousandWordsPrevalence"] = "Words Prevalence - Top 1000 Words";
-$possiblesearchfunctions["TenThousandWordsPrevalence"] = "Words Prevalence - Top 10,000 Words";
-$possiblesearchfunctions["FiftyThousandWordsPrevalence"] = "Words Prevalence - Top 10,000 Words";
-$possiblesearchfunctions["PercentAbbreviations"] = "Use of Word Abbreviations";
 $possiblesearchfunctions["PercentNonDictionary"] = "Use of Non Dictionary Words";
-$possiblesearchfunctions["RhymeDensity"] = "Rhyme Density (Average)";
-$possiblesearchfunctions["RhymeDensityRange"] = "Rhyme Density";
 $possiblesearchfunctions["RhymesPerSyllable"] = "Percentage of Rhyming Syllables (Average)";
 $possiblesearchfunctions["RhymesPerSyllableRange"] = "Percentage of Rhyming Syllables";
 $possiblesearchfunctions["RhymesPerLine"] = "Rhymes Per Line"; // average?
@@ -154,68 +187,77 @@ $possiblesearchfunctions["RhymesPerLineRange"] = "Rhymes per Line (Range)";
 $possiblesearchfunctions["NumberOfRhymeGroupsELR"] = "Number Of Rhyme Groups In The Song By ELR (Average)";
 $possiblesearchfunctions["NumberOfRhymeGroupsELRRange"] = "Number Of Rhyme Groups In The Song By ELR";
 $possiblesearchfunctions["VocalsInstrumentsPrevalence"] = "Vocal vs. Instrumental Prevalence";
-$possiblesearchfunctions["PersonReferences"] = "Person References";
-$possiblesearchfunctions["LocationReferences"] = "Location References";
-$possiblesearchfunctions["OrganizationorBrandReferences"] = "Organization or Brand References";
 $possiblesearchfunctions["ConsumerGoodsReferences"] = "Consumer Goods References";
 $possiblesearchfunctions["CreativeWorksTitles"] = "Creative Works Title References";
-$possiblesearchfunctions["EndLinePerfectRhymesPercentage"] = "Use of End-of-Line Perfect Rhymes (Average)";
-$possiblesearchfunctions["EndLinePerfectRhymesPercentageRange"] = "Use of End-of-Line Perfect Rhymes";
 $possiblesearchfunctions["EndLineSecondaryPerfectRhymesPercentage"] = "Use of Perfect Secondary Rhymes";
-$possiblesearchfunctions["EndLineAssonanceRhymePercentage"] = "Use of End-of-Line Assonance Rhymes (Average)";
-$possiblesearchfunctions["EndLineAssonanceRhymePercentageRange"] = "Use of End-of-Line Assonance Rhymes";
 $possiblesearchfunctions["PerfectRhymesPercentage"] = "Use of Perfect Rhymes (Average)";
 $possiblesearchfunctions["PerfectRhymesPercentageRange"] = "Use of Perfect Rhymes";
-$possiblesearchfunctions["AssonanceRhymePercentage"] = "Use of Assonance Rhymes (Average)";
-$possiblesearchfunctions["AssonanceRhymePercentageRange"] = "Use of Assonance Rhymes";
 
+//lyrical
+$possiblesearchfunctions["Lyrical Moods"] = "Lyrical Moods";
+$possiblesearchfunctions["Lyrical Themes"] = "Lyrical Themes";
+$possiblesearchfunctions["LyricalSubThemes"] = "Lyrical Sub-themes";
+$possiblesearchfunctions["Song Title Word Count"] = "Song Title Word Count";
 $possiblesearchfunctions["ConsonanceRhymePercentage"] = "Use of Consonance Rhymes (Average)";
 $possiblesearchfunctions["ConsonanceRhymePercentageRange"] = "Use of Consonance Rhymes";
-$possiblesearchfunctions["EndOfLineRhymesPercentage"] = "Use of End-of-Line Rhymes (Average)";
-$possiblesearchfunctions["EndOfLineRhymesPercentageRange"] = "Use of End-of-Line Rhymes";
-$possiblesearchfunctions["MidLineRhymesPercentage"] = "Use of Mid-Line Rhymes (Average)";
-$possiblesearchfunctions["MidLineRhymesPercentageRange"] = "Use of Mid-Line Rhymes";
+$possiblesearchfunctions["AssonanceRhymePercentage"] = "Use of Assonance Rhymes (Average)";
+$possiblesearchfunctions["AssonanceRhymePercentageRange"] = "Use of Assonance Rhymes";
 $possiblesearchfunctions["InternalRhymesPercentage"] = "Use of Internal Rhymes (Average)";
 $possiblesearchfunctions["InternalRhymesPercentageRange"] = "Use of Internal Rhymes";
 $possiblesearchfunctions["MidWordRhymes"] = "Use of Mid-Word Rhymes (Average)";
 $possiblesearchfunctions["MidWordRhymesRange"] = "Use of Mid-Word Rhymes";
+$possiblesearchfunctions["MidLineRhymesPercentage"] = "Use of Mid-Line Rhymes (Average)";
+$possiblesearchfunctions["MidLineRhymesPercentageRange"] = "Use of Mid-Line Rhymes";
+$possiblesearchfunctions["RhymeDensity"] = "Rhyme Density (Average)";
+$possiblesearchfunctions["RhymeDensityRange"] = "Rhyme Density";
+//$possiblesearchfunctions["LineRepetitionPrevalence"] = "Line Repetition (Average)";
+//$possiblesearchfunctions["LineRepetitionPrevalenceRange"] = "Line Repetition";
+$possiblesearchfunctions["EndOfLineRhymesPercentage"] = "Use of End-of-Line Rhymes (Average)";
+$possiblesearchfunctions["EndOfLineRhymesPercentageRange"] = "Use of End-of-Line Rhymes";
+$possiblesearchfunctions["EndLinePerfectRhymesPercentage"] = "Use of End-of-Line Perfect Rhymes (Average)";
+$possiblesearchfunctions["EndLinePerfectRhymesPercentageRange"] = "Use of End-of-Line Perfect Rhymes";
+$possiblesearchfunctions["EndLineAssonanceRhymePercentage"] = "Use of End-of-Line Assonance Rhymes (Average)";
+$possiblesearchfunctions["EndLineAssonanceRhymePercentageRange"] = "Use of End-of-Line Assonance Rhymes";
+$possiblesearchfunctions["EndLineConsonanceRhymePercentage"] = "End-of-Line Consonance Rhymes";
+//$possiblesearchfunctions["PercentAbbreviations"] = "Use of Word Abbreviations";
+$possiblesearchfunctions["SlangWordsRange"] = "Use of Slang";
+$possiblesearchfunctions["PercentProfanity"] = "Use of Profanity";
+$possiblesearchfunctions["ProfanityRange"] = "Profanity";
+$possiblesearchfunctions["PersonReferences"] = "Person References (Average)";
+$possiblesearchfunctions["PersonReferencesRange"] = "Person References";
+$possiblesearchfunctions["GeneralPersonReferences"] = "General Person References (Average)";
+$possiblesearchfunctions["GeneralPersonReferencesRange"] = "General Person References";
+$possiblesearchfunctions["LocationReferences"] = "Location References (Average)";
+$possiblesearchfunctions["LocationReferencesRange"] = "Location References";
+$possiblesearchfunctions["GeneralLocationReferences"] = "General Location References (Average)";
+$possiblesearchfunctions["GeneralLocationReferencesRange"] = "General Location References";
+$possiblesearchfunctions["OrganizationorBrandReferences"] = "Organization or Brand References";
+$possiblesearchfunctions["ThousandWordsPrevalenceRange"] = "Usage of Very Common Words";
+$possiblesearchfunctions["TenThousandWordsPrevalence"] = "Words Prevalence - Top 10,000 Words";
+$possiblesearchfunctions["FiftyThousandWordsPrevalence"] = "Words Prevalence - Top 50,000 Words";
+//
 
 $possiblesearchfunctions["WordsPerLineAvg"] = "Words Per Line (Average)";
-$possiblesearchfunctions["ChordDegreePrevalence"] = "Chord Degree Prevalence";
 $possiblesearchfunctions["PreChorusSectionLyrics"] = "Pre-Chorus Section Lyrics";
 $possiblesearchfunctions["UseofParallelMode"] = "Use of Parallel Mode";
-$possiblesearchfunctions["ProductionMood"] = "Production Mood";
-$possiblesearchfunctions["ChordRepetition"] = "Chord Repetition (Average)";
-$possiblesearchfunctions["ChordRepetitionRange"] = "Chord Repetition";
 $possiblesearchfunctions["UseOfTriads"] = "Use Of Triads (Average)";
 $possiblesearchfunctions["UseOfTriadsRange"] = "Use Of Triads";
-$possiblesearchfunctions["UseOfInvertedChords"] = "Use Of Inverted Chords (Average)";
-$possiblesearchfunctions["UseOfInvertedChordsRange"] = "Use of Inverted Chords";
 $possiblesearchfunctions["AverageWordRepetition"] = "Average Word Repetion (Full Song) (Average)";
 $possiblesearchfunctions["AverageWordRepetitionRange"] = "Average Word Repetition (Full Song) ";
 $possiblesearchfunctions["LiteralExperiencesvsAbstract"] = "Literal Experiences vs. Abstract";
 $possiblesearchfunctions["LyricalDensity"] = "Lyrical Density (Average)";
 $possiblesearchfunctions["LyricalDensityRange"] = "Lyrical Density";
-$possiblesearchfunctions["MelodicIntervalPrevalence"] = "Melodic Interval Prevalence";
-$possiblesearchfunctions["UseOf7thChords"] = "Use of 7th Chords (Average)";
-$possiblesearchfunctions["UseOf7thChordsRange"] = "Use of 7th Chords";
-$possiblesearchfunctions["UseOfMajor7thChords"] = "Major 7th Prevalence (Average)";
-$possiblesearchfunctions["UseOfMajor7thChordsRange"] = "Major 7th Prevalence";
-$possiblesearchfunctions["PercentProfanity"] = "Use of Profanity";
-$possiblesearchfunctions["EndLineConsonanceRhymePercentage"] = "End-of-Line Consonance Rhymes";
+//$possiblesearchfunctions["UseOfMajor7thChords"] = "Major 7th Prevalence (Average)";
+//$possiblesearchfunctions["UseOfMajor7thChordsRange"] = "Major 7th Prevalence";
 $possiblesearchfunctions["SecondaryPerfectRhymesPercentage"] = "End-of-Line Secondary Rhymes";
-$possiblesearchfunctions["Danceability"] = "Danceability (Average)";
-$possiblesearchfunctions["DanceabilityRange"] = "Danceability";
 $possiblesearchfunctions["FirstChorusTimeIntoSong"] = "First Chorus: Time Into Song";
 $possiblesearchfunctions["SectionCountRange"] = "Number of Distinct Sections";
-$possiblesearchfunctions["NumMelodicThemes"] = "Amount of Themes In Song";
 
 
 
 $possiblesearchfunctions["Loudness"] = "Loudness (Average)";
 $possiblesearchfunctions["LoudnessRange"] = "Loudness";
 
-$possiblesearchfunctions["NumMelodicThemesRange"] = "Number of Melodic Themes (Range)";
 $possiblesearchfunctions["SectionCount"] = "Number of Distinct Sections (Specific)";
 
 $possiblesearchfunctions["OverallRepetitiveness"] = "Overall Repetitiveness (Average)";
@@ -224,6 +266,7 @@ $possiblesearchfunctions["ConsonanceAlliterationScore"] = "Average Consonance Al
 $possiblesearchfunctions["AssonanceAlliterationScore"] = "Average Assonance Alliteration (Average)";
 $possiblesearchfunctions["ConsonanceAlliterationScoreRange"] = "Average Consonance Alliteration";
 $possiblesearchfunctions["AssonanceAlliterationScoreRange"] = "Average Assonance Alliteration";
+$possiblesearchfunctions["TotalAlliterationRange"] = "Total Alliteration";
 
 
 
@@ -231,6 +274,7 @@ $possibletopnumbers = array();
 $possibletopnumbers["Top 3"] = "Top 3 Songs";
 $possibletopnumbers["Top 5"] = "Top 5 Songs";
 $possibletopnumbers["Top 10"] = "Top 10 Songs";
+
 
 function getMyPossibleSearchFunctions( $type = "" )
 {
@@ -245,21 +289,68 @@ function getMyPossibleSearchFunctions( $type = "" )
     // }
     if( $type == "structure" )
     {
-        $tmp = array( "Song Length Range", "Average Song Length", "Song Form", "Number of Songs (Form)" , "First Section Type", "Average Intro Length", "Intro Length Range", "Intro Instrumental Vocal or Instrumental", "Verse Count", "Pre-Chorus Count", "Chorus Count", "Use Of A Pre-Chorus", "Chorus Precedes Any Section", "First Chorus: Time Into Song Range", "First Chorus: Percent Into Song Range", "First Chorus: Average Time Into Song", "First Chorus: Average Percent Into Song", "Vocal Post-Chorus Count", "Use Of A Vocal Post-Chorus", "Departure Section", "Last Section Type", "Average Outro Length", "Outro Length Range", "Outro (Instrumental or Vocal)", "Number of Distinct Sections" ); //", "Prominent Instruments", "Key", "KeyMajorMinor
+        $tmp = array( "Average Song Length" , 
+		      "Song Length Range", 
+		      "First Section Type", 
+		      "Verse Count", 
+		      "Pre-Chorus Count", 
+		      "Chorus Count", 
+		      "Departure Section", 
+		      "Last Section Type" ); //", "Number of Songs (Form)
+	//", "Prominent Instruments"        $tmp = array( "Song Length Range", "Average Song Length", "Song Form", "Number of Songs (Form)" , "First Section Type", "Average Intro Length", "Intro Length Range", "Intro Instrumental Vocal or Instrumental", "Verse Count", "Pre-Chorus Count", "Chorus Count", "Use Of A Pre-Chorus", "Chorus Precedes Any Section", "First Chorus: Time Into Song Range", "First Chorus: Percent Into Song Range", "First Chorus: Average Time Into Song", "First Chorus: Average Percent Into Song", "Vocal Post-Chorus Count", "Use Of A Vocal Post-Chorus", "Departure Section", "Last Section Type", "Average Outro Length", "Outro Length Range", "Outro (Instrumental or Vocal)", "Number of Distinct Sections" ); //", "Prominent Instruments", "Key", "KeyMajorMinor
     }
     if( $type == "compositional" )
 	{
-	    $tmp = array( "Number of Melodic Themes (Range)", "Melodic Interval Prevalence", "Main Melodic Range", "Main Melodic Range (Number)", "Number of Melodic Themes", "Key", "Key (Major vs. Minor)", "Key (Major, Minor, Major Mode, Minor Mode)", "Use of Parallel Mode", "Diatonic Chord Prevalence", "Use of Inverted Chords", "Use Of Triads", "Use of 7th Chords", "Major 7th Prevalence", "Chord Degree Prevalence", "Chord Repetition" );
+	    $tmp = array( "Diverse Melodic Themes", 
+			  "Melodic Interval Prevalence", 
+			  "Main Melodic Range", 
+			  "Number of Melodic Themes", 
+			  "Key (Major vs. Minor)", 
+			  "Key (Major, Minor, Major Mode, Minor Mode)", 
+			  "Diatonic Chord Prevalence", 
+			  "Use of Inverted Chords", 
+			  "Use of 7th Chords", 
+			  "Chord Degree Prevalence", 
+			  "Chord Repetition", 
+			  "Major 7th Prevalence" );
+	    //	    $tmp = array( "Number of Distinct Melodic Themes", "Melodic Interval Prevalence", "Main Melodic Range", "Main Melodic Range (Number)", "Number of Melodic Themes", "Key", "Key (Major vs. Minor)", "Key (Major, Minor, Major Mode, Minor Mode)", "Use of Parallel Mode", "Diatonic Chord Prevalence", "Use of Inverted Chords", "Use Of Triads", "Use of 7th Chords", "Chord Degree Prevalence" );
 	}
 
     if( $type == "production" )
 	{
-	    $tmp = array( "Average Tempo", "Tempo Range (Broad)", "Tempo Range (Specific)", "Vocal vs. Instrumental Prevalence", "Timbre", "Primary Genres", "Sub-Genres", "Influences", "Production Mood", "DanceabilityRange", "LoudnessRange", "Prominent Instruments" );
+	    $tmp = array( "Genres", 
+			  "Influences", 
+			  "Prominent Instruments", 
+			  "Average Tempo", 
+			  "Tempo Range (BPM)", 
+			  "Tempo Range (BPM) (Specific)", 
+			  "Timbre", 
+			  "Production Mood", 
+			  "DanceabilityRange" );
+	    //	    $tmp = array( "Average Tempo", "Tempo Range (BPM)", "Tempo Range (Specific)", "Vocal vs. Instrumental Prevalence", "Timbre", "Primary Genres", "Sub-Genres", "Influences", "Production Mood", "DanceabilityRange", "LoudnessRange", "Prominent Instruments" );
 	}
 
     if( $type == "lyrical" )
 	{
-	    $tmp = array(  "Song Title Word Count", "Song Title Appearances", "Person References", "Location References", "Organization or Brand References", "Consumer Goods References", "Creative Works Title References", "Literal Experiences vs. Abstract", "Lyrical Sub-themes", "Lyrical Themes", "Lyrical Moods", "Use of In-Line Lyric Repetition", "Line Repetition", "Overall Repetitiveness", "Words Prevalence - Top 1000 Words", "Words Prevalence - Top 10,000 Words", "Words Prevalence - Top 10,000 Words", "Use of Word Abbreviations", "Use of Slang", "Use of Profanity", "Average Consonance Alliteration", "Average Assonance Alliteration", "RhymeDensityRange", "RhymesPerLineRange", "Percentage of Rhyming Syllables", "Average Rhymes per Line", "Number Of Rhyme Groups In The Song By ELR", "Use of End-of-Line Perfect Rhymes", "Use of End-of-Line Assonance Rhymes", "Use of Perfect Rhymes", "Use of Consonance Rhymes", "Use of Assonance Rhymes", "Use of End-of-Line Rhymes", "Use of Internal Rhymes", "Use of Mid-Word Rhymes", "Use of Mid-Line Rhymes", "Lyrical Density", "Words Per Line (Average)", "Rhymes Per Line", "AverageWordRepetitionRange" );
+	    $tmp = array(  "Song Title Word Count", 
+"Person References", 
+"Location References", 
+"Lyrical Themes", 
+"Lyrical Moods", 
+"Line Repetition", 
+"Usage of Very Common Words", 
+"Use of Word Abbreviations", 
+"Use of Slang", 
+"Profanity", 
+"RhymeDensityRange", 
+"Use of End-of-Line Rhymes", 
+"Use of Internal Rhymes", 
+"Use of Mid-Line Rhymes", 
+"Overall Repetitiveness", 
+"Use of End-of-Line Perfect Rhymes", 
+"Total Alliteration" );
+	    
+	    //	    $tmp = array(  "Song Title Word Count", "Song Title Appearances", "Person References", "Location References", "Organization or Brand References", "Consumer Goods References", "Creative Works Title References", "Literal Experiences vs. Abstract", "Lyrical Sub-themes", "Lyrical Themes", "Lyrical Moods", "Use of In-Line Lyric Repetition", "Line Repetition", "Overall Repetitiveness", "Usage of Very Common Words", "Words Prevalence - Top 10,000 Words", "Words Prevalence - Top 10,000 Words", "Use of Word Abbreviations", "Use of Slang", "Use of Profanity", "Average Consonance Alliteration", "Average Assonance Alliteration", "RhymeDensityRange", "RhymesPerLineRange", "Percentage of Rhyming Syllables", "Average Rhymes per Line", "Number Of Rhyme Groups In The Song By ELR", "Use of End-of-Line Perfect Rhymes", "Use of End-of-Line Assonance Rhymes", "Use of Perfect Rhymes", "Use of Consonance Rhymes", "Use of Assonance Rhymes", "Use of End-of-Line Rhymes", "Use of Internal Rhymes", "Use of Mid-Word Rhymes", "Use of Mid-Line Rhymes", "Lyrical Density", "Words Per Line (Average)", "Rhymes Per Line", "AverageWordRepetitionRange" );
 	    
 	}
 
@@ -438,7 +529,7 @@ function calcTrendQSStart( $q, $seasontouse = "" )
 
 function calcTrendQSStartBar()
 {
-    global $search, $nodates, $genrefilter, $specificpeak, $barname, $doingweeklysearch, $newcarryfilter, $doingyearlysearch, $doingthenandnow, $dateurlstouse, $withimprint, $lyricalmoodfilter, $lyricalsubthemefilter, $lyricalthemefilter, $bpmfilter, $majorminorfilter, $minweeksfilter, $columns;
+    global $search, $nodates, $genrefilter, $specificpeak, $barname, $doingweeklysearch, $newcarryfilter, $doingyearlysearch, $doingthenandnow, $dateurlstouse, $withimprint, $lyricalmoodfilter, $lyricalsubthemefilter, $lyricalthemefilter, $bpmfilter, $majorminorfilter, $minweeksfilter, $columns, $season;
 //    echo( "<br>min: $minweeksfilter<br>" );
     $qspl = explode( "/", $q );
     $qs = "";
@@ -493,12 +584,16 @@ function calcTrendQSStartBar()
     {
         $qs .= "search[peakwithin]={$specificpeak}&";
     }
+    if( $season )
+    {
+        $qs .= "search[season]={$season}&";
+    }
     else if( $search["benchmarktype"] )
 	{
 	    if( !is_array( $columns[$barname] ) )
 		$qs .= "search[peakwithin]={$columns[$barname]}&";
 	}
-    else
+    if( $search["peakchart"] )
         $qs .= "search[peakwithin]={$search[peakchart]}&";
     if( $search["chartid"] )
     {
@@ -579,7 +674,7 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 	    $comparisonaspect = array_search( $possiblesearchfunctions, $comparisonaspect );
 	}
 
-    $key = "line:" . $comparisonaspect . "_" . $peak . "_" . (is_array( $quarterstorun)?implode( ",", $quarterstorun ):$quarterstorun) . "_" . implode( ",", $songstouse ) . "." . $doingyearlysearch . "_" . $doingweeklysearch . "_" . $season . "_" . $withimprint . "_" . $genrefilter;
+    $key = "line:" . $comparisonaspect . "_" . $peak . "_" . (is_array( $quarterstorun)?implode( ",", $quarterstorun ):$quarterstorun) . "_" . implode( ",", $songstouse ) . "." . $doingyearlysearch . "_" . $doingweeklysearch . "_" . $season . "_" . $withimprint . "_" . $genrefilter . "." . implode( ",", $allweekdatestorun ) . ".". implode( ",", $allyearstorun );
     //    echo( $key );
 
     // echo( "<br>key is '$key'<br>" ) ; 
@@ -591,7 +686,7 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
     if( isset( $cachedtrenddata[$key] ) ) { 
 //        file_put_contents( "/tmp/hmm", "cache values?: " . ( print_r( $cachedtrenddata[$key], true ) ) . " \n", FILE_APPEND );
 	if( $_GET["help"] )
-	    echo( "cache hit<br>\n" );
+	    echo( "cache hit $key<br>\n" );
 	       return $cachedtrenddata[$key];        
     }
     $retval = array();
@@ -721,27 +816,27 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 
 		    switch( $comparisonaspect )
 			{
-			case "Primary Genres":
-			case "Primary Genre Breakdown":
-			    $labels = db_query_array( "select genres.id, count(*) as num from genres, songs where GenreID = genres.id and songs.id in ( $songidstr ) group by genres.id ", "id", "num" );
-			    foreach( $labels as $t=>$numforthis )
-				{
-				    // $t = $trow["id"];
-				    // $numforthis = db_query_first_cell( "select count(*) from songs where songs.id in ( $songidstr ) and  GenreID = '$t' " );
+			// case "Primary Genres":
+			// case "Primary Genre Breakdown":
+			//     $labels = db_query_array( "select genres.id, count(*) as num from genres, songs where GenreID = genres.id and songs.id in ( $songidstr ) group by genres.id ", "id", "num" );
+			//     foreach( $labels as $t=>$numforthis )
+			// 	{
+			// 	    // $t = $trow["id"];
+			// 	    // $numforthis = db_query_first_cell( "select count(*) from songs where songs.id in ( $songidstr ) and  GenreID = '$t' " );
 				    
-				    $number = $numforthis;
-				    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
-			    if( !$numforthis )
-				$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
-				    $retval[$thiskey][$t]["season"] = $tmpseason;
-				    $retval[$thiskey][$t][0] = $numforthis;
-				    $retval[$thiskey][$t][1] = $numforthis . "%";
-				    $retval[$thiskey][$t][2] = $t;
-				    $retval[$thiskey][$t][3] = "search-results?$qs&search[GenreID]=" . urlencode( $t ); 
-				    $retval[$thiskey][$t][4] = $number;
-				}
-			    break;
-			case "Sub-Genres":
+			// 	    $number = $numforthis;
+			// 	    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
+			//     if( !$numforthis )
+			// 	$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
+			// 	    $retval[$thiskey][$t]["season"] = $tmpseason;
+			// 	    $retval[$thiskey][$t][0] = $numforthis;
+			// 	    $retval[$thiskey][$t][1] = $numforthis . "%";
+			// 	    $retval[$thiskey][$t][2] = $t;
+			// 	    $retval[$thiskey][$t][3] = "search-results?$qs&search[GenreID]=" . urlencode( $t ); 
+			// 	    $retval[$thiskey][$t][4] = $number;
+			// 	}
+			//     break;
+			case "Genres":
 			    // removed 1/27/2022
 			    // if( $genrefilter )
 			    // 	{
@@ -1061,7 +1156,7 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 				    $retval[$thiskey][$t][4] = $number;
 				}
 			    break;
-			case "Sub-Genre/Influence Count":
+			case "Genre/Influence Count":
 			    $stwc = db_query_array( "select InfluenceCount, count(*) as num from songs where id in ( $songidstr ) and InfluenceCount is not null group by InfluenceCount order by InfluenceCount ", "InfluenceCount", "num" );
 			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and InfluenceCount is not null" );
 			    foreach( $stwc as $t=>$numforthis )
@@ -1417,6 +1512,8 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 		case "SlangWords":
 		case "CreativeWorksTitles":
 		case "PersonReferences":
+		case "GeneralLocationReferences":
+		case "GeneralPersonReferences":
 		case "LocationReferences":
 		case "OrganizationorBrandReferences":
 		case "ConsumerGoodsReferences":
@@ -1507,21 +1604,31 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 
                 }
                 break;
+		//enums
 		case "MainMelodicRange":
-		case "ChordDegreePrevalence":
 		case "MelodicIntervalPrevalence":
 		case "VocalsInstrumentsPrevalence":
 		case "LiteralExperiencesvsAbstract":
 		case "Timbre":
+		case "ChordDegreePrevalence":
 		case "ProductionMood":
 
-		    $rows = getSetValues( $comparisonaspect );
 			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and $comparisonaspect is not null  " );
-		if( !count( $rows ) ) $rows = getEnumValues( $comparisonaspect );
-			    foreach( $rows as $t )
+		    $rows = getSetValues( $comparisonaspect );
+		    $isenum = false;
+		    if( !count( $rows ) ) 
+			{
+			    $isenum = true;
+			    $rows = getEnumValues( $comparisonaspect );
+			}
+		    foreach( $rows as $t )
 				{
 
-				    $numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '%$t%'" );
+				    if( $isenum )
+					$numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect = '$t'" );
+				    else
+					$numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '%$t%'" );
+
 
 				    //                    $numforthis = db_query_first_cell( "select count(*) from songs where id in ( $songidstr ) and $comparisonaspect = '$t' " );
 				    $number = $numforthis;
@@ -1540,7 +1647,6 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 			    //			    exit;
 			    break;
 
-
 		case "SectionCountRange":
 		case "PercentDiatonicChordsRange":
 		case "ChordRepetitionRange":
@@ -1558,6 +1664,11 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 		case "RhymesPerLineRange":
 		case "NumberOfRhymeGroupsELRRange":
 		case "EndLinePerfectRhymesPercentageRange":
+		case "ThousandWordsPrevalenceRange":
+		case "LocationReferencesRange":
+		case "PersonReferencesRange":
+		case "GeneralLocationReferencesRange":
+		case "GeneralPersonReferencesRange":
 		case "EndLineAssonanceRhymePercentageRange":
 		case "PerfectRhymesPercentageRange":
 		case "ConsonanceRhymePercentageRange":
@@ -1566,9 +1677,12 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 		case "InternalRhymesPercentageRange":
 		case "MidWordRhymesRange":
 		case "MidLineRhymesPercentageRange":
+		case "SlangWordsRange":
 		case "LyricalDensityRange":
 		case "DanceabilityRange":
+		case "ProfanityRange":
 		case "LoudnessRange":
+		case "TotalAlliterationRange":
 		case "TempoRangeGeneral":
 		case "NumMelodicThemesRange":
 		    $fieldname = $comparisonaspect;
@@ -1612,7 +1726,7 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
     
 function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = array() )
 {
-    global $newarrivalsonly, $cachedtrenddata, $searchsubtype, $allsongs, $dontincludeall, $search, $sectionname, $timeperiod, $genrefilter, $keyislabel, $notdoingall, $withimprint, $possiblesearchfunctions;
+    global $newarrivalsonly, $cachedtrenddata, $searchsubtype, $allsongs, $dontincludeall, $search, $sectionname, $timeperiod, $genrefilter, $subgenrefilter, $keyislabel, $notdoingall, $withimprint, $possiblesearchfunctions;
     if( !$songstouse )
 	$songstouse = $allsongs;
 //echo( $comparisonaspect );    
@@ -1670,7 +1784,7 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 			    $retval[$t][4] = $number;
 			}
 		    break;
-			case "Sub-Genres":
+			case "Genres":
 			    // if( $genrefilter )
 			    // 	{
 			    // 	    $genrename = db_query_first_cell( "select Name from genres where id = $genrefilter" );
@@ -1724,29 +1838,29 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 				    $retval[$t][4] = $number;
 				}
 			    break;
-		case "Primary Genre Breakdown":
-		case "Primary Genres":
-		    $labels = db_query_array( "select genres.id, count(*) as num from genres, songs where GenreID = genres.id and songs.id in ( $songidstr ) group by genres.id", "id", "num" );
-		    foreach( $labels as $t=>$numforthis )
-			{
-			    // $t = $trow["id"];
-			    // $numforthis = db_query_first_cell( "select count(*) from songs where songs.id in ( $songidstr ) and  GenreID = '$t' " );
-			    $number = $numforthis;
+		// case "Primary Genre Breakdown":
+		// case "Primary Genres":
+		//     $labels = db_query_array( "select genres.id, count(*) as num from genres, songs where GenreID = genres.id and songs.id in ( $songidstr ) group by genres.id", "id", "num" );
+		//     foreach( $labels as $t=>$numforthis )
+		// 	{
+		// 	    // $t = $trow["id"];
+		// 	    // $numforthis = db_query_first_cell( "select count(*) from songs where songs.id in ( $songidstr ) and  GenreID = '$t' " );
+		// 	    $number = $numforthis;
 			    
-			    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
-			    if( !$numforthis )
-				$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
-			    $retval[$t][0] = $numforthis;
-			    $retval[$t][1] = $numforthis . "%";
-			    $retval[$t][2] = $t;
-			    $retval[$t][3] = "search-results?$qs&search[GenreID]=" . urlencode( $t ); 
-			    $retval[$t][4] = $number;
-			    if( $keyislabel )
-				{
-				    $retval[$t]["numsongs"] = db_query_first_cell( "select count(*) as num from songs where GenreID = '$t' and songs.id in ( $songidstr )" );
-				}
-			}
-		    break;
+		// 	    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
+		// 	    if( !$numforthis )
+		// 		$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
+		// 	    $retval[$t][0] = $numforthis;
+		// 	    $retval[$t][1] = $numforthis . "%";
+		// 	    $retval[$t][2] = $t;
+		// 	    $retval[$t][3] = "search-results?$qs&search[GenreID]=" . urlencode( $t ); 
+		// 	    $retval[$t][4] = $number;
+		// 	    if( $keyislabel )
+		// 		{
+		// 		    $retval[$t]["numsongs"] = db_query_first_cell( "select count(*) as num from songs where GenreID = '$t' and songs.id in ( $songidstr )" );
+		// 		}
+		// 	}
+		//     break;
 		case "Lyrical Themes":
 		    $lyricalthemes = db_query_array( "select lyricalthemeid, count(*) as num from song_to_lyricaltheme, lyricalthemes where lyricalthemeid = lyricalthemes.id and songid in ( $songidstr )  and HideFromAdvancedSearch = 0  group by lyricalthemeid ", "lyricalthemeid", "num" );
 		    foreach( $lyricalthemes as $t=>$numforthis )
@@ -1999,7 +2113,7 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 			    $retval[$t][4] = $number;
 			}
 		    break;
-		case "Sub-Genre/Influence Count":
+		case "Genre/Influence Count":
 		    $stwc = db_query_array( "select InfluenceCount, count(*) as num from songs where id in ( $songidstr ) and InfluenceCount is not null group by InfluenceCount order by SongLength ", "InfluenceCount", "num" );
 			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and InfluenceCount is not null " );
 		    foreach( $stwc as $t=>$numforthis )
@@ -2461,6 +2575,8 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 		case "UseofParallelMode":
 		case "PersonReferences":
 		case "LocationReferences":
+		case "GeneralPersonReferences":
+		case "GeneralLocationReferences":
 		case "CreativeWorksTitles":
 		case "OrganizationorBrandReferences":
 		case "ConsumerGoodsReferences":
@@ -2575,22 +2691,30 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 		    }
 		break;
 
-		case "MainMelodicRange":
 		case "ChordDegreePrevalence":
+		case "ProductionMood":
+
+		case "MainMelodicRange":
 		case "MelodicIntervalPrevalence":
 		case "Timbre":
 		case "LiteralExperiencesvsAbstract":
-		case "ProductionMood":
 		case "VocalsInstrumentsPrevalence":
 
 		    $rows = getSetValues( $comparisonaspect );
-		    if( !count( $rows ) ) $rows = getEnumValues( $comparisonaspect );
+		$isenum = false;
+		    if( !count( $rows ) ) 
+			{
+			    $isenum = true;
+			    $rows = getEnumValues( $comparisonaspect );
+			}
 
 			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and $comparisonaspect is not null  " );
 		    foreach( $rows as $t )
 				{
-
-				    $numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '%$t%'" );
+				    if( $isenum ) 
+					$numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect = '$t'" );
+				    else
+					$numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '%$t%'" );
 				    //				    echo( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '$t'<Br>" );
 
 				    //                    $numforthis = db_query_first_cell( "select count(*) from songs where id in ( $songidstr ) and $comparisonaspect = '$t' " );
@@ -2628,6 +2752,11 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 		case "RhymesPerLineRange":
 		case "NumberOfRhymeGroupsELRRange":
 		case "EndLinePerfectRhymesPercentageRange":
+		case "LocationReferencesRange":
+		case "GeneralLocationReferencesRange":
+		case "GeneralPersonReferencesRange":
+		case "PersonReferencesRange":
+		case "ThousandWordsPrevalenceRange":
 		case "EndLineAssonanceRhymePercentageRange":
 		case "PerfectRhymesPercentageRange":
 		case "ConsonanceRhymePercentageRange":
@@ -2635,10 +2764,13 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 		case "EndOfLineRhymesPercentageRange":
 		case "InternalRhymesPercentageRange":
 		case "MidWordRhymesRange":
+		case "SlangWordsRange":
 		case "MidLineRhymesPercentageRange":
 		case "LyricalDensityRange":
 		case "DanceabilityRange":
+		case "ProfanityRange":
 		case "LoudnessRange":
+		case "TotalAlliterationRange":
 		case "TempoRangeGeneral":
 		case "NumMelodicThemesRange":
 		    $fieldname = $comparisonaspect;
@@ -2685,13 +2817,13 @@ function getRowsComparison( $search, $songs )
 
     $songs[] = -1;
     $songstr = implode( ", ", $songs );
-    //        echo( "field: " . $field . "<br>");
+    //            echo( "field: " . $field . "<br>");
     switch( $field )
     {
-    case "Primary Genre Breakdown":
-        case "Primary Genres":
-            $rows = db_query_array( "select distinct( genres.id ), Name from songs, genres where songs.id in ( $songstr ) and GenreID = genres.id order by Name ", "id", "Name" );
-            break;
+    // case "Primary Genre Breakdown":
+    //     case "Primary Genres":
+    //         $rows = db_query_array( "select distinct( genres.id ), Name from songs, genres where songs.id in ( $songstr ) and GenreID = genres.id order by Name ", "id", "Name" );
+    //         break;
         case "Number of Songs (Form)":
             $rows = db_query_array( "select SongStructure, count(*) as cnt from songs where id in ( $songstr ) group by SongStructure order by cnt desc ", "SongStructure", "SongStructure" );
             break;
@@ -2702,7 +2834,7 @@ function getRowsComparison( $search, $songs )
 	    $fstr = str_replace( " ", "", $field );
             $rows = db_query_array( "select $fstr from songs where id in ( $songstr ) and $fstr is not null order by Tempo  ", "$fstr", "$fstr" );
             break;
-        case "Sub-Genres":
+        case "Genres":
 		// if( $genrefilter )
 		//     {
 		// 	$genrename = db_query_first_cell( "select Name from genres where id = $genrefilter" );
@@ -2769,7 +2901,7 @@ function getRowsComparison( $search, $songs )
                 $rows[$rid] = $introlengthsotherway[$rval]?$introlengthsotherway[$rval]:$rval;
             }
             break;
-        case "Sub-Genre/Influence Count":
+        case "Genre/Influence Count":
             $rows = db_query_array( "select InfluenceCount from songs where  id in ( $songstr ) order by InfluenceCount", "InfluenceCount", "InfluenceCount" );
             break;
         case "Use Of A Vocal Post-Chorus":
@@ -2864,6 +2996,8 @@ function getRowsComparison( $search, $songs )
 		case "SlangWords":
 		case "PersonReferences":
 		case "LocationReferences":
+		case "GeneralPersonReferences":
+		case "GeneralLocationReferences":
 		case "OrganizationorBrandReferences":
 		case "ConsumerGoodsReferences":
 		case "PercentAbbreviations":
@@ -2968,6 +3102,11 @@ function getRowsComparison( $search, $songs )
 		case "RhymesPerLineRange":
 		case "NumberOfRhymeGroupsELRRange":
 		case "EndLinePerfectRhymesPercentageRange":
+		case "LocationReferencesRange":
+		case "GeneralLocationReferencesRange":
+		case "GeneralPersonReferencesRange":
+		case "PersonReferencesRange":
+		case "ThousandWordsPrevalenceRange":
 		case "EndLineAssonanceRhymePercentageRange":
 		case "PerfectRhymesPercentageRange":
 		case "ConsonanceRhymePercentageRange":
@@ -2975,10 +3114,13 @@ function getRowsComparison( $search, $songs )
 		case "EndOfLineRhymesPercentageRange":
 		case "InternalRhymesPercentageRange":
 		case "MidWordRhymesRange":
+		case "SlangWordsRange":
 		case "MidLineRhymesPercentageRange":
 		case "LyricalDensityRange":
 		case "DanceabilityRange":
+		case "ProfanityRange":
 		case "LoudnessRange":
+		case "TotalAlliterationRange":
 		case "TempoRangeGeneral":
 		case "NumMelodicThemesRange":
 
@@ -3060,27 +3202,27 @@ function getCSVTrendDataForRows( $comparisonaspect, $peak="", $songsbyweeks = ar
 	    
 	    switch( $comparisonaspect )
 		{
-			case "Primary Genre Breakdown":
-			case "Primary Genres":
-			    $labels = db_query_array( "select genres.id, count(*) as num from genres, songs where GenreID = genres.id and songs.id in ( $songidstr ) group by genres.id ", "id", "num" );
-			    foreach( $labels as $t=>$numforthis )
-				{
-				    // $t = $trow["id"];
-				    // $numforthis = db_query_first_cell( "select count(*) from songs where songs.id in ( $songidstr ) and  GenreID = '$t' " );
+			// case "Primary Genre Breakdown":
+			// case "Primary Genres":
+			//     $labels = db_query_array( "select genres.id, count(*) as num from genres, songs where GenreID = genres.id and songs.id in ( $songidstr ) group by genres.id ", "id", "num" );
+			//     foreach( $labels as $t=>$numforthis )
+			// 	{
+			// 	    // $t = $trow["id"];
+			// 	    // $numforthis = db_query_first_cell( "select count(*) from songs where songs.id in ( $songidstr ) and  GenreID = '$t' " );
 				    
-				    $number = $numforthis;
-				    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
-			    if( !$numforthis )
-				$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
-				    $retval[$thiskey][$t]["season"] = $tmpseason;
-				    $retval[$thiskey][$t][0] = $numforthis;
-				    $retval[$thiskey][$t][1] = $numforthis . "%";
-				    $retval[$thiskey][$t][2] = $t;
-				    $retval[$thiskey][$t][3] = "search-results?$qs&search[GenreID]=" . urlencode( $t ); 
-				    $retval[$thiskey][$t][4] = $number;
-				}
-			    break;
-			case "Sub-Genres":
+			// 	    $number = $numforthis;
+			// 	    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
+			//     if( !$numforthis )
+			// 	$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
+			// 	    $retval[$thiskey][$t]["season"] = $tmpseason;
+			// 	    $retval[$thiskey][$t][0] = $numforthis;
+			// 	    $retval[$thiskey][$t][1] = $numforthis . "%";
+			// 	    $retval[$thiskey][$t][2] = $t;
+			// 	    $retval[$thiskey][$t][3] = "search-results?$qs&search[GenreID]=" . urlencode( $t ); 
+			// 	    $retval[$thiskey][$t][4] = $number;
+			// 	}
+			//     break;
+			case "Genres":
 			    // if( $genrefilter )
 			    // 	{
 			    // 	    $genrename = db_query_first_cell( "select Name from genres where id = $genrefilter" );
@@ -3403,7 +3545,7 @@ function getCSVTrendDataForRows( $comparisonaspect, $peak="", $songsbyweeks = ar
 				    $retval[$thiskey][$t][4] = $number;
 				}
 			    break;
-			case "Sub-Genre/Influence Count":
+			case "Genre/Influence Count":
 			    $stwc = db_query_array( "select InfluenceCount, count(*) as num from songs where id in ( $songidstr ) and InfluenceCount is not null group by InfluenceCount order by InfluenceCount ", "InfluenceCount", "num" );
 			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and InfluenceCount is not null " );
 			    foreach( $stwc as $t=>$numforthis )
@@ -3845,6 +3987,8 @@ function getCSVTrendDataForRows( $comparisonaspect, $peak="", $songsbyweeks = ar
 		case "CreativeWorksTitles":
 		case "PersonReferences":
 		case "LocationReferences":
+		case "GeneralPersonReferences":
+		case "GeneralLocationReferences":
 		case "OrganizationorBrandReferences":
 		case "ConsumerGoodsReferences":
 		case "SlangWords":
@@ -3967,20 +4111,24 @@ function getCSVTrendDataForRows( $comparisonaspect, $peak="", $songsbyweeks = ar
 		case "ProductionMood":
 		case "LiteralExperiencesvsAbstract":
 		    $rows = getSetValues( $comparisonaspect );
-		if( !count( $rows ) ) $rows = getEnumValues( $comparisonaspect );
+		$isenum = false;
+		if( !count( $rows ) ) { 
+		    $isenum = true;
+		    $rows = getEnumValues( $comparisonaspect );
+		}
 			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and $comparisonaspect is not null  " );
 			    foreach( $rows as $t )
 				{
+				    if( $isenum )
+					$numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect = '$t'" );
+				    else
+					$numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '%$t%'" );
 
-//				echo( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '$t'<br>" );
-				    $numforthis = db_query_first_cell( "select count(*) as num from songs where id in ( $songidstr ) and $comparisonaspect like '%$t%'" );
-
-				    //                    $numforthis = db_query_first_cell( "select count(*) from songs where id in ( $songidstr ) and $comparisonaspect = '$t' " );
 				    $number = $numforthis;
 				    $displ = $t;
 				    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
-			    if( !$numforthis )
-				$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
+				    if( !$numforthis )
+					$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
 				    $retval[$thiskey][$t]["season"] = $tmpseason;
 				    $retval[$thiskey][$displ][0] = $numforthis;
 				    $retval[$thiskey][$displ][1] = $numforthis. "%";
@@ -4011,6 +4159,11 @@ function getCSVTrendDataForRows( $comparisonaspect, $peak="", $songsbyweeks = ar
 		case "RhymesPerLineRange":
 		case "NumberOfRhymeGroupsELRRange":
 		case "EndLinePerfectRhymesPercentageRange":
+		case "LocationReferencesRange":
+		case "GeneralPersonReferencesRange":
+		case "GeneralLocationReferencesRange":
+		case "PersonReferencesRange":
+		case "ThousandWordsPrevalenceRange":
 		case "EndLineAssonanceRhymePercentageRange":
 		case "PerfectRhymesPercentageRange":
 		case "ConsonanceRhymePercentageRange":
@@ -4018,10 +4171,13 @@ function getCSVTrendDataForRows( $comparisonaspect, $peak="", $songsbyweeks = ar
 		case "EndOfLineRhymesPercentageRange":
 		case "InternalRhymesPercentageRange":
 		case "MidWordRhymesRange":
+		case "SlangWordsRange":
 		case "MidLineRhymesPercentageRange":
 		case "LyricalDensityRange":
 		case "DanceabilityRange":
+		case "ProfanityRange":
 		case "LoudnessRange":
+		case "TotalAlliterationRange":
 		case "TempoRangeGeneral":
 		case "NumMelodicThemesRange":
 		//     $percent = "%";

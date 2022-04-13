@@ -33,6 +33,8 @@ foreach( $songstouse as $barname=>$tmpsongs )
 		$benchmarkpeak = $columns[$barname];
 		$newcarryfilter = "";
 		$minweeksfilter = "";
+		$season = "";
+
 		if( is_array( $benchmarkpeak ) )
 		    {
 			foreach( $benchmarkpeak as $type=>$val )
@@ -41,18 +43,29 @@ foreach( $songstouse as $barname=>$tmpsongs )
 				    $newcarryfilter = $val;
 				if( $type == "minweeksfilter" )
 				    $minweeksfilter = $val;
+				if( $type == "season" )
+				    {
+					$season = $val;
+				    }
 			    }
 			$benchmarkpeak = "";
 		    }
+		if( $search["benchmarktype"] == "Genre Comparisons" )
+		    {
+			$subgenrefilter = $benchmarkpeak;
+			$benchmarkpeak = "";
+		    }		
 	    }
 
 
     $alldataforrows[$barname] = getBarTrendDataForRows( $search[comparisonaspect], "", $tmpsongs );
+    //    echo( "help:" . count( $tmpsongs ) . "<br>"); 
 }
 
 
 
-
+$font = "Poppins";
+//$font = "Arial";
 
 $sortingbyvalue = 1; 
 if( isHighestToLowest( $search[comparisonaspect] ) ) 
@@ -106,6 +119,10 @@ else
 //print_r( $rows );
 //print_r( $presortedbarkey );
 //	asort( $presortedbarkey );
+
+
+include "trend-toremove.php";
+$barkey = array();
 	$cnt = 0;
 	foreach( $rows as $key=>$throwaway )
 	    {
@@ -119,7 +136,16 @@ if( $_GET["help"] )
 	file_put_contents( "hmmrc", "rows:" . print_r( $rows, true ), FILE_APPEND );
 	file_put_contents( "hmmrc", "barkey: " . print_r( $barkey, true ), FILE_APPEND );
     }
-$colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#91e1dd" );
+
+// new colors
+$colors = array( "#eeac6f", "#f5ca7d", "#8475a2", "#ebac9a", "#faa33c", "#38226d", "#da857a", "#f9e3b7", "#e3ddf2", "#d7719f", "#bb0e2c", "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd", "#ed8a6b", "#2fcc71", "#689bd0", "#a38671", "#e74c3c", "#34495e", "#9b59b6", "#1abc9c", "#95a5a6", "#5e345e", "#a5c63b", "#b8c9f1", "#e67e22", "#ef717a", "#3a6f81", "#5065a1", "#345f41", "#d5c295", "#f47cc3", "#ffa800", "#ffcd02", "#c0392b", "#3498db", "#2980b9", "#5b48a2", "#98abd5", "#79302a", "#16a085", "#f0deb4", "#2b2b2b" );
+	$numtotalbars = 0;
+foreach( $alldataforrows as $vals )
+{
+	$numtotalbars += count( $vals ) ;
+}
+//echo( "num: " . $numtotalbars );
+
 ?>
 	<script type="text/javascript">
 		window.onload = function () {
@@ -139,13 +165,13 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
 				exportEnabled: true,
 				animationEnabled: false,
 				title: {
-				 text: "<?=str_replace( '"', '\"', $possiblesearchfunctions[$search[comparisonaspect]] )?>",
+				 text: "<?=str_replace( '"', '\"', $possiblesearchfunctions[$search[comparisonaspect]]?$possiblesearchfunctions[$search[comparisonaspect]]:$search[comparisonaspect] )?><?=$datedisplay?": ".$datedisplay:""?> <?=$search[specificsubgenre]?"(".getNameById( "subgenres", $search[specificsubgenre] ) . ")":""?>",
 
-                    fontColor: "#888888",
+                    fontColor: "#8b26b2",
                     // fontColor: "#ffffff",
-                    fontFamily: "Open Sans",
+                    fontFamily: "<?=$font?>",
                     fontWeight: "bold",
-					fontSize: 25
+					fontSize: 20
 				},
                 backgroundColor: '#ffffff',
                 // backgroundColor: '<?=$gray?>',
@@ -153,7 +179,7 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
 					gridColor: "#f0f0f0",
 					// gridColor: "#525252",
 					labelFontColor: "#7a7a7a",
-					labelFontFamily: "Open Sans",
+					labelFontFamily: "<?=$font?>",
                     labelAngle: 50,
 					labelFontSize: 14,
                     interval: 1,
@@ -226,21 +252,29 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
                     
                     
 				}, 
-           dataPointMaxWidth: 120,
+<? $max = $numtotalbars > 12?"90":"120";
+
+if( $numtotalbars > 15 ) 
+$max = "70";
+if( $numtotalbars >= 20 ) 
+$max = "50";
+?>
+           dataPointMaxWidth: <?=$max?>,
 				data: [
                     <?php
                     $count = 0;
                     $cnt = -1;
                     foreach( $alldataforrows as $columnname => $dataforrows )
                     {
+
                         $cnt++;
                        ?>
             {
 					type: "<?=$_GET["graphtype"]?$_GET["graphtype"]:"line"?>",
                     markerType: "none",
                    <? if( $cnt > 6 && 1 == 0  ) { ?>visible: false, <? }?>
-					indexLabelFontFamily: "Open Sans",
-					showInLegend: <?=$search[benchmarktype]||$doingthenandnow?"true":"false"?>,
+					indexLabelFontFamily: "<?=$font?>",
+					showInLegend: <?=$searchtype!= "Benchmark"?"false":"true"?>,
 					lineThickness: 3,
 					name: "<?=$columnname?>",
 					color: "<?=$colors[$cnt]?>",
@@ -278,7 +312,7 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
                             }
                             ?>                         
                                 {
-                                  color: "<?=$colors[$cnt]?>", label: "<?=$labelname?>", x: <?=$barkey[$rname]?>, y: <?=formatYAxis( $dataforrows[$r][0] )?>, numsongs: "<?=$dataforrows[$r][4]?>", indexLabel: "<?=$dataforrows[$r][1]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "bold", indexLabelFontSize: "14", click: function( e ) { document.location.href="<?=$dataforrows[$r][3]?>"; }, cursor: "pointer", markerType: "circle", "url": "<?=$dataforrows[$r][3]?>" },
+                                  color: "<?=$colors[$cnt]?>", label: "<?=$labelname?>", x: <?=$barkey[$rname]?>, y: <?=formatYAxis( $dataforrows[$r][0] )?>, numsongs: "<?=$dataforrows[$r][4]?>", indexLabel: "<?=$dataforrows[$r][1]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "bold", indexLabelFontSize: "14", <? if( $_SESSION["loggedin"] ) { ?>click: function( e ) { document.location.href="<?=$dataforrows[$r][3]?>";}, cursor: "pointer", <? } ?>markerType: "circle", "url": "<?=$_SESSION["loggedin"]?$dataforrows[$r][3]:""?>" },
                         <?  }
                         ?>                                
 					]
@@ -291,7 +325,7 @@ $colors = array( "#5b9bd5","#fa8564","#009900","#fdd752","#aec785","#9972b5","#9
                       fontSize: 14,
                       fontColor: "#7a7a7a",
                       // fontColor: "#ffffff",
-                      fontFamily: "Open Sans",
+                      fontFamily: "<?=$font?>",
                       horizontalAlign: "center",
                       cursor: "pointer",
                       itemclick: function (e) {

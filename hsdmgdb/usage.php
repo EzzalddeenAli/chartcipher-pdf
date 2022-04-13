@@ -33,7 +33,7 @@ if( $go )
 {
     $res = db_query_rows( "select * from immersionusage where 1 $whr order by dateadded desc" );
 }
-$userarr = db_query_array( "select user_id, login from reports_amember.am_user where user_id in ( select userid from immersionusage )", "user_id", "login" );
+$userarr = db_query_array( "select user_id, login from eccipher_amember.am_user where user_id in ( select userid from immersionusage )", "user_id", "login" );
 $userarr[0] = "Not Logged In";
 
 $cols = array();
@@ -155,7 +155,7 @@ outputSelectValues( $emails, $ipaddress );
                 ?>
 <tr>
 <? 
-$emails2 = db_query_array( "select user_id, email from reports_amember.am_user where user_id in ( select userid from immersionusage ) ", "user_id", "email" );
+$emails2 = db_query_array( "select user_id, email from eccipher_amember.am_user where user_id in ( select userid from immersionusage ) ", "user_id", "email" );
 foreach( $cols as $k ) { 
 ?>
 <td>

@@ -130,11 +130,11 @@ if( $weekdateid )
 	$ext .= " and songs.id in ( " . implode( ", ", $sids ) . " )";
 }
 
-$res = db_query_rows( "select songnames.Name as SongName, songs.* from $tablename, songnames where   songnameid = songnames.id $ext order by SongName" );
+$res = db_query_rows( "select songnames.Name as SongName, songs.* from $tablename, songnames where   songnameid = songnames.id $ext order by SongName limit 500" );
 
 
 include "nav.php";
-if( isRachel() ) echo ( "select songnames.Name as SongName, songs.* from $tablename, songnames where   songnameid = songnames.id $ext order by SongName" );
+if( isRachel() ) echo ( "select songnames.Name as SongName, songs.* from $tablename, songnames where   songnameid = songnames.id $ext order by SongName limit 500" );
 ?>
 
 <h3><?=$uppercase?></h3>

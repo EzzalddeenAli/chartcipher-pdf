@@ -19,11 +19,10 @@ define( 'WINTERCOMPARISON', '1,1' );
 define( 'SUMMERCOMPARISON', '3,3' );
 define( 'FALLCOMPARISON', '4,4' );
 define( 'SPRINGCOMPARISON', '2,2' );
-$seasonswithall = array( WINTERCOMPARISON=>"Q1", SPRINGCOMPARISON => "Q2", SUMMERCOMPARISON=> "Q3", FALLCOMPARISON=> "Q4", "4,1,2,3"=>"Q1 & Q3", ALLSEASONS24=>"Q2 & Q4" );
+$seasonswithall = array( WINTERCOMPARISON=>"Winter", SPRINGCOMPARISON => "Spring", SUMMERCOMPARISON=> "Summer", FALLCOMPARISON=> "Fall" );
 $seasons = $seasonswithall; 
 
 //$clientwhere = $_SESSION["loggedin"]?" IsActive = 1 ":"IsActive = 1 and ( songs.ClientID is null or songs.ClientID = 0 )";
-$peakvalues = array( "1"=> "#1 Hits", "3"=> "Top 3", "5"=> "Top 5", "10"=> "Top 10", "25"=>"Top 25", "50"=>"Top 50");
 
 $clientwhere = "IsActive = 1";
 if( $searchclientid )
@@ -38,6 +37,14 @@ $GLOBALS["clientwhere"] = $clientwhere;
 if( !$chartid ) 
     $chartid = 37; 
 
+if( $chartid != 37 )
+    {
+	$peakvalues = array( "10"=>"Top 10");
+    }
+else
+    $peakvalues = array( "25"=>"Top 25", "50"=>"Top 50");
+
+
 $clientwhere .= " and find_in_set( $chartid, chartids )";
 
 $chartname = db_query_first_cell( "select Name from charts where id = $chartid" );
@@ -50,7 +57,7 @@ foreach( $access as $a )
 }
 //    print_r( $access );
 //    exit;
-if( $_SERVER[REMOTE_ADDR] == "99.73.32.79" )
+if( $_SERVER[REMOTE_ADDR] == "76.198.132.181" )
     $anyokay = 1;
 if( $nouserrequired )
     {
@@ -102,7 +109,7 @@ if( !$anyokay && !$_GET["forcelogin"] )
 //    print_r( $user );
 // exit;
 //
-$isstudent = is_berklee() && isset( $_COOKIE["proxylogintype"] ) && $_COOKIE["proxylogintype"] == "student";
+$isstudent = isset( $_COOKIE["proxylogintype"] ) && $_COOKIE["proxylogintype"] == "student";
 //$isstudent = false;
 //print_r( $_COOKIE );
 
@@ -421,15 +428,16 @@ $GLOBALS["firstyear"] = $earliesty;
 
 
 $searchcolumnsdisplay = array();
+$searchcolumnsdisplay["season"] = "Season";
 $searchcolumnsdisplay["primaryartist"] = "Primary Artist";
 $searchcolumnsdisplay["primaryartistprimary"] = "Primary Artist";
 $searchcolumnsdisplay["primaryartistfeatured"] = "Featured Artist";
 $searchcolumnsdisplay["ArtistBand"] = "Artist";
 $searchcolumnsdisplay["Tempo Range General"] = "Tempo Range (Broad)";
-$searchcolumnsdisplay["GenreID"] = "Primary Genre";
+//$searchcolumnsdisplay["GenreID"] = "Primary Genre";
 $searchcolumnsdisplay["ArtistGenreID"] = "Artist Genre";
 $searchcolumnsdisplay["TotalCount"] = "Total Team Size";
-$searchcolumnsdisplay["GenreName"] = "Primary Genre";
+//$searchcolumnsdisplay["GenreName"] = "Primary Genre";
 $searchcolumnsdisplay["timesignatureid"] = "Time Signature";
 $searchcolumnsdisplay["label"] = "Record Label";
 $searchcolumnsdisplay["labelid"] = "Record Label";
@@ -468,12 +476,12 @@ $searchcolumnsdisplay["ChorusCount"] = "Chorus Count";
 $searchcolumnsdisplay["peakwithin"] = "Peak Chart Position";
 $searchcolumnsdisplay["vocalsgender"] = "Vocal Gender";
 $searchcolumnsdisplay["solovsduet"] = "Solo vs. Multiple Lead Vocalists";
-$searchcolumnsdisplay["GenreFusionType"] = "Sub-Genre Fusion Type";
+//$searchcolumnsdisplay["GenreFusionType"] = "Sub-Genre Fusion Type";
 
 $searchcolumnsdisplay["dates"] = "Chart Dates";
 $searchcolumnsdisplay["songtitleappearancecount"] = "Song Title Appearance Count";
 $searchcolumnsdisplay["introlengthrange"] = "Intro Length";
-$searchcolumnsdisplay["influencecount"] = "Sub-Genre/Influence Count";
+$searchcolumnsdisplay["influencecount"] = "Genre/Influence Count";
 $searchcolumnsdisplay["introlengthrangenums"] = "Intro Length";
 $searchcolumnsdisplay["FirstSectionType"] = "First Section";
 $searchcolumnsdisplay["FirstChorusBreakdown"] = "First Chorus: Breakdown Arrangement";
@@ -533,12 +541,12 @@ $searchcolumnsdisplay["chorustypes"] = "Chorus Types";
 //$searchcolumnsdisplay["withimprint"] = "Has Imprint";
 $searchcolumnsdisplay["bpchorus"] = "Contains a High Impact Chorus";
 $searchcolumnsdisplay["bdfield"] = "Contains a Breakdown Segment";
-$searchcolumnsdisplay["subgenres"] = "Sub-Genres";
+$searchcolumnsdisplay["subgenres"] = "Genres";
 $searchcolumnsdisplay["influences"] = "Influences";
-$searchcolumnsdisplay["specificsubgenre"] = "Sub-Genre";
+$searchcolumnsdisplay["specificsubgenre"] = "Genre";
 $searchcolumnsdisplay["specificinfluence"] = "Influence";
 $searchcolumnsdisplay["newcarryfilter"] = "New Songs / Carryovers";
-$searchcolumnsdisplay["specificsubgenrealso"] = "Sub-Genre";
+$searchcolumnsdisplay["specificsubgenrealso"] = "Genre";
 $searchcolumnsdisplay["specificinfluencealso"] = "Influence";
 $searchcolumnsdisplay["introtypes"] = "Intro Types";
 $searchcolumnsdisplay["ssvocaltypes"] = "Vocals";
@@ -563,7 +571,7 @@ $searchcolumnsdisplay["PercentDiatonicChords"] = "Diatonic Chord Prevalence";
 $searchcolumnsdisplay["Timbre"] = "Timbre";
 $searchcolumnsdisplay["WordsRepetitionPrevalence"] = "Use of In-Line Lyric Repetition";
 $searchcolumnsdisplay["LineRepetitionPrevalence"] = "Line Repetition";
-$searchcolumnsdisplay["SlangWords"] = "Use of Slang";
+$searchcolumnsdisplay["SlangWordsRange"] = "Use of Slang";
 $searchcolumnsdisplay["ThousandWordsPrevalence"] = "Words Prevalence - Top 1000 Words";
 $searchcolumnsdisplay["TenThousandWordsPrevalence"] = "Words Prevalence - Top 10,000 Words";
 $searchcolumnsdisplay["FiftyThousandWordsPrevalence"] = "Words Prevalence - Top 10,000 Words";
@@ -576,6 +584,10 @@ $searchcolumnsdisplay["NumberOfRhymeGroupsELR"] = "Number Of Rhyme Groups In The
 $searchcolumnsdisplay["VocalsInstrumentsPrevalence"] = "Vocal vs. Instrumental Prevalence";
 $searchcolumnsdisplay["PersonReferences"] = "Person References";
 $searchcolumnsdisplay["LocationReferences"] = "Location References";
+$searchcolumnsdisplay["LocationReferencesRange"] = "Location References";
+$searchcolumnsdisplay["GeneralLocationReferencesRange"] = "General Location References";
+$searchcolumnsdisplay["PersonReferencesRange"] = "Location References";
+$searchcolumnsdisplay["GeneralPersonReferencesRange"] = "General Person References";
 $searchcolumnsdisplay["OrganizationorBrandReferences"] = "Organization or Brand References";
 $searchcolumnsdisplay["ConsumerGoodsReferences"] = "Consumer Goods References";
 $searchcolumnsdisplay["CreativeWorksTitles"] = "Creative Works Title References";
@@ -643,6 +655,7 @@ $searchcolumnsdisplay["MidWordRhymesRange"] = "Use of Mid-Word Rhymes (Range)";
 $searchcolumnsdisplay["MidLineRhymesPercentageRange"] = "Use of Mid-Line Rhymes (Range)";
 $searchcolumnsdisplay["LyricalDensityRange"] = "Lyrical Density (Range)";
 $searchcolumnsdisplay["DanceabilityRange"] = "Danceability (Range)";
+$searchcolumnsdisplay["ProfanityRange"] = "Profanity (Range)";
 $searchcolumnsdisplay["LoudnessRange"] = "Loudness (Range)";
 $searchcolumnsdisplay["Loudness"] = "Loudness";
 $searchcolumnsdisplay["TempoRangeGeneral"] = "Tempo Range (General)";
@@ -903,7 +916,7 @@ function formatSearchDisplayName( $default, $value )
 
 function formatSearchDisplay( $key, $value )
 {
-    global $peakvalues, $bpmvalues, $stwcvals, $singlecolumnfields, $grouptypes, $percentoftotalsong, $intropercentoftotalsong, $prechoruspercentoftotalsong, $firstchorustime, $firstchoruspercents, $intropercents, $svsmulttypes, $leadsvsmulttypes, $songwritertypes, $gendertypes, $vocaldeliverytypes, $introlengthsotherway, $seasonswithall, $dontmatchinstruments, $minweeksvalues;
+    global $peakvalues, $bpmvalues, $stwcvals, $singlecolumnfields, $grouptypes, $percentoftotalsong, $intropercentoftotalsong, $prechoruspercentoftotalsong, $firstchorustime, $firstchoruspercents, $intropercents, $svsmulttypes, $leadsvsmulttypes, $songwritertypes, $gendertypes, $vocaldeliverytypes, $introlengthsotherway, $seasonswithall, $dontmatchinstruments, $minweeksvalues, $maxnumperchart, $topmiddle, $bottommiddle;
 ;
     switch( $key ) {
         
@@ -939,6 +952,10 @@ function formatSearchDisplay( $key, $value )
         case "songname":
             $tname = $key;
             $where = $value;
+            break; 
+
+        case "season":
+            $where = $seasonswithall[$value];
             break; 
 
         case "artistinlast":
@@ -1112,10 +1129,10 @@ function formatSearchDisplay( $key, $value )
             }
 	    if( !$where )
 		{
-		    if( $value == "1:25" )
-			$where = "Top 25";
-		    if( $value == "75:100" )
-			$where = "Bottom 25";
+		    if( $value == "1:$topmiddle" )
+			$where = "Top $topmiddle";
+		    if( $value == "$bottommiddle:$maxnumperchart" )
+			$where = "Bottom $topmiddle";
 		}
 
             break; 
@@ -1384,7 +1401,9 @@ function getSearchResults( $search )
                     $peak = $search["peakwithin"]?"<".$search["peakwithin"]:$search["peakchart"];
 		    if( strpos( $search["peakwithin"], ":" ) !== false )
 			$peak = $search["peakwithin"];
-                    $sids = getSongIdsWithinQuarter( false, $value[fromq], $value[fromy], $value[toq], $value[toy], $peak );
+			if( $search["season"] )
+			$season = $search["season"];
+                    $sids = getSongIdsWithinQuarter( false, $value[fromq], $value[fromy], $value[toq], $value[toy], $peak, false, $season );
                     logquery( "peak is?" . $peak );
                     $sids[] = "-1";
                     $where .= " and songs.id in( " . implode( ", " , $sids ) . " )";
@@ -1392,13 +1411,17 @@ function getSearchResults( $search )
                 else if( $value["fromweekdate"] && $value["toweekdate"] )
                 {
                     $peak = $search["peakwithin"]?"<".$search["peakwithin"]:$search["peakchart"];
-                    $sids = getSongIdsWithinWeekdates( false, $value[fromweekdate], $value[toweekdate], $peak );
+			if( $search["season"] )
+			$season = $search["season"];
+                    $sids = getSongIdsWithinWeekdates( false, $value[fromweekdate], $value[toweekdate], $peak, false, $season );
                     logquery( "peak is?" . $peak );
                     $sids[] = "-1";
                     $where .= " and songs.id in( " . implode( ", " , $sids ) . " )";
                 }
                 
                 break;
+case "season":
+     break;
                     // this is an autofill field with one type for the same table 
             case "GenreName":
                 $tname = "genre";
@@ -1645,6 +1668,11 @@ function getSearchResults( $search )
             case "specificinfluence":
                 $where .= " and InfluencesHard like '%,$value,%'";
                 break;
+            case "ProductionMood":
+            case "MainMelodicRange":
+            case "ChordDegreePrevalence":
+                $where .= " and {$key} like '%$value%'";
+                break;
             case "subgenres":
             case "influences":
             case "placements":
@@ -1881,6 +1909,9 @@ function getSearchResults( $search )
                     
                 }
                 break;
+            case "MelodicIntervalPrevalence":
+                    $where .= "  and find_in_set( '$value', MelodicIntervalPrevalence ) > 0  ";
+	    break;
             case "mainlabeltype":
                 if( $value == "single" )
                 {
@@ -1988,6 +2019,7 @@ function getSearchResults( $search )
 	     else
 		 $where .= " and song_to_chart.NumberOfWeeksSpentInTheTop10 >= $value";
 	     break;
+		case "Tempo Range":
 		case "Tempo Range General":
 		    $nospaces = str_replace( " ", "", $key );
 		    $where .= " and {$nospaces} = '$value'";

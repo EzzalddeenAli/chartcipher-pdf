@@ -4,7 +4,7 @@ $cols[] = "Percentage Of Songs Within The Top 10";
 $cols[] = "Top Label(s)";
 $cols[] = "Top Songwriter Team Size(s)";
 $cols[] = "Top Lead Vocal";
-$cols[] = "Top Sub-Genre/Influence(s)";
+$cols[] = "Top Genre/Influence(s)";
 $cols[] = "Electronic Vs. Acoustic Songs";
 $cols[] = "Top Instruments (in addition to drums/percussion)";
 $cols[] = "Top Lyrical Theme(s)";
@@ -199,7 +199,7 @@ function getGenreValues( $quarterstorun, $col )
             $retval = appendGenreValues( $retval, $primarygenres, $allvalues, $notesarr, $initqs, "vocalsgender" );
             
             break;
-        case "Top Sub-Genre/Influence(s)":
+        case "Top Genre/Influence(s)":
             foreach( $primarygenres as $p )
             {
 		$tomatch = $p[Name];

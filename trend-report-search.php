@@ -248,14 +248,9 @@ outputSelectValues( $years, $search["dates"]["fromy"] ); ?>
 							<div class="form-row-left quarter-select">
 								<div class="cf"></div>
 								<div class="form-row-left-inner">
-								<label>Primary Genre:</label>
 								</div>
 								<div class="cf"></div>
 
-								<select name="genrefilter">
-									<option value="">All Primary Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-								</select>
 <div class="cf"></div>
 
 								</div>
@@ -349,12 +344,6 @@ foreach( array(  "column"=>"Bar Graph", "line"=>"Line Graph" ) as $pid=>$pval ) 
 		    }
 		    else {
 		       $('.comp-hidden-record').removeClass('show').addClass('hide');
-		    }
-		    if ($("#comp-select").val() == "Primary Genre") {
-		       $('.comp-hidden-primary').removeClass('hide').addClass('show');
-		    }
-		    else {
-		       $('.comp-hidden-primary').removeClass('show').addClass('hide');
 		    }
 		    if ($("#comp-select").val() == "Vocal Gender") {
 		       $('.comp-hidden-vocal').removeClass('hide').addClass('show');

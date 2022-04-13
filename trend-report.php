@@ -4,6 +4,8 @@ include "trendfunctions.php";
 include 'header.php'; 
 if( !$_GET["graphtype"] ) $_GET["graphtype"] = "line";
 
+$newsearchlink = "/read-a-report";
+
 $sorttableids = array();
 $allgraphnames = array();
 $season = $search[dates][season];
@@ -388,12 +390,6 @@ table.sortable  {
                <div class="icon back-search ">
                <a class=" desktop" href="trend-report-search.php?<?=$_SERVER['QUERY_STRING']?>">Back</a></div>
                         
-                       <div class="icon new-search ">
-           
-              <a href="https://analytics.chartcipher.com/read-a-report">New Search</a> </div>
-
-    
-    </div>
                         </div>
         
 <section>

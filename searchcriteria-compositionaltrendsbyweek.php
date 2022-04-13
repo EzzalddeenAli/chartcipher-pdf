@@ -78,23 +78,6 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
 </td></tr>
 
 <? } ?>
-<? if( isset( $genrefilter ) ) { 
-    $tmpurl = "compositional-trends-by-weeks-search-results.php?" . $_SERVER['QUERY_STRING'];
-$tmpurl = str_replace( "genrefilter={$genrefilter}", "", $tmpurl );
-$tmpurl .= "&genrefilter=";
-?>
-								<tr>
-									<td class="search-column-1">
-									Primary Genre
-</td>									<td class="search-column-2">
-
- 								<select name="genrefilter" style="width:200px" onChange='document.location.href="<?=$tmpurl?>" + escape( this.options[this.selectedIndex].value )' >
-									<option value="">All Primary Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-								</select>
-</td></tr>
-
-<? } ?>
 <!--                         <? if( $search[peakchart]  ){ ?>
 								<tr>
 									<td class="search-column-1">

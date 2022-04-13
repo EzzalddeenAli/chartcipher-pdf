@@ -29,31 +29,31 @@ include 'header.php';
                                        <div class="col-4 flex">
                                              <div class="header-block header-block-insights">
                                                <a  href="/insights.php" >
-                                                   <h1>Insights</h1>
-                                                    <p>Recent Trends and Reports</p>
+                                                   <h1>Trend Reports</h1>
+                                                    <p>Discover the trends behind the charts.</p>
                                                 </a>
                                             </div><!-- /.header-block-1B -->
 
                                        </div>
 
+                                          <div class="col-4 flex">
+                                              <div class="header-block header-block-benchmark">
+                                                  <a  href="benchmark.php" >
+                                                   <h1>Benchmark Reports</h1>
+                                                    <p>Compare groups of songs or subsets of charts.</p>
+                                                </a>
+                                            </div><!-- /.header-block-4b -->
+                                       </div>
                                        <div class="col-4 flex">
                                               <div class="header-block header-block-song-trends">
                                                   <a  href="/song-landing.php" >
-                                                   <h1>Song Trends</h1>
-                                                    <p>Search for Compositional, Lyrical, Production & Structure Trends</p>
+                                                   <h1>Interactive Trend Searches</h1>
+                                                    <p>Search for specific compositional, lyrical, production and structure trends.</p>
                                                 </a>
                                                
                                             </div><!-- /.header-block-4b -->
                                        </div>
                                         
-                                          <div class="col-4 flex">
-                                              <div class="header-block header-block-benchmark">
-                                                  <a  href="benchmark.php" >
-                                                   <h1>Benchmark</h1>
-                                                    <p>Benchmark Groups of Songs</p>
-                                                </a>
-                                            </div><!-- /.header-block-4b -->
-                                       </div>
                                     </div>
                                  
                                  

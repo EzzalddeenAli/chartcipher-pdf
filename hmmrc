@@ -1,0 +1,439 @@
+Array
+(
+    [Top 25] => Array
+        (
+            [5] => Array
+                (
+                    [season] => 
+                    [0] => 18
+                    [1] => 18%
+                    [2] => 5
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=5
+                    [4] => 917
+                )
+
+            [12] => Array
+                (
+                    [season] => 
+                    [0] => 35
+                    [1] => 35%
+                    [2] => 12
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=12
+                    [4] => 1760
+                )
+
+            [19] => Array
+                (
+                    [season] => 
+                    [0] => 8
+                    [1] => 8%
+                    [2] => 19
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=19
+                    [4] => 387
+                )
+
+            [205] => Array
+                (
+                    [season] => 
+                    [0] => 10
+                    [1] => 10%
+                    [2] => 205
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=205
+                    [4] => 490
+                )
+
+            [229] => Array
+                (
+                    [season] => 
+                    [0] => 32
+                    [1] => 32%
+                    [2] => 229
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=229
+                    [4] => 1617
+                )
+
+            [231] => Array
+                (
+                    [season] => 
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 231
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=231
+                    [4] => 71
+                )
+
+            [232] => Array
+                (
+                    [season] => 
+                    [0] => 4
+                    [1] => 4%
+                    [2] => 232
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=232
+                    [4] => 205
+                )
+
+            [307] => Array
+                (
+                    [season] => 
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 307
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=307
+                    [4] => 33
+                )
+
+            [308] => Array
+                (
+                    [season] => 
+                    [0] => 0.0
+                    [1] => 0.0%
+                    [2] => 308
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=308
+                    [4] => 1
+                )
+
+            [309] => Array
+                (
+                    [season] => 
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 309
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=309
+                    [4] => 31
+                )
+
+            [311] => Array
+                (
+                    [season] => 
+                    [0] => 0.0
+                    [1] => 0.0%
+                    [2] => 311
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=311
+                    [4] => 2
+                )
+
+            [312] => Array
+                (
+                    [season] => 
+                    [0] => 0.2
+                    [1] => 0.2%
+                    [2] => 312
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=312
+                    [4] => 9
+                )
+
+            [313] => Array
+                (
+                    [season] => 
+                    [0] => 0.0
+                    [1] => 0.0%
+                    [2] => 313
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=313
+                    [4] => 1
+                )
+
+            [314] => Array
+                (
+                    [season] => 
+                    [0] => 0.2
+                    [1] => 0.2%
+                    [2] => 314
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=314
+                    [4] => 10
+                )
+
+            [315] => Array
+                (
+                    [season] => 
+                    [0] => 0.4
+                    [1] => 0.4%
+                    [2] => 315
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=315
+                    [4] => 19
+                )
+
+            [316] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 316
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=316
+                    [4] => 3
+                )
+
+            [318] => Array
+                (
+                    [season] => 
+                    [0] => 0.0
+                    [1] => 0.0%
+                    [2] => 318
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=318
+                    [4] => 1
+                )
+
+            [321] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 321
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=321
+                    [4] => 3
+                )
+
+            [323] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 323
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=323
+                    [4] => 3
+                )
+
+            [324] => Array
+                (
+                    [season] => 
+                    [0] => 0.0
+                    [1] => 0.0%
+                    [2] => 324
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=324
+                    [4] => 1
+                )
+
+            [325] => Array
+                (
+                    [season] => 
+                    [0] => 0.0
+                    [1] => 0.0%
+                    [2] => 325
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=1:25&&search[specificsubgenrealso]=325
+                    [4] => 1
+                )
+
+        )
+
+    [Bottom 25] => Array
+        (
+            [5] => Array
+                (
+                    [season] => 
+                    [0] => 14
+                    [1] => 14%
+                    [2] => 5
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=5
+                    [4] => 184
+                )
+
+            [12] => Array
+                (
+                    [season] => 
+                    [0] => 41
+                    [1] => 41%
+                    [2] => 12
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=12
+                    [4] => 558
+                )
+
+            [19] => Array
+                (
+                    [season] => 
+                    [0] => 7
+                    [1] => 7%
+                    [2] => 19
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=19
+                    [4] => 101
+                )
+
+            [205] => Array
+                (
+                    [season] => 
+                    [0] => 13
+                    [1] => 13%
+                    [2] => 205
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=205
+                    [4] => 171
+                )
+
+            [229] => Array
+                (
+                    [season] => 
+                    [0] => 20
+                    [1] => 20%
+                    [2] => 229
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=229
+                    [4] => 278
+                )
+
+            [231] => Array
+                (
+                    [season] => 
+                    [0] => 3
+                    [1] => 3%
+                    [2] => 231
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=231
+                    [4] => 38
+                )
+
+            [232] => Array
+                (
+                    [season] => 
+                    [0] => 4
+                    [1] => 4%
+                    [2] => 232
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=232
+                    [4] => 55
+                )
+
+            [307] => Array
+                (
+                    [season] => 
+                    [0] => 0.4
+                    [1] => 0.4%
+                    [2] => 307
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=307
+                    [4] => 6
+                )
+
+            [308] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 308
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=308
+                    [4] => 1
+                )
+
+            [309] => Array
+                (
+                    [season] => 
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 309
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=309
+                    [4] => 7
+                )
+
+            [311] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 311
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=311
+                    [4] => 1
+                )
+
+            [312] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 312
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=312
+                    [4] => 2
+                )
+
+            [313] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 313
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=313
+                    [4] => 1
+                )
+
+            [314] => Array
+                (
+                    [season] => 
+                    [0] => 0.2
+                    [1] => 0.2%
+                    [2] => 314
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=314
+                    [4] => 3
+                )
+
+            [315] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 315
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=315
+                    [4] => 1
+                )
+
+            [323] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 323
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=323
+                    [4] => 2
+                )
+
+            [324] => Array
+                (
+                    [season] => 
+                    [0] => 0.1
+                    [1] => 0.1%
+                    [2] => 324
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2010&search[dates][toq]=2&search[dates][toy]=2021&search[peakwithin]=75:100&&search[specificsubgenrealso]=324
+                    [4] => 1
+                )
+
+        )
+
+)
+rows:Array
+(
+    [308] => 50s Rock N Roll
+    [314] => Blues
+    [307] => Christian
+    [321] => Classical
+    [5] => Country
+    [232] => Dance/Club/Electronic
+    [324] => Dance/Club/ElectronicHip Hop/Rap
+    [12] => Hip Hop/Rap
+    [311] => Hip Hop/RapLatin
+    [312] => Jazz
+    [231] => Latin
+    [309] => Musicals
+    [313] => New Wave Synth Pop
+    [229] => Pop
+    [19] => R&B/Soul
+    [318] => R&B/Soul Hip Hop/Rap
+    [315] => R&B/Soul Pop
+    [323] => rap-song
+    [325] => Reggae
+    [205] => Rock
+    [316] => Rock Pop
+)
+barkey: Array
+(
+    [325] => 0
+    [308] => 1
+    [324] => 2
+    [318] => 3
+    [313] => 4
+    [311] => 5
+    [316] => 6
+    [321] => 7
+    [323] => 8
+    [312] => 9
+    [314] => 10
+    [315] => 11
+    [307] => 12
+    [231] => 13
+    [309] => 14
+    [232] => 15
+    [19] => 16
+    [205] => 17
+    [5] => 18
+    [229] => 19
+    [12] => 20
+)

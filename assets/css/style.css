@@ -146,7 +146,7 @@ a:hover{
    display: block;
    vertical-align: middle;
    font-weight: 900;
-    color: #bcbcbc;
+    color: #7a7a7a;
     font-size: 18px;
         padding-bottom: 5px;
     line-height: 20px;
@@ -156,49 +156,49 @@ a:hover{
 .chart-header li a.email-link:before{
  font-family: "Font Awesome 5 Free";
    content: "\f0e0";
-    color: #bcbcbc;
+    color: #7a7a7a;
 }
 
 .chart-header li a.copy-link:before, ul.icon-list li a.copy-link:before{
  font-family: "Font Awesome 5 Free";
    content: "\f0c5";
-      color: #bcbcbc;
+          color: #7a7a7a;
 }
 
 .chart-header li a.back-link:before, ul.icon-list li a.back-link:before{
  font-family: "Font Awesome 5 Free";
    content: "\f0a8";
-       color: #bcbcbc;
+        color: #7a7a7a;
 }
 
  ul.icon-list li a.search-link:before{
  font-family: "Font Awesome 5 Free";
    content: "\f002";
-       color: #bcbcbc;
+          color: #7a7a7a;
 }
 
  ul.icon-list li a.save-link:before{
  font-family: "Font Awesome 5 Free";
    content: "\f02e";
-       color: #bcbcbc;
+        color: #7a7a7a;
        font-weight: 900;
 }
 
  ul.icon-list li a.download-link:before{
  font-family: "Font Awesome 5 Free";
    content: "\f019";
-       color: #bcbcbc;
+       color: #7a7a7a;
        font-weight: 900;
 }
 
 
 ul.icon-list li:hover a:before, ul.icon-list li:hover a, ul.icon-list a:hover h2:after {
-    color: #7a7a7a;
+    color: #8b26b2;
 }
 
 
 ul.icon-list li:hover a:before, ul.icon-list li:hover a, ul.icon-list a:hover h2:after {
-    color: #7a7a7a;
+    color: #8b26b2;
 }
 
 
@@ -247,6 +247,20 @@ select {
  * Table Code
  * ----------------------------------------------------------------------------
  */
+
+.flex2{
+    
+    display: flex;
+    display: -webkit-box;
+display: -moz-box;
+display: -ms-flexbox;
+display: -webkit-flex;
+
+justify-content:space-between;
+align-items:center;
+    align-content: center;
+    
+}
 .search {
     display: flex;
     align-items: center;
@@ -297,8 +311,9 @@ table td:first-child{
     width: 30%;
 }
 
+
 table tr td a{
-      color: #333333;
+      color: #000;
         display: contents;
     height: 100%;
     width: 100%;
@@ -332,7 +347,7 @@ table tr:hover, .table-section tr:hover, .table-charts tr:hover, .table-insights
 
 
 .table-charts tr td a, .table-insights tr td a{
-      color: #333333;
+      color: #000;
 }
 
 .table-charts tr td a{
@@ -344,9 +359,10 @@ table tr:hover, .table-section tr:hover, .table-charts tr:hover, .table-insights
 
 .table-section tr td, .insights-section tr td{
     font-size: 14px;
-    color: #333333;
+    color: #000;
     line-height: 35px;
     font-weight: 200;
+    width: 100%;
 }
 
 /*
@@ -428,7 +444,7 @@ font-size: 14px;
 
 .table-insights tr td:first-child,
 .table-insights thead tr th{
-    color: #333333;
+    color: #000000;
 
 }
 
@@ -1163,7 +1179,8 @@ li.menu-item-0.user a.active
 	background-color:#28282e;
 }
 .orange-btn{
-	background-color:#ff6633;
+/*ff6633*/
+	background-color:#8b26b2;
 	display: inline-block;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -1960,7 +1977,7 @@ color: #bcbcbc;
 	text-decoration:none;
 	float:right;
 display: block;
-    color: #bcbcbc;
+    color: #7a7a7a;
     text-align: center;
     text-decoration: none;
 }
@@ -1972,6 +1989,7 @@ background-color: #fafafa;
 border-top: solid 1px #f1f2f7;
 padding: 10px 0;
 position: absolute;
+    left: 0px;
 bottom: 0px;
 width:100%;
     text-align: center;
@@ -2408,6 +2426,12 @@ a.save-header-back{
 }
 
 
+table tr td a {
+  color: #000;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
 
 .search-body #comp-search-table{
 	margin: 5px 0 0;
@@ -4231,8 +4255,8 @@ background-size: 22px;
 /* style the items (options), including the selected item: */
 .select-items div,.select-selected {
   color: #8b26b2;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
   padding: 10px 20px 10px 20px;
   border: 0px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -4241,7 +4265,9 @@ background-size: 22px;
 }
 
 
-
+.custom-select.flip .select-items{
+    left: calc(100% - 300px);
+}
 
 
 /* Style items (options): */
@@ -4264,10 +4290,11 @@ background-size: 22px;
     line-height: 18px;
 }
 
+/*
 .select-items div:last-child{
     border-bottom: 0px solid #cecece;
 
-}
+}*/
 
 .select-items div:first-child{
     border-top : 1px solid #cecece;

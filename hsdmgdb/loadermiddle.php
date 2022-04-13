@@ -22,6 +22,13 @@ $toupdate["BillboardArtistName"] = getData( "BillboardArtist" );
 
 $dbsongid = db_query_first_cell( "select id from dbi360_admin.songs where BillboardArtistName = ". $toupdate["BillboardArtistName"] . " and BillboardName = ". $toupdate["BillboardName"] . " " );
 
+$bbid = db_query_first_cell( "select title from dbi360_admin.billboardinfo where title = ".$toupdate["BillboardName"] ." and artist = ".$toupdate["BillboardArtistName"] ." limit 1" );
+if( !$bbid )
+{
+	file_put_contents( "nobillboardmatch.txt", "no match in the billboard records for: $toupdate[BillboardArtistName], $toupdate[BillboardName]\n", FILE_APPEND );
+	$billboardnum++;
+}
+
 if( $dbsongid )
     {
 	$toupdate["HSDsongid"] = $dbsongid;
@@ -195,6 +202,11 @@ $toupdate["SongTitleAppearances"] = getData( "Song Title Appearances" );
 $toupdate["PersonReferences"] = getYesNoData( "Person References" );
     // [Location References] => 45
 $toupdate["LocationReferences"] = getYesNoData( "Location References" );
+$toupdate["TotalAlliteration"] = getYesNoData( "Total Alliteration" );
+
+$toupdate["GeneralPersonReferences"] = getYesNoData( "General Person" );
+    // [Location References] => 45
+$toupdate["GeneralLocationReferences"] = getYesNoData( "General Location" );
     // [Organization or Brand References] => 46
 $toupdate["OrganizationorBrandReferences"] = getYesNoData( "Organization or Brand References" );
     // [Consumer Goods References] => 47
@@ -302,7 +314,7 @@ if( $data[$headerrow["Primary Genre"]] )
     $toupdate["GenreID"] = getOrCreate( "genres", $data[$headerrow["Primary Genre"]] );
     // [Sub-Genres & Influences] => 86
 //echo( "subgenres were ".getData(  ) . "<br>" );
-addOtherTableToSong( $songid, "Sub-Genres", "subgenre", "Main" );
+addOtherTableToSong( $songid, "Genres", "subgenre", "Main" );
 addOtherTableToSong( $songid, "Influences", "influence", "Main" );
 
 $exp = explode( ",", $data[$headerrow["Production Mood"]] );
@@ -340,9 +352,11 @@ foreach( $toupdate as $colname => $val )
     $tmpstr .= " $colname = $val";
     //echo( "update songs set $colname = $val where id = $songid<br>" ); 
 }
+file_put_contents(  "ccloaddata", "update songs set $tmpstr where id = $songid" , FILE_APPEND );
 db_query( "update songs set $tmpstr where id = $songid" ); 
-
+file_put_contents(  "ccloaddata", "after" , FILE_APPEND );
 include "ccautocalc.php";
+file_put_contents(  "ccloaddata", "after autocalc" , FILE_APPEND );
 
 $artist = $toupdate["BillboardArtistName"];
 $songname = $toupdate["BillboardName"];

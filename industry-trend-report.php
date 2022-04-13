@@ -11,6 +11,8 @@ $doingweeklysearch = false;
 $replacetotimeperiod = false;
 
 
+$newsearchlink = "/read-a-report";
+
 
 if( !$_GET["graphtype"] ) $_GET["graphtype"] = "line";
 $urldatestr = "&search[dates][fromq]=" . $search[dates][fromq]. "&search[dates][fromy]=" . $search[dates][fromy];
@@ -430,12 +432,6 @@ h3.tabletitle{
                <div class="icon back-search ">
                    <a class=" desktop" href="industry-trend-report-search.php?<?=$_SERVER['QUERY_STRING']?>">Back</a></div>
                         
-                       <div class="icon new-search ">
-           
-              <a href="/read-a-report">New Search</a> </div>
-
-    
-    </div>
                         </div>
         
         

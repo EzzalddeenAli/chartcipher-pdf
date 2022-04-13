@@ -5,6 +5,42 @@ $thetype = str_replace( "/", "", $thetype );
 $thetype = str_replace( ".php", "", $thetype );
 $thetype = array_shift( explode( "?", $thetype ) );
 
+
+if( $gorachel )
+{
+	$rows = db_query_rows( "select ArtistBand, SongNameHard, MajorMinor from songs, song_to_chart where songs.id = songid and chartid = 37 and song_to_chart.YearEnteredTheTop10 = '2022' order by SongNameHard" );
+	foreach( $rows as $r )
+	{
+		echo( $r[SongNameHard] . "<br>" );
+		}
+exit;
+			
+}
+
+if( $gorachel2 )
+{
+    $f = explode( "\n", file_get_contents( "tocheck.txt" ) );
+    //    print_r( $f );
+    echo( "<table style='width:800px'>" );
+	foreach( $f as $songname )
+	    {	
+		$songname = trim( $songname );
+		if( !$songname ) continue;
+		$r = db_query_first( "select * from songs left join song_to_chart on songs.id = songid and chartid = 37 and SongNameHard = '".escMe( $songname ) . "'" );
+		$s = $r[SongNameHard]; 
+		if( !$r["NumberOfWeeksSpentInTheTop10"] )
+		    {
+			$s = "No Match in billboard";
+		    }
+		$res = db_query_first( "select group_concat( distinct( chart ) ) as chartnames,  group_concat( distinct( artist ) ) as artistnames from  dbi360_admin.billboardinfo where title = '".escMe( $songname )."' limit 1;" );
+		echo( "<tr><td>$songname</td><td>$s</td><td>$r[NumberOfWeeksSpentInTheTop10]</td><td>$res[chartnames]</td><td>$res[artistnames]</td></tr>" );
+		}
+	echo( "</table>" );
+	exit;
+}
+
+
+
 if( !$thetype ) $thetype = $searchsubtype;
 if( isset( $_GET["graphtype"] ) && $search[dates][toq] == $search[dates][fromq] &&  $search[dates][toy] == $search[dates][fromy] )
 {
@@ -144,9 +180,14 @@ $backurl = "/song-landing.php";
                 </div>
                 <div class="cf"></div>
               </div>
-<!--                   <div class="range range-question">To Search for seasonal trends, select a season below.</div>                         -->
+                   <div class="range range-question">To Search for seasonal trends, select a season below.</div>                        
             <div class="form-row-full year-select">
                 <div class="form-row-inner">
+									<select id="season" name="search[dates][season]" <?=$searchby=="Year"?"":"disabled"?>>
+										<option value="">Any</option>
+<?php
+outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
+									</select>
                 </div>
                 <div class="cf"></div>
               </div>
@@ -190,7 +231,7 @@ $backurl = "/song-landing.php";
                   <div class="form-row-full quarter-select">
 								<div class="form-row-left-inner">
                                     
-                                    <div class="select-wrapper">
+                                    <div class="select-wrapper"  style="display:none">
                                         <label>Select songs to include (New songs/Carryovers)</label>
               								<select name="newcarryfilter">
               									<option value="">All Songs</option>
@@ -217,16 +258,23 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
                                       
                   <div class="form-row-full quarter-select">
 								<div class="form-row-left-inner">
-                               
-                                        <label>Select A Specific Primary Genre</label>
-							<select name="genrefilter">
-								<option value="">All Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-							</select>                                    
+
+
+
+
+
+                                  <label>Select a Specific Genre</label>
+									<select name="search[specificsubgenre]" >
+									<option value=""  selected>All</option>
+									<? outputSelectValuesForOtherTable( "subgenres", $search[specificsubgenre]); ?>
+									</select>
+
+
+
 
 								</div>
 								<div class="form-row-right-inner">
-                                    <div class="select-wrapper">
+                                    <div class="select-wrapper" style="display:none">
                                         <label>Select a Specifc Lyrical Theme</label>
 								<select name='search[lyricalthemeid]'>
 									<option value="">All</option>
@@ -279,7 +327,7 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
                    </div>
                 
                 
-                               <div class="row outter row-equal row-padding">
+                               <div class="row outter row-equal row-padding" style="display:none">
                     <div class="col-12 flex switch">
                
                        <div class="row inner row-equal row-padding link-alt">
@@ -310,13 +358,6 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
 								</select>
                 </div>-->
 
-								</div>
-								<div class="form-row-right-inner">
-                                  <label>Select a Specific Sub-Genre</label>
-									<select name="search[subgenreid]" >
-									<option value=""  selected>All</option>
-									<? outputSelectValuesForOtherTable( "subgenres", $search[subgenreid]); ?>
-									</select>
 								</div>
 								
 				<div class="cf"></div>
@@ -372,15 +413,12 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
                    </div>
                 
                 
+                 
+
                             
-                            
-            <div class="form-row-full quarter-select">
-								<div class="form-row-left-inner">
-                                    
-               	<span id="outputformatspan" style="display: none;">
-</span>                                    &nbsp;
-								</div>
-								<div class="form-row-right-inner">
+            <div class="form-row-full quarter-select" style="margin-bottom:70px;">
+							
+								<div class="form-row-right-inner" style='width:100%;'>
                                <div class="submit-btn-wrap">
                                    <div></div>
                                        <input type="submit" value="Search">
@@ -390,6 +428,9 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
 								
 				<div class="cf"></div>
 		</div>
+
+                            
+                            
                 
                 
                   
@@ -484,12 +525,12 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
 		    else {
 		       $('.comp-hidden-producer').removeClass('show').addClass('hide');
 		    }
-		    if ($("#comp-select").val() == "Primary Genre") {
-		       $('.comp-hidden-primary').removeClass('hide').addClass('show');
-		    }
-		    else {
-		       $('.comp-hidden-primary').removeClass('show').addClass('hide');
-		    }
+		    // if ($("#comp-select").val() == "Primary Genre") {
+		    //    $('.comp-hidden-primary').removeClass('hide').addClass('show');
+		    // }
+		    // else {
+		    //    $('.comp-hidden-primary').removeClass('show').addClass('hide');
+		    // }
 		    if ($("#comp-select").val() == "Vocal Gender") {
 		       $('.comp-hidden-vocal').removeClass('hide').addClass('show');
 		    }

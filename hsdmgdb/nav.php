@@ -203,7 +203,7 @@ foreach( $hcats as $c )
 </ul>
 </li>
 
-   <li><a href='#'>Content (A-M)</a>
+   <li style='display:none'><a href='#'>Content (A-M)</a>
 <ul class="fallback">
 <li><a style="font-size:12px" href='artists.php'>Artists</a></li>
 <li><a style="font-size:12px" href='artistgenres.php'>Artist Genres</a></li>
@@ -231,7 +231,7 @@ foreach( $hcats as $c )
 <li><a style="font-size:12px" href='members.php'>Members</a> </li>
 </ul>
 </li>
-   <li><a href='#'>Content (N-Z)</a>
+   <li style='display:none'><a href='#'>Content (N-Z)</a>
 <ul class="fallback">
 <li><a style="font-size:12px" href='outrotypes.php'>Outro Types</a> </li>
 <li><a style="font-size:12px" href='placements.php'>Placements</a> </li>
@@ -265,9 +265,13 @@ foreach( $hcats as $c )
 </li>
 <? } ?>
 <li>
-<a href='loader.php'>Upload</a>
+<a href='ccloader.php'>Upload</a>
 </li>
-<? if( $_SESSION["isadminlogin"] || isRachel()  ) { ?>
+<li>
+<a href='datavalidation.php'>Data Validation</a>
+</li>
+<li><a href='usage.php'>Usage</a></li>
+<? if( 1 == 0 && ($_SESSION["isadminlogin"] || isRachel() ) ) { ?>
 <li>
 <a href='#'>Usage</a>
 <ul class="fallback">

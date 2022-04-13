@@ -346,12 +346,52 @@ for (i = 0; i < l; i++) {
 //	    alert( s.id );
 	    if( s.id == "mysetchart" )
 	    {
-	    	    document.location.href = "chart-landing.php?setchart=" + s.options[i].value;
+<? 
+//print_r( $_SERVER );
+    $tmpurl = $_SERVER['SCRIPT_URL'] . "?" . urldecode( $_SERVER['QUERY_STRING'] );
+    if( $_GET["setchart"] )
+        $tmpurl = str_replace( "setchart=". $_GET["setchart"] , "", $tmpurl );
+
+?>
+	    	    document.location.href = "<?=$tmpurl?>&setchart=" + s.options[i].value;
+		    	    break;
+	    }
+	    else 	    if( s.id == "mysetquarter" )	
+	    {
+<? 
+//print_r( $_SERVER );
+    $tmpurl = $_SERVER['SCRIPT_URL'] . "?" . urldecode( $_SERVER['QUERY_STRING'] );
+    if( $_GET["thisquarter"] )
+    {
+        $tmpurl = str_replace( "thisquarter=". $_GET["thisquarter"] , "", $tmpurl );
+	}
+    if( $_GET["search"]["comparisonaspect"] )
+    {
+        $tmpurl = str_replace( "search[comparisonaspect]=". $_GET["search"]["comparisonaspect"] , "", $tmpurl );
+	}
+
+?>
+	    	    document.location.href = "<?=$tmpurl?>&thisquarter=" + s.options[i].value;
 		    	    break;
 	    }
 	    else if( s.id == "mysetbenchmark" )
 	    {
 	    	    document.location.href = "<?=$benchmarkurlwithouttype?>&search[benchmarktype]=" + encodeURIComponent( s.options[i].value );
+		    	    break;
+	    }
+	    else if( s.id == "mysetreport" )
+	    {
+		document.location.href = s.options[i].value;
+		break;
+	    }
+	    else if( s.id == "mysetbenchmarktype" )
+	    {
+	    	    document.location.href = "<?=$benchmarkurlwithoutsubtype?>&search[benchmarksubtype]=" + encodeURIComponent( s.options[i].value );
+		    	    break;
+	    }
+	    else if( s.id == "mysetgraphtype" )
+	    {
+	    	    document.location.href = "<?=$benchmarkurlwithoutsubtype?>&graphtype=" + encodeURIComponent( s.options[i].value );
 		    	    break;
 	    }
 	    else

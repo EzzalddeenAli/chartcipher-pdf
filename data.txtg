@@ -1,0 +1,2088 @@
+-- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: dbi360_admin
+-- ------------------------------------------------------
+-- Server version	10.1.48-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `SectionShorthand`
+--
+
+DROP TABLE IF EXISTS `SectionShorthand`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SectionShorthand` (
+  `songid` int(11) DEFAULT NULL,
+  `section` varchar(255) DEFAULT NULL,
+  `LengthsSame` int(11) DEFAULT NULL,
+  `NumSections` int(11) DEFAULT NULL,
+  `PercentOfSong` decimal(10,2) DEFAULT NULL,
+  KEY `ssidx` (`songid`,`section`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `artist_to_genre`
+--
+
+DROP TABLE IF EXISTS `artist_to_genre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artist_to_genre` (
+  `artistid` int(11) DEFAULT NULL,
+  `genreid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `artist_to_member`
+--
+
+DROP TABLE IF EXISTS `artist_to_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artist_to_member` (
+  `artistid` int(11) DEFAULT NULL,
+  `memberid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `artists`
+--
+
+DROP TABLE IF EXISTS `artists`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artists` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `FirstName` varchar(255) DEFAULT NULL,
+  `LastName` varchar(255) DEFAULT NULL,
+  `YearBorn` varchar(255) DEFAULT NULL,
+  `WhereBorn` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `City` varchar(255) DEFAULT NULL,
+  `Wikipedia` varchar(255) DEFAULT NULL,
+  `ArtistURL` varchar(255) DEFAULT NULL,
+  `MiddleName` varchar(255) DEFAULT NULL,
+  `FullBirthName` varchar(255) DEFAULT NULL,
+  `datecreated` date DEFAULT NULL,
+  `producerid` int(11) DEFAULT NULL,
+  `ArtistVocalGender` enum('Female','Male','Female/Male') DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `l2` (`id`,`Name`)
+) ENGINE=MyISAM AUTO_INCREMENT=3379 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `backvocals`
+--
+
+DROP TABLE IF EXISTS `backvocals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `backvocals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `backvocaltypes`
+--
+
+DROP TABLE IF EXISTS `backvocaltypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `backvocaltypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `billboardinfo`
+--
+
+DROP TABLE IF EXISTS `billboardinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `billboardinfo` (
+  `chart` varchar(255) DEFAULT NULL,
+  `thedate` date DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `rank` int(11) DEFAULT NULL,
+  `artist` varchar(255) DEFAULT NULL,
+  `lastweek` int(11) DEFAULT NULL,
+  `peakpos` int(11) DEFAULT NULL,
+  `weeksonchart` int(11) DEFAULT NULL,
+  `songid` int(11) DEFAULT NULL,
+  `weekdateid` int(11) DEFAULT NULL,
+  KEY `id1` (`chart`),
+  KEY `id2` (`chart`,`thedate`),
+  KEY `id3` (`chart`,`thedate`,`rank`),
+  KEY `id4` (`chart`,`thedate`,`rank`,`songid`),
+  KEY `id5` (`chart`,`rank`,`songid`),
+  KEY `id6` (`chart`,`thedate`,`songid`),
+  KEY `bbinfo` (`artist`,`title`),
+  KEY `bbinfo2` (`songid`,`thedate`),
+  KEY `wdidx` (`weekdateid`,`songid`),
+  KEY `wdidx2` (`weekdateid`,`thedate`),
+  KEY `wdidx3` (`weekdateid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bridgecharacteristics`
+--
+
+DROP TABLE IF EXISTS `bridgecharacteristics`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bridgecharacteristics` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `charts`
+--
+
+DROP TABLE IF EXISTS `charts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `charts` (
+  `chartname` varchar(255) DEFAULT NULL,
+  `chartkey` varchar(255) DEFAULT NULL,
+  `IsLive` tinyint(4) DEFAULT '0',
+  `chartdescr` text,
+  `chartmedium` set('Radio Airplay','Dance Club','Sales Data','Streaming Data') DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `genre` set('Mainstream','Hip Hop/Rap','R&B/Soul','Country','Pop','Latin','Dance/Club/Electronic','Rock') DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `UseOnDb` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `chorusstructures`
+--
+
+DROP TABLE IF EXISTS `chorusstructures`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chorusstructures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `chorustypes`
+--
+
+DROP TABLE IF EXISTS `chorustypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chorustypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `clients`
+--
+
+DROP TABLE IF EXISTS `clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `containssampleds`
+--
+
+DROP TABLE IF EXISTS `containssampleds`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `containssampleds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `customhovers`
+--
+
+DROP TABLE IF EXISTS `customhovers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customhovers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `Value` text,
+  `WhereGoes` varchar(255) DEFAULT NULL,
+  `hovercategory` varchar(255) DEFAULT NULL,
+  `usecount` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1130 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `customtitles`
+--
+
+DROP TABLE IF EXISTS `customtitles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customtitles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `Value` text,
+  `usecount` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1263 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `dashcache`
+--
+
+DROP TABLE IF EXISTS `dashcache`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dashcache` (
+  `thedate` date DEFAULT NULL,
+  `name` varchar(25) DEFAULT NULL,
+  `value` longtext,
+  KEY `dc` (`name`,`thedate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `downloads`
+--
+
+DROP TABLE IF EXISTS `downloads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `downloads` (
+  `dateadded` datetime DEFAULT NULL,
+  `pdfname` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `endingtypes`
+--
+
+DROP TABLE IF EXISTS `endingtypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `endingtypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `favorites`
+--
+
+DROP TABLE IF EXISTS `favorites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favorites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `sessionid` varchar(255) DEFAULT NULL,
+  `songid` int(11) DEFAULT NULL,
+  `dateadded` datetime DEFAULT NULL,
+  `InfoDescr` text,
+  `proxyloginid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=532 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `genres`
+--
+
+DROP TABLE IF EXISTS `genres`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `graphnotes`
+--
+
+DROP TABLE IF EXISTS `graphnotes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `graphnotes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `Value` text,
+  `WhereGoes` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1049 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `group_to_genre`
+--
+
+DROP TABLE IF EXISTS `group_to_genre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_to_genre` (
+  `groupid` int(11) DEFAULT NULL,
+  `genreid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `group_to_member`
+--
+
+DROP TABLE IF EXISTS `group_to_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_to_member` (
+  `groupid` int(11) DEFAULT NULL,
+  `memberid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `groups`
+--
+
+DROP TABLE IF EXISTS `groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `artists` text,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `datecreated` date DEFAULT NULL,
+  `producerid` int(11) DEFAULT NULL,
+  `GroupVocalGender` enum('Female','Male','Female/Male') DEFAULT NULL,
+  `TwitterHandle` varchar(255) DEFAULT NULL,
+  `TwitterURL` varchar(255) DEFAULT NULL,
+  `InstagramURL` varchar(255) DEFAULT NULL,
+  `InstagramHandle` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=514 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `homepage`
+--
+
+DROP TABLE IF EXISTS `homepage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `homepage` (
+  `name` varchar(255) DEFAULT NULL,
+  `value` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `immersionusage`
+--
+
+DROP TABLE IF EXISTS `immersionusage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `immersionusage` (
+  `dateadded` datetime DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `pagehit` text,
+  `ipaddress` varchar(40) DEFAULT NULL,
+  `sessionid` varchar(40) DEFAULT NULL,
+  `domain` varchar(100) DEFAULT NULL,
+  KEY `idx` (`sessionid`),
+  KEY `idx2` (`userid`),
+  KEY `idx3` (`userid`,`dateadded`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `imprints`
+--
+
+DROP TABLE IF EXISTS `imprints`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imprints` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `instruments`
+--
+
+DROP TABLE IF EXISTS `instruments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `instruments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `introtypes`
+--
+
+DROP TABLE IF EXISTS `introtypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `introtypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  `ishook` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `labels`
+--
+
+DROP TABLE IF EXISTS `labels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `labels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `TwitterHandle` varchar(255) DEFAULT NULL,
+  `TwitterURL` varchar(255) DEFAULT NULL,
+  `InstagramURL` varchar(255) DEFAULT NULL,
+  `InstagramHandle` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `l` (`id`,`Name`)
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lyricalthemes`
+--
+
+DROP TABLE IF EXISTS `lyricalthemes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lyricalthemes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `members`
+--
+
+DROP TABLE IF EXISTS `members`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `members` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(255) DEFAULT NULL,
+  `StageName` varchar(255) DEFAULT NULL,
+  `LastName` varchar(255) DEFAULT NULL,
+  `MiddleName` varchar(255) DEFAULT NULL,
+  `datecreated` datetime DEFAULT NULL,
+  `MemberGender` enum('Female','Male','Gender Non-Conforming') DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `City` varchar(255) DEFAULT NULL,
+  `Wikipedia` varchar(255) DEFAULT NULL,
+  `ArtistURL` varchar(255) DEFAULT NULL,
+  `FullBirthName` varchar(255) DEFAULT NULL,
+  `YearBorn` varchar(255) DEFAULT NULL,
+  `WhereBorn` varchar(255) DEFAULT NULL,
+  `TwitterHandle` varchar(255) DEFAULT NULL,
+  `TwitterURL` varchar(255) DEFAULT NULL,
+  `InstagramURL` varchar(255) DEFAULT NULL,
+  `InstagramHandle` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1741 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `outrotypes`
+--
+
+DROP TABLE IF EXISTS `outrotypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `outrotypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pdfdownloads`
+--
+
+DROP TABLE IF EXISTS `pdfdownloads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pdfdownloads` (
+  `pdfid` int(11) DEFAULT NULL,
+  `dateadded` datetime DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `watermark` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pdfuploads`
+--
+
+DROP TABLE IF EXISTS `pdfuploads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pdfuploads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `keyname` varchar(255) DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `dateuploaded` datetime DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `placement_to_vocalexample`
+--
+
+DROP TABLE IF EXISTS `placement_to_vocalexample`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `placement_to_vocalexample` (
+  `placementid` int(11) DEFAULT NULL,
+  `vocalexampleid` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `placement_to_wowfactor`
+--
+
+DROP TABLE IF EXISTS `placement_to_wowfactor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `placement_to_wowfactor` (
+  `placementid` int(11) DEFAULT NULL,
+  `wowfactorid` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `placements`
+--
+
+DROP TABLE IF EXISTS `placements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `placements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `postchorustypes`
+--
+
+DROP TABLE IF EXISTS `postchorustypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `postchorustypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `primaryinstrumentations`
+--
+
+DROP TABLE IF EXISTS `primaryinstrumentations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `primaryinstrumentations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  `Grouping` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `producer_to_member`
+--
+
+DROP TABLE IF EXISTS `producer_to_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `producer_to_member` (
+  `producerid` int(11) DEFAULT NULL,
+  `memberid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `producers`
+--
+
+DROP TABLE IF EXISTS `producers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `producers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `member1` varchar(255) DEFAULT NULL,
+  `member2` varchar(255) DEFAULT NULL,
+  `member3` varchar(255) DEFAULT NULL,
+  `member4` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `member5` varchar(255) DEFAULT NULL,
+  `Gender` varchar(100) DEFAULT NULL,
+  `member6` varchar(255) DEFAULT NULL,
+  `TwitterURL` varchar(255) DEFAULT NULL,
+  `TwitterHandle` varchar(255) DEFAULT NULL,
+  `InstagramURL` varchar(255) DEFAULT NULL,
+  `InstagramHandle` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `l2` (`id`,`Name`)
+) ENGINE=MyISAM AUTO_INCREMENT=476 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `proxylogins`
+--
+
+DROP TABLE IF EXISTS `proxylogins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proxylogins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `dateadded` datetime DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `facultyorstudent` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=924 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `recentsearches`
+--
+
+DROP TABLE IF EXISTS `recentsearches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `recentsearches` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `url` text,
+  `dateadded` datetime DEFAULT NULL,
+  `sessionid` varchar(255) DEFAULT NULL,
+  `searchtype` varchar(255) DEFAULT NULL,
+  `proxyloginid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=125158 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `retroinfluences`
+--
+
+DROP TABLE IF EXISTS `retroinfluences`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `retroinfluences` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `rocksubgenres`
+--
+
+DROP TABLE IF EXISTS `rocksubgenres`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rocksubgenres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `samplesongs`
+--
+
+DROP TABLE IF EXISTS `samplesongs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `samplesongs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `Year` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `sampletypes`
+--
+
+DROP TABLE IF EXISTS `sampletypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sampletypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `savedartists`
+--
+
+DROP TABLE IF EXISTS `savedartists`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `savedartists` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `Artist` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `sessionid` varchar(255) DEFAULT NULL,
+  `dateadded` datetime DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `proxyloginid` int(11) DEFAULT NULL,
+  `searchtype` varchar(255) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `savedsearchcriteria`
+--
+
+DROP TABLE IF EXISTS `savedsearchcriteria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `savedsearchcriteria` (
+  `savedsearchid` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Value` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `savedsearches`
+--
+
+DROP TABLE IF EXISTS `savedsearches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `savedsearches` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `url` text,
+  `sessionid` varchar(255) DEFAULT NULL,
+  `dateadded` datetime DEFAULT NULL,
+  `searchtype` varchar(255) DEFAULT NULL,
+  `proxyloginid` int(11) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=699 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `searchhistory`
+--
+
+DROP TABLE IF EXISTS `searchhistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `searchhistory` (
+  `dateadded` datetime DEFAULT NULL,
+  `url` text,
+  `userid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `settings`
+--
+
+DROP TABLE IF EXISTS `settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `settings` (
+  `name` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `shortened`
+--
+
+DROP TABLE IF EXISTS `shortened`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shortened` (
+  `code` varchar(255) DEFAULT NULL,
+  `redirto` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_artist`
+--
+
+DROP TABLE IF EXISTS `song_to_artist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_artist` (
+  `songid` int(11) DEFAULT NULL,
+  `artistid` int(11) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `songsampleid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sta` (`artistid`,`type`),
+  KEY `sta2` (`songid`,`type`),
+  KEY `sta3` (`songid`,`type`,`artistid`)
+) ENGINE=MyISAM AUTO_INCREMENT=13758 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_backvocal`
+--
+
+DROP TABLE IF EXISTS `song_to_backvocal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_backvocal` (
+  `songid` int(11) DEFAULT NULL,
+  `backvocalid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_backvocaltype`
+--
+
+DROP TABLE IF EXISTS `song_to_backvocaltype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_backvocaltype` (
+  `songid` int(11) DEFAULT NULL,
+  `backvocaltypeid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_bridgecharacteristic`
+--
+
+DROP TABLE IF EXISTS `song_to_bridgecharacteristic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_bridgecharacteristic` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bridgecharacteristicid` int(11) DEFAULT NULL,
+  `type` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24426 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_chorusstructure`
+--
+
+DROP TABLE IF EXISTS `song_to_chorusstructure`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_chorusstructure` (
+  `songid` int(11) DEFAULT NULL,
+  `chorusstructureid` int(11) DEFAULT NULL,
+  `ChorusNum` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_chorustype`
+--
+
+DROP TABLE IF EXISTS `song_to_chorustype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_chorustype` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `chorustypeid` int(11) DEFAULT NULL,
+  `type` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=36160 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_containssampled`
+--
+
+DROP TABLE IF EXISTS `song_to_containssampled`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_containssampled` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `containssampledid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3785 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_endingtype`
+--
+
+DROP TABLE IF EXISTS `song_to_endingtype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_endingtype` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `endingtypeid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lted` (`songid`,`endingtypeid`)
+) ENGINE=MyISAM AUTO_INCREMENT=16866 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_group`
+--
+
+DROP TABLE IF EXISTS `song_to_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_group` (
+  `songid` int(11) DEFAULT NULL,
+  `groupid` int(11) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `songsampleid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `stgidx` (`songid`,`type`),
+  KEY `stgidx2` (`type`),
+  KEY `stgidx3` (`type`,`groupid`,`songid`)
+) ENGINE=MyISAM AUTO_INCREMENT=281 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_imprint`
+--
+
+DROP TABLE IF EXISTS `song_to_imprint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_imprint` (
+  `songid` int(11) DEFAULT NULL,
+  `imprintid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=377 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_instrument`
+--
+
+DROP TABLE IF EXISTS `song_to_instrument`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_instrument` (
+  `songid` int(11) DEFAULT NULL,
+  `instrumentid` int(11) DEFAULT NULL,
+  `type` varchar(20) DEFAULT 'Main'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_introtype`
+--
+
+DROP TABLE IF EXISTS `song_to_introtype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_introtype` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `introtypeid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=26527 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_label`
+--
+
+DROP TABLE IF EXISTS `song_to_label`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_label` (
+  `songid` int(11) DEFAULT NULL,
+  `labelid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `stgp` (`labelid`,`songid`)
+) ENGINE=MyISAM AUTO_INCREMENT=510 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_lyricaltheme`
+--
+
+DROP TABLE IF EXISTS `song_to_lyricaltheme`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_lyricaltheme` (
+  `songid` int(11) DEFAULT NULL,
+  `lyricalthemeid` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_outrotype`
+--
+
+DROP TABLE IF EXISTS `song_to_outrotype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_outrotype` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `outrotypeid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10463 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_placement`
+--
+
+DROP TABLE IF EXISTS `song_to_placement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_placement` (
+  `songid` int(11) DEFAULT NULL,
+  `placementid` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_postchorustype`
+--
+
+DROP TABLE IF EXISTS `song_to_postchorustype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_postchorustype` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `postchorustypeid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=29985 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_primaryinstrumentation`
+--
+
+DROP TABLE IF EXISTS `song_to_primaryinstrumentation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_primaryinstrumentation` (
+  `songid` int(11) DEFAULT NULL,
+  `primaryinstrumentationid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT 'Main'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_producer`
+--
+
+DROP TABLE IF EXISTS `song_to_producer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_producer` (
+  `songid` int(11) DEFAULT NULL,
+  `producerid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `stgp` (`producerid`,`songid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1041 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_retroinfluence`
+--
+
+DROP TABLE IF EXISTS `song_to_retroinfluence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_retroinfluence` (
+  `songid` int(11) DEFAULT NULL,
+  `retroinfluenceid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT 'Main'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_rocksubgenre`
+--
+
+DROP TABLE IF EXISTS `song_to_rocksubgenre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_rocksubgenre` (
+  `songid` int(11) DEFAULT NULL,
+  `rocksubgenreid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT 'Main'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_samplesong`
+--
+
+DROP TABLE IF EXISTS `song_to_samplesong`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_samplesong` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `samplesongid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3532 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_sampletype`
+--
+
+DROP TABLE IF EXISTS `song_to_sampletype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_sampletype` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sampletypeid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3277 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_songkey`
+--
+
+DROP TABLE IF EXISTS `song_to_songkey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_songkey` (
+  `songid` int(11) DEFAULT NULL,
+  `songkeyid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `NameHard` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4954 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_songsection`
+--
+
+DROP TABLE IF EXISTS `song_to_songsection`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_songsection` (
+  `songid` int(11) DEFAULT NULL,
+  `songsectionid` int(11) DEFAULT NULL,
+  `NumTimes` int(11) DEFAULT NULL,
+  `starttime` time DEFAULT NULL,
+  `endtime` time DEFAULT NULL,
+  `length` time DEFAULT NULL,
+  `sectionpercent` decimal(10,2) DEFAULT NULL,
+  `sectioncount` int(11) DEFAULT NULL,
+  `BridgeSurrogate` tinyint(4) DEFAULT '0',
+  `Stanzas` varchar(2) DEFAULT NULL,
+  `Vocals` set('Sung','Rapped','Spoken') DEFAULT NULL,
+  `VocalTypeDetails` text,
+  `SubgenreDetails` text,
+  `StanzaDetails` text,
+  `VMComparison` set('Similar','Slight/Moderate','Major Shift') DEFAULT NULL,
+  `VMComparisonDescription` text,
+  `BMComparison` set('Similar','Slight/Moderate','Major Shift') DEFAULT NULL,
+  `BMComparisonDescription` text,
+  `PSVMComparison` set('Similar','Slight/Moderate','Major Shift') DEFAULT NULL,
+  `PSVMComparisonDescription` text,
+  `PSBMComparison` set('Similar','Slight/Moderate','Major Shift') DEFAULT NULL,
+  `PSBMComparisonDescription` text,
+  `PrimaryInstrumentation` text,
+  `VocalsGender` set('Solo Female','Solo Male','Duet/Group (All Male)','Duet/Group (All Female)','Duet/Group (Female/Male)') DEFAULT NULL,
+  `PrimaryNarrative` set('1st Person','2nd Person','3rd Person') DEFAULT NULL,
+  `MTI` enum('Decrease','Similar','Increase') DEFAULT NULL,
+  `MTIDescription` text,
+  `TransitionIntoChorus` set('Vocal Lead In','Instrumental/Effect Lead In','Transitional Pause/Lull','Turning on a Dime/Seamless') DEFAULT NULL,
+  `TransitionDetails` text,
+  `Bars` int(11) DEFAULT '0',
+  `WithoutNumberHard` varchar(255) DEFAULT NULL,
+  `BackgroundVocals` set('Sung','Rapped','Spoken') DEFAULT NULL,
+  `PostChorus` tinyint(4) DEFAULT NULL,
+  `PostChorusStanzas` tinyint(4) DEFAULT NULL,
+  `PostChorusDetails` text,
+  `VocalTypesHard` text,
+  `VocalsHard` text,
+  KEY `ssidx2` (`songid`,`songsectionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_songsectioncount`
+--
+
+DROP TABLE IF EXISTS `song_to_songsectioncount`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_songsectioncount` (
+  `songid` int(11) DEFAULT NULL,
+  `songsectionid` int(11) DEFAULT NULL,
+  `sectioncount` int(11) DEFAULT NULL,
+  `StartTime` time DEFAULT NULL,
+  `EndTime` time DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_songwriter`
+--
+
+DROP TABLE IF EXISTS `song_to_songwriter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_songwriter` (
+  `songid` int(11) DEFAULT NULL,
+  `songwriterid` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_subgenre`
+--
+
+DROP TABLE IF EXISTS `song_to_subgenre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_subgenre` (
+  `songid` int(11) DEFAULT NULL,
+  `subgenreid` int(11) DEFAULT NULL,
+  `type` varchar(20) DEFAULT 'Main',
+  KEY `sgidx` (`songid`,`subgenreid`),
+  KEY `sgidx2` (`songid`),
+  KEY `sgidx3` (`subgenreid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_technique`
+--
+
+DROP TABLE IF EXISTS `song_to_technique`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_technique` (
+  `songid` int(11) DEFAULT NULL,
+  `techniqueid` int(11) DEFAULT NULL,
+  `description` text,
+  `url` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `techniquetypeid` int(11) DEFAULT NULL,
+  `techniquecategoryid` int(11) DEFAULT NULL,
+  `techniquesubcategoryid` int(11) DEFAULT NULL,
+  `techniquesubsubcategoryid` int(11) DEFAULT NULL,
+  `imageurl` varchar(255) DEFAULT NULL,
+  `spotify` text,
+  `inactive` tinyint(4) DEFAULT '0',
+  `vimeourl` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=853 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_technique_to_songsection`
+--
+
+DROP TABLE IF EXISTS `song_to_technique_to_songsection`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_technique_to_songsection` (
+  `sttid` int(11) DEFAULT NULL,
+  `songsectionid` int(11) DEFAULT NULL,
+  `starttime` time DEFAULT NULL,
+  `endtime` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_vocal`
+--
+
+DROP TABLE IF EXISTS `song_to_vocal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_vocal` (
+  `songid` int(11) DEFAULT NULL,
+  `vocalid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_vocalexample`
+--
+
+DROP TABLE IF EXISTS `song_to_vocalexample`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_vocalexample` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `songid` int(11) DEFAULT NULL,
+  `vocalexample` text,
+  `exampletype` varchar(255) DEFAULT NULL,
+  `songsectionid` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_vocaltype`
+--
+
+DROP TABLE IF EXISTS `song_to_vocaltype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_vocaltype` (
+  `songid` int(11) DEFAULT NULL,
+  `vocaltypeid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_weekdate`
+--
+
+DROP TABLE IF EXISTS `song_to_weekdate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_weekdate` (
+  `songid` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weekdateid` int(11) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `stwk` (`weekdateid`),
+  KEY `stwk2` (`weekdateid`,`songid`),
+  KEY `stgp` (`weekdateid`,`songid`,`type`)
+) ENGINE=MyISAM AUTO_INCREMENT=23163 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_worldsubgenre`
+--
+
+DROP TABLE IF EXISTS `song_to_worldsubgenre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_worldsubgenre` (
+  `songid` int(11) DEFAULT NULL,
+  `worldsubgenreid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT 'Main'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `song_to_wowfactor`
+--
+
+DROP TABLE IF EXISTS `song_to_wowfactor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `song_to_wowfactor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `songid` int(11) DEFAULT NULL,
+  `exampletype` varchar(255) DEFAULT NULL,
+  `wowfactor` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `songfiledownloads`
+--
+
+DROP TABLE IF EXISTS `songfiledownloads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `songfiledownloads` (
+  `pdfid` int(11) DEFAULT NULL,
+  `dateadded` datetime DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `watermark` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `songkeys`
+--
+
+DROP TABLE IF EXISTS `songkeys`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `songkeys` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `songnames`
+--
+
+DROP TABLE IF EXISTS `songnames`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `songnames` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=677 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `songs`
+--
+
+DROP TABLE IF EXISTS `songs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `songs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ReportQuarter` varchar(10) DEFAULT NULL,
+  `QuarterEnteredTheTop10` varchar(10) DEFAULT NULL,
+  `YearEnteredTheTop10` varchar(10) DEFAULT NULL,
+  `EntryPosition` varchar(10) DEFAULT NULL,
+  `NumberOfWeeksSpentInTheTop10` int(11) DEFAULT NULL,
+  `PeakPosition` int(11) DEFAULT NULL,
+  `Imprint` int(11) DEFAULT NULL,
+  `GenreID` int(11) DEFAULT NULL,
+  `GenreFusionType` enum('Blend','Sectional','Blend + Sectional') DEFAULT NULL,
+  `ElectricVsAcoustic` enum('Primarily Electronic','Primarily Acoustic','Electronic/Acoustic Combo') DEFAULT NULL,
+  `DominantInstrument` enum('Synth','Guitar','Bass','Piano','Drums/Perc','Mix') DEFAULT NULL,
+  `CleverVsGeneric` enum('Clever/Impactful','Generic') DEFAULT NULL,
+  `SongTitleWordCount` int(11) DEFAULT NULL,
+  `SongTitleAppearances` int(11) DEFAULT NULL,
+  `PrimaryNarrative` set('1st Person','2nd Person','3rd Person') DEFAULT NULL,
+  `BackgroundVocals` tinyint(4) DEFAULT NULL,
+  `SongForm` varchar(30) DEFAULT NULL,
+  `SongLength` time DEFAULT NULL,
+  `FirstSection` int(11) DEFAULT NULL,
+  `IntroType` enum('Backing Music','Multifacited','Narration & Plug','Unique','Sparse') DEFAULT NULL,
+  `ChorusKickoffType` enum('Abbreviated','Breakdown/Sparse','Full') DEFAULT NULL,
+  `V1V2BackingComparison` enum('Remains The Same/Close To The Same','Very Changed Up') DEFAULT NULL,
+  `V1V2BackingComments` text,
+  `V1V2MelodyComparison` enum('Remains Constant','Slight To Moderate Shift','Major Shift') DEFAULT NULL,
+  `V1V2MelodyComments` text,
+  `PreChorusMTI` enum('Less Throughout','Decrease/Increase','Constant','Constant/Increase','Greater Throughout') DEFAULT NULL,
+  `PreChorusMTIComments` text,
+  `VersePreChorusBackingMusic` enum('Remains Constant','Slight To Moderate Shift','Major Shift') DEFAULT NULL,
+  `VersePreChorusBackingMusicComments` text,
+  `SimpleRepetitiveChorus` tinyint(4) DEFAULT NULL,
+  `FirstChorusMTI` set('Decrease','Similar','Increase') DEFAULT NULL,
+  `TransitionMethodIntoFirstChorus` set('Vocal Lead In','Instrumental/Effect Lead In','Transitional Pause/Lull','Turning on a Dime/Seamless') DEFAULT NULL,
+  `BridgeSurroundingAreaMTI` enum('C-L','C-H','C/H-L','L-H','L/H-L','L/H-H','L-C','H-L','H-L/H') DEFAULT NULL,
+  `BridgePlacement` enum('A-C-B','B-C-A','B-C-B','B-C-PC/C','IB-C-IB') DEFAULT NULL,
+  `InstrumentalBreakType` enum('Synth','Guitar','Bass','Drums/Perc','Wind','Mixed') DEFAULT NULL,
+  `LastSectionID` int(11) DEFAULT NULL,
+  `OutroType` enum('Vocal play','Change upon preceding section','Change upon a different section','New Type Of Section','Other Section') DEFAULT NULL,
+  `OutroTypeComments` text,
+  `EndingType` set('Abrupt','Sustained','Resolved','False','Fadeout') DEFAULT NULL,
+  `VocalsGender` enum('Solo Female','Solo Male','Duet/Group (All Male)','Duet/Group (All Female)','Duet/Group (Female/Male)') DEFAULT NULL,
+  `songkeyid` int(11) DEFAULT NULL,
+  `timesignatureid` int(11) DEFAULT NULL,
+  `songnameid` int(11) DEFAULT NULL,
+  `MajorMinor` enum('Major','Minor','Both') DEFAULT NULL,
+  `Tempo` decimal(10,2) DEFAULT NULL,
+  `PrimaryGroupId` int(11) DEFAULT NULL,
+  `WritingProduction` int(11) DEFAULT NULL,
+  `SongStructure` varchar(255) DEFAULT NULL,
+  `AbbrevSongStructure` varchar(255) DEFAULT NULL,
+  `SongLengthRange` varchar(40) DEFAULT NULL,
+  `IntroLengthRange` varchar(40) DEFAULT NULL,
+  `FirstChorusPercent` decimal(10,2) DEFAULT NULL,
+  `FirstChorusDescr` varchar(20) DEFAULT NULL,
+  `OutroRange` varchar(20) DEFAULT NULL,
+  `FirstChorusPercentRange` varchar(20) DEFAULT NULL,
+  `ChorusPrecedesVerse` tinyint(4) DEFAULT '0',
+  `Lyrics` text,
+  `VocalTypeExamples` varchar(255) DEFAULT NULL,
+  `FormDescription` text,
+  `FirstSectionDescription` text,
+  `IntroDescr` text,
+  `ChorusDescr` text,
+  `ArtistBand` varchar(255) DEFAULT NULL,
+  `SongwriterCount` tinyint(4) DEFAULT NULL,
+  `Spotify` text,
+  `OfficialVideo` text,
+  `iTunes` text,
+  `Composition` text,
+  `MixType` enum('Blend & Sectional','Sectional','Blend') DEFAULT NULL,
+  `SongTitleAppearanceRange` varchar(20) DEFAULT NULL,
+  `TempoRange` varchar(20) DEFAULT NULL,
+  `IntroLengthRangeNums` varchar(20) DEFAULT NULL,
+  `VerseCount` int(11) DEFAULT NULL,
+  `PrechorusCount` int(11) DEFAULT NULL,
+  `BridgeCount` int(11) DEFAULT NULL,
+  `ChorusCount` int(11) DEFAULT NULL,
+  `BreakCount` int(11) DEFAULT NULL,
+  `FirstChorusRange` varchar(255) DEFAULT NULL,
+  `LastSection` int(11) DEFAULT NULL,
+  `LastSectionType` varchar(30) DEFAULT NULL,
+  `FirstSectionType` varchar(30) DEFAULT NULL,
+  `OutroLengthRangeNums` varchar(20) DEFAULT NULL,
+  `SongLyricsLink` varchar(255) DEFAULT NULL,
+  `TransitionDetails` text,
+  `ContainsSampled` set('Contains Sampled Music','Contains Sampled Vocals') DEFAULT NULL,
+  `IntroVocalVsInst` enum('Instrumental Only','Vocal Only','Instrumental & Vocal') DEFAULT NULL,
+  `FirstChorusMTIDetails` text,
+  `SubgenreFusionTypeDescription` text,
+  `OutroRecycled` enum('All Recycled','All New','Recycled/New') DEFAULT NULL,
+  `OutroVocalVsInst` enum('Instrumental Only','Vocal Only','Instrumental & Vocal') DEFAULT NULL,
+  `OutroCharacteristics` set('Backing Music','Breakdown/Sparse','Multifaceted','Narration','Artist Plug','Big/Powerful') DEFAULT NULL,
+  `OutroCharacteristicsDescr` text,
+  `EndingDetails` text,
+  `RecycledSections` set('Intro','Verse','Pre-Chorus','Chorus','Bridge','Instrumental Break','Vocal Break','Turnaround') DEFAULT NULL,
+  `HSDReport` varchar(255) DEFAULT NULL,
+  `OfficialVideoEmbed` varchar(255) DEFAULT NULL,
+  `BridgeSurrCount` int(11) DEFAULT NULL,
+  `AllSections` text,
+  `IsRemix` tinyint(4) DEFAULT '0',
+  `PlacementsHard` varchar(255) DEFAULT NULL,
+  `SubgenresHard` varchar(255) DEFAULT NULL,
+  `LyricalThemesHard` varchar(255) DEFAULT NULL,
+  `SubsectionVocalTypesHard` text,
+  `IsActive` tinyint(4) DEFAULT '0',
+  `CleanUrl` varchar(255) DEFAULT NULL,
+  `WeekEnteredTheTop10` int(11) DEFAULT NULL,
+  `BridgeSurrogateShortForm` varchar(255) DEFAULT NULL,
+  `KeyMajor` varchar(255) DEFAULT NULL,
+  `SampledLink` varchar(255) DEFAULT NULL,
+  `timesignatureid2` int(11) DEFAULT NULL,
+  `timesignatureid3` int(11) DEFAULT NULL,
+  `SubsectionVocalsHard` text,
+  `SongNameHard` varchar(255) DEFAULT NULL,
+  `ChorusBeforeFirstVerse` tinyint(4) DEFAULT '0',
+  `ClientID` int(11) DEFAULT NULL,
+  `ArtistCount` tinyint(4) DEFAULT NULL,
+  `ProducerCount` tinyint(4) DEFAULT NULL,
+  `InfluenceCount` int(11) DEFAULT NULL,
+  `LabelCount` int(11) DEFAULT NULL,
+  `LeadArtistCount` tinyint(4) DEFAULT NULL,
+  `LogicFilename` varchar(255) DEFAULT NULL,
+  `ReleaseDate` date DEFAULT NULL,
+  `HasBillboard` tinyint(4) DEFAULT '0',
+  `BillboardName` varchar(255) DEFAULT NULL,
+  `BillboardArtistName` varchar(255) DEFAULT NULL,
+  `LogicFilenameDate` datetime DEFAULT NULL,
+  `TotalCount` tinyint(4) DEFAULT '0',
+  `PrimaryGender` varchar(20) DEFAULT NULL,
+  `FeatGender` varchar(20) DEFAULT NULL,
+  `FirstChorusBreakdown` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lted` (`id`,`IsActive`),
+  KEY `lted2` (`id`,`IsActive`,`songnameid`),
+  KEY `lted3` (`IsActive`,`songnameid`)
+) ENGINE=MyISAM AUTO_INCREMENT=3298 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `songsections`
+--
+
+DROP TABLE IF EXISTS `songsections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `songsections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `Abbreviation` varchar(5) DEFAULT NULL,
+  `ShortAbbreviation` varchar(4) DEFAULT NULL,
+  `InAbbreviated` varchar(1) DEFAULT NULL,
+  `SpreadsheetName` varchar(255) DEFAULT NULL,
+  `WithoutNumber` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `songwriters`
+--
+
+DROP TABLE IF EXISTS `songwriters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `songwriters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `Gender` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `subgenres`
+--
+
+DROP TABLE IF EXISTS `subgenres`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subgenres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  `HideFromHSDCharts` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=231 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `subreports`
+--
+
+DROP TABLE IF EXISTS `subreports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subreports` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text,
+  `OrderBy` int(11) DEFAULT NULL,
+  `sheetname` varchar(30) DEFAULT NULL,
+  `onequarter` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `techniquecategories`
+--
+
+DROP TABLE IF EXISTS `techniquecategories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `techniquecategories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `techniqueid` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Definition` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `techniques`
+--
+
+DROP TABLE IF EXISTS `techniques`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `techniques` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `InfoDescr` text,
+  `OrderBy` int(11) DEFAULT NULL,
+  `Category` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=999 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `techniquesubcategories`
+--
+
+DROP TABLE IF EXISTS `techniquesubcategories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `techniquesubcategories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `techniquecategoryid` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Definition` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `techniquesubsubcategories`
+--
+
+DROP TABLE IF EXISTS `techniquesubsubcategories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `techniquesubsubcategories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `techniquesubcategoryid` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Definition` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `techniquetypes`
+--
+
+DROP TABLE IF EXISTS `techniquetypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `techniquetypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `techniqueid` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Definition` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `timesignatures`
+--
+
+DROP TABLE IF EXISTS `timesignatures`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `timesignatures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tlibrary`
+--
+
+DROP TABLE IF EXISTS `tlibrary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tlibrary` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `sessionid` varchar(255) DEFAULT NULL,
+  `tsid` int(11) DEFAULT NULL,
+  `dateadded` datetime DEFAULT NULL,
+  `InfoDescr` text,
+  `proxyloginid` int(11) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=259 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `trendreportnotes`
+--
+
+DROP TABLE IF EXISTS `trendreportnotes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trendreportnotes` (
+  `quarter` varchar(255) DEFAULT NULL,
+  `value` text,
+  `sectionname` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `realname` varchar(255) DEFAULT NULL,
+  `isadmin` tinyint(4) DEFAULT '0',
+  `inactive` tinyint(4) DEFAULT '0',
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vocals`
+--
+
+DROP TABLE IF EXISTS `vocals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vocals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vocaltypes`
+--
+
+DROP TABLE IF EXISTS `vocaltypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vocaltypes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `HideFromAdvancedSearch` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `weekdates`
+--
+
+DROP TABLE IF EXISTS `weekdates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weekdates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  `InfoDescr` text,
+  `QuarterNumber` int(11) DEFAULT NULL,
+  `realdate` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `wdidx` (`id`,`OrderBy`),
+  KEY `wdidx2` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=635 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `worldsubgenres`
+--
+
+DROP TABLE IF EXISTS `worldsubgenres`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `worldsubgenres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) DEFAULT NULL,
+  `OrderBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=205 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `xmlelements`
+--
+
+DROP TABLE IF EXISTS `xmlelements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `xmlelements` (
+  `fieldname` varchar(255) DEFAULT NULL,
+  `fieldvalue` text,
+  `guid` varchar(255) DEFAULT NULL,
+  KEY `i` (`guid`),
+  KEY `i2` (`fieldvalue`(255))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `xmlitems`
+--
+
+DROP TABLE IF EXISTS `xmlitems`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `xmlitems` (
+  `feedid` varchar(20) DEFAULT NULL,
+  `link` text,
+  `title` varchar(255) DEFAULT NULL,
+  `pubdate` datetime DEFAULT NULL,
+  `description` text,
+  `guid` varchar(255) DEFAULT NULL,
+  `sitename` varchar(255) DEFAULT NULL,
+  KEY `rssidx` (`guid`),
+  KEY `rssidx2` (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-02-11 19:05:03

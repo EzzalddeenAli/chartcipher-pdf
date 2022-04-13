@@ -27,6 +27,6 @@ if( $type != "saved"  && $type != "savedartists" )
 
 if( !$proxyloginid ) $proxyloginid = 0;
 
-$ins = db_query_insert_id( "insert into $tablename ( userid, proxyloginid, Name, url, sessionid, searchtype, dateadded ) values ( '$userid', '$proxyloginid', '". escMe( $searchname )."', '". escMe( $url )."', '". escMe( $sessid )."', '". escMe( $searchtype )."', now() )" );
+$ins = db_query_insert_id( "insert into $tablename ( userid, proxyloginid, Name, url, sessionid, chartid, searchtype, dateadded ) values ( '$userid', '$proxyloginid', '". escMe( $searchname )."', '". escMe( $url )."', '". escMe( $sessid )."', '". escMe( $chartid )."', '". escMe( $searchtype )."', now() )" );
 echo( $ins );
 ?>

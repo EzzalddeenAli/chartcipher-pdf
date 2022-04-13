@@ -41,13 +41,7 @@
 								</div>
 								<div class="cf"></div>
 							</div><!-- /.form-row-left -->
-							<!--<div class="form-row-right">
-								<label>Primary Genre:</label>
-								<select name='search[GenreID]'>
-									<option value="">Any</option>
-<? outputSelectValues( $allgenresfordropdown, $search["GenreID"] ); ?>
-								</select>
-							</div>--><!-- /.form-row-right -->
+<!-- /.form-row-right -->
 
 							<div class="form-row-right">
 								<label>Peak Chart Position:</label>
@@ -268,15 +262,10 @@ outputSelectValues( $artisttypes, $search["mainartisttype"] );
 
 
 								<div class="search-hidden-container"  id="shc-subgenres">
-															<h3><a class="expand-btn-3">Primary Genre & Sub-Genres/Influences</a></h3>
+															<h3><a class="expand-btn-3">Genres/Influences</a></h3>
 															<div id="search-hidden-3" class="temp-hidden hide-3">
 																<div class="form-column span-2 element-inline">
 																	<div class="form-row-full">
-																 								 <label>Primary Genre:</label>
-																 								 <select name='search[GenreID]'>
-																 									 <option value="">Any</option>
-<? outputSelectValues( $allgenresfordropdown, $search["GenreID"] ); ?>
-		 </select>
 																  </div><!-- /.form-row-right -->
  <label>Sub-Genres/Influences:</label>
 							        <? $subgenres = getTableRowsArray( "subgenres", " and category in ('Rock', '') ", true, true );

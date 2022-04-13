@@ -8,7 +8,7 @@ $possibletables["2"] = "Weeks at #1";
     $possiblecompositionalaspects["Genre"] = "Primary Genre";
 //    $possiblecompositionalaspects["VocalsGender"] = "Lead Vocal Gender";
 
-    $possiblecompositionalaspects["Sub-Genre/Influence"] = "Sub-Genre/Influence";
+    $possiblecompositionalaspects["Genre/Influence"] = "Genre/Influence";
     $possiblecompositionalaspects["InfluenceCount"] = "Influence Count";
     $possiblecompositionalaspects["Vocal Delivery Type"] = "Vocal Delivery Type";
     $possiblecompositionalaspects["Lyrical Themes"] = "Lyrical Themes";
@@ -58,7 +58,7 @@ function getRowsCompositional( $search, $songs )
     $obs["SongTitleAppearanceRange"] = " SongTitleAppearances ";
     $obs["FirstChorusRange"] = " case when FirstChorusRange = 'Kickoff' then '0:00' else FirstChorusRange end ";
 
-    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Sub-Genre/Influence"=>"subgenre", "Record Labels"=>"label", "Instrumentation"=>"primaryinstrumentation" );
+    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Genre/Influence"=>"subgenre", "Record Labels"=>"label", "Instrumentation"=>"primaryinstrumentation" );
     $tables[ "Song Title Placement"] = "placement";
 
 
@@ -79,9 +79,9 @@ function getRowsCompositional( $search, $songs )
         case "Lyrical Themes":
         case "Instrumentation":
         case "Song Title Placement":
-        case "Sub-Genre/Influence":
+        case "Genre/Influence":
         case "Record Labels":
-            $hasadv = $field == "Sub-Genre/Influence" || $field == "Instrumentation"?" and HideFromAdvancedSearch = 0":"";
+            $hasadv = $field == "Genre/Influence" || $field == "Instrumentation"?" and HideFromAdvancedSearch = 0":"";
             $table = $tables[$field];
             $exttype = $field == "Instrumentation"?" and type = 'Main'":"";
             $rows = db_query_array( "select {$table}s.id, Name from {$table}s, song_to_{$table} where {$table}id = {$table}s.id {$exttype} and songid in ( $songstr ) {$hasadv} order by OrderBy, Name", "id", "Name" );
@@ -188,7 +188,7 @@ function getCompositionalPercentage( $weekstype, $compositionalaspect, $rid, $al
 
     $whr = " and weekdateid in ( " . implode( ", " , $allweekdates ) . " )";
     $obs = array( "SongTitleAppearanceCount"=>"SongTitleAppearances" );
-    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Record Labels"=>"label", "Sub-Genre/Influence"=>"subgenre", "Instrumentation"=>"primaryinstrumentation" );
+    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Record Labels"=>"label", "Genre/Influence"=>"subgenre", "Instrumentation"=>"primaryinstrumentation" );
     $tables[ "Song Title Placement"] = "placement";
     
     // need to filter by num weeks here
@@ -252,7 +252,7 @@ function getCompositionalPercentage( $weekstype, $compositionalaspect, $rid, $al
             break;
         case "Lyrical Themes":
         case "Record Labels":
-        case "Sub-Genre/Influence":
+        case "Genre/Influence":
         case "Song Title Placement":
         case "Instrumentation":
             $table = $tables[$compositionalaspect];
@@ -466,7 +466,7 @@ function getCompositionalURL( $search, $numweeks, $rid )
             $rid = db_query_first_cell( "select id from timesignatures where Name = '" . escMe( $rid ) . "'" );
             $qs["search"]["$field"] = $rid;
             break;
-        case "Sub-Genre/Influence":
+        case "Genre/Influence":
 	    //	    echo( "select id from subgenres where Name = '" . ( $rid ) . "'" );
             $rid = db_query_first_cell( "select id from subgenres where Name = '" . escMe( $rid ) . "'" );
 	    //	    echo( "ris:" . $rid . "\n"  );

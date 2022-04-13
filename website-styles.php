@@ -131,7 +131,7 @@ if( !$_GET["graphtype"] ) $_GET["graphtype"] = "line";
 <br>
                              
 <h3 style="color:#000000;">Characteristics table</h3>
- <p class="characteristics-2"> Poppins, Regular, 14pt, #333333, Line Spacing 42pt (most popular characteristics,new and departing)</p>  
+ <p class="characteristics-2"> Poppins, Regular, 14pt, #000000, Line Spacing 42pt (most popular characteristics,new and departing)</p>  
 <p class="characteristics-1"> Poppins, Regular, 14pt, #7a7a7a, Line Spacing 42pt(most popular characteristics,new and departing)   </p> 
 <div class="row  row-equal row-padding mobile link-alt" style="margin-bottom:100px;">
                             <div class="col-12">
@@ -546,9 +546,9 @@ if( !$fourquartercache )
 $characteristics = gatherCharacteristicsSingleQuarter( "whatever", "most");
 
 $todisplay = array();
-$todisplay[] = "Primary Genres";
+//$todisplay[] = "Primary Genres";
 //$todisplay[] = "Sub-Genres/Influences";
-$todisplay[] = "Sub-Genres/Influences (Top 3)";
+$todisplay[] = "Genres/Influences (Top 3)";
 $todisplay[] = "Solo vs. Multiple Lead Vocalists";
 $todisplay[] = "Lead Vocal Gender (male, female, male/female)";
 $todisplay[] = "Lead Vocal Delivery Type";

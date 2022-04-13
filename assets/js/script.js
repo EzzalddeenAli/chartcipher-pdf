@@ -18,7 +18,7 @@ if( type == "recent" )
 {
 	val = searchName;
 }
-var  formData = "searchtype=" + searchType + "&userid=" + userid + "&proxyloginid=" + proxyloginid + "&type=" + type + "&sessid=" + sessid + "&url=" + encodeURIComponent( document.location.href );  //Name value Pair
+var  formData = "searchtype=" + searchType + "&userid=" + userid + "&chartid=" + mychartatend + "&proxyloginid=" + proxyloginid + "&type=" + type + "&sessid=" + sessid + "&url=" + encodeURIComponent( document.location.href );  //Name value Pair
 formData += "&searchname=" + encodeURIComponent( val );
  
 $.ajax({

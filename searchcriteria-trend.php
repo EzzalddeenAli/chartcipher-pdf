@@ -1,8 +1,11 @@
+<? include "trend-datedisplaycalc.php"; ?>
+
+
 		<section class="search-results-top">
 			<div class="element-container row">
 				<div class="search-container">
                       <div class="home-search-header variant2">
-                                     <h1><?=getOrCreateCustomTitle( ucwords( $searchsubtype ) . " Search3: ". strtoupper( getSearchTrendName( $search[comparisonaspect] ) ), ucwords( $searchsubtype ) . " Search: " . getSearchTrendName( $search[comparisonaspect] ) )?></h1>
+                                     <h1><?=getOrCreateCustomTitle( ucwords( $searchsubtype ) . " Search3: ". strtoupper( getSearchTrendName( $search[comparisonaspect] ) ), ucwords( $searchsubtype ) . " Search: " . getSearchTrendName( $search[comparisonaspect] ) )?><?=$datedisplay?": ".$datedisplay:""?> <?=$search[specificsubgenre]?"(".getNameById( "subgenres", $search[specificsubgenre] ) . ")":""?> </h1>
                                 <div class="cf"></div>
                             </div>
 					<div class="search-body">
@@ -62,23 +65,7 @@ outputSelectValues( getClients(), $searchclientid ); ?>
 
                          Dates: 
 </td>									<td class="search-column-2">
-
-<? if( $doingyearlysearch ) { ?>
-
-                               <?=$search[dates][fromyear]?>
-                         <? if( $search[dates][toyear] ) { ?>
-                                                        to <?=$search["dates"]["specialendq"]?"Q" . $search["dates"]["specialendq"]:""?> <?=$search[dates][toyear]?>
-                                                        <? } ?>
-<? } else if( $doingweeklysearch ) { ?>
-
-<?=$rangedisplay?>
-
-<? } else { ?>
-                               Q<?=$search[dates][fromq]?>/<?=$search[dates][fromy]?>
-                         <? if( $search[dates][toq] ) { ?>
-                                                        to Q<?=$search[dates][toq]?>/<?=$search[dates][toy]?>
-                                                        <? } ?>
-<? } ?>
+<?=$datedisplay?>
 </td></tr>
                          <? } else { ?>
 								<tr>
@@ -135,12 +122,13 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
 </td></tr>
 
 <?php
+if( 1 == 0 ) { 
     $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&newcarryfilter=". $newcarryfilter , "", $tmpurl );
 $tmpurl .= "&newcarryfilter=";
 
     ?>
-								<tr>
+								<tr style="display:none">
 									<td class="search-column-1">
 
     Songs to include (New songs/Carryovers): 
@@ -153,29 +141,8 @@ $tmpurl .= "&newcarryfilter=";
                                 </div><!-- /.form-row-right -->
 </td></tr>
 
-
-
-    <?php
-    $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
-$tmpurl = str_replace( "&genrefilter=". $genrefilter , "", $tmpurl );
-$tmpurl .= "&genrefilter=";
-
-    ?>
-<?if( isset( $_GET["genrefilter"] ) ) {  ?>
-								<tr>
-									<td class="search-column-1">
-
-                       Primary Genre: 
-</td>									<td class="search-column-2">
-								<select name="genrefilter" style="width:400px" onChange='document.location.href="<?=$tmpurl?>" + this.options[this.selectedIndex].value'>
-									<option value="">All Primary Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-								</select>
-
-                                </div><!-- /.form-row-right -->
-</td></tr>
-<? } ?>
 <? 
+}
 $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[specificsubgenre]=". $search[specificsubgenre] , "", $tmpurl );
 $tmpurl .= "&search[specificsubgenre]=";
@@ -183,23 +150,22 @@ if( $search["specificsubgenre"] || 1  ) {
 ?>
 								<tr>
 									<td class="search-column-1">
-Sub-Genre:
+Genre:
 </td>									<td class="search-column-2">
 
 								<select name="genrefilter" style="width:400px" onChange='document.location.href="<?=$tmpurl?>" + this.options[this.selectedIndex].value'>
-									<option value="">All Sub-Genres/Influences</option>
+									<option value="">All Genres</option>
 <? outputSelectValuesForOtherTable( "subgenres", $search[specificsubgenre], true ); ?>
 								</select>
 </td></tr>
     <? } ?>
-
 
 <? 
 $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[majorminor]=". $search[majorminor] , "", $tmpurl );
 $tmpurl .= "&search[majorminor]=";
 ?>
-								<tr>
+								<tr style="display:none">
 									<td class="search-column-1">
 Songs in a Major or Minor Key:
 </td>									<td class="search-column-2">
@@ -216,7 +182,7 @@ $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[exactbpm]=". $search[exactbpm] , "", $tmpurl );
 $tmpurl .= "&search[exactbpm]=";
 ?>
-								<tr>
+								<tr style="display:none">
 									<td class="search-column-1">
 BPM:
 </td>									<td class="search-column-2">
@@ -234,7 +200,7 @@ $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[lyricalthemeid]=". $search[lyricalthemeid] , "", $tmpurl );
 $tmpurl .= "&search[lyricalthemeid]=";
 ?>
-								<tr>
+								<tr style="display:none">
 									<td class="search-column-1">
 Lyrical Theme:
 </td>									<td class="search-column-2">
@@ -253,7 +219,7 @@ $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[lyricalsubthemeid]=". $search[lyricalsubthemeid] , "", $tmpurl );
 $tmpurl .= "&search[lyricalsubthemeid]=";
 ?>
-								<tr>
+								<tr style="display:none">
 									<td class="search-column-1">
 Lyrical Sub Theme:
 </td>									<td class="search-column-2">
@@ -277,7 +243,7 @@ $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[lyricalmoodid]=". $search[lyricalmoodid] , "", $tmpurl );
 $tmpurl .= "&search[lyricalmoodid]=";
 ?>
-								<tr>
+								<tr style="display:none">
 									<td class="search-column-1">
 Lyrical Mood:
 </td>									<td class="search-column-2">

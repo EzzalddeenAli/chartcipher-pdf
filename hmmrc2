@@ -1,0 +1,138 @@
+Array
+(
+    [Top 25] => Array
+        (
+            [2] => Array
+                (
+                    [0] => 37
+                    [1] => 37%
+                    [2] => 2
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=2
+                    [4] => 85
+                )
+
+            [3] => Array
+                (
+                    [0] => 45
+                    [1] => 45%
+                    [2] => 3
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=3
+                    [4] => 103
+                )
+
+            [4] => Array
+                (
+                    [0] => 2
+                    [1] => 2%
+                    [2] => 4
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=4
+                    [4] => 5
+                )
+
+            [5] => Array
+                (
+                    [0] => 6
+                    [1] => 6%
+                    [2] => 5
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=5
+                    [4] => 13
+                )
+
+            [6] => Array
+                (
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 6
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=6
+                    [4] => 2
+                )
+
+            [8] => Array
+                (
+                    [0] => 4
+                    [1] => 4%
+                    [2] => 8
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=8
+                    [4] => 10
+                )
+
+            [22] => Array
+                (
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 22
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=22
+                    [4] => 3
+                )
+
+        )
+
+    [Bottom 25] => Array
+        (
+            [2] => Array
+                (
+                    [0] => 40
+                    [1] => 40%
+                    [2] => 2
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=2
+                    [4] => 45
+                )
+
+            [3] => Array
+                (
+                    [0] => 44
+                    [1] => 44%
+                    [2] => 3
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=3
+                    [4] => 49
+                )
+
+            [4] => Array
+                (
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 4
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=4
+                    [4] => 1
+                )
+
+            [5] => Array
+                (
+                    [0] => 7
+                    [1] => 7%
+                    [2] => 5
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=5
+                    [4] => 8
+                )
+
+            [8] => Array
+                (
+                    [0] => 4
+                    [1] => 4%
+                    [2] => 8
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=8
+                    [4] => 4
+                )
+
+            [22] => Array
+                (
+                    [0] => 1
+                    [1] => 1%
+                    [2] => 22
+                    [3] => search-results?search[dates][fromq]=1&search[dates][fromy]=2015&search[dates][toq]=1&search[dates][toy]=2019&search[peakwithin]=&&search[GenreID]=22
+                    [4] => 1
+                )
+
+        )
+
+)
+rows:Array
+(
+    [Top 25] => Top 25
+    [Bottom 25] => Bottom 25
+)
+barkey: Array
+(
+    [Top 25] => 0
+    [Bottom 25] => 1
+)

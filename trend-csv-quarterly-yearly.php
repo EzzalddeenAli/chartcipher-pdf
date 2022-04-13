@@ -167,7 +167,7 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
 
 
 					<div class="form-row-left">
-    								<label>Sub-Genres/Influences To Use:</label>
+    								<label>Genres/Influences To Use:</label>
 								<br><br>
 <? 
 $possinfluences = db_query_array( "select Name, id from subgenres", "id", "Name" );
@@ -207,11 +207,6 @@ echo( "<input style='display: inline !important' type='checkbox' name='pinstrume
     					</div><!-- /.form-row-right -->
 	<div class="cf"></div>
 								<div class="form-row-left">
-								<label>Primary Genre:</label>
-																<select name="genrefilter">
-																	<option value="">All Genres</option>
-								<? outputSelectValues( $allgenresfordropdown, $genrefilter ); ?>
-																</select>
 						</div><!-- /.form-row-right -->
 
 

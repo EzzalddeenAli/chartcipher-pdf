@@ -31,7 +31,7 @@ else
     $possiblecomparisonaspects = array();
     $pccounts[count( $possiblecomparisonaspects )] = "Genre";
     $possiblecomparisonaspects["Genre"] = "Primary Genre";
-    $possiblecomparisonaspects["Sub-Genre/Influence"] = "Sub-Genre/Influence";
+    $possiblecomparisonaspects["Genre/Influence"] = "Genre/Influence";
 
     $pccounts[count( $possiblecomparisonaspects )] = "Vocals & Lyrics";
     $possiblecomparisonaspects["VocalsGender"] = "Lead Vocal Gender (with solo vs. duet/group)";
@@ -223,7 +223,7 @@ function getRowsComparison( $search, $songs )
     $obs["SongTitleAppearanceRange"] = " SongTitleAppearances ";
     $obs["FirstChorusRange"] = " case when FirstChorusRange = 'Kickoff' then '0:00' else FirstChorusRange end ";
 
-    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Sub-Genre/Influence"=>"subgenre", "Record Labels"=>"label", "Instrumentation"=>"primaryinstrumentation" );
+    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Genre/Influence"=>"subgenre", "Record Labels"=>"label", "Instrumentation"=>"primaryinstrumentation" );
     $tables[ "Song Title Placement"] = "placement";
 
 
@@ -244,9 +244,9 @@ function getRowsComparison( $search, $songs )
         case "Lyrical Themes":
         case "Instrumentation":
         case "Song Title Placement":
-        case "Sub-Genre/Influence":
+        case "Genre/Influence":
         case "Record Labels":
-            $hasadv = $field == "Sub-Genre/Influence" || $field == "Instrumentation"?" and HideFromAdvancedSearch = 0":"";
+            $hasadv = $field == "Genre/Influence" || $field == "Instrumentation"?" and HideFromAdvancedSearch = 0":"";
             $table = $tables[$field];
             $exttype = $field == "Instrumentation"?" and type = 'Main'":"";
             $rows = db_query_array( "select {$table}s.id, Name from {$table}s, song_to_{$table} where {$table}id = {$table}s.id {$exttype} and songid in ( $songstr ) {$hasadv} order by OrderBy, Name", "id", "Name" );
@@ -394,7 +394,7 @@ function getComparisonPercentage( $comparisonfilter, $comparisonaspect, $aid, $r
     }
 
     $obs = array( "SongTitleAppearanceCount"=>"SongTitleAppearances" );
-    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Record Labels"=>"label", "Sub-Genre/Influence"=>"subgenre", "Instrumentation"=>"primaryinstrumentation" );
+    $tables = array( "Genre"=>"genre", "Lyrical Themes"=>"lyricaltheme", "Record Labels"=>"label", "Genre/Influence"=>"subgenre", "Instrumentation"=>"primaryinstrumentation" );
     $tables[ "Song Title Placement"] = "placement";
     
     switch( $comparisonfilter )
@@ -523,7 +523,7 @@ function getComparisonPercentage( $comparisonfilter, $comparisonaspect, $aid, $r
             break;
         case "Lyrical Themes":
         case "Record Labels":
-        case "Sub-Genre/Influence":
+        case "Genre/Influence":
         case "Song Title Placement":
         case "Instrumentation":
             $table = $tables[$comparisonaspect];
@@ -902,7 +902,7 @@ function getComparisonURL( $search, $aid, $rid )
             $rid = db_query_first_cell( "select id from timesignatures where Name = '" . escMe( $rid ) . "'" );
             $qs["search"]["$field"] = $rid;
             break;
-        case "Sub-Genre/Influence":
+        case "Genre/Influence":
             $rid = db_query_first_cell( "select id from subgenres where Name = '" . escMe( $rid ) . "'" );
 	    $qs["search"]["subgenres"]["$rid"] = $rid;
             break;
