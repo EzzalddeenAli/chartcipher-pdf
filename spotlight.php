@@ -16,6 +16,7 @@ else if( date( "m" ) <= 9 )
 else
     $fq = 4;
 
+$fq = 1;
 $qarr = array( $fq . "/" . date( "Y" ) );
 $tmpq = getPreviousQuarter( $fq . "/" . date( "Y" ) );
 $qarr[] = $tmpq;
@@ -42,12 +43,15 @@ $wd = getSetting( "homepageweek" );
 $dt = db_query_first_cell( "select Name from weekdates where id = $wd" );
 $wdorderby = db_query_first_cell( "select OrderBy from weekdates where id = $wd" );
 
+//echo( $wdorderby );
 $twelveago = db_query_first_cell( "select Name from weekdates where OrderBy < $wdorderby order by OrderBy desc limit 11, 1 " );
 $fiftytwoago = db_query_first_cell( "select Name from weekdates where OrderBy < $wdorderby order by OrderBy desc limit 51, 1 " );
 $twelveagoid = db_query_first_cell( "select id from weekdates where OrderBy < $wdorderby order by OrderBy desc limit 11, 1 " );
 $fiftytwoagoid = db_query_first_cell( "select id from weekdates where OrderBy < $wdorderby order by OrderBy desc limit 51, 1 " );
 $twelveagoob = db_query_first_cell( "select OrderBy from weekdates where OrderBy < $wdorderby order by OrderBy desc limit 11, 1 " );
 $fiftytwoagoob = db_query_first_cell( "select OrderBy from weekdates where OrderBy < $wdorderby order by OrderBy desc limit 51, 1 " );
+
+//echo( $twelveago );
 
 if( !$search["benchmarksubtype"] ) $search["benchmarksubtype"] = "Compositional";
 
@@ -108,12 +112,14 @@ $fiftytwocharacteristicsstr = "&search[dates][fromweekdate]=".$search["dates"]["
                            <div class="col-12 ">
                                <div class="home-search-header flex2">
                                         <h2>Most Popular Characteristics</h2>
+                                   <a href="#" data-featherlight="#searchlightbox"  class="save-link">Save Search</a>
 
                          <div class="custom-select" >
 
 								<select id="mysetbenchmarktype">
 								<? outputSelectValues( $benchmarksubtypes, $search[benchmarksubtype] ); ?>
 								</select>
+
 
 </div>
                                
@@ -165,6 +171,23 @@ $link = "trend-search-results.php?search[comparisonaspect]=$r&graphtype=column";
                 </div>
 		</section><!-- /.home-top -->
 	</div><!-- /.site-body -->
+								<div class="lightbox" id="searchlightbox">
+									<div class="save-search-header">
+										<h1>SAVE SEARCH</h2>
+									</div><!-- /.save-search-header -->
+									<div class="save-search-body">
+										<label>Name:</label>
+										<input type='text' name="searchname" id='searchname' onChange='javascript:document.getElementById( "searchnamehidden").value = this.value; '>
+										<a class="black-btn" href="#" onClick='javascript:saveSearch( "saved", "Spotlight" ); return false'>SAVE</a>
+										<div class="cf"></div>
+									</div><!-- /.save-search-body -->
+								</div><!-- #searchlightbox -->
+      <input type='hidden' name="searchnamehidden" id='searchnamehidden'>
+    <script>
+		var sessid = "<?=session_id()?>";
+		var searchType = "Spotlight";
+	var searchName = "<?=$possiblesearchfunctions[$search[comparisonaspect]]  . ( $datedisplay ? ": " . $datedisplay:"" )?>";
+</script>
 
 
 <?php include 'footer.php';?>

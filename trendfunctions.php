@@ -318,7 +318,7 @@ function getMyPossibleSearchFunctions( $type = "" )
 
     if( $type == "production" )
 	{
-	    $tmp = array( "Genres", 
+	    $tmp = array(
 			  "Influences", 
 			  "Prominent Instruments", 
 			  "Average Tempo", 
@@ -328,6 +328,11 @@ function getMyPossibleSearchFunctions( $type = "" )
 			  "Production Mood", 
 			  "DanceabilityRange" );
 	    //	    $tmp = array( "Average Tempo", "Tempo Range (BPM)", "Tempo Range (Specific)", "Vocal vs. Instrumental Prevalence", "Timbre", "Primary Genres", "Sub-Genres", "Influences", "Production Mood", "DanceabilityRange", "LoudnessRange", "Prominent Instruments" );
+
+	    if( !isNoGenreChart() )
+	    {
+	    array_unshift( $tmp,  "Genres" );
+	    }
 	}
 
     if( $type == "lyrical" )

@@ -1,7 +1,7 @@
                <div class="row  row-equal row-padding chart-section">
                             <div class="col-6">
                        <div class="home-search-header  flex-addon">
-                                <h3>Saved Searches</h3>
+                                <h3>Saved Searches and Reports</h3>
                                  <a style="display:none;" class="search" href="/saved-searches"><img src="assets/images/home/search-view-icon.svg" /></a>
                             </div>
                          <div class="header-inner" >

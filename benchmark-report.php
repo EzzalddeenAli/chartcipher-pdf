@@ -1,8 +1,8 @@
 <?php 
 $istrendreport = true;
 include "trendfunctions.php";
-include "benchmarkreportfunctions.php";
 include 'header.php'; 
+include "benchmarkreportfunctions.php";
 if( !$_GET["graphtype"] ) $_GET["graphtype"] = "column";
 $graphtype = $_GET["graphtype"];
 $backurl = "benchmark.php";
@@ -27,6 +27,18 @@ if( ($search["benchmarktype"] == "Seasonal Comparisons") && !$season )
 	echo( "<script>document.location.href = 'benchmark.php?needsseason=1&" . $_SERVER["QUERY_STRING"]."';</script>" );
 	exit;
     }
+
+if( in_array( intval( $chartid ), array( 6, 3, 15, 42, 43 ) ) || in_array( intval( $_GET["setchart"] ), array( 6, 3, 15, 42, 43 ) )  )
+{
+	if( $search["benchmarktype"] == "Genre Comparisons" )
+	{
+	Header( "Location: benchmark.php" );
+	echo( "<script language='javascript'>document.location.href = 'benchmark.php';</script>" );
+	exit;
+	}
+	
+}
+
 
 //print_r( $season) ;
 if( !$search["dates"]["fromy"] && !$search["dates"]["fromweekdate"] && !$search["dates"]["fromyear"] )
@@ -223,6 +235,7 @@ $tmpurl .= "&search[comparisonaspect]=";
                              <div class="col-8">
                    <div class="home-search-header flex-addon">
                                 <h2>Trend Graph</h2>
+<ul>                 <li><a href="#" data-featherlight="#searchlightbox"  class="save-link">Save Search</a></li></ul>
 <!--                         <div class="custom-select" >
 								<select id="mysetgraphtype">
      <? foreach( array(  "column"=>"Bar Graph", "line"=>"Line Graph" ) as $pid=>$pval ) { ?>
@@ -353,5 +366,22 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
 if( strpos( $search[comparisonaspect], "Average" ) !== false )
     $labelextra = "";
 ?>
+								<div class="lightbox" id="searchlightbox">
+									<div class="save-search-header">
+										<h1>SAVE SEARCH</h2>
+									</div><!-- /.save-search-header -->
+									<div class="save-search-body">
+										<label>Name:</label>
+										<input type='text' name="searchname" id='searchname' onChange='javascript:document.getElementById( "searchnamehidden").value = this.value; '>
+										<a class="black-btn" href="#" onClick='javascript:saveSearch( "saved", "Benchmark" ); return false'>SAVE</a>
+										<div class="cf"></div>
+									</div><!-- /.save-search-body -->
+								</div><!-- #searchlightbox -->
+      <input type='hidden' name="searchnamehidden" id='searchnamehidden'>
+    <script>
+		var sessid = "<?=session_id()?>";
+		var searchType = "Benchmark";
+	var searchName = "<?=$possiblesearchfunctions[$search[comparisonaspect]]  . ( $datedisplay ? ": " . $datedisplay:"" )?>";
+</script>
 <? 
 include "trend-search-results-{$graphtype}.php";  ?>

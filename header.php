@@ -994,12 +994,12 @@ $(document).ready(function(){
 		<div class="footer-disclaimer">
 			<p>&copy; <?php echo date('Y'); ?> ChartCipher, All Rights Reserved</p>
             
-            <p>Phone:<br>
+            <p class="hide">Phone:<br>
             212-871-2308</p>
             
             <p>Customer Service:<br>
             customerservice@chartcipher.com</p>
-			<p><a href="https://www.chartcipher.com/privacy-policy/" >Privacy Policy</a> | <a href="https://www.chartcipher.com/terms" >Terms of Use</a></p>
+			<p class="hide"><a href="https://www.chartcipher.com/privacy-policy/" >Privacy Policy</a> | <a href="https://www.chartcipher.com/terms" >Terms of Use</a></p>
 			<p><a href="http://i360m.com/">Designed by Imagine 360 Marketing</a></p>
 		</div>
 	</div><!-- /.site-sidebar -->

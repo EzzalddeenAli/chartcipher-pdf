@@ -26,7 +26,7 @@ $benchmarkdescriptions["New Songs vs. Carryovers"] = "Compare the characteristic
 $benchmarkdescriptions["Staying Power - 10 Weeks"] = "Compare the characteristics of songs that charted for ten or more weeks vs. those that charted for nine or less weeks.";
 $benchmarkdescriptions["Seasonal Comparisons"] = "Compare the characteristics of songs based on seasons.";
 
-if( !in_array( intval( $chartid ), array( 6, 3, 15, 42, 43 ) ) )
+if(!isNoGenreChart( $chartid ) )
     {
 	$benchmarktypes["Genre Comparisons"] = "Genre Comparisons";
 	$benchmarkdescriptions["Genre Comparisons"] = "Compare the characteristics of songs by genre.";

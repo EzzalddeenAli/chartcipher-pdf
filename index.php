@@ -95,11 +95,11 @@ if( $i == 4 ) echo( "           <div class=\"more-items\">" );
                <div class="row  row-equal row-padding mobile link-alt">
                             <div class="col-6">
                        <div class="home-search-header ">
-                                <h3>Saved Searches</h3>
+                                <h3>Saved Searches and Reports</h3>
                                  <a style="display:none;" class="search" href="/saved-searches"><img src="assets/images/home/search-view-icon.svg" /></a>
                             </div>
                          <div class="header-inner" >
-                         <table class="table table-section">
+                         <table class="table table-section table-search">
 <? $searches = getSavedSearches(); 
 $i = 0;
 foreach( $searches as $s ) { 

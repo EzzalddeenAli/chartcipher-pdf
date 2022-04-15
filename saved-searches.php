@@ -11,7 +11,7 @@ $allcharts = db_query_array( "select id, Name from charts", "id", "Name" );
 if( $delid )
 {
 	db_query( "delete from savedsearches where userid = '$userid' and id = $delid" );
-	$err = "<font color='red'>Deleted.</font>";
+//	$err = "<font color='red'>Deleted.</font>";
 }
 if( $delall )
 {
@@ -41,7 +41,7 @@ if( $errmsg == "delall" )
 			<div class="element-container row">
 				<div class="search-container">
 					<div class="search-header">
-						<h1><?=getOrCreateCustomTitle( "Saved Searches", "Saved Searches" )?></h1>
+						<h1><?=getOrCreateCustomTitle( "My Dashboard", "My Dashboard" )?></h1>
 
 <!--
 <h2>    <? $cust = getOrCreateCustomHover( "saved-searches", "View and manage your saved searches." );?>
@@ -77,7 +77,11 @@ if( $errmsg == "delall" )
         
 <? $searches = getSavedSearches(); 
 foreach( $searches as $s ) { 
-	 $url = $s[url] . "&savedid={$s[id]}";
+//print_r( $s );
+	 $url = $s[url];
+//	 if( strpos( $url , "?" ) === false )
+//	 	 $url .= "?" ; 
+//		 $url .= "&savedid={$s[id]}";
 	 $query = "";
 	 switch( $s[searchtype] ){  
          case "Song":
@@ -87,6 +91,17 @@ foreach( $searches as $s ) {
          case "Song Title":
              $query = "song-title-search";
              $searchurl = str_replace( "search-results", $query, $s[url] );
+             break; 
+         case "Spotlight":
+             $searchurl = $s[url];
+             break; 
+         case "Levels":
+             $searchurl = $s[url];
+             break; 
+             
+         case "Benchmark":
+             $query = "benchmark";
+             $searchurl = str_replace( "benchmark-report", $query, $s[url] );
              break; 
              
          case "Comparative":

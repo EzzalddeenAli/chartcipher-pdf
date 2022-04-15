@@ -192,6 +192,9 @@ a:hover{
 }
 
 
+
+
+
 ul.icon-list li:hover a:before, ul.icon-list li:hover a, ul.icon-list a:hover h2:after {
     color: #8b26b2;
 }
@@ -364,6 +367,17 @@ table tr:hover, .table-section tr:hover, .table-charts tr:hover, .table-insights
     font-weight: 200;
     width: 100%;
 }
+
+.table-search tr td{
+
+    width: 50%!important;
+}
+
+
+.table-search td:nth-child(2) {
+  text-align: left;
+}
+
 
 /*
 .insights-section tr td{
@@ -1059,7 +1073,8 @@ li.menu-item-0.user a.active
 	border-radius: 4px;
 }
 .delete-btn:hover{
-	background-color: #ff6633;
+	background-color: #8b26b2;
+	color:#ffffff;
 }
 .delete-btn-all{
 	display: none;
@@ -1987,7 +2002,7 @@ display: block;
 .info-block{
 background-color: #fafafa;
 border-top: solid 1px #f1f2f7;
-padding: 10px 0;
+padding: 10px 10px;
 position: absolute;
     left: 0px;
 bottom: 0px;
@@ -4308,4 +4323,19 @@ background-size: 22px;
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.save-link{
+  color: #999!important;
+font-size: 13px!important;
+}
+
+
+a.save-link::before {
+
+  font-family: "Font Awesome 5 Free";
+   content: "\f02e";
+  color: #7a7a7a;
+    margin-right: 10px;
+    
 }

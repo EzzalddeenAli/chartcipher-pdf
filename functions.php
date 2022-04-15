@@ -2526,5 +2526,13 @@ function getChartInfo( $songid, $chartid="" )
     return db_query_first( "select * from song_to_chart where songid = $songid and chartid = $chartid" );
 }
 
+function isNoGenreChart( $mychartid = "" )
+{
+	global $_GET, $chartid;
+	if( !$mychartid )
+		$mychartid = $chartid;
+	return in_array( intval( $mychartid ), array( 6, 3, 15, 42, 43 ) ) || in_array( intval( $_GET["setchart"] ), array( 6, 3, 15, 42, 43 ) ); 
+}
+
 
 ?>

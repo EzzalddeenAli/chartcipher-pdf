@@ -61,6 +61,7 @@
 <? } ?>
 //                            alert( thisval );
                             var count = 0;
+if( $_SESSION["loggedin"]) { 
                             for(i = 0; i <  e.chart.options.data.length ; i++ )
                             {
                                     // this is like 1-5 times
@@ -91,6 +92,7 @@ else
 					}
                                 }
                             }
+}
                             return val;
                         }
 				},

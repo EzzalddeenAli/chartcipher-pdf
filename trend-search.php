@@ -91,7 +91,14 @@ $backurl = "/song-landing.php";
                        <div class="row inner row-equal row-padding link-alt">
                            <div class="col-12 flex">
                                <div class="home-search-header">
-                                        <h2><?=$title?></h2>
+                                        <h2>
+                         <div class="custom-select" >
+<select id="mysetreport">
+<? foreach( $titles as $t=> $display ) { ?>
+<option <?=$title == $display . " " . "Trends"?"SELECTED":""?> value="<?=$t?>"><?=$display?> Trends</option>
+<? } ?>
+</select>
+</div>
                                         <div class="cf"></div>
                                 </div>
                                  <div class="inner-content ">
@@ -230,17 +237,6 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
      
                   <div class="form-row-full quarter-select">
 								<div class="form-row-left-inner">
-                                    
-                                    <div class="select-wrapper"  style="display:none">
-                                        <label>Select songs to include (New songs/Carryovers)</label>
-              								<select name="newcarryfilter">
-              									<option value="">All Songs</option>
-              	   <? outputSelectValuesForNewCarry( $newcarryfilter, "trend" )?>
-              								</select>
-                </div>
-                                    
-								</div>
-								<div class="form-row-right-inner">
                                   <label># of weeks on <?=$chartname?></label>
 									<select name="search[minweeks]"  >
 									<option value="" disabled selected>(Any, 10, +25, 50+) </option>
@@ -251,13 +247,8 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
 
 									</select>
 								</div>
-								
-				<div class="cf"></div>
-		</div><!-- /.form-row-left -->
- </div>
-                                      
-                  <div class="form-row-full quarter-select">
-								<div class="form-row-left-inner">
+
+								<div class="form-row-right-inner" <? if( isNoGenreChart() ){ echo( "style='display:none'" ); }?>>
 
 
 
@@ -270,20 +261,12 @@ outputSelectValues( $minweeksvalues, $search[minweeks] );
 									</select>
 
 
-
-
 								</div>
-								<div class="form-row-right-inner">
-                                    <div class="select-wrapper" style="display:none">
-                                        <label>Select a Specifc Lyrical Theme</label>
-								<select name='search[lyricalthemeid]'>
-									<option value="">All</option>
-<? outputSelectValuesForOtherTable( "lyricalthemes", $search[lyricalthemeid]); ?>
-								</select>
-                </div>
-
-                                      </div>
-</div>
+								
+				<div class="cf"></div>
+		</div><!-- /.form-row-left -->
+ </div>
+                                      
                                       
      
                   <div class="form-row-full quarter-select">

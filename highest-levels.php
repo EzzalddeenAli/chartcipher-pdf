@@ -31,12 +31,12 @@ $backurl = "insights.php";
 include "trendfunctions.php";
 
 include "trendreportfunctions.php";
-include "benchmarkreportfunctions.php";
+
 
 
 
 include 'header.php'; 
-
+include "benchmarkreportfunctions.php";
 
 
 if( date( "m" ) <= 3 )
@@ -214,6 +214,7 @@ $allquarters = array_reverse( $allquarters );
 								<select id="mysetquarter">
 								<? outputSelectValues( $allquarters, $thisquarter ); ?>
 								</select>
+
                                </div>
                             </div>
                          <div class="header-inner " >
@@ -278,6 +279,10 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
    $tmpurl .= "&search[dates][$k]=$v";
 
 ?>
+                       
+                       <a href="#" data-featherlight="#searchlightbox"  class="save-link">Save Search</a>
+                       
+                       
                                  <a class="search" href="/<?=$tmpurl?>"> View >></a>
                             </div>
                          <div class="header-inner insight-graph" >
@@ -339,6 +344,24 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
         
 
 	</div><!-- /.site-body -->
+								<div class="lightbox" id="searchlightbox">
+									<div class="save-search-header">
+										<h1>SAVE SEARCH</h2>
+									</div><!-- /.save-search-header -->
+									<div class="save-search-body">
+										<label>Name:</label>
+										<input type='text' name="searchname" id='searchname' onChange='javascript:document.getElementById( "searchnamehidden").value = this.value; '>
+										<a class="black-btn" href="#" onClick='javascript:saveSearch( "saved", "Levels" ); return false'>SAVE</a>
+										<div class="cf"></div>
+									</div><!-- /.save-search-body -->
+								</div><!-- #searchlightbox -->
+      <input type='hidden' name="searchnamehidden" id='searchnamehidden'>
+    <script>
+		var sessid = "<?=session_id()?>";
+		var searchType = "levels";
+	var searchName = "<?=$possiblesearchfunctions[$search[comparisonaspect]]  . ( $datedisplay ? ": " . $datedisplay:"" )?>";
+</script>
+
 
 <?php include 'footer.php';?>
     <? if( $search["comparisonaspect"] ) { ?>

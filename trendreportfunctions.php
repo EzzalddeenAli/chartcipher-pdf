@@ -406,7 +406,10 @@ function gatherCharacteristicsSingleQuarter( $thisquarter, $type )
 		    $each = count( $matchingarr ) > 1 ?" each":"";
 		    if( $numsongs )
 			{
-			    $retval[$displ . ":"] = implode( ", ", $matchingarr ) . " ({$valtouse}% of songs, $numsongs {$son}{$each})";
+			if( $_SESSION["loggedin"] )
+			    $retval[$displ . ":"] = implode( ", ", $matchingarr ) . " ($numsongs {$son}{$each}, {$valtouse}% of songs)"; //  
+			else
+			    $retval[$displ . ":"] = implode( ", ", $matchingarr ) . " ({$valtouse}% of songs)"; // , $numsongs {$son}{$each}
 			}
 		}
 //        print_r( $matchingarr );
