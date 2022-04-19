@@ -975,8 +975,12 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 			case "Tempo Range General":
 			    //                TempoRange
 			    $nospaces = str_replace( " ", "", $comparisonaspect );
-			    $stwc = db_query_array( "select $nospaces, count(*) as num from songs where id in ( $songidstr ) and TempoRange > 0 group by $nospaces order by $nospaces  ", "$nospaces", "num" );
-			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and $nospaces > 0  " );
+		$zero = "0";
+		if( $nospaces == "TempoRangeGeneral" )
+		    $zero = "''";
+		//		echo( "select $nospaces, count(*) as num from songs where id in ( $songidstr ) and TempoRange > $zero group by $nospaces order by $nospaces<br><br>" );
+			    $stwc = db_query_array( "select $nospaces, count(*) as num from songs where id in ( $songidstr ) and $nospaces > $zero group by $nospaces order by $nospaces  ", "$nospaces", "num" );
+			    $numsongs = db_query_first_cell( "select count(distinct( id)) from songs where id in ( $songidstr ) and $nospaces > $zero  " );
 			    foreach( $stwc as $t=>$numforthis )
 				{
 				    //                    $numforthis = db_query_first_cell( "select count(*) from songs where id in ( $songidstr ) and TempoRange = '$t' " );
@@ -989,7 +993,7 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 				    $retval[$thiskey][$t][0] = $numforthis;
 				    $retval[$thiskey][$t][1] = $numforthis . "%";
 				    $retval[$thiskey][$t][2] = $t;
-				    $retval[$thiskey][$t][3] = "search-results?$qs&search[TempoRange]=" . urlencode( $t ) . ""; 
+				    $retval[$thiskey][$t][3] = "search-results?$qs&search[$comparisonaspect]=" . urlencode( $t ) . ""; 
 				    $retval[$thiskey][$t][4] = $number;
 				}
 			    break;

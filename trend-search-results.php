@@ -74,6 +74,13 @@ $lyricalthemefilter = $search["lyricalthemeid"];
 $subgenrefilter = $search["specificsubgenre"];
 $minweeksfilter = $search["minweeks"];
 
+if( isNoGenreChart() && $search["comparisonaspect"] == "Genres" && !$_SESSION["isadminlogin"] )
+    {
+	Header( "Location: /song-landing.php" );
+	exit;
+    }
+
+
 $season = $search[dates][season];
 if( !$search[dates][fromq] && !$search[dates][fromyear] && !$search[dates][fromweekdate] )
 {

@@ -529,12 +529,12 @@ function gatherCharacteristicsMultipleQuarters( $quarterstorun, $type )
                     if( $type == "upward" )
                     {
 			// was 3
-                        if( $thisval <= $prevvalue ) $oktoadd = false;
+                        if( $thisval-1 <= $prevvalue ) $oktoadd = false;
                     }
                     if( $type == "downward" )
                     {
 			// was 3? 
-                        if( $thisval >= $prevvalue ) $oktoadd = false;
+                        if( $thisval+1 >= $prevvalue ) $oktoadd = false;
 		// if( strpos( $displ, "Key" ) !== false && count( $rows ) == 2 )
 	    	// {
 		// 	echo( "$displ($rowdispl): $thisval, $prevvalue<br>" );
@@ -545,14 +545,15 @@ function gatherCharacteristicsMultipleQuarters( $quarterstorun, $type )
                     {
                         if( $thisquarter != $tmpquarter && $maxmin < $thisval )
                         {
-//                        echo( "$tmpquarter ($thisval) SETTING MAX to $thisval, was " . $maxmin . "<br>");
+			    // if( strpos( $displ, "Song Length Range" ) !== false )
+			    // 	echo( "$tmpquarter ($rowdispl) ($thisval) SETTING MAX to $thisval, was " . $maxmin . "<br>");
                             $maxmin = $thisval;
                         }
-                    if( $thisquarter == $tmpquarter )
-                    {
-//                        echo( "$rowdispl ($thisval) MAX:" . $maxmin . "<br>");
-                        $oktoadd = $thisval-3 > $maxmin;
-                    }
+			if( $thisquarter == $tmpquarter )
+			    {
+				//                        echo( "$rowdispl ($thisval) MAX:" . $maxmin . "<br>");
+				$oktoadd = $thisval-1 > $maxmin;
+			    }
                     }
                     if( $type == "lowest" )
                     {
@@ -561,7 +562,7 @@ function gatherCharacteristicsMultipleQuarters( $quarterstorun, $type )
                         if( $thisquarter == $tmpquarter )
                         {
 //                        echo( "$rowdispl ($thisval) MIN:" . $maxmin . "<br>" );
-                            $oktoadd = $thisval+3 < $maxmin;
+                            $oktoadd = $thisval+1 < $maxmin;
                         }
                     }
                     $prevvalue = $thisval;

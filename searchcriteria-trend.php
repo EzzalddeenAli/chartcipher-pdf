@@ -269,7 +269,7 @@ $tmpurl = str_replace( "&graphtype=". $graphtype , "", $tmpurl );
 $tmpurl .= "&graphtype=";
 //echo( "$tmpurl -- $_GET[graphtype]" );
     ?>
-<? if( isset( $_GET[graphtype] ) && $search[comparisonaspect] != "Number of Weeks" && $search[comparisonaspect] != "Number of Songs" && $search[comparisonaspect] != "Number of Songs (Form)" && !$search["dates"]["season"] ){ ?>
+<? if( $search[comparisonaspect] != "Number of Weeks" && $search[comparisonaspect] != "Number of Songs" && $search[comparisonaspect] != "Number of Songs (Form)" && !$search["dates"]["season"] ){ ?>
 								<tr>
 									<td class="search-column-1">
     Output Format: 

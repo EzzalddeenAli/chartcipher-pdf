@@ -392,7 +392,7 @@ db_query( "update songs set TempoRangeGeneral = 'Under 79' where Tempo <= 79 and
 db_query( "update songs set TempoRangeGeneral = '80-99' where Tempo >= 80 and Tempo < 100 and id = $songid " );
 db_query( "update songs set TempoRangeGeneral = '100-119' where Tempo >= 100 and Tempo < 120 and id = $songid " );
 db_query( "update songs set TempoRangeGeneral = '120-149' where Tempo >= 120  and Tempo < 150 and id = $songid" );
-db_query( "update songs set TempoRangeGeneral = '150+' where Tempo >= 120  and id = $songid" );
+db_query( "update songs set TempoRangeGeneral = '150+' where Tempo >= 150  and id = $songid" );
 
 db_query( "update songs set TempoRangeGeneral = null where (Tempo = 0 or Tempo is null) and id = $songid" );
 db_query( "update songs set MajorMinor = 'Major' where SpecificMajorMinor in ( 'Major', 'Lydian', 'Mixolydian', 'Pentatonic' ) and id = $songid" );
