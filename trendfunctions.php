@@ -534,7 +534,7 @@ function calcTrendQSStart( $q, $seasontouse = "" )
 
 function calcTrendQSStartBar()
 {
-    global $search, $nodates, $genrefilter, $specificpeak, $barname, $doingweeklysearch, $newcarryfilter, $doingyearlysearch, $doingthenandnow, $dateurlstouse, $withimprint, $lyricalmoodfilter, $lyricalsubthemefilter, $lyricalthemefilter, $bpmfilter, $majorminorfilter, $minweeksfilter, $columns, $season;
+    global $search, $nodates, $genrefilter, $specificpeak, $barname, $doingweeklysearch, $newcarryfilter, $doingyearlysearch, $doingthenandnow, $dateurlstouse, $withimprint, $lyricalmoodfilter, $lyricalsubthemefilter, $lyricalthemefilter, $bpmfilter, $majorminorfilter, $minweeksfilter, $columns, $season, $crosschartfilter, $subgenrefilter;
 //    echo( "<br>min: $minweeksfilter<br>" );
     $qspl = explode( "/", $q );
     $qs = "";
@@ -593,9 +593,13 @@ function calcTrendQSStartBar()
     {
         $qs .= "search[season]={$season}&";
     }
+    if( $crosschartfilter )
+    {
+        $qs .= "setchart={$crosschartfilter}&";
+    }
     else if( $search["benchmarktype"] )
 	{
-	    if( !is_array( $columns[$barname] ) )
+	    if( !is_array( $columns[$barname] ) && $search["benchmarktype"] != "Genre Comparisons" )
 		$qs .= "search[peakwithin]={$columns[$barname]}&";
 	}
     if( $search["peakchart"] )
@@ -646,6 +650,8 @@ function calcTrendQSStartBar()
     }
     if( $search[specificsubgenre] )
         $qs .= "search[specificsubgenre]={$search[specificsubgenre]}&";
+    if( $subgenrefilter )
+        $qs .= "search[specificsubgenre]={$subgenrefilter}&";
     if( $search[specificinfluence] )
         $qs .= "search[specificinfluence]={$search[specificinfluence]}&";
     if( $search["toptentype"] )

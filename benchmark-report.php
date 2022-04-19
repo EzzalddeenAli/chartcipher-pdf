@@ -28,6 +28,14 @@ if( ($search["benchmarktype"] == "Seasonal Comparisons") && !$season )
 	exit;
     }
 
+if( ($search["benchmarktype"] == "Cross Chart Comparisons") && !$search["comparechartids"] )
+    {
+	//	echo( "in here" );
+	Header( "Location: /benchmark.php?needschart=1&" . $_SERVER["QUERY_STRING"] );
+	echo( "<script>document.location.href = 'benchmark.php?needschart=1&" . $_SERVER["QUERY_STRING"]."';</script>" );
+	exit;
+    }
+
 if( in_array( intval( $chartid ), array( 6, 3, 15, 42, 43 ) ) || in_array( intval( $_GET["setchart"] ), array( 6, 3, 15, 42, 43 ) )  )
 {
 	if( $search["benchmarktype"] == "Genre Comparisons" )
@@ -72,6 +80,15 @@ switch( $search["benchmarktype"] ) {
 	    {
 		$columns[$seasonswithall[$s]] = array( "season"=>$s );
 	    }
+    break;
+    case "Cross Chart Comparisons":
+    $allcharts = db_query_array( "select id, Name from charts", "id", "Name" );
+	$columns = array();
+	foreach( $search["comparechartids"] as $s )
+	    {
+		$columns[$allcharts[$s]] = array( "crosschartid"=>$s );
+	    }
+//	    print_r( $columns );
     break;
     case "New Songs vs. Carryovers":
 	$columns = array( "New Songs"=> array( "newcarryfilter"=>"new" ), "Carryovers"=> array("newcarryfilter"=>"carryover" ) );
@@ -135,6 +152,8 @@ $alllllsongs = array();
 			$newcarryfilter = $val;
 		    if( $type == "minweeksfilter" )
 			$minweeksfilter = $val;
+		    if( $type == "crosschartid" )
+			$crosschartfilter = $val;
 		    if( $type == "season" )
 			{
 			$season = $val;
@@ -149,12 +168,12 @@ $alllllsongs = array();
 	    $benchmarkpeak = "";
 	}		
 
-
     //    echo( "min: $minweeksfilter" );
     //    echo( $minweeksfilter );
 	$allsongstop = getSongIdsWithinQuarter( false, $search[dates][fromq], $search[dates][fromy], $search[dates][toq], $search[dates][toy], $benchmarkpeak, false, $season );
 	if( !count( $allsongstop ) )
 	    {
+//	    echo( "removing $c" );
 		unset( $columns[$c] );
 		continue;
 	    }

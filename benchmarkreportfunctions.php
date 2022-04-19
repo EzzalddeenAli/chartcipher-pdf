@@ -19,6 +19,7 @@ $benchmarktypes["Top vs. Bottom of the Charts"] = "Top vs. Bottom of the Charts"
 $benchmarktypes["New Songs vs. Carryovers"] = "New Songs vs. Carryovers";
 $benchmarktypes["Staying Power - 10 Weeks"] = "Staying Power: Song with 10+ Weeks vs. Songs with less than 10 Weeks";
 $benchmarktypes["Seasonal Comparisons"] = "Seasonal Comparisons";
+$benchmarktypes["Cross Chart Comparisons"] = "Cross Chart Comparisons";
 
 $benchmarkdescriptions = array();
 $benchmarkdescriptions["Top vs. Bottom of the Charts"] = "Compare the characteristics of songs that peaked at the top half of the chart vs. those at the bottom half.";
@@ -31,6 +32,7 @@ if(!isNoGenreChart( $chartid ) )
 	$benchmarktypes["Genre Comparisons"] = "Genre Comparisons";
 	$benchmarkdescriptions["Genre Comparisons"] = "Compare the characteristics of songs by genre.";
     }
+$benchmarkdescriptions["Cross Chart Comparisons"] = "Compare the characteristics of charts.";
 
 
 $benchmarksubtypes = array();
@@ -66,12 +68,12 @@ $benchmarknumerics["Lyrical"]["InternalRhymesPercentageRange"] = "InternalRhymes
 $benchmarknumerics["Lyrical"]["MidLineRhymesPercentageRange"] = "MidLineRhymesPercentageRange";
 $benchmarknumerics["Lyrical"]["RhymeDensityRange"] = "RhymeDensityRange";
 $benchmarknumerics["Lyrical"]["EndOfLineRhymesPercentageRange"] = "EndOfLineRhymesPercentageRange";
-$benchmarknumerics["Lyrical"]["PercentAbbreviations"] = "PercentAbbreviations";
-$benchmarknumerics["Lyrical"]["SlangWords"] = "SlangWords";
+//$benchmarknumerics["Lyrical"]["PercentAbbreviations"] = "PercentAbbreviations";
+$benchmarknumerics["Lyrical"]["SlangWordsRange"] = "SlangWordsRange";
 $benchmarknumerics["Lyrical"]["ProfanityRange"] = "ProfanityRange";
 $benchmarknumerics["Lyrical"]["PersonReferences"] = "PersonReferences";
 $benchmarknumerics["Lyrical"]["LocationReferences"] = "LocationReferences";
-$benchmarknumerics["Lyrical"]["ThousandWordsPrevalence"] = "ThousandWordsPrevalence";
+$benchmarknumerics["Lyrical"]["ThousandWordsPrevalenceRange"] = "ThousandWordsPrevalenceRange";
 
 
 // Overview

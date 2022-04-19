@@ -47,11 +47,16 @@ foreach( $songstouse as $barname=>$tmpsongs )
 				    {
 					$season = $val;
 				    }
+				if( $type == "crosschartid" )
+				    {
+					$crosschartfilter = $val;
+				    }
 			    }
 			$benchmarkpeak = "";
 		    }
 		if( $search["benchmarktype"] == "Genre Comparisons" )
 		    {
+//		    echo( "in here" );
 			$subgenrefilter = $benchmarkpeak;
 			$benchmarkpeak = "";
 		    }		

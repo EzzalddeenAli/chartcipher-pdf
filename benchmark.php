@@ -153,6 +153,17 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
 </div>
 
 								</div>
+								<div id="crosschartdiv" class="form-row-right-inner" style="display:<?=$search[benchmarktype]=="Cross Chart Comparisons"?"":"none"?>">
+                                    <div class="select-wrapper">
+<label>Chart (Use the command key to select multiple charts.) </label>
+									<select id="comparechartids" name="search[comparechartids][]" multiple style="height:85px">
+<?php
+									outputSelectValuesForOtherTable( "charts", $search["comparechartids"], false, " and UseOnDb = 1" ); ?>
+
+									</select>
+</div>
+
+								</div>
 								
 				<div class="cf"></div>
 		</div><!-- /.form-row-left -->
@@ -658,6 +669,17 @@ $( document ).ready(function() {
                 return true;
             }, "* Please choose one or more seasons.");
 
+        $.validator.addMethod("onlyifcharts", function(value, element) {
+		var val = $("#benchmarktype").val();
+		//		alert( "chosen:" + val );
+		var thesevalues = $("#comparechartids").val();
+		//		alert( "these: " + thesevalues );
+
+		if( val == "Cross Chart Comparisons" && ((""+thesevalues) == "null" ) )
+		    return false;
+                return true;
+            }, "* Please choose one or more seasons.");
+
 		$('#benchmarkform').validate({
 			onfocusout: false,
 			onkeyup: false,
@@ -671,6 +693,7 @@ $( document ).ready(function() {
                   'search[dates][fromy]': { datesmustbevalid: true },
                   'search[dates][toy]': { datesmustbevalid: true },
                   'search[dates][season][]': { onlyifseasons: true },
+                  'search[comparechartids][]': { onlyifcharts: true },
                   'search[dates][fromyear]': { datesmustbevalidyear: true },
                   'search[dates][toyear]': { datesmustbevalidyear: true },
                   'searchcriteria[artistid]': { onlyifartist: true },
@@ -890,6 +913,10 @@ if( val == "Seasonal Comparisons" )
     $("#seasonaldiv").css( "display", "" );
 else
     $("#seasonaldiv").css( "display", "none" );
+if( val == "Cross Chart Comparisons" )
+    $("#crosschartdiv").css( "display", "" );
+else
+    $("#crosschartdiv").css( "display", "none" );
 }
 
         

@@ -950,7 +950,10 @@ function getQuarterEnteredTheTopTenString( $str , $season, $not = "" )
 
 function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter = "", $endyear = "", $positiononly = "", $orderbysongtitle = false, $seasontouse = "" )
 {
-    global $cachesongids, $numberoneonly, $nodates, $clientfilter, $genrefilter, $lyricalthemefilter, $lyricalsubthemefilter, $lyricalmoodfilter, $minweeksfilter, $bpmfilter, $majorminorfilter, $newcarryfilter, $subgenrefilter, $season, $withimprint, $chartid; // ughhhhhh
+    global $cachesongids, $numberoneonly, $nodates, $clientfilter, $genrefilter, $lyricalthemefilter, $lyricalsubthemefilter, $lyricalmoodfilter, $minweeksfilter, $bpmfilter, $majorminorfilter, $newcarryfilter, $subgenrefilter, $season, $withimprint, $chartid, $crosschartfilter; // ughhhhhh
+
+    if( $crosschartfilter )
+        $chartid = $crosschartfilter;
 //echo( "chat: " . $chartid );
     $seasontouse = $seasontouse?$seasontouse:$season;
     if( $numberoneonly ) $positiononly = 1;
@@ -1069,9 +1072,9 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
   {
       $valuearr = explode( "-", $minweeksfilter );
       if( count( $valuearr ) > 1 )
-	  $ext .= " and songs.id in ( select songid from song_to_chart where chartid = '". $_SESSION["chartid"] . "' and song_to_chart.NumberOfWeeksSpentInTheTop10 >= $valuearr[0] and song_to_chart.NumberOfWeeksSpentInTheTop10 <= $valuearr[1] )"; 
+	  $ext .= " and songs.id in ( select songid from song_to_chart where chartid = '". ($crosschartfilter?$crosschartfilter:$_SESSION["chartid"]) . "' and song_to_chart.NumberOfWeeksSpentInTheTop10 >= $valuearr[0] and song_to_chart.NumberOfWeeksSpentInTheTop10 <= $valuearr[1] )"; 
       else
-	  $ext .= " and songs.id in ( select songid from song_to_chart where chartid = '". $_SESSION["chartid"] . "' and NumberOfWeeksSpentInTheTop10 >= $minweeksfilter )"; 
+	  $ext .= " and songs.id in ( select songid from song_to_chart where chartid = '".  ($crosschartfilter?$crosschartfilter:$_SESSION["chartid"]) . "' and NumberOfWeeksSpentInTheTop10 >= $minweeksfilter )"; 
       
   }
   if( $lyricalsubthemefilter )
@@ -1120,7 +1123,7 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
   if( $_GET["help"] )
       echo( "<br>\n getsongidswithinquarter : " . $ext . "\n<br>\n" );
   
-  $key = "$quarter, $year, $endquarter, $endyear, $positiononly, $newarrivalsonly, $songwriterfilter, $clientfilter, $labelfilter, $artistfilter, $genrefilter, $artistid, $artisttype, $withimprint, $newcarryfilter, $minweeksfilter, $subgenrefilter, $seasontouse, $chartid";
+  $key = "$quarter, $year, $endquarter, $endyear, $positiononly, $newarrivalsonly, $songwriterfilter, $clientfilter, $labelfilter, $artistfilter, $genrefilter, $artistid, $artisttype, $withimprint, $newcarryfilter, $minweeksfilter, $subgenrefilter, $seasontouse, $chartid, $crosschartfilter";
   if( $endyear && !$endquarter )
   {
       $endquarter = 4;
@@ -1209,7 +1212,7 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
       	  $seasontouse = implode( ",", $seasontouse );
       }
       $s = str_replace( "4", "0", $seasontouse );
-      $chartstr = " and song_to_weekdate.chartid = $_SESSION[chartid]";
+      $chartstr = " and song_to_weekdate.chartid = ". ($crosschartfilter?$crosschartfilter:$_SESSION["chartid"]);
       $quarternumber = $seasontouse?" and QuarterNumber % 4 in ($s)" :""; 
 
  if( strpos( $positiononly, ":" ) !== false )

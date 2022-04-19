@@ -146,7 +146,7 @@ $tmpurl .= "&newcarryfilter=";
 $tmpurl = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[specificsubgenre]=". $search[specificsubgenre] , "", $tmpurl );
 $tmpurl .= "&search[specificsubgenre]=";
-if( $search["specificsubgenre"] && !isNoGenreChart()  ) { 
+if(  !isNoGenreChart()  ) { 
 ?>
 								<tr>
 									<td class="search-column-1">
