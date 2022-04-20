@@ -184,6 +184,7 @@ $alllllsongs = array();
     }	     
 //echo( "all the songs: " );
 //print_r( $alllllsongs );
+//echo( count( $alllllsongs ) );
 $rows = getRowsComparison( $search, $alllllsongs );
 //    $allgenres = db_query_array( "select id, Name from genres order by OrderBy", "id", "Name" );
 //    $genrefilter = $_GET["subgenrefilter"];

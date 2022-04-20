@@ -69,9 +69,6 @@ $_SESSION["chartid"] = $chartid;
 
 $setchart = $chartid;
 
-$maxnumperchart = 100;
-$topmiddle = 25;
-$bottommiddle = 75;
 // pop-songs
 if( $setchart == 3 )
 {
@@ -79,8 +76,13 @@ if( $setchart == 3 )
 	$topmiddle = 20;
 	$bottommiddle = 21;
 }
-// country-songs, rock songs, r&b , electronic
-if( $setchart == 6 || $setchart == 42 || $setchart == 15 || $setchart == 43 )
+else if( $setchart == 37 )
+{
+$maxnumperchart = 100;
+$topmiddle = 25;
+$bottommiddle = 75;
+}
+else // everything else
 {
 	$maxnumperchart = 50;
 	$topmiddle = 25;
@@ -123,7 +125,7 @@ if( strpos( $tmp, "client-" ) !== false  || $clientfilter )
 @include_once "dbconfig.php";
 @include_once "../dbconfig.php";
 
-
+//echo( isRachel() );
 if( !$nologin ) 
   {
     //if( $password == "hsdmg@DBP@$$w0rd"|| isRachel() )
@@ -1123,6 +1125,12 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
   if( $_GET["help"] )
       echo( "<br>\n getsongidswithinquarter : " . $ext . "\n<br>\n" );
   
+    $theclientwhere = $GLOBALS["clientwhere"]; 
+    if( $crosschartfilter )
+    	$theclientwhere = " 1 ";
+
+//	echo( "the: " . $theclientwhere );
+
   $key = "$quarter, $year, $endquarter, $endyear, $positiononly, $newarrivalsonly, $songwriterfilter, $clientfilter, $labelfilter, $artistfilter, $genrefilter, $artistid, $artisttype, $withimprint, $newcarryfilter, $minweeksfilter, $subgenrefilter, $seasontouse, $chartid, $crosschartfilter";
   if( $endyear && !$endquarter )
   {
@@ -1199,9 +1207,9 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
   if( $nodates ) //  || $GLOBALS["isclientsearch"]
   {
       if( $orderbysongtitle )
-          $sql = ( "select distinct( songs.id ) as songid from songs where {$GLOBALS[clientwhere]} $ext and songs.id = songid $gbext order by SongNameHard" );
+          $sql = ( "select distinct( songs.id ) as songid from songs where $theclientwhere $ext and songs.id = songid $gbext order by SongNameHard" );
       else
-          $sql = ( "select distinct( songs.id ) as songid from songs where {$GLOBALS[clientwhere]} $ext $gbext " );
+          $sql = ( "select distinct( songs.id ) as songid from songs where $theclientwhere $ext $gbext " );
   }
   else
   {
@@ -1233,9 +1241,9 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
       }
 
       if( $orderbysongtitle )
-          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where {$GLOBALS[clientwhere]} and weekdateid in ( select id from weekdates where OrderBy >= '$startdate' and OrderBy < '$enddate' $quarternumber $weekdateext ) $ext $chartstr  and songs.id = songid $gbext order by SongNameHard" );
+          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where $theclientwhere and weekdateid in ( select id from weekdates where OrderBy >= '$startdate' and OrderBy < '$enddate' $quarternumber $weekdateext ) $ext $chartstr  and songs.id = songid $gbext order by SongNameHard" );
       else
-          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where {$GLOBALS[clientwhere]} and songid = songs.id $chartstr and  weekdateid in ( select id from weekdates where OrderBy >= '$startdate' and OrderBy < '$enddate' $quarternumber $weekdateext ) $ext $gbstr " );
+          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where $theclientwhere and songid = songs.id $chartstr and  weekdateid in ( select id from weekdates where OrderBy >= '$startdate' and OrderBy < '$enddate' $quarternumber $weekdateext ) $ext $gbstr " );
 
   }
 
@@ -2579,7 +2587,7 @@ function getCharts( $activeonly = true )
 }
 function isRachel()
 {
-    return $_SERVER["REMOTE_ADDR"] == "24.23.212.234";
+    return $_SERVER["REMOTE_ADDR"] == "24.23.212.234" || $_SERVER["REMOTE_ADDR"] == "104.10.249.211";
 	
 }
 function fixTotalCountForAllSongs()
