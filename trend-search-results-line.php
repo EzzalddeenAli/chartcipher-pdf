@@ -1,3 +1,12 @@
+<? 
+
+$presortedbarkey = $rows;
+include "graphsorter.php";
+$rows = $presortedbarkey;
+
+
+?>
+
 	<script type="text/javascript">
 		window.onload = function () {
 			CanvasJS.addColorSet("hsdColors",
@@ -61,7 +70,6 @@
 <? } ?>
 //                            alert( thisval );
                             var count = 0;
-if( $_SESSION["loggedin"]) { 
                             for(i = 0; i <  e.chart.options.data.length ; i++ )
                             {
                                     // this is like 1-5 times
@@ -78,21 +86,20 @@ if( $_SESSION["loggedin"]) {
 					if( numsongs == 1 ) numsongs += " Song";
 					else numsongs += " Songs";
 					numsongs = " (" + numsongs + ")"
-<? if( $_SESSION["loggedin"] || 1 ) { ?>
 					if( thisy > 0 )
 {
+<? if( $_SESSION["loggedin"] || 1 ) { ?>
 	if( dpoints[j].url> "")
 	    val += ( "<a href='" + dpoints[j].url + "'><font color='" + thiscolor + "'>" + chartname + numsongs +"</font></a><Br>" ) ;
 else
+<? } ?>
 	    val += ( "<font color='" + thiscolor + "'>" + chartname + numsongs +"</font><Br>" ) ;
 }
 					else
-<? } ?>
                                         val += ( "<font color='" + thiscolor + "'>" + chartname + "</font><Br>" ) ;
 					}
                                 }
                             }
-}
                             return val;
                         }
 				},

@@ -193,7 +193,7 @@ $backurl = "/song-landing.php";
 									<select id="season" name="search[dates][season]" <?=$searchby=="Year"?"":"disabled"?>>
 										<option value="">Any</option>
 <?php
-outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
+outputSelectValues( $seasonswithall, $search["dates"]["season"] ); ?>
 									</select>
                 </div>
                 <div class="cf"></div>
@@ -239,7 +239,7 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
 								<div class="form-row-left-inner">
                                   <label># of weeks on <?=$chartname?></label>
 									<select name="search[minweeks]"  >
-									<option value="" disabled selected>(Any, 10, +25, 50+) </option>
+									<option value="" selected>(Any, 10, +25, 50+) </option>
 <?
 $minweeksvalues = array( "1-1"=>"1 Week", "1-5"=>"5 Weeks or Less", "1-10"=>"10 Weeks or Less", "10"=>"10 Weeks or More", "20"=>"20 Weeks or More", "30"=>"30 Weeks or More" );
 outputSelectValues( $minweeksvalues, $search[minweeks] );

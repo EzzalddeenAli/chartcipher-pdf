@@ -7,6 +7,17 @@ include "connect.php";
 
 include "nav.php";
 
+db_query( "delete from song_to_influencegroup" );
+$allinfluencegroups = db_query_array( "Select id from influencegroups", "id", "id" );
+foreach( $allinfluencegroups as $aid )
+{
+	$res = db_query_array( "select songid from song_to_influence sti, influences i where i.id = influenceid and influencegroupid = $aid", "songid", "songid" );
+	foreach( $res as $r )
+	{
+		db_query( "insert into song_to_influencegroup ( songid, influencegroupid ) values ( '$r', '$aid' )" );
+	}
+}
+
 //     $des = db_query_rows( "describe songs" );
 // foreach( $des as $srow )
 // {
@@ -228,6 +239,129 @@ if( $gosongs )
 			//     break;
 		    }
 		}
+
+    db_query( "update songs set SongLengthRange = 'Under 3:00' where SongLength < '00:03:00' " );
+    db_query( "update songs set SongLengthRange = '3:00 - 3:29' where SongLength >= '00:03:00' and SongLength < '00:03:30'  " );
+    db_query( "update songs set SongLengthRange = '3:30 - 3:59' where SongLength >= '00:03:30' and SongLength < '00:04:00'  " );
+    db_query( "update songs set SongLengthRange = '4:00 +' where SongLength >= '00:04:00'  " );
+
+    db_query( "update songs set IntroLengthRange = 'No Intro' where IntroLength is null and   id = '$songid'");
+    db_query( "update songs set IntroLengthRange = 'Short' where IntroLength >= '00:00:01' and IntroLength < '00:00:10'  " );
+    db_query( "update songs set IntroLengthRange = 'Moderately Short' where IntroLength >= '00:00:10' and IntroLength < '00:00:20' " );
+    db_query( "update songs set IntroLengthRange = 'Moderately Long' where IntroLength >= '00:00:20' and IntroLength < '00:00:30'  " );
+    db_query( "update songs set IntroLengthRange = 'Long' where IntroLength >= '00:00:30' " );
+
+
+// SongTitleAppearanceRange
+
+$times = array();
+$times[] = "None";
+$times[] = "1 - 5 Times";
+$times[] = "6 - 10 Times";
+$times[] = "11 - 15 Times";
+$times[] = "16 - 20 Times";
+$times[] = "21+ Times";
+
+$etimes = array();
+$etimes[] = array( 0, 0 );
+$etimes[] = array( 1, 5 );
+$etimes[] = array( 6, 10 );
+$etimes[] = array( 11, 15 );
+$etimes[] = array( 16, 20 );
+$etimes[] = array( 21, 9999 );
+
+foreach( $times as $k=>$t )
+  {
+    $et = $etimes[$k];
+    db_query( "update songs set SongTitleAppearanceRange = '$t' where SongTitleAppearances >= '$et[0]' and SongTitleAppearances <= '$et[1]' " );
+  }
+
+
+db_query( "update songs set IntroLengthRangeNums = '' where IntroLength is null ");
+
+$times = array();
+$times[] = "0:01 - 0:09";
+$times[] = "0:10 - 0:19";
+$times[] = "0:20 - 0:29";
+$times[] = "0:30 +";
+
+$etimes = array();
+$etimes[] = array( '00:00:01', '00:00:10' );
+$etimes[] = array( '00:00:10', '00:00:20' );
+$etimes[] = array( '00:00:20', '00:00:30' );
+$etimes[] = array( '00:00:30', '23:00:00' );
+
+foreach( $times as $k=>$t )
+  {
+    $et = $etimes[$k];
+    db_query( "update songs set IntroLengthRangeNums = '$t' where IntroLength >= '$et[0]' and IntroLength < '$et[1]' " );
+  }
+
+
+db_query( "update songs set OutroLengthRangeNums = '' where OutroLength is null");
+
+$times = array();
+$times[] = "0:01 - 0:09";
+$times[] = "0:10 - 0:19";
+$times[] = "0:20 - 0:29";
+$times[] = "0:30 +";
+
+$etimes = array();
+$etimes[] = array( '00:00:01', '00:00:10' );
+$etimes[] = array( '00:00:10', '00:00:20' );
+$etimes[] = array( '00:00:20', '00:00:30' );
+$etimes[] = array( '00:00:30', '23:00:00' );
+
+foreach( $times as $k=>$t )
+  {
+    $et = $etimes[$k];
+    db_query( "update songs set OutroLengthRangeNums = '$t' where OutroLength >= '$et[0]' and OutroLength < '$et[1]' " );
+  }
+
+
+
+// TempoRange
+$i = 0; 
+while( $i < 400 )
+  {
+    $endi = $i + 9;
+    $t = "$i - $endi";
+	db_query( "update songs set TempoRange = '$t' where Tempo >= '$i' and Tempo <= '$endi' " );
+    $i+= 10;
+  }
+
+db_query( "update songs set TempoRangeGeneral = 'Under 79' where Tempo <= 79 and Tempo > 0 " );
+db_query( "update songs set TempoRangeGeneral = '80-99' where Tempo >= 80 and Tempo < 100  " );
+
+db_query( "update songs set TempoRangeGeneral = '100-119' where Tempo >= 100 and Tempo < 120  " );
+
+db_query( "update songs set TempoRangeGeneral = '120-139' where Tempo >= 120  and Tempo < 140" );
+
+db_query( "update songs set TempoRangeGeneral = '140+' where Tempo >= 140  " );
+
+db_query( "update songs set TempoRangeGeneral = null where (Tempo = 0 or Tempo is null) " );
+db_query( "update songs set MajorMinor = 'Major' where SpecificMajorMinor in ( 'Major', 'Lydian', 'Mixolydian', 'Pentatonic' ) " );
+db_query( "update songs set MajorMinor = 'Minor' where SpecificMajorMinor not in ( 'Major', 'Lydian', 'Mixolydian', 'Pentatonic' ) " );
+
+
+ $outrolength = db_query_first_cell( "update songs set OutroRange = 'No Outro' where time_to_sec( OutroLength ) = 0"  );
+ $outrolength = db_query_first_cell( "update songs set OutroRange = 'Short' where time_to_sec( OutroLength ) > 0 "  );
+ $outrolength = db_query_first_cell( "update songs set OutroRange = 'Moderately Short' where time_to_sec( OutroLength ) >= 10 "  );
+ $outrolength = db_query_first_cell( "update songs set OutroRange = 'Moderately Long' where time_to_sec( OutroLength ) >= 20 "  );
+ $outrolength = db_query_first_cell( "update songs set OutroRange = 'Long' where time_to_sec( OutroLength ) >= 30"  );
+
+
+db_query( "delete from song_to_influencegroup" );
+$allinfluencegroups = db_query_array( "Select id from influencegroups", "id", "id" );
+foreach( $allinfluencegroups as $aid )
+{
+	$res = db_query_array( "select songid from song_to_influence sti, influences i where i.id = influenceid and influencegroupid = $aid", "songid", "songid" );
+	foreach( $res as $r )
+	{
+		db_query( "insert into song_to_influencegroup ( songid, influencegroupid ) values ( '$r', '$aid' )" );
+	}
+}
+
 		db_query( "update songs set ProfanityRange = 'None' where PercentProfanity = 0" );
 		include "loadbillboardchartdata.php";
 //$err =ob_get_contents(); 

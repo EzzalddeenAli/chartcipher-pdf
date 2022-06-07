@@ -4,9 +4,20 @@
 		<section class="search-results-top">
 			<div class="element-container row">
 				<div class="search-container">
-                      <div class="home-search-header variant2">
-                                     <h1><?=getOrCreateCustomTitle( ucwords( $searchsubtype ) . " Search3: ". strtoupper( getSearchTrendName( $search[comparisonaspect] ) ), ucwords( $searchsubtype ) . " Search: " . getSearchTrendName( $search[comparisonaspect] ) )?><?=$datedisplay?": ".$datedisplay:""?> <?=$search[specificsubgenre]?"(".getNameById( "subgenres", $search[specificsubgenre] ) . ")":""?> </h1>
-                                <div class="cf"></div>
+                      <div class="home-search-header variant2 flex-addon">
+                          
+                               <h1><?=" Search: " . getSearchTrendName( $search[comparisonaspect] ) ?><?=$datedisplay?": ".$datedisplay:""?> <?=$search[specificsubgenre]?"(".getNameById( "subgenres", $search[specificsubgenre] ) . ")":""?> </h1>
+                          
+                         <div class="custom-select" >
+<? 
+$searchsubtypes = array( "structure"=>"Structure", "compositional"=>"Compositional", "production"=>"Production", "lyrical"=>"Lyrical" );
+?>
+								<select id="mysetsearchsubtype">
+								<? outputSelectValues( $searchsubtypes, $searchsubtype ); ?>
+								</select>
+</div>
+                                
+                                <div class="cf hide"></div>
                             </div>
 					<div class="search-body">
                         
@@ -26,6 +37,7 @@ $tmpurl .= "&search[comparisonaspect]=";
 								<tr>
 									<td class="search-column-1">
     Search Focus: 
+
 </td>									<td class="search-column-2">
  								<select name="search[comparisonaspect]" style="width:400px" onChange='document.location.href="<?=$tmpurl?>" + this.options[this.selectedIndex].value' >
     <? 

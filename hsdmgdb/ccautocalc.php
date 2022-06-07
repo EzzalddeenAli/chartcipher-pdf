@@ -6,25 +6,25 @@
     $autocalcvalues = array();
 
   //  $firstrow = db_query_first( "select Name, type, OrderBy, weekdates.id from weekdates, song_to_weekdate where songid = $songid and weekdateid = weekdates.id order by OrderBy limit 1" );
-    $firstdate = $firstrow[OrderBy];
-//echo( "autoclcing $songid: " . $firstdate . "<br>" );
-      if( date( "n", $firstdate ) <= 3 )
-      {
-	$quarter = "1/" . date( "Y", $firstdate );
-      }
-    else if( date( "n", $firstdate ) <= 6 )
+//     $firstdate = $firstrow[OrderBy];
+// //echo( "autoclcing $songid: " . $firstdate . "<br>" );
+//       if( date( "n", $firstdate ) <= 3 )
+//       {
+// 	$quarter = "1/" . date( "Y", $firstdate );
+//       }
+//     else if( date( "n", $firstdate ) <= 6 )
 
-      {
-	$quarter = "2/" . date( "Y", $firstdate );
-      }
-    else if( date( "n", $firstdate ) <= 9 )
-      {
-	$quarter = "3/" . date( "Y", $firstdate );
-      }
-    else
-      {
-	$quarter = "4/" . date( "Y", $firstdate );
-      }
+//       {
+// 	$quarter = "2/" . date( "Y", $firstdate );
+//       }
+//     else if( date( "n", $firstdate ) <= 9 )
+//       {
+// 	$quarter = "3/" . date( "Y", $firstdate );
+//       }
+//     else
+//       {
+// 	$quarter = "4/" . date( "Y", $firstdate );
+//       }
 
   //  $numweeks = db_query_first_cell( "select count(*) from weekdates, song_to_weekdate where songid = $songid and weekdateid = weekdates.id order by OrderBy" );
     //$peak = db_query_first_cell( "select type from weekdates, song_to_weekdate where songid = $songid and weekdateid = weekdates.id order by cast( replace( type, 'position', '' ) as signed ) limit 1" );
@@ -199,47 +199,46 @@ $autocalcvalues = getAutoCalcRange( $autocalcvalues, $songid, "TotalAlliteration
 $autocalcvalues["SongNameHard"] = escMe( db_query_first_cell( "select BillboardName from songs where id = $songid"  ) );
 $autocalcvalues["ArtistBand"] = escMe( db_query_first_cell( "select BillboardArtistName from songs where id = $songid"  ) );
 
-$totalsec = db_query_first_cell( "select time_to_sec( SongLength ) from songs where id = $songid" );
-$firstchorusstart = db_query_first_cell( "select time_to_sec( FirstChorusTimeIntoSong ) from songs where id = $songid " );
-$outrolength = db_query_first_cell( "select time_to_sec( OutroLength ) from songs where id = $songid"  );
+// $totalsec = db_query_first_cell( "select time_to_sec( SongLength ) from songs where id = $songid" );
+// $firstchorusstart = db_query_first_cell( "select time_to_sec( FirstChorusTimeIntoSong ) from songs where id = $songid " );
 
-db_query( "update songs set FirstChorusPercent = " .  number_format( $firstchorusstart * 100 / ($totalsec?$totalsec:1), 2, ".", "" ) . " where id = $songid" ); 
+// db_query( "update songs set FirstChorusPercent = " .  number_format( $firstchorusstart * 100 / ($totalsec?$totalsec:1), 2, ".", "" ) . " where id = $songid" ); 
 
 
 //FirstChorusPercentRange  
 //FirstChorusPercent       
 
-$times = array();
-$times[] = "Kickoff";
-$times[] = "0:01 - 0:19";
-$times[] = "0:20 - 0:39";
-$times[] = "0:40 - 0:59";
-$times[] = "1:00 +";
+// $times = array();
+// $times[] = "Kickoff";
+// $times[] = "0:01 - 0:19";
+// $times[] = "0:20 - 0:39";
+// $times[] = "0:40 - 0:59";
+// $times[] = "1:00 +";
 
-$etimes = array();
-$etimes[] = array( '00:00:00', '00:00:01' );
-$etimes[] = array( '00:00:01', '00:00:20' );
-$etimes[] = array( '00:00:20', '00:00:40' );
-$etimes[] = array( '00:00:40', '00:01:00' );
-$etimes[] = array( '00:01:00', '23:00:00' );
+// $etimes = array();
+// $etimes[] = array( '00:00:00', '00:00:01' );
+// $etimes[] = array( '00:00:01', '00:00:20' );
+// $etimes[] = array( '00:00:20', '00:00:40' );
+// $etimes[] = array( '00:00:40', '00:01:00' );
+// $etimes[] = array( '00:01:00', '23:00:00' );
 
-db_query( "update songs set FirstChorusRange = null where id = $songid" );
-foreach( $times as $k=>$t )
-  {
-    $et = $etimes[$k];
-    //    echo( "update songs set FirstChorusRange = '$t' where FirstChorusTimeIntoSong >= '$et[0]' and FirstChorusTimeIntoSong < '$et[1]' )<br>" );
-    db_query( "update songs set FirstChorusRange = '$t' where FirstChorusTimeIntoSong >= '$et[0]' and FirstChorusTimeIntoSong < '$et[1]' and id = $songid" );
-  }
+// db_query( "update songs set FirstChorusRange = null where id = $songid" );
+// foreach( $times as $k=>$t )
+//   {
+//     $et = $etimes[$k];
+//     //    echo( "update songs set FirstChorusRange = '$t' where FirstChorusTimeIntoSong >= '$et[0]' and FirstChorusTimeIntoSong < '$et[1]' )<br>" );
+//     db_query( "update songs set FirstChorusRange = '$t' where FirstChorusTimeIntoSong >= '$et[0]' and FirstChorusTimeIntoSong < '$et[1]' and id = $songid" );
+//   }
 
 
-db_query( "update songs set FirstChorusPercentRange = null where id = $songid" );
-$arr = array( 0=>"Kickoff", "10"=>"Early", 20=>"Moderately Early", "30"=>"Moderately Late", "100"=>"Late");
-foreach( $arr as $a=>$descr )
-{
-    db_query( "update songs set FirstChorusPercentRange = '$descr' where FirstChorusPercent <= $a and FirstChorusPercentRange is null and id = $songid" );
-}
+// db_query( "update songs set FirstChorusPercentRange = null where id = $songid" );
+// $arr = array( 0=>"Kickoff", "10"=>"Early", 20=>"Moderately Early", "30"=>"Moderately Late", "100"=>"Late");
+// foreach( $arr as $a=>$descr )
+// {
+//     db_query( "update songs set FirstChorusPercentRange = '$descr' where FirstChorusPercent <= $a and FirstChorusPercentRange is null and id = $songid" );
+// }
 
-db_query( "update songs set FirstChorusDescr = null, FirstChorusPercentRange = null where FirstChorusRange is null and id = $songid" );
+// db_query( "update songs set FirstChorusDescr = null, FirstChorusPercentRange = null where FirstChorusRange is null and id = $songid" );
 
 
 
@@ -247,116 +246,30 @@ db_query( "update songs set FirstChorusDescr = null, FirstChorusPercentRange = n
 
 //FirstChorusRange
 
-db_query( "update songs set FirstChorusDescr = null where id = $songid" );
-$firstchorusarr = db_query_rows( "select time_to_sec( FirstChorusTimeIntoSong ), id as songid from songs where id = $songid" );
-foreach( $firstchorusarr as $frow )
-{
-    $firstchorusstart = $frow["tm"];
-    if( $firstchorusstart <= 0  )
-	db_query( "update songs set FirstChorusDescr = 'Kickoff' where id = $frow[songid]" );
-    else if( $firstchorusstart < 20  )
-	db_query( "update songs set FirstChorusDescr = 'Early' where id = $frow[songid]" );
-    else if( $firstchorusstart < 40  )
-	db_query( "update songs set FirstChorusDescr = 'Moderately Early' where id = $frow[songid]" );
-    else if( $firstchorusstart < 60  )
-	db_query( "update songs set FirstChorusDescr = 'Moderately Late' where id = $frow[songid]" );
-    else
-	db_query( "update songs set FirstChorusDescr = 'Late' where id = $frow[songid]" );
-}
+// db_query( "update songs set FirstChorusDescr = null where id = $songid" );
+// $firstchorusarr = db_query_rows( "select time_to_sec( FirstChorusTimeIntoSong ), id as songid from songs where id = $songid" );
+// foreach( $firstchorusarr as $frow )
+// {
+//     $firstchorusstart = $frow["tm"];
+//     if( $firstchorusstart <= 0  )
+// 	db_query( "update songs set FirstChorusDescr = 'Kickoff' where id = $frow[songid]" );
+//     else if( $firstchorusstart < 20  )
+// 	db_query( "update songs set FirstChorusDescr = 'Early' where id = $frow[songid]" );
+//     else if( $firstchorusstart < 40  )
+// 	db_query( "update songs set FirstChorusDescr = 'Moderately Early' where id = $frow[songid]" );
+//     else if( $firstchorusstart < 60  )
+// 	db_query( "update songs set FirstChorusDescr = 'Moderately Late' where id = $frow[songid]" );
+//     else
+// 	db_query( "update songs set FirstChorusDescr = 'Late' where id = $frow[songid]" );
+// }
 
 
-// SongTitleAppearanceRange
-
-$times = array();
-$times[] = "None";
-$times[] = "1 - 5 Times";
-$times[] = "6 - 10 Times";
-$times[] = "11 - 15 Times";
-$times[] = "16 - 20 Times";
-$times[] = "21+ Times";
-
-$etimes = array();
-$etimes[] = array( 0, 0 );
-$etimes[] = array( 1, 5 );
-$etimes[] = array( 6, 10 );
-$etimes[] = array( 11, 15 );
-$etimes[] = array( 16, 20 );
-$etimes[] = array( 21, 9999 );
-
-foreach( $times as $k=>$t )
-  {
-    $et = $etimes[$k];
-    db_query( "update songs set SongTitleAppearanceRange = '$t' where SongTitleAppearances >= '$et[0]' and SongTitleAppearances <= '$et[1]' and id = $songid" );
-  }
-
-
-db_query( "update songs set IntroLengthRangeNums = '' where IntroLength is null and id = $songid");
-
-$times = array();
-$times[] = "0:01 - 0:09";
-$times[] = "0:10 - 0:19";
-$times[] = "0:20 - 0:29";
-$times[] = "0:30 +";
-
-$etimes = array();
-$etimes[] = array( '00:00:01', '00:00:10' );
-$etimes[] = array( '00:00:10', '00:00:20' );
-$etimes[] = array( '00:00:20', '00:00:30' );
-$etimes[] = array( '00:00:30', '23:00:00' );
-
-foreach( $times as $k=>$t )
-  {
-    $et = $etimes[$k];
-    db_query( "update songs set IntroLengthRangeNums = '$t' where IntroLength >= '$et[0]' and IntroLength < '$et[1]' and id = $songid" );
-  }
-
-
-db_query( "update songs set OutroLengthRangeNums = '' where OutroLength is null  and id = $songid");
-
-$times = array();
-$times[] = "0:01 - 0:09";
-$times[] = "0:10 - 0:19";
-$times[] = "0:20 - 0:29";
-$times[] = "0:30 +";
-
-$etimes = array();
-$etimes[] = array( '00:00:01', '00:00:10' );
-$etimes[] = array( '00:00:10', '00:00:20' );
-$etimes[] = array( '00:00:20', '00:00:30' );
-$etimes[] = array( '00:00:30', '23:00:00' );
-
-foreach( $times as $k=>$t )
-  {
-    $et = $etimes[$k];
-    db_query( "update songs set OutroLengthRangeNums = '$t' where OutroLength >= '$et[0]' and OutroLength < '$et[1]'  and id = $songid" );
-  }
 
 // OutroLengthRangeNums
     // this is a description of how LONG the outro is      
-if( !$outrolength  )
-    $autocalcvalues["OutroRange"] = "No Outro";
-else if ( $outrolength < 10 )
-    $autocalcvalues["OutroRange"] = "Short";
-else if ( $outrolength < 20 )
-    $autocalcvalues["OutroRange"] = "Moderately Short";
-else if ( $outrolength < 30 )
-    $autocalcvalues["OutroRange"] = "Moderately Long";
-else
-    $autocalcvalues["OutroRange"] = "Long";
 
 // SongLengthRange
     // start these are general updates
-    db_query( "update songs set SongLengthRange = 'Under 3:00' where SongLength < '00:03:00' and id = '$songid'" );
-    db_query( "update songs set SongLengthRange = '3:00 - 3:29' where SongLength >= '00:03:00' and SongLength < '00:03:30'  and id = '$songid'" );
-    db_query( "update songs set SongLengthRange = '3:30 - 3:59' where SongLength >= '00:03:30' and SongLength < '00:04:00'  and id = '$songid'" );
-    db_query( "update songs set SongLengthRange = '4:00 +' where SongLength >= '00:04:00'  and id = '$songid'" );
-
-    db_query( "update songs set IntroLengthRange = 'No Intro' where IntroLength is null and   id = '$songid'");
-    db_query( "update songs set IntroLengthRange = 'Short' where IntroLength >= '00:00:01' and IntroLength < '00:00:10'  and id = '$songid'" );
-    db_query( "update songs set IntroLengthRange = 'Moderately Short' where IntroLength >= '00:00:10' and IntroLength < '00:00:20' and id = '$songid'" );
-    db_query( "update songs set IntroLengthRange = 'Moderately Long' where IntroLength >= '00:00:20' and IntroLength < '00:00:30'  and id = '$songid'" );
-    db_query( "update songs set IntroLengthRange = 'Long' where IntroLength >= '00:00:30' and id = '$songid'" );
-
 $arr = db_query_array( "select distinct( subgenreid ) from song_to_subgenre where songid = '$songid' and type = 'Main' ", "subgenreid", "subgenreid" );
 $autocalcvalues["SubgenresHard"] = "," . implode( ",", $arr ) . ",";
 
@@ -367,7 +280,7 @@ $arr = db_query_array( "select distinct( lyricalthemeid ) from song_to_lyricalth
 $autocalcvalues["LyricalThemesHard"] = "," . implode( ",", $arr ) . ",";
 
 
-$autocalcvalues["NumberOfWeeksSpentInTheTop10"] = db_query_first_cell( "select count(*) from song_to_weekdate where songid = $songid" );    
+//$autocalcvalues["NumberOfWeeksSpentInTheTop10"] = db_query_first_cell( "select count(*) from song_to_weekdate where songid = $songid" );    
 
 $tmpstr = "";
 foreach( $autocalcvalues as $colname => $val )
@@ -377,26 +290,6 @@ foreach( $autocalcvalues as $colname => $val )
 }
 db_query( "update songs set $tmpstr where id = $songid" ); 
 
-
-// TempoRange
-$i = 0; 
-while( $i < 400 )
-  {
-    $endi = $i + 9;
-    $t = "$i - $endi";
-    db_query( "update songs set TempoRange = '$t' where Tempo >= '$i' and Tempo <= '$endi' and id = $songid" );
-    $i+= 10;
-  }
-
-db_query( "update songs set TempoRangeGeneral = 'Under 79' where Tempo <= 79 and Tempo > 0 and id = $songid" );
-db_query( "update songs set TempoRangeGeneral = '80-99' where Tempo >= 80 and Tempo < 100 and id = $songid " );
-db_query( "update songs set TempoRangeGeneral = '100-119' where Tempo >= 100 and Tempo < 120 and id = $songid " );
-db_query( "update songs set TempoRangeGeneral = '120-149' where Tempo >= 120  and Tempo < 150 and id = $songid" );
-db_query( "update songs set TempoRangeGeneral = '150+' where Tempo >= 150  and id = $songid" );
-
-db_query( "update songs set TempoRangeGeneral = null where (Tempo = 0 or Tempo is null) and id = $songid" );
-db_query( "update songs set MajorMinor = 'Major' where SpecificMajorMinor in ( 'Major', 'Lydian', 'Mixolydian', 'Pentatonic' ) and id = $songid" );
-db_query( "update songs set MajorMinor = 'Minor' where SpecificMajorMinor not in ( 'Major', 'Lydian', 'Mixolydian', 'Pentatonic' ) and id = $songid" );
 
 
 //db_query( "update songs set MajorMinor = 'Major' where id in ( select songid from song_to_songkey where NameHard like '%Major%' ) and id = $songid" );

@@ -186,7 +186,7 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
                 </div>
                                     
 								</div>
-								<div class="form-row-right-inner">
+								<div class="form-row-right-inner" id="peakposdiv">
                                   <label>Select Peak Chart Position</label>
     								<select name="search[peakchart]">
     									<option value="">Entire Chart</option>
@@ -201,7 +201,21 @@ outputSelectValues( $seasons, $search["dates"]["season"] ); ?>
 				<div class="cf"></div>
 		</div><!-- /.form-row-left -->
    
-                                      
+                  <div class="form-row-full quarter-select">
+								<div class="form-row-left-inner" id="minweeksdiv">
+                                  <label># of weeks on <?=$chartname?></label>
+									<select name="search[minweeks]"  >
+									<option value="" selected>(Any, 10, +25, 50+) </option>
+<?
+$minweeksvalues = array( "1-1"=>"1 Week", "1-5"=>"5 Weeks or Less", "1-10"=>"10 Weeks or Less", "10"=>"10 Weeks or More", "20"=>"20 Weeks or More", "30"=>"30 Weeks or More" );
+outputSelectValues( $minweeksvalues, $search[minweeks] );
+?>
+
+									</select>
+								</div>
+
+
+                                      </div>
                                       
      
      
@@ -917,6 +931,14 @@ if( val == "Cross Chart Comparisons" )
     $("#crosschartdiv").css( "display", "" );
 else
     $("#crosschartdiv").css( "display", "none" );
+if( val == "Top vs. Bottom of the Charts" )
+    $("#peakposdiv").css( "display", "none" );
+else
+    $("#peakposdiv").css( "display", "" );
+if( val == "Staying Power - 10 Weeks" )
+    $("#minweeksdiv").css( "display", "none" );
+else
+    $("#minweeksdiv").css( "display", "" );
 }
 
         

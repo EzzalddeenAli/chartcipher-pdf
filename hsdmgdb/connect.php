@@ -956,7 +956,7 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
 
     if( $crosschartfilter )
         $chartid = $crosschartfilter;
-//echo( "chat: " . $chartid );
+//echo( "chat: " . $newarrivalsonly );
     $seasontouse = $seasontouse?$seasontouse:$season;
     if( $numberoneonly ) $positiononly = 1;
   if( $_GET["help"] )
@@ -1203,7 +1203,11 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
         $nodates = false;
     }
 
+    $theclientwhere = $GLOBALS["clientwhere"]; 
+    if( $crosschartfilter )
+    	$theclientwhere = " 1 ";
 
+//echo( "cl" . $theclientwhere );
   if( $nodates ) //  || $GLOBALS["isclientsearch"]
   {
       if( $orderbysongtitle )
@@ -1268,7 +1272,7 @@ function getSongIdsWithinQuarter( $newarrivalsonly, $quarter, $year, $endquarter
 
 function getSongIdsWithinWeekdates( $newarrivalsonly, $fromweekdateob, $toweekdateob, $positiononly = "", $orderbysongtitle = false )
 {
-    global $cachesongids, $numberoneonly, $songwriterfilter, $nodates, $clientfilter, $artistfilter, $genrefilter, $myartistsongs, $artistid, $artisttype, $labelfilter, $newcarryfilter, $subgenrefilter, $producerfilter, $lyricalthemefilter, $lyricalsubthemefilter, $lyricalmoodfilter, $withimprint, $season, $bpmfilter, $majorminorfilter;
+    global $cachesongids, $numberoneonly, $songwriterfilter, $nodates, $clientfilter, $artistfilter, $genrefilter, $myartistsongs, $artistid, $artisttype, $labelfilter, $newcarryfilter, $subgenrefilter, $producerfilter, $lyricalthemefilter, $lyricalsubthemefilter, $lyricalmoodfilter, $withimprint, $season, $bpmfilter, $majorminorfilter, $chartid;
     if( $numberoneonly ) $positiononly = 1;
   if( $_GET["help"] )
       echo( "<br>\nDATES: $fromweekdateob,$toweekdateob\n<br>" );
@@ -1281,15 +1285,15 @@ function getSongIdsWithinWeekdates( $newarrivalsonly, $fromweekdateob, $toweekda
 
   if( $newarrivalsonly || $newcarryfilter == "new" )
     {
-	$ext .= " and WeekEnteredTheTop10 in ( " . implode( ", " , $allweeks ) . " )";
+          $ext .= " and  songs.id in ( select songid from song_to_chart where chartid = $chartid and  WeekEnteredTheTop10 not in ( " . implode( ", ", $allweeks ) . "  ) )";
+
     }
 
     if( $newcarryfilter == "carryover" )
     {
-	$ext .= " and WeekEnteredTheTop10 not in ( " . implode( ", " , $allweeks ) . " )";
+          $ext .= " and  songs.id not in ( select songid from song_to_chart where chartid = $chartid and WeekEnteredTheTop10 in ( " . implode( ", ", $allweeks ) . " ) )";
+          
     }
-
-
 
 
   if( $positiononly )
@@ -1395,6 +1399,8 @@ function getSongIdsWithinWeekdates( $newarrivalsonly, $fromweekdateob, $toweekda
     {
         $nodates = false;
     }
+      $chartstr = " and song_to_weekdate.chartid = ". ($crosschartfilter?$crosschartfilter:$_SESSION["chartid"]);
+      
   if( $nodates ) // || $GLOBALS["isclientsearch"]
   {
       if( $orderbysongtitle )
@@ -1404,13 +1410,22 @@ function getSongIdsWithinWeekdates( $newarrivalsonly, $fromweekdateob, $toweekda
   }
   else
   {
+    $theclientwhere = $GLOBALS["clientwhere"]; 
+    if( $crosschartfilter )
+    	$theclientwhere = " 1 ";
+
+//echo( "cl" . $theclientwhere );
+
 //  file_put_contents( "/tmp/rc", $ext . "\n" );
       if( $orderbysongtitle )
-          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where {$GLOBALS[clientwhere]} and weekdateid in ( ". implode( ", ", $allweeks ) . " ) $ext and songs.id = songid order by SongNameHard" );
+          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where $theclientwhere $chartstr and weekdateid in ( ". implode( ", ", $allweeks ) . " ) $ext and songs.id = songid order by SongNameHard" );
       else
-          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where {$GLOBALS[clientwhere]} and songid = songs.id and weekdateid in ( ". implode( ", ", $allweeks ) . " ) $ext" );
+          $sql = ( "select distinct( songid ) as songid from song_to_weekdate, songs where $theclientwhere $chartstr and songid = songs.id and weekdateid in ( ". implode( ", ", $allweeks ) . " ) $ext" );
 
   }
+
+  if( $_GET["help"] )
+      echo( $sql . "<br>");
 
   logquery( $sql );
   

@@ -41,10 +41,12 @@ function isHighestToLowest( $title )
 	$title == "ProfanityRange" || 
 	$title == "Genres" || 
 	$title == "Influences" || 
+	$title == "Influences (Grouped)" || 
 	$title == "VocalsInstrumentsPrevalence" || 
 	$title == "LastSectionType" || 
 	$title == "Song Form" || 
 	$title == "RhymeDensityRange" || 
+	$title == "Tempo Range General" || 
 	$title == "EndOfLineRhymesPercentageRange" || 
 	$title == "EndLinePerfectRhymesPercentageRange" || 
 	$title == "MidLineRhymesPercentageRange" || 
@@ -107,6 +109,7 @@ $possiblesearchfunctions = array();
 //$possiblesearchfunctions["Primary Genre Breakdown"] = "Genre Breakdown";
 $possiblesearchfunctions["Genres"] = "Genres";
 $possiblesearchfunctions["Influences"] = "Influences";
+$possiblesearchfunctions["InfluencesGrouped"] = "Influences (Grouped)";
 $possiblesearchfunctions["Prominent Instruments"] = "Prominent Instruments";
 //$possiblesearchfunctions["Average Tempo"] = "Average Tempo (BPM)";
 $possiblesearchfunctions["Tempo Range General"] = "Tempo Range (BPM)";
@@ -174,7 +177,7 @@ $possiblesearchfunctions["UseOfInvertedChords"] = "Use Of Inverted Chords (Avera
 $possiblesearchfunctions["UseOfInvertedChordsRange"] = "Use of Inverted Chords";
 $possiblesearchfunctions["PercentDiatonicChords"] = "Diatonic Chord Prevalence (Average)";
 $possiblesearchfunctions["PercentDiatonicChordsRange"] = "Diatonic Chord Prevalence";
-$possiblesearchfunctions["ChordDegreePrevalence"] = "Chord Degree Prevalence";
+$possiblesearchfunctions["ChordDegreePrevalence"] = "Chord Degree Usage";
 //
 
 
@@ -287,7 +290,8 @@ function getMyPossibleSearchFunctions( $type = "" )
     // {
     //     $tmp = array( "Lyrical Themes", "Song Title Word Count", "Song Title Appearances" );
     // }
-    if( $type == "structure" )
+//    echo( $type );
+    if( strtolower( $type ) == "structure" )
     {
         $tmp = array( "Average Song Length" , 
 		      "Song Length Range", 
@@ -299,7 +303,7 @@ function getMyPossibleSearchFunctions( $type = "" )
 		      "Last Section Type" ); //", "Number of Songs (Form)
 	//", "Prominent Instruments"        $tmp = array( "Song Length Range", "Average Song Length", "Song Form", "Number of Songs (Form)" , "First Section Type", "Average Intro Length", "Intro Length Range", "Intro Instrumental Vocal or Instrumental", "Verse Count", "Pre-Chorus Count", "Chorus Count", "Use Of A Pre-Chorus", "Chorus Precedes Any Section", "First Chorus: Time Into Song Range", "First Chorus: Percent Into Song Range", "First Chorus: Average Time Into Song", "First Chorus: Average Percent Into Song", "Vocal Post-Chorus Count", "Use Of A Vocal Post-Chorus", "Departure Section", "Last Section Type", "Average Outro Length", "Outro Length Range", "Outro (Instrumental or Vocal)", "Number of Distinct Sections" ); //", "Prominent Instruments", "Key", "KeyMajorMinor
     }
-    if( $type == "compositional" )
+    if( strtolower( $type ) == "compositional" )
 	{
 	    $tmp = array( "Diverse Melodic Themes", 
 			  "Melodic Interval Prevalence", 
@@ -310,16 +314,17 @@ function getMyPossibleSearchFunctions( $type = "" )
 			  "Diatonic Chord Prevalence", 
 			  "Use of Inverted Chords", 
 			  "Use of 7th Chords", 
-			  "Chord Degree Prevalence", 
+			  "Chord Degree Usage", 
 			  "Chord Repetition", 
 			  "Major 7th Prevalence" );
-	    //	    $tmp = array( "Number of Distinct Melodic Themes", "Melodic Interval Prevalence", "Main Melodic Range", "Main Melodic Range (Number)", "Number of Melodic Themes", "Key", "Key (Major vs. Minor)", "Key (Major, Minor, Major Mode, Minor Mode)", "Use of Parallel Mode", "Diatonic Chord Prevalence", "Use of Inverted Chords", "Use Of Triads", "Use of 7th Chords", "Chord Degree Prevalence" );
+	    //	    $tmp = array( "Number of Distinct Melodic Themes", "Melodic Interval Prevalence", "Main Melodic Range", "Main Melodic Range (Number)", "Number of Melodic Themes", "Key", "Key (Major vs. Minor)", "Key (Major, Minor, Major Mode, Minor Mode)", "Use of Parallel Mode", "Diatonic Chord Prevalence", "Use of Inverted Chords", "Use Of Triads", "Use of 7th Chords", "Chord Degree Usage" );
 	}
 
-    if( $type == "production" )
+    if( strtolower( $type ) == "production" )
 	{
 	    $tmp = array(
 			  "Influences", 
+			  "InfluencesGrouped", 
 			  "Prominent Instruments", 
 			  "Average Tempo", 
 			  "Tempo Range (BPM)", 
@@ -335,7 +340,7 @@ function getMyPossibleSearchFunctions( $type = "" )
 	    }
 	}
 
-    if( $type == "lyrical" )
+    if( strtolower( $type ) == "lyrical" )
 	{
 	    $tmp = array(  "Song Title Word Count", 
 "Person References", 
@@ -521,6 +526,8 @@ function calcTrendQSStart( $q, $seasontouse = "" )
         $qs .= "search[specificsubgenre]={$search[specificsubgenre]}&";
     if( $search[specificinfluence] )
         $qs .= "search[specificinfluence]={$search[specificinfluence]}&";
+    if( $search[specificinfluencegroup] )
+        $qs .= "search[specificinfluencegroup]={$search[specificinfluencegroup]}&";
     //    if( $search["lyricalmoodid"] )
     //        $qs .= "search[lyricalmoodid]={$search[lyricalmoodid]}&";
     //    if( $search["lyricalthemeid"] )
@@ -654,6 +661,8 @@ function calcTrendQSStartBar()
         $qs .= "search[specificsubgenre]={$subgenrefilter}&";
     if( $search[specificinfluence] )
         $qs .= "search[specificinfluence]={$search[specificinfluence]}&";
+    if( $search[specificinfluencegroup] )
+        $qs .= "search[specificinfluencegroup]={$search[specificinfluencegroup]}&";
     if( $search["toptentype"] )
     {
         $qs .= "search[toptentype]={$search[toptentype]}&";
@@ -899,6 +908,31 @@ function getTrendDataForRows( $quarterstorun, $comparisonaspect, $peak="", $song
 				    $retval[$thiskey][$t][1] = $numforthis . "%";
 				    $retval[$thiskey][$t][2] = $t;
 				    $retval[$thiskey][$t][3] = "search-results?$qs&search[specificinfluencealso]=" . urlencode( $t ); 
+				    $retval[$thiskey][$t][4] = $number;
+				}
+			    break;
+			case "InfluencesGrouped":
+			    if( $genrefilter )
+				{
+				    $genrename = db_query_first_cell( "select Name from genres where id = $genrefilter" );
+				    $ext = " and influencegroups.Name <> '$genrename'";
+				}
+			    $sql = "select influencegroupid, count(*) as num from song_to_influencegroup, influencegroups where influencegroupid = influencegroups.id and songid in ( $songidstr ) $ext group by influencegroupid ";
+			    $influences = db_query_array( $sql, "influencegroupid", "num" );
+//			    if( $_GET["help3"] ) echo( "\ninfluence search: " . $sql . "\n<br>" );
+			    
+			    foreach( $influences as $t=>$numforthis )
+				{
+				    $number = $numforthis;
+				    
+				    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
+			    if( !$numforthis )
+				$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
+				    $retval[$thiskey][$t]["season"] = $tmpseason;
+				    $retval[$thiskey][$t][0] = $numforthis;
+				    $retval[$thiskey][$t][1] = $numforthis . "%";
+				    $retval[$thiskey][$t][2] = $t;
+				    $retval[$thiskey][$t][3] = "search-results?$qs&search[specificinfluencegroup]=" . urlencode( $t ); 
 				    $retval[$thiskey][$t][4] = $number;
 				}
 			    break;
@@ -1850,6 +1884,31 @@ function getBarTrendDataForRows( $comparisonaspect, $peak="", $songstouse = arra
 				    $retval[$t][1] = $numforthis . "%";
 				    $retval[$t][2] = $t;
 				    $retval[$t][3] = "search-results?$qs&search[specificinfluencealso]=" . urlencode( $t ); 
+				    $retval[$t][4] = $number;
+				}
+			    break;
+			case "InfluencesGrouped":
+			    if( $genrefilter )
+				{
+				    $genrename = db_query_first_cell( "select Name from genres where id = $genrefilter" );
+				    $ext = " and influencegroups.Name <> '$genrename'";
+				}
+			    $sql = "select influencegroupid, count(*) as num from song_to_influencegroup, influencegroups where influencegroupid = influencegroups.id and songid in ( $songidstr ) $ext group by influencegroupid ";
+			    $influences = db_query_array( $sql, "influencegroupid", "num" );
+			    if( $_GET["help"] ) echo( "\ninfluence search: " . $sql . "\n<br>" );
+			    
+			    foreach( $influences as $t=>$numforthis )
+				{
+				    $number = $numforthis;
+				    
+				    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
+			    if( !$numforthis )
+				$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
+				    $retval[$t]["season"] = $tmpseason;
+				    $retval[$t][0] = $numforthis;
+				    $retval[$t][1] = $numforthis . "%";
+				    $retval[$t][2] = $t;
+				    $retval[$t][3] = "search-results?$qs&search[specificinfluencegroup]=" . urlencode( $t ); 
 				    $retval[$t][4] = $number;
 				}
 			    break;
@@ -2871,6 +2930,15 @@ function getRowsComparison( $search, $songs )
             $rows = db_query_array( "select distinct( influences.id ), Name from song_to_influence, influences where  type = 'Main' and songid in ( $songstr ) and influenceid = influences.id and type = 'Main' and HideFromAdvancedSearch = 0 $ext order by Name", "id", "Name" );
 
             break;
+        case "InfluencesGrouped":
+		if( $genrefilter )
+		    {
+			$genrename = db_query_first_cell( "select Name from genres where id = $genrefilter" );
+			$ext = " and influencegroups.Name <> '$genrename'";
+		    }
+            $rows = db_query_array( "select distinct( influencegroups.id ), Name from song_to_influencegroup, influencegroups where  songid in ( $songstr ) and influencegroupid = influencegroups.id $ext order by Name", "id", "Name" );
+
+            break;
         case "Lyrical Themes":
             $rows = db_query_array( "select distinct( lyricalthemes.id ), Name from song_to_lyricaltheme, lyricalthemes where songid in ( $songstr ) and lyricalthemeid = lyricalthemes.id  and HideFromAdvancedSearch = 0 order by Name ", "id", "Name" );
             break;
@@ -3288,6 +3356,33 @@ function getCSVTrendDataForRows( $comparisonaspect, $peak="", $songsbyweeks = ar
 				    $retval[$thiskey][$t][1] = $numforthis . "%";
 				    $retval[$thiskey][$t][2] = $t;
 				    $retval[$thiskey][$t][3] = "search-results?$qs&search[specificinfluencealso]=" . urlencode( $t ); 
+				    $retval[$thiskey][$t][4] = $number;
+				}
+			    break;
+			case "InfluencesGrouped":
+			    if( $genrefilter )
+				{
+				    $genrename = db_query_first_cell( "select Name from genres where id = $genrefilter" );
+				    $ext = " and influencegroups.Name <> '$genrename'";
+				}
+			    $sql = "select influencegroupid, count(*) as num from song_to_influencegroup, influencegroups where influencegroupid = influencegroups.id and songid in ( $songidstr ) $ext group by influencegroupid ";
+			    $influences = db_query_array( $sql, "influencegroupid", "num" );
+			    if( $_GET["help"] ) echo( "\ninfluence search: " . $sql . "\n<br>" );
+			    
+			    foreach( $influences as $t=>$numforthis )
+				{
+				    //                    $t = $trow["id"];
+				    //                    $numforthis = db_query_first_cell( "select count(*) from songs, song_to_influence where songid in ( $songidstr ) and songid = songs.id and  song_to_influence.influenceid = '$t' " );
+				    $number = $numforthis;
+				    
+				    $numforthis = number_format( $numforthis * 100 / ($numsongs?$numsongs:1) );
+			    if( !$numforthis )
+				$numforthis = number_format( $number * 100 / ($numsongs?$numsongs:1), 1 );
+				    $retval[$thiskey][$t]["season"] = $tmpseason;
+				    $retval[$thiskey][$t][0] = $numforthis;
+				    $retval[$thiskey][$t][1] = $numforthis . "%";
+				    $retval[$thiskey][$t][2] = $t;
+				    $retval[$thiskey][$t][3] = "search-results?$qs&search[specificinfluencegroup]=" . urlencode( $t ); 
 				    $retval[$thiskey][$t][4] = $number;
 				}
 			    break;

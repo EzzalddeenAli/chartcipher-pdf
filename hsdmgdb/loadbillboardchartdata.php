@@ -1,11 +1,12 @@
 <? 
 require_once "connect.php"; 
 
-$charts = db_query_array( "select id, chartkey from charts where UseOnDB = 1", "id", "chartkey" );
+$charts = db_query_array( "select id, chartkey from charts where UseOnDB = 1 ", "id", "chartkey" );
 $weekdates = db_query_array( "select id, Name from weekdates", "id", "Name" );
 $bbids = array();
 if( 1 == 1 )
     {
+    	    db_query( "delete from song_to_weekdate " );
 	file_put_contents( "loadbb1.txt", "starting \n" );
 foreach( $charts as $cid=>$cname )
 {
@@ -49,7 +50,7 @@ foreach( $charts as $cid=>$cname )
 
 if( 1 == 1 )
     {
-db_query( "delete from song_to_chart" );
+db_query( "delete from song_to_chart " );
 $songs = db_query_array( "select id from songs", "id", "id" );
        	file_put_contents( "loadbb1.txt", "starting mapping songs to charts\n", FILE_APPEND );
 foreach( $songs as $songid )

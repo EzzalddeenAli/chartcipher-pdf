@@ -50,9 +50,9 @@ else
 
 if( !$_GET["thisquarter"] )
     {
-	$fq = 1;
-	$thisquarter = $fq . "/" . date( "Y" ) ;
-	$fy = date( "Y" );
+	$fq = 4;
+	$fy = date( "Y" )-1;
+	$thisquarter = $fq . "/" . $fy;
     }
 
 $istesting = 0; 
@@ -81,7 +81,7 @@ $qarr[] = $tmpq;
 
 $numtoadd = 2;
 if( $leveltype == "upward" || $leveltype == "downward" ) 
-    $numtoadd = 1;
+    $numtoadd = 2;
 for( $i = 0; $i < $numtoadd; $i ++  )
     {
 	$tmpq = getPreviousQuarter( $tmpq );
@@ -155,6 +155,7 @@ $allsongs = getSongIdsWithinQuarter( false, $search[dates][fromq], $search[dates
 include "trend-datedisplaycalc.php";
 
     $benchmarkurlwithoutsubtype = "{$leveltype}-levels.php?" . urldecode( $_SERVER['QUERY_STRING'] );
+    $levelswithouttype = "-levels.php?" . urldecode( $_SERVER['QUERY_STRING'] );
     $benchmarkurlwithoutsubtype = str_replace( "&search[benchmarksubtype]=". $search[benchmarksubtype] , "", $benchmarkurlwithoutsubtype );
     $benchmarkurlwithoutsubtype = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $benchmarkurlwithoutsubtype );
 
@@ -180,15 +181,14 @@ include "trend-datedisplaycalc.php";
                <div class="row  inner row-equal element-container mobile link-alt">
                             <div class="col-6">
                        <div class="home-search-header  flex-addon">
-<h2>
-					   <? if( $leveltype == "upward" ) { ?>
-Multi-Quarter Upward Trends
-									     <? } else if( $leveltype == "downward" ) { ?>
-Multi-Quarter Downward Trends
+                        <div class="custom-select" >
+								<select id="mysetinsighttype">
+<option value='gospotlight'>Most Popular Characteristics</option>
+<? foreach( $insightsarr as $itype=>$display ) { ?>
+<option <?=$leveltype == $itype?"SELECTED":""?> value='<?=$itype?>'><?=$display?></option>
+<? } ?></select>
+</div>
 
-	<? } else { ?>
-                                <?=$leveltypecaps?> Levels in Four or More Quarters
-	    <? } ?></h2>
                         <div class="custom-select" >
 
 								<select id="mysetbenchmarktype">
@@ -313,9 +313,9 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
                       
                                  <div class="info-block"><p>
 					   <? if( $leveltype == "upward" ) { ?>
-<?=$search["benchmarksubtype"]?> characteristics that increased in prominence for two or more quarters.
+<?=$search["benchmarksubtype"]?> characteristics that increased in prominence for three or more quarters.
 									     <? } else if( $leveltype == "downward" ) { ?>
-<?=$search["benchmarksubtype"]?> characteristics that decreased in prominence for two or more quarters.
+<?=$search["benchmarksubtype"]?> characteristics that decreased in prominence for three or more quarters.
 															<? } else { ?>
                              <?=$search["benchmarksubtype"]?> characteristics that are at their <?=$leveltype?> levels in four or more quarters.
 																    <? } ?>

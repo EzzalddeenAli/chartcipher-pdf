@@ -222,6 +222,7 @@ foreach( $hcats as $c )
 <li><a style="font-size:12px" href='groupgenres.php'>Group Genres</a> </li>
 <li><a style="font-size:12px" href='homepage.php'>Homepage</a> </li>
 <li><a style="font-size:12px" href='imprints.php'>Imprints</a> </li>
+<li><a style="font-size:12px" href='influencegroups.php'>Influence Groups</a> </li>
 <li><a style="font-size:12px" href='instruments.php'>Instruments</a> </li>
 <li><a style="font-size:12px" href='subgenres.php'>Sub-Genres/Influences</a> </li>
 <li><a style="font-size:12px" href='introtypes.php'>Intro Types</a> </li>
@@ -269,6 +270,9 @@ foreach( $hcats as $c )
 </li>
 <li>
 <a href='datavalidation.php'>Data Validation</a>
+</li>
+<li>
+<a href='colors.php'>Colors</a>
 </li>
 <li><a href='usage.php'>Usage</a></li>
 <? if( 1 == 0 && ($_SESSION["isadminlogin"] || isRachel() ) ) { ?>

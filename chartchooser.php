@@ -9,7 +9,7 @@
                                
                                <div class="home-search-header  chart-header desktop-alt variant2 flex-addon ">
       
-                         <div class="custom-select" >
+                         <div class="custom-select"  <?=$search["benchmarktype"] == "Cross Chart Comparisons"?"style='display:none'":""?>>
 								<select id="mysetchart">
 								<? outputSelectValuesForOtherTable( "charts", $chartid, false, " and UseOnDb = 1" ); ?>
 								</select>

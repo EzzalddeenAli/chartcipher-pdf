@@ -10,7 +10,12 @@ include "trendfunctions{$mybychart}.php";
 $searchsubtype = str_replace( "/", "", $searchsubtype );
 $thetype = str_replace( "/", "", $thetype );
 
+if( !$searchsubtype && $search["benchmarksubtype"] ) $searchsubtype = $search["benchmarksubtype"];
 
+if( !$search["comparisonaspect"] )
+$search["comparisonaspect"]  = array_key_first( getMyPossibleSearchFunctions( $searchsubtype ) );
+
+//	    $newcarryfilter = "new";
 if( $_GET["gome"] )
 {
 
@@ -63,7 +68,11 @@ $newsearchlink =  "/song-landing.php";
 //     }
 // }
 // exit;
-
+$searchsubtypewithoutsubtypeandcomparisonaspect = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
+$searchsubtypewithoutsubtypeandcomparisonaspect = str_replace( "search[comparisonaspect]=". $search[comparisonaspect] , "", $searchsubtypewithoutsubtypeandcomparisonaspect );
+$searchsubtypewithoutsubtypeandcomparisonaspect = str_replace( "&searchsubtype=". $searchsubtype , "", $searchsubtypewithoutsubtypeandcomparisonaspect );
+//echo( $search["comparisonaspect"] ); 
+//echo( $searchsubtypewithoutsubtypeandcomparisonaspect );
 $backurl = ($thetype?"$thetype":"trend")."-search.php".$_SERVER['QUERY_STRING'];
 
 $bpmfilter = $search["exactbpm"];
@@ -295,7 +304,7 @@ else
 
     // exit;
 // new colors
-$colors = array( "#eeac6f", "#f5ca7d", "#8475a2", "#ebac9a", "#faa33c", "#38226d", "#da857a", "#f9e3b7", "#e3ddf2", "#d7719f", "#bb0e2c", "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd", "#ed8a6b", "#2fcc71", "#689bd0", "#a38671", "#e74c3c", "#34495e", "#9b59b6", "#1abc9c", "#95a5a6", "#5e345e", "#a5c63b", "#b8c9f1", "#e67e22", "#ef717a", "#3a6f81", "#5065a1", "#345f41", "#d5c295", "#f47cc3", "#ffa800", "#ffcd02", "#c0392b", "#3498db", "#2980b9", "#5b48a2", "#98abd5", "#79302a", "#16a085", "#f0deb4", "#2b2b2b" );
+$colors = db_query_array( "select OrderBy, Name from colors order by OrderBy", "OrderBy", "Name" );
     //$colors = array( "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd" ); 
     // $colors = array( "#5d97cc","#fb833b", "#aeaeae", "#4b6986", "#7f5237", "#ffffff" ); 
     // $colors = array( "#A860AB", "#FF2705", "#FFFF17", "#1DFF0D", "#10FFEF", "#1020FF", "#FF03BC", "#FFAEB3" );
@@ -309,6 +318,44 @@ $colors = array( "#eeac6f", "#f5ca7d", "#8475a2", "#ebac9a", "#faa33c", "#38226d
 	    $dataforrows = getTrendDataForRows( $quarterstorun, $search[comparisonaspect], $pos );
 	}
 }
+
+function outputCSV($output, $data) {
+    foreach ($data as $row)
+	fputcsv($output, $row); // here you can change delimiter/enclosure
+}
+
+
+if( $csv )
+{
+	$formatforcsv = array();
+	foreach( $rows as $rid=>$rval )
+	{	 $formatforcsv[] = array( $rid, $rval );
+	}
+
+	    $output = fopen("php://output", "w");
+	header("Content-type: text/x-csv");
+	header("Content-Disposition: attachment; filename=export.csv");
+    if( $graphtype == "column" || $graphtype == "pie" )
+{
+		outputCSV( $output, $formatforcsv );
+		outputCSV( $output, $dataforrows );
+}
+else
+{
+	outputCSV( $output, $formatforcsv );
+	foreach( $dataforrows as $key=>$data )
+	{
+		$header = array( array( "Key", $key ) );
+		outputCSV( $output, $header );
+		outputCSV( $output, $data );
+	}
+}
+
+    fclose($output);
+exit;
+}
+
+
 if( $help )
     {
 	//    print_r( $allsongs );
@@ -316,6 +363,11 @@ if( $help )
     }
 
 include 'header.php';
+if( $_SESSION["loggedin"] )
+{
+	$t = "trend-search-results.php?" . urldecode( $_SERVER['QUERY_STRING'] );
+	echo( "<a href='$t&csv=1'>csv</a>" );
+}
 
 if( isTrendTable( $search[comparisonaspect] ) )
 {

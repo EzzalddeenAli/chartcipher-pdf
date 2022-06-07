@@ -1,5 +1,7 @@
 <?php 
 $istrendreport = true;
+
+if( !isset( $mainurl ) ) $mainurl = "benchmark-report.php";
 include "trendfunctions.php";
 include 'header.php'; 
 include "benchmarkreportfunctions.php";
@@ -11,6 +13,14 @@ $newsearchlink = "/benchmark.php";
 $allgraphnames = array();
 if( count( $search[dates][season] ) )
     $season = $search[dates][season];
+
+	$pos = $search[peakchart];
+	if( $pos && strpos( $pos, "client-" ) === false )
+	    {
+		$pos = "<" . $pos;
+	    }
+
+	    $overridepos = $pos;
 
 if( !$search["benchmarksubtype"] ) $search["benchmarksubtype"] = "Compositional";
 
@@ -159,17 +169,25 @@ $alllllsongs = array();
 			$season = $val;
 			}
 		}
-	        $benchmarkpeak = "";
+	        $benchmarkpeak = $overridepos;
 	}
     // add to the trend-search-results-type too
 	if( $search["benchmarktype"] == "Genre Comparisons" )
 	{
 	    $subgenrefilter = $benchmarkpeak;
-	    $benchmarkpeak = "";
+	    $benchmarkpeak = $overridepos;
 	}		
+	if( $search["benchmarktype"] != "Staying Power - 10 Weeks" )
+	    {
+		$minweeksfilter = $search["minweeks"];
+	    }
 
     //    echo( "min: $minweeksfilter" );
     //    echo( $minweeksfilter );
+	if( $search["benchmarktype"] != "New Songs vs. Carryovers" )
+	    $newcarryfilter = "new";
+
+
 	$allsongstop = getSongIdsWithinQuarter( false, $search[dates][fromq], $search[dates][fromy], $search[dates][toq], $search[dates][toy], $benchmarkpeak, false, $season );
 	if( !count( $allsongstop ) )
 	    {
@@ -209,11 +227,15 @@ include "trendreportfunctions.php";
                        <div class="home-search-header  flex-addon">
                                 <h2>
 
+<? if( $search["benchmarktype"] != "Cross Chart Comparisons" ) { ?>
                          <div class="custom-select" >
 								<select id="mysetbenchmark">
 								<? outputSelectValues( $benchmarktypes, $search[benchmarktype] ); ?>
 								</select>
+<? } else { ?>
+<?=$search["benchmarktype"]?>
 </div>
+<? } ?>
                          <div class="custom-select" >
 
 								<select id="mysetbenchmarktype">
@@ -227,14 +249,14 @@ include "trendreportfunctions.php";
                          <table class="table insights-section">
 <?php
 // for the footer
-    $benchmarkurlwithouttype = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
+    $benchmarkurlwithouttype = "$mainurl?" . urldecode( $_SERVER['QUERY_STRING'] );
     $benchmarkurlwithouttype = str_replace( "&search[benchmarktype]=". $search[benchmarktype] , "", $benchmarkurlwithouttype );
     $benchmarkurlwithouttype = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $benchmarkurlwithouttype );
-    $benchmarkurlwithoutsubtype = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
+    $benchmarkurlwithoutsubtype = "$mainurl?" . urldecode( $_SERVER['QUERY_STRING'] );
     $benchmarkurlwithoutsubtype = str_replace( "&search[benchmarksubtype]=". $search[benchmarksubtype] , "", $benchmarkurlwithoutsubtype );
     $benchmarkurlwithoutsubtype = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $benchmarkurlwithoutsubtype );
 // end for the footer
-    $tmpurl = "benchmark-report.php?" . urldecode( $_SERVER['QUERY_STRING'] );
+    $tmpurl = "$mainurl?" . urldecode( $_SERVER['QUERY_STRING'] );
 $tmpurl = str_replace( "&search[comparisonaspect]=". $search[comparisonaspect] , "", $tmpurl );
 $tmpurl .= "&search[comparisonaspect]=";
 
@@ -358,6 +380,65 @@ if( strpos( $tmpurl, "comparisonaspect") === false )
                   
                 </div>
         
+        
+       
+               <div class="row  row-equal row-padding mobile link-alt">
+                            <div class="col-6">
+                       <div class="home-search-header ">
+                                <h3>Saved Searches and Reports</h3>
+                                 <a style="display:none;" class="search" href="/saved-searches"><img src="assets/images/home/search-view-icon.svg" /></a>
+                            </div>
+                         <div class="header-inner" >
+                         <table class="table table-section table-search">
+<? $searches = getSavedSearches(); 
+$i = 0;
+foreach( $searches as $s ) { 
+	 $url = $s[url] . "&savedid={$s[id]}";
+$i++; 
+if( $i > 5 ) continue;
+?>
+                            <tr>
+                                <td><a href="<?=$url?>" class="rowlink"><?=$s[Name]?></a></td>
+                                <td><?=prettyFormatDate( $s[dateadded] ) ?></td>
+                                      <td> </td>
+                            </tr>
+<? } ?>
+
+                        </table>
+                        </div><!-- /.header-block-1B -->
+                      </div>
+                             <div class="col-6" >
+                   <div class="home-search-header ">
+                                <h3>Recent Searches</h3>
+                                 <a style="display:none;" class="search" href="/saved-searches"><img src="assets/images/home/search-view-icon.svg" /></a>
+                            </div>
+                         <div class="header-inner " >
+                         <table class="table table-section ">
+<? $searches = getRecentSearches( 40 ); 
+$already = array();
+foreach( $searches as $s ) { 
+	 if( isset( $already[$s[url]] ) ) continue;
+$already[$s[url]] = 1;
+if( count( $already ) > 3 ) continue;
+$name = $s[Name]?$s[Name]:"Advanced Search";
+$name = str_replace( "Trend Search: ", "", $name );
+
+?>
+                                                    <tr data-href="<?=$s[url]?>">
+<td>
+<a class='rowlink' href='<?=$url?>'><?=$name?></a>            </td>
+                                    <td></td>
+                                    <td></td>
+                                                    </tr>
+<? } ?>
+                        </table>
+                        </div><!-- /.header-block-1B -->
+                      </div>
+                      </div>
+        
+        
+        
+            </div><!-- /.row -->
        
 
 		</section><!-- /.home-top -->

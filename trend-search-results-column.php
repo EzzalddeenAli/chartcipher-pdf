@@ -143,7 +143,7 @@ if( $_GET["help"] )
     }
 
 // new colors
-$colors = array( "#faa33c", "#8475a2", "#ebac9a", "#7197b4", "#f9e3b7", "#38226d", "#bd685d", "#d7719f", "#71b49f", "#e3ddf2", "#bb0e2c", "#42606e", "#eeac6f", "#f5ca7d", "#8475a2", "#ebac9a", "#faa33c", "#38226d", "#da857a", "#f9e3b7", "#e3ddf2", "#d7719f", "#bb0e2c", "#1fb5ad","#fa8564","#efb3e6","#fdd752","#aec785","#9972b5","#91e1dd", "#ed8a6b", "#2fcc71", "#689bd0", "#a38671", "#e74c3c", "#34495e", "#9b59b6", "#1abc9c", "#95a5a6", "#5e345e", "#a5c63b", "#b8c9f1", "#e67e22", "#ef717a", "#3a6f81", "#5065a1", "#345f41", "#d5c295", "#f47cc3", "#ffa800", "#ffcd02", "#c0392b", "#3498db", "#2980b9", "#5b48a2", "#98abd5", "#79302a", "#16a085", "#f0deb4", "#2b2b2b" );
+$colors = db_query_array( "select OrderBy, Name from colors order by OrderBy", "OrderBy", "Name" );
 	$numtotalbars = 0;
 foreach( $alldataforrows as $vals )
 {
@@ -216,7 +216,6 @@ foreach( $alldataforrows as $vals )
 <? } ?>
 //                            alert( thisval );
                             var count = 0;
-<? if( $_SESSION["loggedin"] ) { ?>
                             for(i = 0; i <  e.chart.options.data.length ; i++ )
                             {
                                     // this is like 1-5 times
@@ -232,14 +231,17 @@ foreach( $alldataforrows as $vals )
                                     {
                                         var chartname = dpoints[j].numsongs;
                                         var thiscolor = dpoints[j].color;
+<? if( $_SESSION["loggedin"] ) { ?>
                                         if( dpoints[j].url ) 
                                             val += ( "<a href='" + dpoints[j].url + "'><font color='" + thiscolor + "'>" + chartname + "</font></a><Br>" ) ;
                                         else
+<? }?>
+
                                             val += ( "<font color='" + thiscolor + "'>" + chartname + "</font><Br>" ) ;
+
                                     }
                                 }
                             }
-<? }?>
                             return val;
                         }
 				},
@@ -259,7 +261,7 @@ foreach( $alldataforrows as $vals )
                     
                     
 				}, 
-<? $max = $numtotalbars > 12?"90":"120";
+<? $max = $numtotalbars >= 12?"90":"120";
 
 if( $numtotalbars > 15 ) 
 $max = "70";
@@ -281,7 +283,7 @@ $max = "50";
                     markerType: "none",
                    <? if( $cnt > 6 && 1 == 0  ) { ?>visible: false, <? }?>
 					indexLabelFontFamily: "<?=$font?>",
-					showInLegend: <?=$searchtype!= "Benchmark"?"false":"true"?>,
+					showInLegend: <?=$searchtype!= "Benchmark"&& $searchtype!= "Cross Chart"?"false":"true"?>,
 					lineThickness: 3,
 					name: "<?=$columnname?>",
 					color: "<?=$colors[$cnt]?>",
@@ -319,7 +321,7 @@ $max = "50";
                             }
                             ?>                         
                                 {
-                                  color: "<?=$colors[$cnt]?>", label: "<?=$labelname?>", x: <?=$barkey[$rname]?>, y: <?=formatYAxis( $dataforrows[$r][0] )?>, numsongs: "<?=$dataforrows[$r][4]?>", indexLabel: "<?=$dataforrows[$r][1]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "bold", indexLabelFontSize: "14", <? if( $_SESSION["loggedin"] ) { ?>click: function( e ) { document.location.href="<?=$dataforrows[$r][3]?>";}, cursor: "pointer", <? } ?>markerType: "circle", "url": "<?=$_SESSION["loggedin"]?$dataforrows[$r][3]:""?>" },
+                                  color: "<?=$colors[$cnt]?>", label: "<?=$labelname?>",  x: <?=$barkey[$rname]?>, y: <?=formatYAxis( $dataforrows[$r][0] )?>, numsongs: "<?=$dataforrows[$r][4]?>", indexLabel: "<?=$dataforrows[$r][1]?>", indexLabelFontColor: "#7a7a7a", indexLabelFontWeight: "bold", indexLabelFontSize: "14", <? if( $_SESSION["loggedin"] ) { ?>click: function( e ) { document.location.href="<?=$dataforrows[$r][3]?>";}, cursor: "pointer", <? } ?>markerType: "circle", "url": "<?=$_SESSION["loggedin"]?$dataforrows[$r][3]:""?>" },
                         <?  }
                         ?>                                
 					]

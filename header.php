@@ -915,7 +915,7 @@ foreach( $charts as $id => $name ) {
 			
             <? if( isEssentials() ) {  ?>
                     <li class="sidebar-menu-item-song-searches">
-                        <a class="locked" href="#">My Dashboard</a>
+                        <a class="locked" href="#">Saved Songs & Searches</a>
                         <div id="sub-nav3" class="hidden">
                             <span class="arrow-left"></span>
                            <h2> This feature is available with a PRO subscription. </h2>
@@ -948,7 +948,7 @@ foreach( $charts as $id => $name ) {
                     </li>
             <? } else if( !isStudent() && !isEssentials() ) {  ?>
                     <li class="sidebar-menu-item-song-searches">
-                        <a href="/saved-searches">My Dashboard<img class="hide info-icon menu-icon" title="<?=getOrCreateCustomHover( "Navigation - Saved Searches", "Access or edit your saved searches here.")?>" src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
+                        <a href="/saved-searches">Saved Songs & Searches<img class="hide info-icon menu-icon" title="<?=getOrCreateCustomHover( "Navigation - Saved Searches", "Access or edit your saved searches here.")?>" src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>
                     </li>
                     <!--<li class="sidebar-menu-item-artist-searches">
                         <a href="/saved-artists-labels"> Saved Artists Searches<img class="info-icon menu-icon" title="<?=getOrCreateCustomHover( "Navigation - Saved Artists & Labels", "Access or edit your saved artists and labels here.")?>" src="assets/images/hit-songs-deconstructed-more-information-sidebar-icon.svg" border="0"></a>

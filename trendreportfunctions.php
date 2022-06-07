@@ -427,6 +427,7 @@ function gatherCharacteristicsMultipleQuarters( $quarterstorun, $type )
     $retval = array();
     global $reportsarr, $nogainers, $search, $oldestq, $oldesty, $quarter, $year, $thisquarter, $industrytrendreports;
 
+//    array_shift( $quarterstorun );
     $qarr = $quarterstorun;
 
         $arrtouse = $reportsarr;

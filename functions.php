@@ -19,8 +19,16 @@ define( 'WINTERCOMPARISON', '1,1' );
 define( 'SUMMERCOMPARISON', '3,3' );
 define( 'FALLCOMPARISON', '4,4' );
 define( 'SPRINGCOMPARISON', '2,2' );
-$seasonswithall = array( WINTERCOMPARISON=>"Winter", SPRINGCOMPARISON => "Spring", SUMMERCOMPARISON=> "Summer", FALLCOMPARISON=> "Fall" );
-$seasons = $seasonswithall; 
+$seasonswithall = array( WINTERCOMPARISON=>"Q1", SPRINGCOMPARISON => "Q2", SUMMERCOMPARISON=> "Q3", FALLCOMPARISON=> "Q4", "4,1,2,3"=>"Q1 & Q3", ALLSEASONS24=>"Q2 & Q4" );
+$seasonswithall = array( WINTERCOMPARISON=>"Winter", SPRINGCOMPARISON => "Spring", SUMMERCOMPARISON=> "Summer", FALLCOMPARISON=> "Fall", "4,1,2,3"=>"Winter & Summer", ALLSEASONS24=>"Spring & Fall"  );
+$seasons = array( WINTERCOMPARISON=>"Winter", SPRINGCOMPARISON => "Spring", SUMMERCOMPARISON=> "Summer", FALLCOMPARISON=> "Fall" );
+
+$insightsarr = array();
+$insightsarr["upward"] = "Multi-Quarter Upward Trends";
+$insightsarr["downward"] = "Multi-Quarter Downward Trends";
+$insightsarr["highest"] = "Highest Levels in 4+ Quarters";
+$insightsarr["lowest"] = "Lowest Levels in 4+ Quarters";
+
 
 //$clientwhere = $_SESSION["loggedin"]?" IsActive = 1 ":"IsActive = 1 and ( songs.ClientID is null or songs.ClientID = 0 )";
 
@@ -545,6 +553,7 @@ $searchcolumnsdisplay["subgenres"] = "Genres";
 $searchcolumnsdisplay["influences"] = "Influences";
 $searchcolumnsdisplay["specificsubgenre"] = "Genre";
 $searchcolumnsdisplay["specificinfluence"] = "Influence";
+$searchcolumnsdisplay["specificinfluencegroup"] = "Influence (Group)";
 $searchcolumnsdisplay["newcarryfilter"] = "New Songs / Carryovers";
 $searchcolumnsdisplay["specificsubgenrealso"] = "Genre";
 $searchcolumnsdisplay["specificinfluencealso"] = "Influence";
@@ -602,7 +611,7 @@ $searchcolumnsdisplay["MidLineRhymesPercentage"] = "Use of Mid-Line Rhymes";
 $searchcolumnsdisplay["InternalRhymesPercentage"] = "Use of Internal Rhymes";
 $searchcolumnsdisplay["MidWordRhymes"] = "Use of Mid-Word Rhymes";
 $searchcolumnsdisplay["WordsPerLineAvg"] = "Words Per Line Average";
-$searchcolumnsdisplay["ChordDegreePrevalence"] = "Chord Degree Prevalence";
+$searchcolumnsdisplay["ChordDegreePrevalence"] = "Chord Degree Usage";
 $searchcolumnsdisplay["PreChorusSectionLyrics"] = "Pre-Chorus Section Lyrics";
 $searchcolumnsdisplay["MainMelodicRangeNum"] = "Main Melodic Range (Number)";
 $searchcolumnsdisplay["UseofParallelMode"] = "Use of Parallel Mode";
@@ -1196,6 +1205,9 @@ function formatSearchDisplay( $key, $value )
         case "specificinfluencealso":
             $where = getTableValue( $value, "influences" );
             break;
+        case "specificinfluencegroup":
+            $where = getTableValue( $value, "influencegroups" );
+            break;
         case "subgenres":
         case "influences":
         case "placements":
@@ -1667,6 +1679,9 @@ case "season":
             case "specificinfluencealso":
             case "specificinfluence":
                 $where .= " and InfluencesHard like '%,$value,%'";
+                break;
+            case "specificinfluencegroup":
+                $where .= " and songs.id in (select songid from song_to_influencegroup where influencegroupid = '$value' )";
                 break;
             case "ProductionMood":
             case "MainMelodicRange":

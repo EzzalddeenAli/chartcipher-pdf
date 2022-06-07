@@ -389,9 +389,31 @@ for (i = 0; i < l; i++) {
 	    	    document.location.href = "<?=$benchmarkurlwithoutsubtype?>&search[benchmarksubtype]=" + encodeURIComponent( s.options[i].value );
 		    	    break;
 	    }
+	    else if( s.id == "mysetinsighttype" )
+	    {
+	    if( s.options[i].value == "gospotlight" )
+	    {
+	    	    document.location.href = "/spotlight.php?search[benchmarksubtype]=compositional";
+		    exit;
+	    }
+	    if( s.options[i].value == "backtoreports" )
+	    {
+	    	    document.location.href = "/insights.php";
+		    exit;
+	    }
+	    	    document.location.href = encodeURIComponent( s.options[i].value ) + "-levels?<? if( $thisquarter ) { ?>thisquarter=<?=$_GET["thisquarter"]?><? }?>";
+		    	    break;
+	    }
 	    else if( s.id == "mysetgraphtype" )
 	    {
 	    	    document.location.href = "<?=$benchmarkurlwithoutsubtype?>&graphtype=" + encodeURIComponent( s.options[i].value );
+		    	    break;
+	    }
+	    else if( s.id == "mysetsearchsubtype" )
+	    {
+
+	    	    document.location.href = "<?=$searchsubtypewithoutsubtypeandcomparisonaspect?>&searchsubtype=" + encodeURIComponent( s.options[i].text.toLowerCase() );
+//		    alert( "<?=$searchsubtypewithoutsubtypeandcomparisonaspect?>&searchsubtype=" + encodeURIComponent( s.options[i].text.toLowerCase() ) );
 		    	    break;
 	    }
 	    else

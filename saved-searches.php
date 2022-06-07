@@ -41,7 +41,7 @@ if( $errmsg == "delall" )
 			<div class="element-container row">
 				<div class="search-container">
 					<div class="search-header">
-						<h1><?=getOrCreateCustomTitle( "My Dashboard", "My Dashboard" )?></h1>
+						<h1><?=getOrCreateCustomTitle( "Saved Songs & Searches", "Saved Songs & Searches" )?></h1>
 
 <!--
 <h2>    <? $cust = getOrCreateCustomHover( "saved-searches", "View and manage your saved searches." );?>
@@ -104,6 +104,11 @@ foreach( $searches as $s ) {
              $searchurl = str_replace( "benchmark-report", $query, $s[url] );
              break; 
              
+         case "Cross Chart":
+             $query = "benchmark";
+             $searchurl = str_replace( "cross-chart-report", $query, $s[url] );
+             break; 
+             
          case "Comparative":
              $query = "comparative-search";
              $searchurl = str_replace( "comparative-search-results", $query, $s[url] );
@@ -138,6 +143,8 @@ foreach( $searches as $s ) {
 	     	     parse_str( $s[url], $tmpattrs);
 	     if( $tmpattrs["searchsubtype"] ) $query = $tmpattrs["searchsubtype"] . "-search";
 		//	     print_r( $tmpattrs );
+		if( !$query )
+		$query = "trend-search";
              $searchurl = str_replace( "trend-search-results", $query, $s[url] );
              break; 
          case "Artist Genre":

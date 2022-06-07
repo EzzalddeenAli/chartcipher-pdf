@@ -1,1 +1,1 @@
-update charts set OrderBy = '' where id = 45<br><br>alter table songs add OrderBy decimal( 12, 10 ); <br><br>alter table songs add OrderBy varchar( 255 ); <br><br>alter table songs add OrderBy tinyint; <br>Incorrect integer value: '' for column `accipher_admin`.`charts`.`OrderBy` at row 1 is the err
+select songid from song_to_influences sti, influences i where i.id = influenceid and influencegroupid = 14Table 'accipher_admin.song_to_influences' doesn't exist is the err

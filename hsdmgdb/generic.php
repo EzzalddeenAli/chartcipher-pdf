@@ -6,7 +6,7 @@ if( $admin_hasadvsearch )
 }	    		    
 
 $shorttablename = substr($tablename, 0, -1);
-if( $shorttablename != "songname" && $shorttablename != "genre" && $shorttablename != "chart" && $shorttablename != "client" && !function_exists( 'anySongsWith' ) )
+if( $shorttablename != "songname" && $shorttablename != "genre" && $shorttablename != "chart" && $shorttablename != "client" && $shorttablename != "color" && !function_exists( 'anySongsWith' ) )
     db_query( "delete from song_to_{$shorttablename} where songid not in ( select id from songs)" );
 
 if( !function_exists( 'anySongsWith' ) ) 
@@ -46,7 +46,13 @@ if( $addnew && $newname )
 		  $val = 0;
 	      if( $k == "UseOnDb" && !$val ) 
 		  $val = 0;
-	      if( $k == "OrderBy" && !$val ) 
+	      if( $k == "HideFromHSDCharts" && !$val ) 
+		  $val = 0;
+	      if( $k == "HideFromAdvancedSearch" && !$val ) 
+		  $val = 0;
+	      if( $k == "influencegroupid" && !$val ) 
+		  $val = 0;
+	      if( $k == "OrderBy" && !strlen( $val ) ) 
 		  $val = 99;
               db_query( "update $tablename set $k = '" . escMe( $val ) . "' where id = $ins" );
           }
@@ -75,11 +81,17 @@ if( $update )
 		  $val = 0;
 	      if( $k == "isadmin" && !$val ) 
 		  $val = 0;
+	      if( $k == "HideFromHSDCharts" && !$val ) 
+		  $val = 0;
+	      if( $k == "HideFromAdvancedSearch" && !$val ) 
+		  $val = 0;
 	      if( $k == "IsLive" && !$val ) 
+		  $val = 0;
+	      if( $k == "influencegroupid" && !$val ) 
 		  $val = 0;
 	      if( $k == "UseOnDb" && !$val ) 
 		  $val = 0;
-	      if( $k == "OrderBy" && !$val ) 
+	      if( $k == "OrderBy" && !strlen( $val ) ) 
 		  $val = 99;
 	      
 		db_query( "update $tablename set $k = '" . escMe( $val ) . "' where id = $id" );
@@ -173,7 +185,9 @@ else
 			    <? } ?>
 
 			    <? foreach( $res as $r ) { ?>
-<tr><td><input type='text' size='30' name="names[<?=$r[id]?>]" value="<?=htmlspecialchars( $r[$namestr] )?>"></td>
+
+
+<tr <? if( $shorttablename == "color" ) echo( "style='background-color: $r[Name]'" ); ?>><td><input type='text' size='30' name="names[<?=$r[id]?>]" value="<?=htmlspecialchars( $r[$namestr] )?>"></td>
 <? if( isset( $extracolumns ) ) { 
 
     foreach( $extracolumns as $k=>$display ) { 
@@ -236,7 +250,7 @@ $word = "songs";
 if( $shorttablename == "member" )
     $word = "artists/groups/producers";
 
-if( $shorttablename != "chart" ) { 
+if( $shorttablename != "chart" && $shorttablename != "color" ) { 
 				   $any = anySongsWith( $tablename, $r[id] );
 if( !$any ) { ?>
 <A onClick='return confirm( "Are you sure you want to delete this?" )' href='<?=$tablename?>.php?del=<?=$r[id]?>'>Del?</a>

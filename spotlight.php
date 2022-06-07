@@ -15,8 +15,10 @@ else if( date( "m" ) <= 9 )
     $fq = 3;
 else
     $fq = 4;
+$fq = 4;
+$quarter = $fq;
+$year = date( "Y" ) - 1;
 
-$fq = 1;
 $qarr = array( $fq . "/" . date( "Y" ) );
 $tmpq = getPreviousQuarter( $fq . "/" . date( "Y" ) );
 $qarr[] = $tmpq;
@@ -29,10 +31,8 @@ $exp = explode( "/", $tmpq );
 $search["dates"]["fromq"] = $exp[0]; 
 $search["dates"]["fromy"] = $exp[1];
 $search["dates"]["toq"] = $fq; 
-$search["dates"]["toy"] = date( "Y" );
+$search["dates"]["toy"] = $year;
 
-$quarter = $fq;
-$year = date( "Y" );
 $oldestq = $exp[0];
 $oldesty = $exp[1];
 $quarterstorun = getQuarters( $oldestq, $oldesty, $quarter, $year );
@@ -111,7 +111,14 @@ $fiftytwocharacteristicsstr = "&search[dates][fromweekdate]=".$search["dates"]["
                        <div class="row inner row-equal row-padding link-alt">
                            <div class="col-12 ">
                                <div class="home-search-header flex2">
-                                        <h2>Most Popular Characteristics</h2>
+                        <div class="custom-select" >
+								<select id="mysetinsighttype">
+<option value='gospotlight'>Most Popular Characteristics</option>
+<option value='backtoreports'>Back To Reports</option>
+<? foreach( $insightsarr as $itype=>$display ) { ?>
+<option <?=$leveltype == $itype?"SELECTED":""?> value='<?=$itype?>'><?=$display?></option>
+<? } ?></select>
+</div>
                                    <a href="#" data-featherlight="#searchlightbox"  class="save-link">Save Search</a>
 
                          <div class="custom-select" >
@@ -143,6 +150,7 @@ $fiftytwocharacteristicsstr = "&search[dates][fromweekdate]=".$search["dates"]["
 { 
 
 $link = "trend-search-results.php?search[comparisonaspect]=$r&graphtype=column";
+if( !$characteristics[$v . ":"]) continue;
 ?>
                                 <tr role="row">
                                <td role="cell"><?=$v?></td>

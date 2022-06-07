@@ -37,6 +37,10 @@ $allcharts = db_query_rows( "select id, chartkey, Name from charts where UseOnDb
                                                      <td class=""> </td>
                                                </tr>
 <? } ?>
+                                                <tr>
+                                                    <td><a href="cross-chart-comparisons.php" class="norowlink"><span>Cross Chart Comparison</span></a></td>
+                                                     <td class=""> </td>
+                                               </tr>
                                 </table>
                                 </div><!-- /.header-block-1B -->
 
@@ -62,7 +66,7 @@ foreach( $res as $r ) {
 $img = db_query_first_cell( "SELECT guid      FROM {$reportsdbname}.wp_postmeta AS pm      INNER JOIN {$reportsdbname}.wp_posts AS p ON pm.meta_value=p.ID       WHERE pm.post_id = '$r[ID]'        AND pm.meta_key = '_thumbnail_id'       ORDER BY p.post_date DESC" );
 $i++; 
 $img = str_replace( "https://editorial.chartcipher.com/wp-content/uploads/", "../wpuploads/", $img );
-if( $i == 4 ) echo( "           <div class=\"more-items\">" );
+if( $i == 5 ) echo( "           <div class=\"more-items\">" );
 ?> 
 
                                 <div class="item-wrap">
@@ -78,7 +82,7 @@ if( $i == 4 ) echo( "           <div class=\"more-items\">" );
                                     </div>
                                 </div>
 							   <? }?>
-							       <? if( $i >= 4 ) { ?>                             </div><? } ?>
+							       <? if( $i >= 5 ) { ?>                             </div><? } ?>
                              </div>
                         </div><!-- /.header-block-1B -->
                         <div class="info-block2">
